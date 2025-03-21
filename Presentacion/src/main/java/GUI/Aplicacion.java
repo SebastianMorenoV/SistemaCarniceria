@@ -16,17 +16,19 @@ public class Aplicacion {
     private RegistrarVenta registrarVenta;
     private FormularioTarjeta formularioTarjeta;
     private FormularioEfectivo formularioEfectivo;
+    private MenuOpciones menuOpciones;
 
     public Aplicacion() {
         framePrincipal = new JFrame("Sistema Carnicería");
         framePrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        framePrincipal.setSize(600, 400);
+        framePrincipal.setSize(1150, 700);
         framePrincipal.setLocationRelativeTo(null); // Centrar pantalla
 
         // Inicializar pantallas
         registrarVenta = new RegistrarVenta(this);
         formularioTarjeta = new FormularioTarjeta(this);
         formularioEfectivo = new FormularioEfectivo(this);
+        menuOpciones = new MenuOpciones(this);
     }
 
     // Método para mostrar RegistrarVenta (Pantalla Principal)
@@ -47,6 +49,10 @@ public class Aplicacion {
     // Mostrar un mensaje de error si no hay productos
     public void mostrarErrorVentaSinProductos() {
         JOptionPane.showMessageDialog(framePrincipal, "Error: No hay productos en la venta.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public void mostrarMenuOpciones(){
+        cambiarPantalla(menuOpciones);
     }
 
     // Cambiar de pantalla dentro del frame principal

@@ -30,7 +30,7 @@ public class FormularioTarjeta extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Pago con tarjeta procesado correctamente.");
-                app.mostrarRegistrarVenta(); // Volver a la pantalla principal
+                app.mostrarMenuOpciones(); // Volver a la pantalla principal
             }
         });
 

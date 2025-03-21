@@ -5,6 +5,7 @@
 package com.carniceria.presentacion;
 
 import GUI.Aplicacion;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -12,8 +13,8 @@ import GUI.Aplicacion;
  */
 public class Presentacion {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedLookAndFeelException {
         Aplicacion app = new Aplicacion();
-        app.mostrarRegistrarVenta();
+        app.mostrarMenuOpciones();
     }
 }
