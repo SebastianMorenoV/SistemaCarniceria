@@ -44,9 +44,9 @@ public class RegistrarVenta extends javax.swing.JPanel {
         btnFinalizarVenta = new GUI.PanelRound();
         jLabel4 = new javax.swing.JLabel();
         btnTarjeta = new GUI.PanelRound();
-        jLabel5 = new javax.swing.JLabel();
+        jlabelTarjeta = new javax.swing.JLabel();
         btnEfectivo = new GUI.PanelRound();
-        jLabel6 = new javax.swing.JLabel();
+        jLabelEfectivo = new javax.swing.JLabel();
         listaProductos = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         txtBusquedaNombre = new javax.swing.JLabel();
@@ -140,12 +140,17 @@ public class RegistrarVenta extends javax.swing.JPanel {
         btnTarjeta.setRoundTopRight(15);
         btnTarjeta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Tarjeta");
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnTarjeta.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 50));
+        jlabelTarjeta.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        jlabelTarjeta.setForeground(new java.awt.Color(255, 255, 255));
+        jlabelTarjeta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlabelTarjeta.setText("Tarjeta");
+        jlabelTarjeta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jlabelTarjeta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlabelTarjetaMouseClicked(evt);
+            }
+        });
+        btnTarjeta.add(jlabelTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 50));
 
         add(btnTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 460, 220, 50));
 
@@ -156,12 +161,17 @@ public class RegistrarVenta extends javax.swing.JPanel {
         btnEfectivo.setRoundTopRight(15);
         btnEfectivo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Efectivo");
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEfectivo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 50));
+        jLabelEfectivo.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        jLabelEfectivo.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelEfectivo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelEfectivo.setText("Efectivo");
+        jLabelEfectivo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelEfectivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEfectivoMouseClicked(evt);
+            }
+        });
+        btnEfectivo.add(jLabelEfectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 50));
 
         add(btnEfectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 520, 220, 50));
 
@@ -276,6 +286,14 @@ public class RegistrarVenta extends javax.swing.JPanel {
         app.mostrarMenuOpciones();
     }//GEN-LAST:event_btnAtrasMouseClicked
 
+    private void jlabelTarjetaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlabelTarjetaMouseClicked
+        app.mostrarFormularioTarjeta();
+    }//GEN-LAST:event_jlabelTarjetaMouseClicked
+
+    private void jLabelEfectivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEfectivoMouseClicked
+        app.mostrarFormularioEfectivo();
+    }//GEN-LAST:event_jLabelEfectivoMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnAtras;
@@ -287,10 +305,10 @@ public class RegistrarVenta extends javax.swing.JPanel {
     private javax.swing.JTextField inputNombre;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabelEfectivo;
     private javax.swing.JList<String> jList1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel jlabelTarjeta;
     private javax.swing.JScrollPane listaProductos;
     private GUI.PanelRound pnlTotal;
     private javax.swing.JScrollPane tblProductosVenta;
