@@ -13,7 +13,9 @@ import javax.swing.UIManager;
  * @author Admin
  */
 public class MenuOpciones extends javax.swing.JPanel {
+
     Aplicacion app;
+
     /**
      * Creates new form MenuOpciones
      */
@@ -54,6 +56,9 @@ public class MenuOpciones extends javax.swing.JPanel {
 
         icnRealizarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icnRealizarVenta.png"))); // NOI18N
         icnRealizarVenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                icnRealizarVentaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 icnRealizarVentaMouseEntered(evt);
             }
@@ -86,7 +91,7 @@ public class MenuOpciones extends javax.swing.JPanel {
     private void icnRealizarVentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icnRealizarVentaMouseEntered
         // TODO add your handling code here:
         pnlBotonVentaEnCaja.setBackground(new Color(100, 100, 120, 180));
-        
+
     }//GEN-LAST:event_icnRealizarVentaMouseEntered
 
     private void pnlBotonVentaEnCajaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBotonVentaEnCajaMouseEntered
@@ -98,6 +103,10 @@ public class MenuOpciones extends javax.swing.JPanel {
         // TODO add your handling code here:
         pnlBotonVentaEnCaja.setBackground(new Color(73, 69, 79, 150));
     }//GEN-LAST:event_pnlBotonVentaEnCajaMouseExited
+
+    private void icnRealizarVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icnRealizarVentaMouseClicked
+        app.mostrarRegistrarVenta();
+    }//GEN-LAST:event_icnRealizarVentaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

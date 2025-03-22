@@ -4,10 +4,17 @@
  */
 package Implementacion;
 
+import DTOs.EmpledoCargadoDTO;
+
 /**
  *
  * @author Lap-064
  */
-public class RealizarVenta {
-    
+public class RealizarVenta implements IRealizarVenta {
+
+    @Override
+    public EmpledoCargadoDTO cargarEmpleado() {
+        return new EmpledoCargadoDTO("Juan Soto");
+    }
+
 }

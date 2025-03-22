@@ -32,9 +32,6 @@ public class Aplicacion {
     }
 
     // Método para mostrar RegistrarVenta (Pantalla Principal)
-    public void mostrarRegistrarVenta() {
-        cambiarPantalla(registrarVenta);
-    }
 
     // Método para mostrar FormularioTarjeta
     public void mostrarFormularioTarjeta() {
@@ -55,6 +52,9 @@ public class Aplicacion {
         cambiarPantalla(menuOpciones);
     }
 
+    public void mostrarRegistrarVenta(){
+        cambiarPantalla(registrarVenta);
+    }
     // Cambiar de pantalla dentro del frame principal
     private void cambiarPantalla(JPanel nuevaPantalla) {
         framePrincipal.getContentPane().removeAll(); // Eliminar contenido anterior

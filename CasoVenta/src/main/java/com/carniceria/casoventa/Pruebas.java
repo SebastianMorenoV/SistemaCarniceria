@@ -4,13 +4,14 @@
 
 package com.carniceria.casoventa;
 
+import DTOs.*;
 /**
  *
  * @author Lap-064
  */
-public class CasoVenta {
+public class Pruebas {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+
     }
 }
