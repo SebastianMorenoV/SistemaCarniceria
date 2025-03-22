@@ -35,6 +35,8 @@ public class Aplicacion {
 
     // Método para mostrar FormularioTarjeta
     public void mostrarFormularioTarjeta() {
+        framePrincipal.setSize(800, 470);               
+        framePrincipal.setLocationRelativeTo(null);     
         cambiarPantalla(formularioTarjeta);
     }
 
@@ -53,6 +55,8 @@ public class Aplicacion {
     }
 
     public void mostrarRegistrarVenta(){
+        framePrincipal.setSize(1150, 700);               
+        framePrincipal.setLocationRelativeTo(null); 
         cambiarPantalla(registrarVenta);
     }
     // Cambiar de pantalla dentro del frame principal

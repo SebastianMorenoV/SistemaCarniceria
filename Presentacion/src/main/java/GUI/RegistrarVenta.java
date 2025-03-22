@@ -62,13 +62,11 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
         txtCajero.setBackground(new java.awt.Color(0, 0, 0));
         txtCajero.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
-        txtCajero.setForeground(new java.awt.Color(0, 0, 0));
         txtCajero.setText("Cajero:");
         add(txtCajero, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 20, -1, -1));
 
         jTable1.setBackground(new java.awt.Color(217, 217, 217));
         jTable1.setFont(new java.awt.Font("Product Sans Infanity", 0, 12)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(0, 0, 0));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -111,7 +109,6 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Total:");
         pnlTotal.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
 
@@ -138,6 +135,11 @@ public class RegistrarVenta extends javax.swing.JPanel {
         btnTarjeta.setRoundBottomRight(15);
         btnTarjeta.setRoundTopLeft(15);
         btnTarjeta.setRoundTopRight(15);
+        btnTarjeta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTarjetaMouseClicked(evt);
+            }
+        });
         btnTarjeta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jlabelTarjeta.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
@@ -186,12 +188,10 @@ public class RegistrarVenta extends javax.swing.JPanel {
         add(listaProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 510, 650, 140));
 
         txtBusquedaNombre.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        txtBusquedaNombre.setForeground(new java.awt.Color(0, 0, 0));
         txtBusquedaNombre.setText("Busqueda Nombre:");
         add(txtBusquedaNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 460, 210, 30));
 
         txtBusquedaCodigo.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        txtBusquedaCodigo.setForeground(new java.awt.Color(0, 0, 0));
         txtBusquedaCodigo.setText("Busqueda Codigo:");
         add(txtBusquedaCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 210, 30));
 
@@ -232,7 +232,6 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
         txtPanelVentaEnCaja.setBackground(new java.awt.Color(0, 0, 0));
         txtPanelVentaEnCaja.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        txtPanelVentaEnCaja.setForeground(new java.awt.Color(0, 0, 0));
         txtPanelVentaEnCaja.setText("Panel de Venta en Caja");
         add(txtPanelVentaEnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, -1));
 
@@ -287,12 +286,17 @@ public class RegistrarVenta extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAtrasMouseClicked
 
     private void jlabelTarjetaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlabelTarjetaMouseClicked
+        //app.mostrarFormularioTarjeta();
         app.mostrarFormularioTarjeta();
     }//GEN-LAST:event_jlabelTarjetaMouseClicked
 
     private void jLabelEfectivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEfectivoMouseClicked
         app.mostrarFormularioEfectivo();
     }//GEN-LAST:event_jLabelEfectivoMouseClicked
+
+    private void btnTarjetaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTarjetaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTarjetaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
