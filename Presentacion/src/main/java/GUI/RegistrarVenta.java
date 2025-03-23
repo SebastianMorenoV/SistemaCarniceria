@@ -12,15 +12,32 @@ import DTOs.EmpledoCargadoDTO;
 import DTOs.NuevoProductoVentaDTO;
 import DTOs.ProductoCargadoDTO;
 import Implementacion.RealizarVenta;
+import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
 import javax.swing.DefaultListModel;
+import javax.swing.InputMap;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 public class RegistrarVenta extends javax.swing.JPanel {
@@ -37,7 +54,6 @@ public class RegistrarVenta extends javax.swing.JPanel {
         this.realizarVenta = new RealizarVenta();
         initComponents();
         valoresDefault();
-
     }
 
     /**
@@ -71,6 +87,9 @@ public class RegistrarVenta extends javax.swing.JPanel {
         txtPanelVentaEnCaja = new javax.swing.JLabel();
         btnAtras = new javax.swing.JLabel();
         btnReiniciarVenta = new javax.swing.JLabel();
+        btnAtajos = new GUI.PanelRound();
+        jlabelAtajos = new javax.swing.JLabel();
+        txtBusquedaNombre1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -149,11 +168,6 @@ public class RegistrarVenta extends javax.swing.JPanel {
         btnTarjeta.setRoundBottomRight(15);
         btnTarjeta.setRoundTopLeft(15);
         btnTarjeta.setRoundTopRight(15);
-        btnTarjeta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnTarjetaMouseClicked(evt);
-            }
-        });
         btnTarjeta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jlabelTarjeta.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
@@ -211,9 +225,9 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
         add(listaProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 760, 140));
 
-        txtBusquedaNombre.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        txtBusquedaNombre.setText("Busqueda Nombre:");
-        add(txtBusquedaNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 460, 210, 30));
+        txtBusquedaNombre.setFont(new java.awt.Font("Product Sans Infanity", 0, 17)); // NOI18N
+        txtBusquedaNombre.setText("Ctrl + A para consultar Atajos");
+        add(txtBusquedaNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 120, 230, 30));
 
         txtBusquedaCodigo.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         txtBusquedaCodigo.setText("Busqueda Codigo:");
@@ -227,11 +241,6 @@ public class RegistrarVenta extends javax.swing.JPanel {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 inputNombreFocusLost(evt);
-            }
-        });
-        inputNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputNombreActionPerformed(evt);
             }
         });
         inputNombre.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -253,11 +262,6 @@ public class RegistrarVenta extends javax.swing.JPanel {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 inputCodigoFocusLost(evt);
-            }
-        });
-        inputCodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputCodigoActionPerformed(evt);
             }
         });
         inputCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -292,11 +296,32 @@ public class RegistrarVenta extends javax.swing.JPanel {
             }
         });
         add(btnReiniciarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 70, -1, -1));
-    }// </editor-fold>//GEN-END:initComponents
 
-    private void inputCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputCodigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputCodigoActionPerformed
+        btnAtajos.setBackground(new java.awt.Color(44, 44, 44));
+        btnAtajos.setRoundBottomLeft(15);
+        btnAtajos.setRoundBottomRight(15);
+        btnAtajos.setRoundTopLeft(15);
+        btnAtajos.setRoundTopRight(15);
+        btnAtajos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jlabelAtajos.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        jlabelAtajos.setForeground(new java.awt.Color(255, 255, 255));
+        jlabelAtajos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlabelAtajos.setText("Consultar Atajos");
+        jlabelAtajos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jlabelAtajos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlabelAtajosMouseClicked(evt);
+            }
+        });
+        btnAtajos.add(jlabelAtajos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 50));
+
+        add(btnAtajos, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 150, 220, 50));
+
+        txtBusquedaNombre1.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        txtBusquedaNombre1.setText("Busqueda Nombre:");
+        add(txtBusquedaNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 460, 210, 30));
+    }// </editor-fold>//GEN-END:initComponents
 
     private void inputCodigoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputCodigoFocusGained
         if (inputCodigo.getText().equals("Codigo")) {
@@ -309,10 +334,6 @@ public class RegistrarVenta extends javax.swing.JPanel {
             inputCodigo.setText("Codigo");
         }
     }//GEN-LAST:event_inputCodigoFocusLost
-
-    private void inputNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputNombreActionPerformed
 
     private void inputNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNombreFocusGained
         if (inputNombre.getText().equals("Nombre Producto")) {
@@ -338,10 +359,6 @@ public class RegistrarVenta extends javax.swing.JPanel {
     private void jLabelEfectivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEfectivoMouseClicked
         app.mostrarFormularioEfectivo();
     }//GEN-LAST:event_jLabelEfectivoMouseClicked
-
-    private void btnTarjetaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTarjetaMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTarjetaMouseClicked
 
     private void btnReiniciarVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReiniciarVentaMouseClicked
         int opcion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas reiniciar la venta?", "Confirmar Reinicio", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -388,8 +405,13 @@ public class RegistrarVenta extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jList1KeyPressed
 
+    private void jlabelAtajosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlabelAtajosMouseClicked
+        abrirDialogoAtajos();
+    }//GEN-LAST:event_jlabelAtajosMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private GUI.PanelRound btnAtajos;
     private javax.swing.JLabel btnAtras;
     private GUI.PanelRound btnEfectivo;
     private GUI.PanelRound btnFinalizarVenta;
@@ -401,12 +423,14 @@ public class RegistrarVenta extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelEfectivo;
     private javax.swing.JList<String> jList1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel jlabelAtajos;
     private javax.swing.JLabel jlabelTarjeta;
     private javax.swing.JScrollPane listaProductos;
     private GUI.PanelRound pnlTotal;
     private javax.swing.JScrollPane tblProductosVenta;
     private javax.swing.JLabel txtBusquedaCodigo;
     private javax.swing.JLabel txtBusquedaNombre;
+    private javax.swing.JLabel txtBusquedaNombre1;
     private javax.swing.JLabel txtCajero;
     private javax.swing.JLabel txtIva;
     private javax.swing.JLabel txtPanelVentaEnCaja;
@@ -459,6 +483,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
         cargarEmpleado();
         cargarProductos();
         tamañoColumnasPreferidos();
+        crearAtajos();
     }
 
     private void buscarProducto(String textoBusqueda) {
@@ -499,7 +524,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
             if (productoCargado != null) {
                 try {
                     // Obtener la cantidad del producto
-                    double cantidad = Double.parseDouble((String) JOptionPane.showInputDialog( null,"Ingresa la cantidad del producto:","Cantidad",JOptionPane.QUESTION_MESSAGE,null,null,"1.0"));
+                    double cantidad = Double.parseDouble((String) JOptionPane.showInputDialog(null, "Ingresa la cantidad del producto:", "Cantidad", JOptionPane.QUESTION_MESSAGE, null, null, "1.0"));
 
                     // Validar que la cantidad sea mayor que 0
                     if (cantidad <= 0) {
@@ -618,5 +643,69 @@ public class RegistrarVenta extends javax.swing.JPanel {
         }
         label.setFont(fuenteOriginal);
         label.setText(texto);
+    }
+
+    public void crearAtajos() {
+        // Crear un mapa para asociar teclas con métodos
+        Map<KeyStroke, Runnable> acciones = Map.of(
+                KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0), app::mostrarFormularioEfectivo,
+                KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0), app::mostrarFormularioTarjeta,
+                KeyStroke.getKeyStroke(KeyEvent.VK_F8, 0), () -> inputCodigo.requestFocus(), // Asignar foco al inputCodigo
+                KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0), () -> inputNombre.requestFocus(), // Asignar foco al inputNombre
+                // CONFIRMARVENTA -> Aquí agregas el método de finalizar venta cuando lo tengas --------------------------------------------------------                   
+                KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0), this::reiniciarVenta,
+                KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK), this::abrirDialogoAtajos
+        );
+
+        // Obtener InputMap y ActionMap del JPanel
+        InputMap inputMap = this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap actionMap = this.getActionMap();
+
+        // Recorrer el mapa para asignar cada atajo
+        for (Map.Entry<KeyStroke, Runnable> entrada : acciones.entrySet()) {
+            String nombreAccion = "accion" + entrada.getKey(); // Nombre dinámico para cada acción
+
+            inputMap.put(entrada.getKey(), nombreAccion);
+            actionMap.put(nombreAccion, new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    entrada.getValue().run(); // Ejecuta el método asociado
+                }
+            });
+        }
+    }
+
+    public void abrirDialogoAtajos() {
+        JDialog dialogo = new JDialog((JFrame) SwingUtilities.getWindowAncestor(this), "Atajos del Sistema", true);
+        dialogo.setSize(400, 350);
+        dialogo.setLayout(new BorderLayout());
+        dialogo.setLocationRelativeTo(this);
+
+       JTextArea txtAtajos = new JTextArea(
+        """
+        F1   - Opción Pago Efectivo
+        F2   - Opción Pago Tarjeta
+        F8   - Buscar por Código
+        F9   - Buscar por Nombre
+        F10  - Finalizar Venta
+        F12  - Reiniciar Venta
+        
+        Ctrl + A  Mostrar Atajos
+        """
+);
+       txtAtajos.setFont(new Font("Monospaced", Font.PLAIN, 20));
+        txtAtajos.setEditable(false);
+        txtAtajos.setMargin(new Insets(10, 10, 10, 10)); // Márgenes
+        dialogo.add(new JScrollPane(txtAtajos), BorderLayout.CENTER);
+
+        JButton btnCerrar = new JButton("Cerrar");
+        btnCerrar.addActionListener(e -> dialogo.dispose()); // Cerrar el diálogo
+
+        // Agregar el botón al diálogo
+        JPanel panelBoton = new JPanel();
+        panelBoton.add(btnCerrar);
+        dialogo.add(panelBoton, BorderLayout.SOUTH);
+
+        dialogo.setVisible(true);
     }
 }
