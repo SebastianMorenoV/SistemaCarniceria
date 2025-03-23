@@ -8,10 +8,12 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.Timer;
 
@@ -28,16 +30,6 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         this.app = app;
         initComponents();
         
-         btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
-        @Override
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            mostrarCargaConGif(
-                "Procesando el pago de la tarjeta...",// Mensaje q sale
-                "Procesando Pago",//Titulo del JOptionPAne
-                2000//Para que dure 2 segundos                                      
-            );
-        }
-    });
     }
 
     /**
@@ -110,13 +102,18 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegresar.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 100, 40));
 
-        add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, 160, 40));
+        add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 350, 160, 40));
 
         btnAceptar.setBackground(new java.awt.Color(44, 44, 44));
         btnAceptar.setRoundBottomLeft(15);
         btnAceptar.setRoundBottomRight(15);
         btnAceptar.setRoundTopLeft(15);
         btnAceptar.setRoundTopRight(15);
+        btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAceptarMouseClicked(evt);
+            }
+        });
         btnAceptar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
@@ -126,61 +123,18 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAceptar.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 100, 40));
 
-        add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 160, 40));
+        add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 160, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
         // TODO add your handling code here:
-        app.mostrarRegistrarVenta();
+        ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
 
-    public void mostrarCargaConGif(String mensaje, String titulo, int duracion) {
-        // Cargar el GIF
-        ImageIcon iconoGif = new ImageIcon(getClass().getResource("/imagenes/cargando.gif")); 
-        JLabel lblGif = new JLabel(iconoGif);
-        
-        
-
-        // Crear el mensaje con texto + GIF
-        JPanel panel = new JPanel(new BorderLayout(10, 10));
-        JLabel lblMensaje = new JLabel("<html><h2>" + titulo + "</h2><p>" + mensaje + "</p></html>");
-        
-        panel.setPreferredSize(new Dimension(400, 200));//Tamaño del JOptionPane
-
-        // Estilo del mensaje
-        lblMensaje.setFont(new Font("Product Sans Infanity", Font.PLAIN, 14));
-        panel.add(lblMensaje, BorderLayout.NORTH);
-        panel.add(lblGif, BorderLayout.CENTER);
-
-        // Crear el JOptionPane
-        JOptionPane optionPane = new JOptionPane(panel, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
-        JDialog dialog = optionPane.createDialog(titulo);
-        
-        //Tamaño del jDialog para el JOptionPAne
-        dialog.setSize(500, 250);
-        dialog.setLocationRelativeTo(null);
-        dialog.pack(); 
-
-        // Centrar la ventana
-        dialog.setLocationRelativeTo(null);
-
-        // Usar SwingWorker para no bloquear la ejecución
-        SwingWorker<Void, Void> worker = new SwingWorker<>() {
-            @Override
-            protected Void doInBackground() throws Exception {
-                Thread.sleep(duracion); // Esperar el tiempo indicado de 2 segunditos
-                return null;
-            }
-
-            @Override
-            protected void done() {
-                dialog.dispose(); // Cerrar el diálogo que se creo para mostrar el  JOptionPane
-            }
-        };
-
-        worker.execute(); // Iniciar el temporizador en segundo plano
-        dialog.setVisible(true);
-        }
+    private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
+        // TODO add your handling code here:
+        app.mostrarProcesandoPago("Procesando el pago de la tarjeta...", "Procesando Pago", 2000);
+    }//GEN-LAST:event_btnAceptarMouseClicked
 
     
 

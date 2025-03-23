@@ -4,6 +4,7 @@ GUI\RegistrarVenta$2.class
 GUI\FormularioTarjeta.class
 GUI\RegistrarVenta$7.class
 GUI\FormularioTarjeta$2.class
+GUI\Aplicacion$1.class
 GUI\FormularioEfectivo$3.class
 GUI\MenuOpciones$1.class
 GUI\FormularioMostrarCambio$2.class
@@ -20,7 +21,6 @@ GUI\Aplicacion.class
 GUI\FormularioEfectivo$4.class
 GUI\RegistrarVenta$1.class
 GUI\FormularioEfectivo.class
-GUI\FormularioTarjeta$3.class
 GUI\MenuOpciones$2.class
 GUI\RegistrarVenta.class
 GUI\RegistrarVenta$6.class
