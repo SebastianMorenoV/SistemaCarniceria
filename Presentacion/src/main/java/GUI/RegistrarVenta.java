@@ -9,7 +9,19 @@ package GUI;
  * @author Lap-064
  */
 import DTOs.EmpledoCargadoDTO;
+import DTOs.NuevoProductoVentaDTO;
+import DTOs.ProductoCargadoDTO;
 import Implementacion.RealizarVenta;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
 public class RegistrarVenta extends javax.swing.JPanel {
 
@@ -17,14 +29,15 @@ public class RegistrarVenta extends javax.swing.JPanel {
      * Creates new form RealizarVenta
      */
     Aplicacion app;
+    private List<ProductoCargadoDTO> listadoProductos;
     private RealizarVenta realizarVenta;
 
     public RegistrarVenta(Aplicacion app) {
         this.app = app;
         this.realizarVenta = new RealizarVenta();
         initComponents();
-        tamañoColumnasPreferidos();
-        cargarEmpleado();
+        valoresDefault();
+
     }
 
     /**
@@ -40,7 +53,9 @@ public class RegistrarVenta extends javax.swing.JPanel {
         tblProductosVenta = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         pnlTotal = new GUI.PanelRound();
-        jLabel2 = new javax.swing.JLabel();
+        txtSubtotal = new javax.swing.JLabel();
+        txtTotal = new javax.swing.JLabel();
+        txtIva = new javax.swing.JLabel();
         btnFinalizarVenta = new GUI.PanelRound();
         jLabel4 = new javax.swing.JLabel();
         btnTarjeta = new GUI.PanelRound();
@@ -66,21 +81,10 @@ public class RegistrarVenta extends javax.swing.JPanel {
         add(txtCajero, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 20, -1, -1));
 
         jTable1.setBackground(new java.awt.Color(217, 217, 217));
-        jTable1.setFont(new java.awt.Font("Product Sans Infanity", 0, 12)); // NOI18N
+        jTable1.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Codigo", "Descripción del articulo", "Cantidad", "Precio", "Importe"
@@ -107,10 +111,20 @@ public class RegistrarVenta extends javax.swing.JPanel {
         pnlTotal.setRoundTopRight(30);
         pnlTotal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel2.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
-        jLabel2.setText("Total:");
-        pnlTotal.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
+        txtSubtotal.setBackground(new java.awt.Color(0, 0, 0));
+        txtSubtotal.setFont(new java.awt.Font("Product Sans Infanity", 0, 30)); // NOI18N
+        txtSubtotal.setText("Subtotal: $0.00");
+        pnlTotal.add(txtSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 220, -1));
+
+        txtTotal.setBackground(new java.awt.Color(0, 0, 0));
+        txtTotal.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
+        txtTotal.setText("Total: $0.00");
+        pnlTotal.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 220, -1));
+
+        txtIva.setBackground(new java.awt.Color(0, 0, 0));
+        txtIva.setFont(new java.awt.Font("Product Sans Infanity", 0, 30)); // NOI18N
+        txtIva.setText("IVA(16%): $0.00");
+        pnlTotal.add(txtIva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 220, -1));
 
         add(pnlTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 220, 220, 220));
 
@@ -183,9 +197,19 @@ public class RegistrarVenta extends javax.swing.JPanel {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList1MouseClicked(evt);
+            }
+        });
+        jList1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jList1KeyPressed(evt);
+            }
+        });
         listaProductos.setViewportView(jList1);
 
-        add(listaProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 510, 650, 140));
+        add(listaProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 760, 140));
 
         txtBusquedaNombre.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         txtBusquedaNombre.setText("Busqueda Nombre:");
@@ -210,6 +234,14 @@ public class RegistrarVenta extends javax.swing.JPanel {
                 inputNombreActionPerformed(evt);
             }
         });
+        inputNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                inputNombreKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputNombreKeyTyped(evt);
+            }
+        });
         add(inputNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 460, 160, 30));
 
         inputCodigo.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
@@ -226,6 +258,14 @@ public class RegistrarVenta extends javax.swing.JPanel {
         inputCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputCodigoActionPerformed(evt);
+            }
+        });
+        inputCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                inputCodigoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputCodigoKeyTyped(evt);
             }
         });
         add(inputCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 460, 150, 30));
@@ -246,6 +286,11 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
         btnReiniciarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/deshacer (1).png"))); // NOI18N
         btnReiniciarVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReiniciarVenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReiniciarVentaMouseClicked(evt);
+            }
+        });
         add(btnReiniciarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 70, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -298,6 +343,51 @@ public class RegistrarVenta extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnTarjetaMouseClicked
 
+    private void btnReiniciarVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReiniciarVentaMouseClicked
+        int opcion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas reiniciar la venta?", "Confirmar Reinicio", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (opcion == JOptionPane.YES_OPTION) {
+            reiniciarVenta();
+        }
+    }//GEN-LAST:event_btnReiniciarVentaMouseClicked
+
+    private void inputCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputCodigoKeyReleased
+        String textoBusqueda = inputCodigo.getText().trim();
+        buscarProducto(textoBusqueda);
+    }//GEN-LAST:event_inputCodigoKeyReleased
+
+    private void inputNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputNombreKeyReleased
+        String textoBusqueda = inputNombre.getText().trim();
+        buscarProducto(textoBusqueda);
+    }//GEN-LAST:event_inputNombreKeyReleased
+
+    private void inputCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputCodigoKeyTyped
+        char c = evt.getKeyChar();
+        // Solo permite números (0-9) y retroceso
+        if (!Character.isDigit(c) && c != KeyEvent.VK_BACK_SPACE) {
+            evt.consume(); // Ignora la entrada si no es válida
+        }
+    }//GEN-LAST:event_inputCodigoKeyTyped
+
+    private void inputNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputNombreKeyTyped
+        char c = evt.getKeyChar();
+        // Permitir solo letras, espacios y retroceso
+        if (!Character.isLetter(c) && c != ' ' && c != KeyEvent.VK_BACK_SPACE) {
+            evt.consume(); // Ignorar entrada si no es válida
+        }
+    }//GEN-LAST:event_inputNombreKeyTyped
+
+    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+        if (evt.getClickCount() == 2) { // Doble clic
+            agregarProductoVenta(); // Llama al método al doble clic
+        }
+    }//GEN-LAST:event_jList1MouseClicked
+
+    private void jList1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jList1KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) { // Si presiona Enter
+            agregarProductoVenta(); // Llama al método
+        }
+    }//GEN-LAST:event_jList1KeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnAtras;
@@ -307,7 +397,6 @@ public class RegistrarVenta extends javax.swing.JPanel {
     private GUI.PanelRound btnTarjeta;
     private javax.swing.JTextField inputCodigo;
     private javax.swing.JTextField inputNombre;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelEfectivo;
     private javax.swing.JList<String> jList1;
@@ -319,11 +408,13 @@ public class RegistrarVenta extends javax.swing.JPanel {
     private javax.swing.JLabel txtBusquedaCodigo;
     private javax.swing.JLabel txtBusquedaNombre;
     private javax.swing.JLabel txtCajero;
+    private javax.swing.JLabel txtIva;
     private javax.swing.JLabel txtPanelVentaEnCaja;
+    private javax.swing.JLabel txtSubtotal;
+    private javax.swing.JLabel txtTotal;
     // End of variables declaration//GEN-END:variables
 
     //Metodos Auxiliares para presentacion
-
     public void tamañoColumnasPreferidos() {
         jTable1.getColumnModel().getColumn(0).setPreferredWidth(80);  // Código
         jTable1.getColumnModel().getColumn(1).setPreferredWidth(300); // Descripción del artículo
@@ -331,9 +422,201 @@ public class RegistrarVenta extends javax.swing.JPanel {
         jTable1.getColumnModel().getColumn(3).setPreferredWidth(80);  // Precio
         jTable1.getColumnModel().getColumn(4).setPreferredWidth(80);  // Importe
     }
-    
-    public void cargarEmpleado(){
+
+    public void cargarEmpleado() {
         EmpledoCargadoDTO empleadoCargado = realizarVenta.cargarEmpleado();
-        txtCajero.setText("Cajero:  " +  empleadoCargado.getNombre());
+        txtCajero.setText("Cajero:  " + empleadoCargado.getNombre());
+    }
+
+    public void cargarProductos() {
+        listadoProductos = realizarVenta.cargarProductos();
+        // Crear el modelo para la lista
+        DefaultListModel<String> modelo = new DefaultListModel<>();
+
+        // Recorrer la lista y agregar los elementos al modelo
+        for (ProductoCargadoDTO p : listadoProductos) {
+            modelo.addElement(p.getCodigo() + " " + p.getNombre() + p.getDescripcion() + "  $" + p.getDecimal()); // Personaliza como quieras
+        }
+        // Asignar el modelo al jList1
+        jList1.setModel(modelo);
+    }
+
+    public void reiniciarVenta() {
+        // faltantes: 
+        // eliminar productos venta de tabla
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0); // Elimina todas las filas
+        //resetar el historial
+
+        //resetear totales con la tabla vacia
+        calcularTotales();
+
+        inputCodigo.setText("");
+        inputNombre.setText("");
+    }
+
+    public void valoresDefault() {
+        cargarEmpleado();
+        cargarProductos();
+        tamañoColumnasPreferidos();
+    }
+
+    private void buscarProducto(String textoBusqueda) {
+        DefaultListModel<String> modeloFiltrado = new DefaultListModel<>();
+
+        if (textoBusqueda.trim().isEmpty()) {
+            cargarProductos();
+            return;
+        }
+
+        for (ProductoCargadoDTO p : listadoProductos) {
+            String infoProducto = p.getCodigo() + " " + p.getNombre() + " " + p.getDescripcion() + " $" + p.getDecimal();
+
+            // Convertir todo a minúsculas para búsqueda flexible
+            String productoNormalizado = infoProducto.toLowerCase().replaceAll("\\s+", "");
+            String textoNormalizado = textoBusqueda.toLowerCase().replaceAll("\\s+", "");
+
+            if (productoNormalizado.contains(textoNormalizado)) {
+                modeloFiltrado.addElement(infoProducto);
+            }
+        }
+
+        if (modeloFiltrado.isEmpty()) {
+            modeloFiltrado.addElement("No se encontraron coincidencias.");
+        }
+
+        jList1.setModel(modeloFiltrado);
+    }
+
+    public void agregarProductoVenta() {
+        // Obtener el String seleccionado del JList
+        String infoProducto = jList1.getSelectedValue();
+
+        if (infoProducto != null && !infoProducto.isEmpty()) {
+            // Convertir el String a ProductoCargadoDTO
+            ProductoCargadoDTO productoCargado = convertirStringAProducto(infoProducto);
+
+            if (productoCargado != null) {
+                try {
+                    // Obtener la cantidad del producto
+                    double cantidad = Double.parseDouble((String) JOptionPane.showInputDialog( null,"Ingresa la cantidad del producto:","Cantidad",JOptionPane.QUESTION_MESSAGE,null,null,"1.0"));
+
+                    // Validar que la cantidad sea mayor que 0
+                    if (cantidad <= 0) {
+                        JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor que 0.");
+                        return;
+                    }
+
+                    // Agregar el producto convertido a la venta
+                    NuevoProductoVentaDTO productoVenta = realizarVenta.agregarProducto(productoCargado, cantidad);
+                    // Obtener el modelo de la tabla
+                    DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+
+                    // Crear un arreglo con los valores del producto para agregarlo a la tabla
+                    Object[] fila = {
+                        productoVenta.getProducto().getCodigo(),
+                        productoVenta.getProducto().getNombre() + " " + productoVenta.getProducto().getDescripcion(),
+                        productoVenta.getCantidad(),
+                        productoVenta.getPrecioUnitario(),
+                        productoVenta.getImporte()
+                    };
+                    modelo.addRow(fila);
+                    // llamadaMetodo actualizarTotal
+                    calcularTotales();
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Error: Ingresa un valor numérico válido.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al convertir el producto.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecciona un producto válido.");
+        }
+    }
+
+    public ProductoCargadoDTO convertirStringAProducto(String infoProducto) {
+        try {
+            // Dividir el String por espacios para separar los datos
+            String[] partes = infoProducto.split(" ");
+
+            // Extraer el código como int
+            int codigo = Integer.parseInt(partes[0]);
+
+            // Unir el nombre del producto (ej. "CocaCola 1.5lts Retornable")
+            StringBuilder nombreBuilder = new StringBuilder();
+            int i = 1;
+            while (i < partes.length && !partes[i].startsWith("$")) {
+                nombreBuilder.append(partes[i]).append(" ");
+                i++;
+            }
+
+            String nombreCompleto = nombreBuilder.toString().trim();
+
+            // Extraer precio (el último elemento, sin el signo $)
+            String precioTexto = partes[partes.length - 1].replace("$", "");
+            double precio = Double.parseDouble(precioTexto);
+
+            // Crear el objeto ProductoCargadoDTO
+            return new ProductoCargadoDTO(codigo, nombreCompleto, "Descripción", precio);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null; // Si ocurre un error, devuelve null
+        }
+    }
+
+    public void calcularTotales() {
+        List<NuevoProductoVentaDTO> productosVenta = new ArrayList<>();
+
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+
+        // Recorrer todas las filas de la tabla
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            int codigo = (int) modelo.getValueAt(i, 0); // Columna 0 -> Código
+            String nombreDescripcion = (String) modelo.getValueAt(i, 1); // Columna 1 -> Nombre + Descripción
+            double cantidad = (double) modelo.getValueAt(i, 2); // Columna 2 -> Cantidad
+            double precioUnitario = (double) modelo.getValueAt(i, 3); // Columna 3 -> Precio Unitario
+            double importe = (double) modelo.getValueAt(i, 4); // Columna 4 -> Importe
+
+            // Crear el objeto ProductoCargadoDTO si es necesario
+            ProductoCargadoDTO producto = new ProductoCargadoDTO(codigo, nombreDescripcion, "", precioUnitario);
+
+            // Crear el objeto NuevoProductoVentaDTO
+            NuevoProductoVentaDTO productoVenta = new NuevoProductoVentaDTO(producto, cantidad, precioUnitario, importe);
+
+            // Agregarlo a la lista
+            productosVenta.add(productoVenta);
+        }
+        double subtotalCalculado = realizarVenta.calcularSubtotal(productosVenta);
+        double iva = realizarVenta.calcularIva(subtotalCalculado);
+        double total = realizarVenta.calcularTotal(subtotalCalculado, iva);
+
+        String textoTotal = "Total: $" + String.format("%.2f", total);
+        txtTotal.setText(textoTotal);
+        ajustarTamanoTexto(txtTotal, textoTotal);
+
+        String textoSubtotal = "Subtotal: $" + String.format("%.2f", subtotalCalculado);
+        txtSubtotal.setText(textoSubtotal);
+        ajustarTamanoTexto(txtSubtotal, textoSubtotal);
+
+        String textoIva = "IVA(16%): $" + String.format("%.2f", iva);
+        txtIva.setText(textoIva);
+        ajustarTamanoTexto(txtIva, textoIva);
+    }
+
+    public void ajustarTamanoTexto(JLabel label, String texto) {
+        Font fuenteOriginal = label.getFont();
+        int anchoLabel = label.getWidth();
+
+        int tamanoFuente = fuenteOriginal.getSize();
+        FontMetrics fm = label.getFontMetrics(fuenteOriginal);
+
+        while (fm.stringWidth(texto) > anchoLabel && tamanoFuente > 10) {
+            tamanoFuente--;
+            fuenteOriginal = fuenteOriginal.deriveFont((float) tamanoFuente);
+            fm = label.getFontMetrics(fuenteOriginal);
+        }
+        label.setFont(fuenteOriginal);
+        label.setText(texto);
     }
 }

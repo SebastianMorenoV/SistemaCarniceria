@@ -5,10 +5,24 @@
 package Implementacion;
 
 import DTOs.*;
+import java.util.List;
+
 /**
  *
  * @author Lap-064
  */
 public interface IRealizarVenta {
+
     public EmpledoCargadoDTO cargarEmpleado();
+
+    public List<ProductoCargadoDTO> cargarProductos();
+
+    public NuevoProductoVentaDTO agregarProducto(ProductoCargadoDTO productoCargado, double cantidad);
+
+    public double calcularTotal(double subtotal , double iva);
+    
+    public double calcularSubtotal(List<NuevoProductoVentaDTO> productosEnTabla);
+    
+    public double calcularIva(double subtotal);
+    
 }
