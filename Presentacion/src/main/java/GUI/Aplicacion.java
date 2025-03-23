@@ -16,6 +16,7 @@ public class Aplicacion {
     private RegistrarVenta registrarVenta;
     private FormularioTarjeta formularioTarjeta;
     private FormularioEfectivo formularioEfectivo;
+    private FormularioMostrarCambio mostrarCambio;
     private MenuOpciones menuOpciones;
 
     public Aplicacion() {
@@ -28,6 +29,7 @@ public class Aplicacion {
         registrarVenta = new RegistrarVenta(this);
         formularioTarjeta = new FormularioTarjeta(this);
         formularioEfectivo = new FormularioEfectivo(this);
+        mostrarCambio = new FormularioMostrarCambio(this);
         menuOpciones = new MenuOpciones(this);
     }
 
@@ -42,7 +44,15 @@ public class Aplicacion {
 
     // Método para mostrar FormularioEfectivo
     public void mostrarFormularioEfectivo() {
+        framePrincipal.setSize(635,317);
+        framePrincipal.setLocationRelativeTo(null); 
         cambiarPantalla(formularioEfectivo);
+    }
+    
+    public void mostrarFormularioCambio(){
+        framePrincipal.setSize(377,270);
+        framePrincipal.setLocationRelativeTo(null); 
+        cambiarPantalla(mostrarCambio);
     }
 
     // Mostrar un mensaje de error si no hay productos

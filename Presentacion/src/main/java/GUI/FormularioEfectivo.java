@@ -4,17 +4,21 @@
  */
 package GUI;
 
+import java.awt.Color;
+
 /**
  *
  * @author janot
  */
 public class FormularioEfectivo extends javax.swing.JPanel {
-
+    Aplicacion app;
+    
     /**
      * Creates new form FormularioEfectivo
      */
     public FormularioEfectivo(Aplicacion app) {
         initComponents();
+        this.app = app;
         
     }
 
@@ -34,9 +38,9 @@ public class FormularioEfectivo extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         btnAceptar = new GUI.PanelRound();
-        jLabel6 = new javax.swing.JLabel();
-        btnAceptar1 = new GUI.PanelRound();
-        jLabel7 = new javax.swing.JLabel();
+        jLabelAceptar = new javax.swing.JLabel();
+        btnCancelar = new GUI.PanelRound();
+        jLabelCancelar = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(0, 0, 0));
@@ -47,6 +51,17 @@ public class FormularioEfectivo extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("X");
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel1MouseDragged(evt);
+            }
+        });
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 40, -1));
 
         jLabel2.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
@@ -82,41 +97,98 @@ public class FormularioEfectivo extends javax.swing.JPanel {
         btnAceptar.setRoundTopRight(15);
         btnAceptar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Aceptar");
-        btnAceptar.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 40));
+        jLabelAceptar.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        jLabelAceptar.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelAceptar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelAceptar.setText("Aceptar");
+        jLabelAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelAceptarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelAceptarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabelAceptarMouseExited(evt);
+            }
+        });
+        btnAceptar.add(jLabelAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 40));
 
         add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 140, 40));
 
-        btnAceptar1.setBackground(new java.awt.Color(44, 44, 44));
-        btnAceptar1.setRoundBottomLeft(15);
-        btnAceptar1.setRoundBottomRight(15);
-        btnAceptar1.setRoundTopLeft(15);
-        btnAceptar1.setRoundTopRight(15);
-        btnAceptar1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnCancelar.setBackground(new java.awt.Color(44, 44, 44));
+        btnCancelar.setRoundBottomLeft(15);
+        btnCancelar.setRoundBottomRight(15);
+        btnCancelar.setRoundTopLeft(15);
+        btnCancelar.setRoundTopRight(15);
+        btnCancelar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Cancelar");
-        btnAceptar1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 140, 30));
+        jLabelCancelar.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        jLabelCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelCancelar.setText("Cancelar");
+        jLabelCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelCancelarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelCancelarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabelCancelarMouseExited(evt);
+            }
+        });
+        btnCancelar.add(jLabelCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 40));
 
-        add(btnAceptar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, 140, 40));
+        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, 140, 40));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        app.mostrarRegistrarVenta();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel1MouseDragged
+
+    private void jLabelCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCancelarMouseClicked
+        app.mostrarRegistrarVenta();
+    }//GEN-LAST:event_jLabelCancelarMouseClicked
+
+    private void jLabelCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCancelarMouseEntered
+        btnCancelar.setBackground(new Color(100, 100, 120, 180));
+    }//GEN-LAST:event_jLabelCancelarMouseEntered
+
+    private void jLabelAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAceptarMouseClicked
+        app.mostrarFormularioCambio();
+        
+    }//GEN-LAST:event_jLabelAceptarMouseClicked
+
+    private void jLabelAceptarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAceptarMouseEntered
+        btnAceptar.setBackground(new Color(100, 100, 120, 180));
+    }//GEN-LAST:event_jLabelAceptarMouseEntered
+
+    private void jLabelAceptarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAceptarMouseExited
+        btnAceptar.setBackground(new Color(60,63,65));
+    }//GEN-LAST:event_jLabelAceptarMouseExited
+
+    private void jLabelCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCancelarMouseExited
+        btnCancelar.setBackground(new Color(60,63,65));
+    }//GEN-LAST:event_jLabelCancelarMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.PanelRound btnAceptar;
-    private GUI.PanelRound btnAceptar1;
+    private GUI.PanelRound btnCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabelAceptar;
+    private javax.swing.JLabel jLabelCancelar;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
