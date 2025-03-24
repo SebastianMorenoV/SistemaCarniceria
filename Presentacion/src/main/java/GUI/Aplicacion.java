@@ -17,10 +17,10 @@ import javax.swing.*;
 public class Aplicacion {
 
     private JFrame framePrincipal; // Ventana principal
-    private RegistrarVenta registrarVenta;
+    protected RegistrarVenta registrarVenta;
     private FormularioTarjeta formularioTarjeta;
-    private FormularioEfectivo formularioEfectivo;
-    private FormularioMostrarCambio mostrarCambio;
+    public FormularioEfectivo formularioEfectivo;
+    public FormularioMostrarCambio mostrarCambio;
     private MenuOpciones menuOpciones;
 
     public Aplicacion() {
@@ -46,15 +46,11 @@ public class Aplicacion {
 
     // Método para mostrar FormularioEfectivo
     public void mostrarFormularioEfectivo() {
-        framePrincipal.setSize(635,317);
-        framePrincipal.setLocationRelativeTo(null); 
-        cambiarPantalla(formularioEfectivo);
+        abrirPantalla(formularioEfectivo);
     }
     
     public void mostrarFormularioCambio(){
-        framePrincipal.setSize(377,270);
-        framePrincipal.setLocationRelativeTo(null); 
-        cambiarPantalla(mostrarCambio);
+        abrirPantalla(mostrarCambio);
     }
 
     // Mostrar un mensaje de error si no hay productos
@@ -137,6 +133,5 @@ public class Aplicacion {
 
         ventana.setVisible(true);
     }
-    
     
 }

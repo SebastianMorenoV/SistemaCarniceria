@@ -5,6 +5,9 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 
 /**
  *
@@ -12,12 +15,17 @@ import java.awt.Color;
  */
 public class FormularioMostrarCambio extends javax.swing.JPanel {
     Aplicacion app;
+    Timer timer;
+    double total;
+    double pagoCon;
+    double cambio = 0;
+    
     /**
      * Creates new form FormularioMostrarCambio
      */
     public FormularioMostrarCambio(Aplicacion app) {
         initComponents();
-        this.app = app;
+        this.app = app;    
     }
 
     /**
@@ -32,7 +40,7 @@ public class FormularioMostrarCambio extends javax.swing.JPanel {
         jlabelCantTotal = new javax.swing.JLabel();
         jlabelTotal = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabelCantPagaste = new javax.swing.JLabel();
+        jlabelCantPagaste = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabelCantCambio = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -44,7 +52,6 @@ public class FormularioMostrarCambio extends javax.swing.JPanel {
 
         jlabelCantTotal.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         jlabelCantTotal.setForeground(new java.awt.Color(0, 0, 0));
-        jlabelCantTotal.setText("$");
 
         jlabelTotal.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         jlabelTotal.setForeground(new java.awt.Color(0, 0, 0));
@@ -54,9 +61,8 @@ public class FormularioMostrarCambio extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Pagaste Con:");
 
-        jLabelCantPagaste.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        jLabelCantPagaste.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelCantPagaste.setText("$");
+        jlabelCantPagaste.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        jlabelCantPagaste.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel4.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
@@ -116,7 +122,7 @@ public class FormularioMostrarCambio extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelCantCambio)
-                    .addComponent(jLabelCantPagaste)
+                    .addComponent(jlabelCantPagaste)
                     .addComponent(jlabelCantTotal))
                 .addContainerGap(36, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +143,7 @@ public class FormularioMostrarCambio extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabelCantPagaste))
+                    .addComponent(jlabelCantPagaste))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -155,7 +161,6 @@ public class FormularioMostrarCambio extends javax.swing.JPanel {
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         // TODO add your handling code here:
-        app.mostrarRegistrarVenta();
     }//GEN-LAST:event_btnAceptarMouseClicked
 
     private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseEntered
@@ -170,16 +175,52 @@ public class FormularioMostrarCambio extends javax.swing.JPanel {
         btnAceptar.setBackground(new Color(60,63,65));
     }//GEN-LAST:event_jLabel5MouseExited
 
+    public void cargarLabels(){
+        jlabelCantTotal.setText("$" + total);
+        jlabelCantPagaste.setText("$" + pagoCon);
+        jLabelCantCambio.setText("$" + (total-pagoCon));
+    }
+    
+    
+    private void calcularCambio(){
+        System.out.println();
+    }
 
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public double getPagoCon() {
+        return pagoCon;
+    }
+
+    public void setPagoCon(double pagoCon) {
+        this.pagoCon = pagoCon;
+    }
+
+    public double getCambio() {
+        return cambio;
+    }
+
+    public void setCambio(double cambio) {
+        this.cambio = cambio;
+    }
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.PanelRound btnAceptar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabelCantCambio;
-    private javax.swing.JLabel jLabelCantPagaste;
+    public javax.swing.JLabel jLabelCantCambio;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel jlabelCantTotal;
+    public javax.swing.JLabel jlabelCantPagaste;
+    public javax.swing.JLabel jlabelCantTotal;
     private javax.swing.JLabel jlabelTotal;
     private javax.swing.JLabel jlabelTotal1;
     // End of variables declaration//GEN-END:variables

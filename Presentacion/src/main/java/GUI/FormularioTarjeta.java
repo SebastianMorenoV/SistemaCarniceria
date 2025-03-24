@@ -100,6 +100,11 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Regresar");
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
         btnRegresar.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 100, 40));
 
         add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 350, 160, 40));
@@ -135,6 +140,10 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         // TODO add your handling code here:
         app.mostrarProcesandoPago("Procesando el pago de la tarjeta...", "Procesando Pago", 2000);
     }//GEN-LAST:event_btnAceptarMouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel6MouseClicked
 
     
 

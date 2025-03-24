@@ -5,13 +5,19 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
  * @author janot
  */
 public class FormularioEfectivo extends javax.swing.JPanel {
-    Aplicacion app;
+    private Aplicacion app;
+    private Timer timer;
+    private double cantPago;
     
     /**
      * Creates new form FormularioEfectivo
@@ -19,7 +25,14 @@ public class FormularioEfectivo extends javax.swing.JPanel {
     public FormularioEfectivo(Aplicacion app) {
         initComponents();
         this.app = app;
-        
+        //ACTUALIZA EL TOTAL CADA 1 segundo
+        timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cargarTotal();
+            }
+        });
+        timer.start(); // Iniciar el Timer
     }
 
     /**
@@ -31,12 +44,10 @@ public class FormularioEfectivo extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelTotal = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextPago = new javax.swing.JTextField();
         btnAceptar = new GUI.PanelRound();
         jLabelAceptar = new javax.swing.JLabel();
         btnCancelar = new GUI.PanelRound();
@@ -47,38 +58,16 @@ public class FormularioEfectivo extends javax.swing.JPanel {
         setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("X");
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jLabel1MouseDragged(evt);
-            }
-        });
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 40, -1));
-
         jLabel2.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Pago en efectivo");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 620, -1));
 
-        jLabel3.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Total:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, -1));
-
-        jLabel4.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("$0.00");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, -1, -1));
+        jLabelTotal.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
+        jLabelTotal.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelTotal.setText("Total:");
+        add(jLabelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, -1));
 
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
         jLabel5.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
@@ -86,9 +75,8 @@ public class FormularioEfectivo extends javax.swing.JPanel {
         jLabel5.setText("Pagaras con:");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, -1, -1));
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setText("$");
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 150, 30));
+        jTextPago.setBackground(new java.awt.Color(255, 255, 255));
+        add(jTextPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 150, 30));
 
         btnAceptar.setBackground(new java.awt.Color(44, 44, 44));
         btnAceptar.setRoundBottomLeft(15);
@@ -145,16 +133,8 @@ public class FormularioEfectivo extends javax.swing.JPanel {
         add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, 140, 40));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        app.mostrarRegistrarVenta();
-    }//GEN-LAST:event_jLabel1MouseClicked
-
-    private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel1MouseDragged
-
     private void jLabelCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCancelarMouseClicked
-        app.mostrarRegistrarVenta();
+        
     }//GEN-LAST:event_jLabelCancelarMouseClicked
 
     private void jLabelCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCancelarMouseEntered
@@ -162,8 +142,23 @@ public class FormularioEfectivo extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabelCancelarMouseEntered
 
     private void jLabelAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAceptarMouseClicked
-        app.mostrarFormularioCambio();
-        
+        if(!jTextPago.getText().trim().isEmpty()){
+           try {
+               Double.parseDouble(jTextPago.getText());
+                app.mostrarCambio.jlabelCantTotal.setText(app.formularioEfectivo.jLabelTotal.getText().substring(6));
+                app.mostrarCambio.jlabelCantPagaste.setText("$"+app.formularioEfectivo.jTextPago.getText());
+                app.mostrarCambio.setTotal(Double.parseDouble(app.formularioEfectivo.jLabelTotal.getText().substring(8)));
+                app.mostrarCambio.setPagoCon(Double.parseDouble(jTextPago.getText()));  
+                app.mostrarCambio.jLabelCantCambio.setText("$" + (app.mostrarCambio.getPagoCon() - app.mostrarCambio.getTotal()));
+                app.mostrarFormularioCambio();
+                app.mostrarCambio.cargarLabels();
+           } catch (Exception e) {
+               JOptionPane.showMessageDialog(this, "El dato tiene que ser doubleo entero");
+           }
+       }
+        else{
+            JOptionPane.showMessageDialog(this, "No puede ver campos vacios");
+        }
     }//GEN-LAST:event_jLabelAceptarMouseClicked
 
     private void jLabelAceptarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAceptarMouseEntered
@@ -178,17 +173,23 @@ public class FormularioEfectivo extends javax.swing.JPanel {
         btnCancelar.setBackground(new Color(60,63,65));
     }//GEN-LAST:event_jLabelCancelarMouseExited
 
+    private void cargarTotal(){
+        jLabelTotal.setText(app.registrarVenta.getTotal().getText());
+    }
+    
+
+    public double getCantPago() {
+        return cantPago;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.PanelRound btnAceptar;
     private GUI.PanelRound btnCancelar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelAceptar;
     private javax.swing.JLabel jLabelCancelar;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jLabelTotal;
+    private javax.swing.JTextField jTextPago;
     // End of variables declaration//GEN-END:variables
 }
