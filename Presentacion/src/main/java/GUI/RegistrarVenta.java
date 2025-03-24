@@ -52,6 +52,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
     private List<ProductoCargadoDTO> listadoProductos;
     public ArrayList<NuevoProductoVentaDTO> listadoProductosVenta;
     private RealizarVenta realizarVenta;
+    public JDialog dialogTarjeta = null;
 
     public RegistrarVenta(Aplicacion app) {
         this.app = app;
@@ -442,7 +443,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
     private void btnFinalizarVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFinalizarVentaMouseClicked
         // TODO add your handling code here:
         int confirmar = JOptionPane.showConfirmDialog(this, "¿Desea finalizar la venta?", "Confirmar Venta", JOptionPane.YES_NO_OPTION);
-        if(confirmar == JOptionPane.YES_OPTION){
+        if (confirmar == JOptionPane.YES_OPTION) {
             app.mostrarTicketPDF(guardarVenta());
         }
     }//GEN-LAST:event_btnFinalizarVentaMouseClicked
@@ -562,8 +563,8 @@ public class RegistrarVenta extends javax.swing.JPanel {
             if (productoCargado != null) {
                 try {
                     // Obtener la cantidad del producto
-                    String respuesta = (String)JOptionPane.showInputDialog(null, "Ingresa la cantidad del producto:", "Cantidad", JOptionPane.QUESTION_MESSAGE, null, null, "1.0");
-                    if(respuesta == null){
+                    String respuesta = (String) JOptionPane.showInputDialog(null, "Ingresa la cantidad del producto:", "Cantidad", JOptionPane.QUESTION_MESSAGE, null, null, "1.0");
+                    if (respuesta == null) {
                         return;
                     }
                     double cantidad = Double.parseDouble(respuesta);
@@ -765,13 +766,13 @@ public class RegistrarVenta extends javax.swing.JPanel {
         return Double.parseDouble(totalS);
     }
 
-    public ventaDTO guardarVenta(){
+    public ventaDTO guardarVenta() {
         LocalDate fecha = LocalDate.now();
         EmpledoCargadoDTO empleadoCargado = realizarVenta.cargarEmpleado();
-        ventaDTO ventaNueva = new ventaDTO(empleadoCargado,fecha,listadoProductosVenta);
+        ventaDTO ventaNueva = new ventaDTO(empleadoCargado, fecha, listadoProductosVenta);
         return ventaNueva;
     }
-    
+
     public void eliminarProducto() {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
 

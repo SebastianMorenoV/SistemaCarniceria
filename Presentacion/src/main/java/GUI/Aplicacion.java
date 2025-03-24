@@ -44,10 +44,12 @@ public class Aplicacion {
 
     // Método para mostrar RegistrarVenta (Pantalla Principal)
     // Método para mostrar FormularioTarjeta
-    public void mostrarFormularioTarjeta() {
-        abrirPantalla(formularioTarjeta);
+    public JDialog mostrarFormularioTarjeta() {
+        JDialog dialog = abrirPantalla(formularioTarjeta);
+        return dialog;
     }
-    public void mostrarTicketPDF(ventaDTO venta){
+
+    public void mostrarTicketPDF(ventaDTO venta) {
         ticket = new vistaTicketPDF(venta);
         abrirPantalla(ticket);
     }
@@ -92,6 +94,8 @@ public class Aplicacion {
         JPanel panelGif = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelGif.add(lblGif);
         panel.add(panelGif, BorderLayout.CENTER);
+        
+        cerrarPantallaDialogo();
 
         // Crear el JOptionPane
         JOptionPane procesarPago = new JOptionPane(panel, JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
@@ -187,14 +191,27 @@ public class Aplicacion {
         framePrincipal.setVisible(true);
     }
 
-    private void abrirPantalla(JPanel nuevaPantalla) {
-        ventanaActual = new JDialog(framePrincipal, true);
-        ventanaActual.setIconImage(new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB));
+    private JDialog abrirPantalla(JPanel nuevaPantalla) {
+        // Cerrar la ventana actual si está abierta
+        if (ventanaActual != null && ventanaActual.isVisible()) {
+            ventanaActual.dispose();
+        }
+        // Crear un nuevo JDialog
+        ventanaActual = new JDialog(framePrincipal, true); // Modal
+        ventanaActual.setIconImage(new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB)); // Icono vacío
         ventanaActual.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         ventanaActual.getContentPane().add(nuevaPantalla);
         ventanaActual.pack();
         ventanaActual.setLocationRelativeTo(framePrincipal);
         ventanaActual.setVisible(true);
+
+        return ventanaActual;
+    }
+
+    public void cerrarPantallaDialogo() {
+        if (ventanaActual != null && ventanaActual.isVisible()) {
+            ventanaActual.dispose(); // Cierra el JDialog
+        }
     }
 
 }
