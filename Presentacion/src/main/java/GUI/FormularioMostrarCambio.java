@@ -7,6 +7,9 @@ package GUI;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 /**
@@ -168,7 +171,8 @@ public class FormularioMostrarCambio extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel5MouseEntered
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        app.mostrarRegistrarVenta();
+        ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();
+        
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited

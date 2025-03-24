@@ -7,7 +7,10 @@ package GUI;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 /**
@@ -134,7 +137,7 @@ public class FormularioEfectivo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCancelarMouseClicked
-        
+        ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();        
     }//GEN-LAST:event_jLabelCancelarMouseClicked
 
     private void jLabelCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCancelarMouseEntered
@@ -159,6 +162,7 @@ public class FormularioEfectivo extends javax.swing.JPanel {
         else{
             JOptionPane.showMessageDialog(this, "No puede ver campos vacios");
         }
+        ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();
     }//GEN-LAST:event_jLabelAceptarMouseClicked
 
     private void jLabelAceptarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAceptarMouseEntered
