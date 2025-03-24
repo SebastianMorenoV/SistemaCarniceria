@@ -10,7 +10,7 @@ import excepciones.ProcesadorPagoException;
  *
  * @author janot
  */
-public class ProcesadorPago implements IProcesadorPago{
+public class ProcesadorPago implements IProcesadorPago {
 
     @Override
     public PagoViejoDTO registrarPago(PagoNuevoDTO pago) {
@@ -28,25 +28,27 @@ public class ProcesadorPago implements IProcesadorPago{
         if (pago.getMetodoPago() == null) {
             throw new ProcesadorPagoException("El método de pago no puede ser nulo.");
         }
-        
-        if(pago.getMetodoPago().getNuevaTarjeta()!=null){
-            System.out.println("Pago exitoso");
-            return true;
+
+        if (pago.getMetodoPago().getNuevaTarjeta() != null) {
+            if (pago.getMetodoPago().getNuevaTarjeta().getSaldoDisponible() > pago.getMonto()) {
+                return true;
+            }
+            return false;
+
         }
 
-    return false;
+        return false;
     }
 
     private boolean validarTarjeta(NuevaTarjetaDTO tarjeta) {
-        return tarjeta.getNumeroTarjeta() != null &&
-               tarjeta.getNumeroTarjeta().length() == 16 && // Simulación de validación de tarjeta
-               tarjeta.getCvv() > 99 && tarjeta.getCvv() < 1000;
+        return tarjeta.getNumeroTarjeta() != null
+                && tarjeta.getNumeroTarjeta().length() == 16
+                && // Simulación de validación de tarjeta
+                tarjeta.getCvv() > 99 && tarjeta.getCvv() < 1000;
     }
 
     private boolean validarEfectivo(NuevoEfectivoDTO efectivo, double monto) {
         return efectivo.getMonto() >= monto; // El efectivo debe ser suficiente para el pago
-    }  
-    
-}
-    
+    }
 
+}

@@ -19,8 +19,8 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
 public class Aplicacion {
 
     private JFrame framePrincipal; // Ventana principal
-    protected RegistrarVenta registrarVenta;
-    private FormularioTarjeta formularioTarjeta;
+    public RegistrarVenta registrarVenta;
+    public FormularioTarjeta formularioTarjeta;
     public FormularioEfectivo formularioEfectivo;
     public FormularioMostrarCambio mostrarCambio;
     private MenuOpciones menuOpciones;

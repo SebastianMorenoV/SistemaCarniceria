@@ -30,8 +30,10 @@ import javax.swing.Timer;
  * @author Admin
  */
 public class FormularioTarjeta extends javax.swing.JPanel {
+
     Aplicacion app;
     ProcesadorPago proce;
+
     /**
      * Creates new form FormularioTarjeta
      */
@@ -39,7 +41,7 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         this.app = app;
         this.proce = new ProcesadorPago();
         initComponents();
-        
+
     }
 
     /**
@@ -147,40 +149,35 @@ public class FormularioTarjeta extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRegresarMouseClicked
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
-        // TODO add your handling code here:
-        // TODO add your handling code here:
-        //app.mostrarProcesandoPago(false);
         String titular = inputTitularTarjeta.getText();
         String numeroTarjeta = inputNumeroTarjeta.getText();
         String fechaVencimiento = inputFechaExpiracion.getText();
         String cvvStr = inputCVV.getText();
-        int cvv;
-        cvv = Integer.parseInt(cvvStr);
-        NuevaTarjetaDTO tarjeta = new NuevaTarjetaDTO(titular, numeroTarjeta, fechaVencimiento, cvv);
+        int cvv = Integer.parseInt(cvvStr);
+        double saldo = 200; // tarjeta con 200 pesos
+        NuevaTarjetaDTO tarjeta = new NuevaTarjetaDTO(titular, numeroTarjeta, fechaVencimiento, cvv, saldo);
         Date fechaPago = new Date();
-        double monto = 300.00;
         
-        MetodoPagoDTO pene = new MetodoPagoDTO(tarjeta);
-        PagoNuevoDTO pago = new PagoNuevoDTO(fechaPago, pene, monto);
+        double monto = app.registrarVenta.getTotalDouble();
+        MetodoPagoDTO metodoPago = new MetodoPagoDTO(tarjeta);
+        PagoNuevoDTO pago = new PagoNuevoDTO(fechaPago, metodoPago, monto);
         try {
             boolean ans = proce.verificarPago(pago);
-            if(ans){
+            if (ans) {
                 app.mostrarProcesandoPago(true);
-            }else{
+            } else {
                 app.mostrarProcesandoPago(false);
             }
         } catch (ProcesadorPagoException ex) {
             app.mostrarProcesandoPago(false);
-            Logger.getLogger(FormularioTarjeta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnAceptarMouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
-         ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();
+        ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();
     }//GEN-LAST:event_jLabel6MouseClicked
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.PanelRound btnAceptar;

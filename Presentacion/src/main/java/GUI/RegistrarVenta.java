@@ -117,7 +117,13 @@ public class RegistrarVenta extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setFocusable(false);
         jTable1.setRowHeight(40);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         tblProductosVenta.setViewportView(jTable1);
 
         add(tblProductosVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 880, 370));
@@ -211,6 +217,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        jList1.setFocusable(false);
         jList1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jList1MouseClicked(evt);
@@ -409,6 +416,19 @@ public class RegistrarVenta extends javax.swing.JPanel {
         abrirDialogoAtajos();
     }//GEN-LAST:event_jlabelAtajosMouseClicked
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        if (evt.getClickCount() == 2) { // Doble clic
+            int respuesta = JOptionPane.showConfirmDialog(null, "¿Deseas eliminar el producto?", "Eliminar producto", JOptionPane.YES_NO_OPTION);
+            if (respuesta == JOptionPane.YES_OPTION) {
+                eliminarProducto(); // Llama al método al doble clic
+                calcularTotales();
+            } else {
+                // Limpiar la selección
+                jTable1.getSelectionModel().clearSelection();
+            }
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.PanelRound btnAtajos;
@@ -524,7 +544,11 @@ public class RegistrarVenta extends javax.swing.JPanel {
             if (productoCargado != null) {
                 try {
                     // Obtener la cantidad del producto
-                    double cantidad = Double.parseDouble((String) JOptionPane.showInputDialog(null, "Ingresa la cantidad del producto:", "Cantidad", JOptionPane.QUESTION_MESSAGE, null, null, "1.0"));
+                    String respuesta = (String)JOptionPane.showInputDialog(null, "Ingresa la cantidad del producto:", "Cantidad", JOptionPane.QUESTION_MESSAGE, null, null, "1.0");
+                    if(respuesta == null){
+                        return;
+                    }
+                    double cantidad = Double.parseDouble(respuesta);
 
                     // Validar que la cantidad sea mayor que 0
                     if (cantidad <= 0) {
@@ -548,6 +572,8 @@ public class RegistrarVenta extends javax.swing.JPanel {
                     modelo.addRow(fila);
                     // llamadaMetodo actualizarTotal
                     calcularTotales();
+
+                    jList1.getSelectionModel().clearSelection();
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(null, "Error: Ingresa un valor numérico válido.");
                 }
@@ -675,19 +701,18 @@ public class RegistrarVenta extends javax.swing.JPanel {
         }
     }
 
-    public JLabel getTotal(){
+    public JLabel getTotal() {
         return txtTotal;
     }
-    
-    
+
     public void abrirDialogoAtajos() {
         JDialog dialogo = new JDialog((JFrame) SwingUtilities.getWindowAncestor(this), "Atajos del Sistema", true);
         dialogo.setSize(400, 350);
         dialogo.setLayout(new BorderLayout());
         dialogo.setLocationRelativeTo(this);
 
-       JTextArea txtAtajos = new JTextArea(
-        """
+        JTextArea txtAtajos = new JTextArea(
+                """
         F1   - Opción Pago Efectivo
         F2   - Opción Pago Tarjeta
         F8   - Buscar por Código
@@ -697,8 +722,8 @@ public class RegistrarVenta extends javax.swing.JPanel {
         
         Ctrl + A  Mostrar Atajos
         """
-);
-       txtAtajos.setFont(new Font("Monospaced", Font.PLAIN, 20));
+        );
+        txtAtajos.setFont(new Font("Monospaced", Font.PLAIN, 20));
         txtAtajos.setEditable(false);
         txtAtajos.setMargin(new Insets(10, 10, 10, 10)); // Márgenes
         dialogo.add(new JScrollPane(txtAtajos), BorderLayout.CENTER);
@@ -712,5 +737,26 @@ public class RegistrarVenta extends javax.swing.JPanel {
         dialogo.add(panelBoton, BorderLayout.SOUTH);
 
         dialogo.setVisible(true);
+    }
+
+    //metodoAuxiliar para obtener el total entre pantallas
+    public Double getTotalDouble() {
+        String totalS = txtTotal.getText();
+        totalS = totalS.replace("Total: $", "").trim();
+        // Convierte el texto a un número double
+        return Double.parseDouble(totalS);
+    }
+
+    public void eliminarProducto() {
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+
+        int filaAEliminar = jTable1.getSelectedRow();
+        if (filaAEliminar != -1) {
+            // Eliminar la fila del modelo de la tabla
+            modelo.removeRow(filaAEliminar);
+
+            // Limpiar la selección
+            jTable1.getSelectionModel().clearSelection();
+        }
     }
 }
