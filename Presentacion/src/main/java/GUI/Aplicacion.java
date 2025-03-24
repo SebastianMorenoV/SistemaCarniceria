@@ -8,6 +8,7 @@ package GUI;
  *
  * @author Sebastian Moreno
  */
+import DTOs.ventaDTO;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -25,6 +26,7 @@ public class Aplicacion {
     public FormularioMostrarCambio mostrarCambio;
     private MenuOpciones menuOpciones;
     private JDialog ventanaActual; // Variable para almacenar la ventana actual
+    protected vistaTicketPDF ticket;
 
     public Aplicacion() {
         framePrincipal = new JFrame("Sistema Carnicería");
@@ -44,6 +46,10 @@ public class Aplicacion {
     // Método para mostrar FormularioTarjeta
     public void mostrarFormularioTarjeta() {
         abrirPantalla(formularioTarjeta);
+    }
+    public void mostrarTicketPDF(ventaDTO venta){
+        ticket = new vistaTicketPDF(venta);
+        abrirPantalla(ticket);
     }
 
     // Método para mostrar FormularioEfectivo

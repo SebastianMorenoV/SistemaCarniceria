@@ -11,6 +11,7 @@ package GUI;
 import DTOs.EmpledoCargadoDTO;
 import DTOs.NuevoProductoVentaDTO;
 import DTOs.ProductoCargadoDTO;
+import DTOs.ventaDTO;
 import Implementacion.RealizarVenta;
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -19,9 +20,11 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.crypto.AEADBadTagException;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.DefaultListModel;
@@ -47,11 +50,13 @@ public class RegistrarVenta extends javax.swing.JPanel {
      */
     Aplicacion app;
     private List<ProductoCargadoDTO> listadoProductos;
+    public ArrayList<NuevoProductoVentaDTO> listadoProductosVenta;
     private RealizarVenta realizarVenta;
 
     public RegistrarVenta(Aplicacion app) {
         this.app = app;
         this.realizarVenta = new RealizarVenta();
+        this.listadoProductosVenta = new ArrayList<>();
         initComponents();
         valoresDefault();
     }
@@ -158,6 +163,11 @@ public class RegistrarVenta extends javax.swing.JPanel {
         btnFinalizarVenta.setRoundBottomRight(15);
         btnFinalizarVenta.setRoundTopLeft(15);
         btnFinalizarVenta.setRoundTopRight(15);
+        btnFinalizarVenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnFinalizarVentaMouseClicked(evt);
+            }
+        });
         btnFinalizarVenta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
@@ -428,6 +438,14 @@ public class RegistrarVenta extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void btnFinalizarVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFinalizarVentaMouseClicked
+        // TODO add your handling code here:
+        int confirmar = JOptionPane.showConfirmDialog(this, "¿Desea finalizar la venta?", "Confirmar Venta", JOptionPane.YES_NO_OPTION);
+        if(confirmar == JOptionPane.YES_OPTION){
+            app.mostrarTicketPDF(guardarVenta());
+        }
+    }//GEN-LAST:event_btnFinalizarVentaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -747,6 +765,13 @@ public class RegistrarVenta extends javax.swing.JPanel {
         return Double.parseDouble(totalS);
     }
 
+    public ventaDTO guardarVenta(){
+        LocalDate fecha = LocalDate.now();
+        EmpledoCargadoDTO empleadoCargado = realizarVenta.cargarEmpleado();
+        ventaDTO ventaNueva = new ventaDTO(empleadoCargado,fecha,listadoProductosVenta);
+        return ventaNueva;
+    }
+    
     public void eliminarProducto() {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
 
