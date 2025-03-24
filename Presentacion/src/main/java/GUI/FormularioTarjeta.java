@@ -164,7 +164,6 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         try {
             boolean ans = proce.verificarPago(pago);
             if (ans) {
-                app.registrarVenta.dialogTarjeta.dispose();
                 app.mostrarProcesandoPago(true);
             } else {
                 
