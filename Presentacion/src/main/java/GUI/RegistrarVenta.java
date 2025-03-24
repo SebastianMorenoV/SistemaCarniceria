@@ -593,6 +593,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
                     calcularTotales();
 
                     jList1.getSelectionModel().clearSelection();
+                    listadoProductosVenta.add(productoVenta);
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(null, "Error: Ingresa un valor numérico válido.");
                 }

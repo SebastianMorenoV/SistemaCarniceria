@@ -6,8 +6,13 @@ package GUI;
 
 import DTOs.NuevoProductoVentaDTO;
 import DTOs.ventaDTO;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.util.ArrayList;
+import static javax.swing.Box.createVerticalGlue;
 import javax.swing.BoxLayout;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,19 +22,36 @@ import javax.swing.table.DefaultTableModel;
  */
 public class vistaTicketPDF extends javax.swing.JPanel {
     protected ventaDTO venta;
+    protected double subtotal, iva, total;
     /**
      * Creates new form vistaTicketPDF
      */
     public vistaTicketPDF(ventaDTO venta) {
         initComponents();
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.venta = venta;
+        generarTicketVenta();
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        jScrollPane1 = new JScrollPane(jTable1); 
+        add(jScrollPane1);
+        add(createVerticalGlue());
+        panelSumas.setLayout(new GridLayout(3,2));
+        panelSumas.add(campoSubtotal);
+        panelSumas.add(campoSubtotal2);
+        panelSumas.add(campoIVA);
+        panelSumas.add(campoIVATotal);
+        panelSumas.add(campoTotalVenta);
+        panelSumas.add(campoTotal);
+        jPanel1.add(btnImprimirTicket);
+        jPanel1.add(btnSalirTicket);
         ticket.setAlignmentX(CENTER_ALIGNMENT);
         campoCarniceria.setAlignmentX(CENTER_ALIGNMENT);
         campoEmpleado.setAlignmentX(CENTER_ALIGNMENT);
         campoFechaVenta.setAlignmentX(CENTER_ALIGNMENT);
+        jPanel1.setLayout(new FlowLayout());
+        add(panelSumas);
+        add(jPanel1);
         
-        this.venta = venta;
-        generarTicketVenta();
+        
     }
 
     /**
@@ -42,17 +64,56 @@ public class vistaTicketPDF extends javax.swing.JPanel {
     private void initComponents() {
 
         ticket = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         campoCarniceria = new javax.swing.JLabel();
+        panelSumas = new javax.swing.JPanel();
+        campoSubtotal = new javax.swing.JLabel();
+        campoIVA = new javax.swing.JLabel();
+        campoTotalVenta = new javax.swing.JLabel();
+        campoSubtotal2 = new javax.swing.JLabel();
+        campoIVATotal = new javax.swing.JLabel();
+        campoTotal = new javax.swing.JLabel();
         campoFechaVenta = new javax.swing.JLabel();
         campoEmpleado = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        btnImprimirTicket = new javax.swing.JButton();
+        btnSalirTicket = new javax.swing.JButton();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
         ticket.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         ticket.setText("Ticket de Compra");
         add(ticket);
+
+        campoCarniceria.setText("Carniceria");
+        add(campoCarniceria);
+
+        campoSubtotal.setText("Subtotal:  ");
+        panelSumas.add(campoSubtotal);
+
+        campoIVA.setText("IVA:");
+        panelSumas.add(campoIVA);
+
+        campoTotalVenta.setText("Total:");
+        panelSumas.add(campoTotalVenta);
+
+        campoSubtotal2.setText("jLabel1");
+        panelSumas.add(campoSubtotal2);
+
+        campoIVATotal.setText("jLabel2");
+        panelSumas.add(campoIVATotal);
+
+        campoTotal.setText("jLabel3");
+        panelSumas.add(campoTotal);
+
+        add(panelSumas);
+
+        campoFechaVenta.setText("jLabel3");
+        add(campoFechaVenta);
+
+        campoEmpleado.setText("jLabel1");
+        add(campoEmpleado);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -69,28 +130,54 @@ public class vistaTicketPDF extends javax.swing.JPanel {
 
         add(jScrollPane1);
 
-        campoCarniceria.setText("Carniceria");
-        add(campoCarniceria);
+        btnImprimirTicket.setBackground(new java.awt.Color(0, 0, 0));
+        btnImprimirTicket.setForeground(new java.awt.Color(255, 255, 255));
+        btnImprimirTicket.setText("Imprimir");
+        btnImprimirTicket.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jPanel1.add(btnImprimirTicket);
 
-        campoFechaVenta.setText("jLabel3");
-        add(campoFechaVenta);
+        btnSalirTicket.setBackground(new java.awt.Color(102, 102, 102));
+        btnSalirTicket.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalirTicket.setText("Salir");
+        btnSalirTicket.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnSalirTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirTicketActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSalirTicket);
 
-        campoEmpleado.setText("jLabel1");
-        add(campoEmpleado);
+        add(jPanel1);
+        jPanel1.getAccessibleContext().setAccessibleName("");
+        jPanel1.getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSalirTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirTicketActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalirTicketActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnImprimirTicket;
+    private javax.swing.JButton btnSalirTicket;
     private javax.swing.JLabel campoCarniceria;
     private javax.swing.JLabel campoEmpleado;
     private javax.swing.JLabel campoFechaVenta;
+    private javax.swing.JLabel campoIVA;
+    private javax.swing.JLabel campoIVATotal;
+    private javax.swing.JLabel campoSubtotal;
+    private javax.swing.JLabel campoSubtotal2;
+    private javax.swing.JLabel campoTotal;
+    private javax.swing.JLabel campoTotalVenta;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JPanel panelSumas;
     private javax.swing.JLabel ticket;
     // End of variables declaration//GEN-END:variables
 
     public void generarTicketVenta(){
-        String columnasTabla[] = {"Producto","cantidad","total"};
+        String columnasTabla[] = {"Producto","cantidad","subtotal"};
         campoEmpleado.setText(venta.getEmpleado().getNombre());
         campoFechaVenta.setText(venta.getFechaHora().toString());
         DefaultTableModel modelo = new DefaultTableModel(columnasTabla, 0);
@@ -100,9 +187,13 @@ public class vistaTicketPDF extends javax.swing.JPanel {
         }
         jTable1.setModel(modelo);
         jTable1.setVisible(true);
-        jScrollPane1.add(jTable1);
-        this.add(jScrollPane1);
-       
+        jTable1.setEnabled(false);
+        subtotal = calcularSubtotal(venta.getListadoProductosVenta());
+        iva = calcularIva(subtotal);
+        total = calcularTotal(subtotal, iva);
+        campoSubtotal2.setText(String.format("%.2f",subtotal));
+        campoIVATotal.setText(String.format("%.2f",iva));        
+        campoTotal.setText(String.format("%.2f",total));
     }
     public double calcularSubtotal(ArrayList<NuevoProductoVentaDTO> productosEnTabla) {
         double subtotal = 0.0;
