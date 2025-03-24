@@ -6,15 +6,21 @@ package Implementacion;
 
 import DTOs.EmpledoCargadoDTO;
 import DTOs.NuevoProductoVentaDTO;
+import DTOs.PagoNuevoDTO;
 import DTOs.ProductoCargadoDTO;
+import excepciones.ProcesadorPagoException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Lap-064
  */
 public class RealizarVenta implements IRealizarVenta {
+
+    ProcesadorPago proce;
 
     @Override
     public EmpledoCargadoDTO cargarEmpleado() {
@@ -60,5 +66,17 @@ public class RealizarVenta implements IRealizarVenta {
     @Override
     public double calcularTotal(double subtotal, double iva) {
         return subtotal + iva;
+    }
+
+    @Override
+    public boolean verificarPago(PagoNuevoDTO pagoNuevoDTO){
+
+        try {
+            return proce.verificarPago(pagoNuevoDTO);
+        } catch (ProcesadorPagoException ex) {
+            Logger.getLogger(RealizarVenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+
     }
 }

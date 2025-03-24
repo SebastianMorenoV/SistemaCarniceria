@@ -18,9 +18,9 @@ com\carniceria\presentacion\Presentacion.class
 GUI\RegistrarVenta$14.class
 GUI\RegistrarVenta$8.class
 GUI\Aplicacion.class
-GUI\FormularioEfectivo$4.class
 GUI\RegistrarVenta$1.class
 GUI\FormularioEfectivo.class
+GUI\FormularioTarjeta$3.class
 GUI\MenuOpciones$2.class
 GUI\RegistrarVenta.class
 GUI\RegistrarVenta$6.class

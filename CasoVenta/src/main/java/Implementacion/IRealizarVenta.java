@@ -25,4 +25,6 @@ public interface IRealizarVenta {
     
     public double calcularIva(double subtotal);
     
+    public boolean verificarPago(PagoNuevoDTO pago);
+    
 }

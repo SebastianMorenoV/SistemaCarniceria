@@ -4,9 +4,17 @@
  */
 package GUI;
 
+import DTOs.MetodoPagoDTO;
+import DTOs.NuevaTarjetaDTO;
+import DTOs.PagoNuevoDTO;
+import Implementacion.ProcesadorPago;
+import excepciones.ProcesadorPagoException;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -23,11 +31,13 @@ import javax.swing.Timer;
  */
 public class FormularioTarjeta extends javax.swing.JPanel {
     Aplicacion app;
+    ProcesadorPago proce;
     /**
      * Creates new form FormularioTarjeta
      */
     public FormularioTarjeta(Aplicacion app) {
         this.app = app;
+        this.proce = new ProcesadorPago();
         initComponents();
         
     }
@@ -49,7 +59,7 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         inputFechaExpiracion = new javax.swing.JTextField();
-        inputFechaExpiracion1 = new javax.swing.JTextField();
+        inputCVV = new javax.swing.JTextField();
         btnRegresar = new GUI.PanelRound();
         jLabel6 = new javax.swing.JLabel();
         btnAceptar = new GUI.PanelRound();
@@ -81,7 +91,7 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         jLabel5.setText("Fecha de expiracion");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, -1, -1));
         add(inputFechaExpiracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 170, 30));
-        add(inputFechaExpiracion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 140, 30));
+        add(inputCVV, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 140, 30));
 
         btnRegresar.setBackground(new java.awt.Color(44, 44, 44));
         btnRegresar.setRoundBottomLeft(15);
@@ -105,7 +115,7 @@ public class FormularioTarjeta extends javax.swing.JPanel {
                 jLabel6MouseClicked(evt);
             }
         });
-        btnRegresar.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 100, 40));
+        btnRegresar.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 40));
 
         add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 350, 160, 40));
 
@@ -138,11 +148,36 @@ public class FormularioTarjeta extends javax.swing.JPanel {
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         // TODO add your handling code here:
-        app.mostrarProcesandoPago("Procesando el pago de la tarjeta...", "Procesando Pago", 2000);
+        // TODO add your handling code here:
+        //app.mostrarProcesandoPago(false);
+        String titular = inputTitularTarjeta.getText();
+        String numeroTarjeta = inputNumeroTarjeta.getText();
+        String fechaVencimiento = inputFechaExpiracion.getText();
+        String cvvStr = inputCVV.getText();
+        int cvv;
+        cvv = Integer.parseInt(cvvStr);
+        NuevaTarjetaDTO tarjeta = new NuevaTarjetaDTO(titular, numeroTarjeta, fechaVencimiento, cvv);
+        Date fechaPago = new Date();
+        double monto = 300.00;
+        
+        MetodoPagoDTO pene = new MetodoPagoDTO(tarjeta);
+        PagoNuevoDTO pago = new PagoNuevoDTO(fechaPago, pene, monto);
+        try {
+            boolean ans = proce.verificarPago(pago);
+            if(ans){
+                app.mostrarProcesandoPago(true);
+            }else{
+                app.mostrarProcesandoPago(false);
+            }
+        } catch (ProcesadorPagoException ex) {
+            app.mostrarProcesandoPago(false);
+            Logger.getLogger(FormularioTarjeta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAceptarMouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
+         ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();
     }//GEN-LAST:event_jLabel6MouseClicked
 
     
@@ -150,8 +185,8 @@ public class FormularioTarjeta extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.PanelRound btnAceptar;
     private GUI.PanelRound btnRegresar;
+    private javax.swing.JTextField inputCVV;
     private javax.swing.JTextField inputFechaExpiracion;
-    private javax.swing.JTextField inputFechaExpiracion1;
     private javax.swing.JTextField inputNumeroTarjeta;
     private javax.swing.JTextField inputTitularTarjeta;
     private javax.swing.JLabel jLabel1;

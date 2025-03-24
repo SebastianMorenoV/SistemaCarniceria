@@ -8,10 +8,10 @@ import java.util.Date;
  */
 public class PagoNuevoDTO {
     Date fechaHora;
-    MetodoPago metodoPago;
+    MetodoPagoDTO metodoPago;
     double monto;
 
-    public PagoNuevoDTO(Date fechaHora, MetodoPago metodoPago, double monto) {
+    public PagoNuevoDTO(Date fechaHora, MetodoPagoDTO metodoPago, double monto) {
         this.fechaHora = fechaHora;
         this.metodoPago = metodoPago;
         this.monto = monto;
@@ -25,11 +25,11 @@ public class PagoNuevoDTO {
         this.fechaHora = fechaHora;
     }
 
-    public MetodoPago getMetodoPago() {
+    public MetodoPagoDTO getMetodoPago() {
         return metodoPago;
     }
 
-    public void setMetodoPago(MetodoPago metodoPago) {
+    public void setMetodoPago(MetodoPagoDTO metodoPago) {
         this.metodoPago = metodoPago;
     }
 

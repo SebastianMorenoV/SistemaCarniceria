@@ -10,10 +10,10 @@ public class PagoViejoDTO {
     int idPago;
     Date fechaHora;
     double monto;
-    MetodoPago metodoPago;
+    MetodoPagoDTO metodoPago;
     String estado;
 
-    public PagoViejoDTO(int idPago, Date fechaHora, double monto, MetodoPago metodoPago, String estado) {
+    public PagoViejoDTO(int idPago, Date fechaHora, double monto, MetodoPagoDTO metodoPago, String estado) {
         this.idPago = idPago;
         this.fechaHora = fechaHora;
         this.monto = monto;
@@ -45,11 +45,11 @@ public class PagoViejoDTO {
         this.monto = monto;
     }
 
-    public MetodoPago getMetodoPago() {
+    public MetodoPagoDTO getMetodoPago() {
         return metodoPago;
     }
 
-    public void setMetodoPago(MetodoPago metodoPago) {
+    public void setMetodoPago(MetodoPagoDTO metodoPago) {
         this.metodoPago = metodoPago;
     }
 
