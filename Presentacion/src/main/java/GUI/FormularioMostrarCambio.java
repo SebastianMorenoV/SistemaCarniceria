@@ -25,12 +25,9 @@ public class FormularioMostrarCambio extends javax.swing.JPanel {
     /**
      * Creates new form FormularioMostrarCambio
      */
-    public FormularioMostrarCambio(Aplicacion app, double total, double pagaraCon, double cambio) {
+    public FormularioMostrarCambio(Aplicacion app) {
         initComponents();
         this.app = app;    
-        this.total = total;
-        this.pagaraCon = pagaraCon;
-        this.cambio = cambio;
         cargarDatos();
     }
 
@@ -194,11 +191,11 @@ public class FormularioMostrarCambio extends javax.swing.JPanel {
     
     
     private void cargarDatos(){
-        /*
+
         total = app.formularioEfectivo.total;
         pagaraCon = app.formularioEfectivo.pagaraCon;
         cambio = app.formularioEfectivo.cambio;
-        */
+        
         jlabelCantTotal.setText("$" + total);
         jlabelCantPagaste.setText("$" + pagaraCon);
         jLabelCantCambio.setText("$" + cambio);

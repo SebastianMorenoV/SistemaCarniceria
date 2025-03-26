@@ -167,7 +167,7 @@ public class FormularioEfectivo extends javax.swing.JPanel {
             }
             else{
                 cambio = pagaraCon - total; 
-                app.mostrarFormularioCambio(total,pagaraCon,cambio);
+                app.mostrarFormularioCambio();
                 return true;
             }
         }
@@ -180,7 +180,6 @@ public class FormularioEfectivo extends javax.swing.JPanel {
     //Valida el campo de texto
     private boolean validarTextFieldPagaraCon(){
         String pagaraCon = jTextPago.getText();
-        
         //Validar si el campo de texto esta vacio
         if(pagaraCon.trim().isEmpty()){
             JOptionPane.showMessageDialog(this, "El campo esta vacio");
@@ -196,12 +195,6 @@ public class FormularioEfectivo extends javax.swing.JPanel {
         return true;      
     }
 
-    public double getTotal() {
-        return total;
-    }
-    
-    
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLabelPagoEfectivo;
     private GUI.PanelRound btnAceptar;
@@ -209,7 +202,7 @@ public class FormularioEfectivo extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelAceptar;
     private javax.swing.JLabel jLabelPagaraCon;
     private javax.swing.JLabel jLabelRegresar;
-    private javax.swing.JLabel jLabelTotal;
+    public javax.swing.JLabel jLabelTotal;
     private javax.swing.JTextField jTextPago;
     // End of variables declaration//GEN-END:variables
 }

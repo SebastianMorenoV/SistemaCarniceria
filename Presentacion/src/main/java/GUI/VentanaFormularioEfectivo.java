@@ -11,22 +11,19 @@ public class VentanaFormularioEfectivo extends JDialog{
     private final int width= 620;
     private final int height = 320;
     
-    public VentanaFormularioEfectivo(Aplicacion app){
-        configuracionVentana(app);
+    public VentanaFormularioEfectivo(Aplicacion app, FormularioEfectivo formularioEfectivo){
+        configuracionVentana(app, formularioEfectivo);
     }
     
 
-    public void configuracionVentana(Aplicacion app){
+    public void configuracionVentana(Aplicacion app, FormularioEfectivo formulario){
+        formulario.jLabelTotal.setText("Total: "+ " $" + app.registrarVenta.getTotalDouble());
         setTitle("Formulario de Efectivo");
         setSize(width, height);  // Tamaño personalizado
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);  // Centrar ventana
         setResizable(false);
-        
-        // Agregar el formulario a la ventana
-        FormularioEfectivo formulario = new FormularioEfectivo(app);
         add(formulario);
-        
         setVisible(true);
     }
 }

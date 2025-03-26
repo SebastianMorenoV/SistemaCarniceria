@@ -15,11 +15,11 @@ public class VentanaFormularioMostrarCambio extends JDialog{
     private final int width= 381;
     private final int height = 270;
     
-    public VentanaFormularioMostrarCambio(Aplicacion app,double total, double pagaraCon, double cambio){
-        configuracionVentana(app,total,pagaraCon,cambio);
+    public VentanaFormularioMostrarCambio(Aplicacion app){
+        configuracionVentana(app);
     }
 
-    public void configuracionVentana(Aplicacion app, double total, double pagaraCon, double cambio){
+    public void configuracionVentana(Aplicacion app){
         setTitle("Formulario Cambio");
         setSize(width, height);  // Tamaño personalizado
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -27,7 +27,7 @@ public class VentanaFormularioMostrarCambio extends JDialog{
         setResizable(false);
         
         // Agregar el formulario a la ventana
-        FormularioMostrarCambio formulario = new FormularioMostrarCambio(app,total,pagaraCon,cambio);
+        FormularioMostrarCambio formulario = new FormularioMostrarCambio(app);
         add(formulario);
         
         setVisible(true);
