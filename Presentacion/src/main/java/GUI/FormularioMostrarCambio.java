@@ -18,17 +18,20 @@ import javax.swing.Timer;
  */
 public class FormularioMostrarCambio extends javax.swing.JPanel {
     Aplicacion app;
-    Timer timer;
-    double total;
-    double pagoCon;
-    double cambio = 0;
+    private double total;
+    private double pagaraCon;
+    private double cambio;
     
     /**
      * Creates new form FormularioMostrarCambio
      */
-    public FormularioMostrarCambio(Aplicacion app) {
+    public FormularioMostrarCambio(Aplicacion app, double total, double pagaraCon, double cambio) {
         initComponents();
         this.app = app;    
+        this.total = total;
+        this.pagaraCon = pagaraCon;
+        this.cambio = cambio;
+        cargarDatos();
     }
 
     /**
@@ -127,12 +130,12 @@ public class FormularioMostrarCambio extends javax.swing.JPanel {
                     .addComponent(jLabelCantCambio)
                     .addComponent(jlabelCantPagaste)
                     .addComponent(jlabelCantTotal))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(130, 130, 130)
                     .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(128, Short.MAX_VALUE)))
+                    .addContainerGap(135, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,17 +156,17 @@ public class FormularioMostrarCambio extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jLabelCantCambio))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(196, 196, 196)
                     .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(23, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
-        // TODO add your handling code here:
+        cargarDatos();
     }//GEN-LAST:event_btnAceptarMouseClicked
 
     private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseEntered
@@ -179,41 +182,28 @@ public class FormularioMostrarCambio extends javax.swing.JPanel {
         btnAceptar.setBackground(new Color(60,63,65));
     }//GEN-LAST:event_jLabel5MouseExited
 
-    public void cargarLabels(){
-        jlabelCantTotal.setText("$" + total);
-        jlabelCantPagaste.setText("$" + pagoCon);
-        jLabelCantCambio.setText("$" + (total-pagoCon));
-    }
-    
-    
-    private void calcularCambio(){
-        System.out.println();
-    }
-
-    public double getTotal() {
-        return total;
-    }
 
     public void setTotal(double total) {
         this.total = total;
     }
 
-    public double getPagoCon() {
-        return pagoCon;
-    }
-
-    public void setPagoCon(double pagoCon) {
-        this.pagoCon = pagoCon;
-    }
-
-    public double getCambio() {
-        return cambio;
-    }
-
-    public void setCambio(double cambio) {
-        this.cambio = cambio;
+    public void setPagaraCon(double pagaraCon) {
+        this.pagaraCon = pagaraCon;
     }
     
+    
+    
+    private void cargarDatos(){
+        /*
+        total = app.formularioEfectivo.total;
+        pagaraCon = app.formularioEfectivo.pagaraCon;
+        cambio = app.formularioEfectivo.cambio;
+        */
+        jlabelCantTotal.setText("$" + total);
+        jlabelCantPagaste.setText("$" + pagaraCon);
+        jLabelCantCambio.setText("$" + cambio);
+    }
+   
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

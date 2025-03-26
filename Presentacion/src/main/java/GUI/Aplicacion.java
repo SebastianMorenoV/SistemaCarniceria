@@ -38,7 +38,7 @@ public class Aplicacion {
         registrarVenta = new RegistrarVenta(this);
         formularioTarjeta = new FormularioTarjeta(this);
         formularioEfectivo = new FormularioEfectivo(this);
-        mostrarCambio = new FormularioMostrarCambio(this);
+        mostrarCambio = new FormularioMostrarCambio(this,0.0,0.0,0.0);
         menuOpciones = new MenuOpciones(this);
     }
 
@@ -56,11 +56,11 @@ public class Aplicacion {
 
     // Método para mostrar FormularioEfectivo
     public void mostrarFormularioEfectivo() {
-        abrirPantalla(formularioEfectivo);
+        VentanaFormularioEfectivo formulario = new VentanaFormularioEfectivo(this);
     }
 
-    public void mostrarFormularioCambio() {
-        abrirPantalla(mostrarCambio);
+    public void mostrarFormularioCambio(double total, double pagaraCon, double cambio) {
+        VentanaFormularioMostrarCambio formulario = new VentanaFormularioMostrarCambio(this,total,pagaraCon,cambio);
     }
 
     // Mostrar un mensaje de error si no hay productos

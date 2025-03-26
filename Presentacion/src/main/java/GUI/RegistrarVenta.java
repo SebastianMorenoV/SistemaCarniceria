@@ -720,11 +720,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
             });
         }
     }
-
-    public JLabel getTotal() {
-        return txtTotal;
-    }
-
+    
     public void abrirDialogoAtajos() {
         JDialog dialogo = new JDialog((JFrame) SwingUtilities.getWindowAncestor(this), "Atajos del Sistema", true);
         dialogo.setSize(400, 350);

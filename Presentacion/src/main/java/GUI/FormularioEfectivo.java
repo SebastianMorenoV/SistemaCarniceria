@@ -4,6 +4,8 @@
  */
 package GUI;
 
+import DTOs.NuevoEfectivoDTO;
+import Implementacion.ProcesadorPago;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,23 +21,17 @@ import javax.swing.Timer;
  */
 public class FormularioEfectivo extends javax.swing.JPanel {
     private Aplicacion app;
-    private Timer timer;
-    private double cantPago;
+    protected double total;
+    protected double pagaraCon;
+    protected double cambio;
+    
     
     /**
      * Creates new form FormularioEfectivo
      */
     public FormularioEfectivo(Aplicacion app) {
-        initComponents();
         this.app = app;
-        //ACTUALIZA EL TOTAL CADA 1 segundo
-        timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cargarTotal();
-            }
-        });
-        timer.start(); // Iniciar el Timer
+        initComponents();
     }
 
     /**
@@ -47,36 +43,36 @@ public class FormularioEfectivo extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
+        JLabelPagoEfectivo = new javax.swing.JLabel();
         jLabelTotal = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabelPagaraCon = new javax.swing.JLabel();
         jTextPago = new javax.swing.JTextField();
         btnAceptar = new GUI.PanelRound();
         jLabelAceptar = new javax.swing.JLabel();
         btnCancelar = new GUI.PanelRound();
-        jLabelCancelar = new javax.swing.JLabel();
+        jLabelRegresar = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(0, 0, 0));
         setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Pago en efectivo");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 620, -1));
+        JLabelPagoEfectivo.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
+        JLabelPagoEfectivo.setForeground(new java.awt.Color(0, 0, 0));
+        JLabelPagoEfectivo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabelPagoEfectivo.setText("Pago en efectivo");
+        add(JLabelPagoEfectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 620, -1));
 
         jLabelTotal.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
         jLabelTotal.setForeground(new java.awt.Color(0, 0, 0));
         jLabelTotal.setText("Total:");
         add(jLabelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, -1));
 
-        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel5.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Pagaras con:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, -1, -1));
+        jLabelPagaraCon.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelPagaraCon.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
+        jLabelPagaraCon.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelPagaraCon.setText("Pagaras con:");
+        add(jLabelPagaraCon, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, -1, -1));
 
         jTextPago.setBackground(new java.awt.Color(255, 255, 255));
         add(jTextPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 150, 30));
@@ -115,54 +111,39 @@ public class FormularioEfectivo extends javax.swing.JPanel {
         btnCancelar.setRoundTopRight(15);
         btnCancelar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelCancelar.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        jLabelCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelCancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelCancelar.setText("Cancelar");
-        jLabelCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabelCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelRegresar.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        jLabelRegresar.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelRegresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelRegresar.setText("Regresar");
+        jLabelRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelCancelarMouseClicked(evt);
+                jLabelRegresarMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabelCancelarMouseEntered(evt);
+                jLabelRegresarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabelCancelarMouseExited(evt);
+                jLabelRegresarMouseExited(evt);
             }
         });
-        btnCancelar.add(jLabelCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 40));
+        btnCancelar.add(jLabelRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 40));
 
         add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, 140, 40));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabelCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCancelarMouseClicked
+    private void jLabelRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelRegresarMouseClicked
         ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();        
-    }//GEN-LAST:event_jLabelCancelarMouseClicked
+    }//GEN-LAST:event_jLabelRegresarMouseClicked
 
-    private void jLabelCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCancelarMouseEntered
+    private void jLabelRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelRegresarMouseEntered
         btnCancelar.setBackground(new Color(100, 100, 120, 180));
-    }//GEN-LAST:event_jLabelCancelarMouseEntered
+    }//GEN-LAST:event_jLabelRegresarMouseEntered
 
     private void jLabelAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAceptarMouseClicked
-        if(!jTextPago.getText().trim().isEmpty()){
-           try {
-               Double.parseDouble(jTextPago.getText());
-                app.mostrarCambio.jlabelCantTotal.setText(app.formularioEfectivo.jLabelTotal.getText().substring(6));
-                app.mostrarCambio.jlabelCantPagaste.setText("$"+app.formularioEfectivo.jTextPago.getText());
-                app.mostrarCambio.setTotal(Double.parseDouble(app.formularioEfectivo.jLabelTotal.getText().substring(8)));
-                app.mostrarCambio.setPagoCon(Double.parseDouble(jTextPago.getText()));  
-                app.mostrarCambio.jLabelCantCambio.setText("$" + (app.mostrarCambio.getPagoCon() - app.mostrarCambio.getTotal()));
-                app.mostrarFormularioCambio();
-                app.mostrarCambio.cargarLabels();
-           } catch (Exception e) {
-               JOptionPane.showMessageDialog(this, "El dato tiene que ser doubleo entero");
-           }
-       }
-        else{
-            JOptionPane.showMessageDialog(this, "No puede ver campos vacios");
+        if (calcularCambio()) {
+            ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();
         }
-        ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();
     }//GEN-LAST:event_jLabelAceptarMouseClicked
 
     private void jLabelAceptarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAceptarMouseEntered
@@ -173,26 +154,61 @@ public class FormularioEfectivo extends javax.swing.JPanel {
         btnAceptar.setBackground(new Color(60,63,65));
     }//GEN-LAST:event_jLabelAceptarMouseExited
 
-    private void jLabelCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCancelarMouseExited
+    private void jLabelRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelRegresarMouseExited
         btnCancelar.setBackground(new Color(60,63,65));
-    }//GEN-LAST:event_jLabelCancelarMouseExited
+    }//GEN-LAST:event_jLabelRegresarMouseExited
 
-    private void cargarTotal(){
-        jLabelTotal.setText(app.registrarVenta.getTotal().getText());
+    private boolean calcularCambio(){
+        total = app.registrarVenta.getTotalDouble();
+        if (validarTextFieldPagaraCon()) {
+            pagaraCon = Double.parseDouble(jTextPago.getText());
+            if(pagaraCon < total){
+                JOptionPane.showMessageDialog(this, "No te alcanza");
+            }
+            else{
+                cambio = pagaraCon - total; 
+                app.mostrarFormularioCambio(total,pagaraCon,cambio);
+                return true;
+            }
+        }
+        return false;
+
     }
     
-
-    public double getCantPago() {
-        return cantPago;
+    
+    
+    //Valida el campo de texto
+    private boolean validarTextFieldPagaraCon(){
+        String pagaraCon = jTextPago.getText();
+        
+        //Validar si el campo de texto esta vacio
+        if(pagaraCon.trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "El campo esta vacio");
+            return false;
+        }
+        
+        try {
+            Double.parseDouble(pagaraCon);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Tiene que ser de tipo numerico");
+        }
+        
+        return true;      
     }
 
+    public double getTotal() {
+        return total;
+    }
+    
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel JLabelPagoEfectivo;
     private GUI.PanelRound btnAceptar;
     private GUI.PanelRound btnCancelar;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelAceptar;
-    private javax.swing.JLabel jLabelCancelar;
+    private javax.swing.JLabel jLabelPagaraCon;
+    private javax.swing.JLabel jLabelRegresar;
     private javax.swing.JLabel jLabelTotal;
     private javax.swing.JTextField jTextPago;
     // End of variables declaration//GEN-END:variables
