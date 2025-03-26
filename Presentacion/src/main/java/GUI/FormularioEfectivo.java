@@ -21,6 +21,7 @@ import javax.swing.Timer;
  */
 public class FormularioEfectivo extends javax.swing.JPanel {
     private Aplicacion app;
+    private ProcesadorPago procesadorPago;
     protected double total;
     protected double pagaraCon;
     protected double cambio;
@@ -30,6 +31,7 @@ public class FormularioEfectivo extends javax.swing.JPanel {
      * Creates new form FormularioEfectivo
      */
     public FormularioEfectivo(Aplicacion app) {
+        procesadorPago = new ProcesadorPago();
         this.app = app;
         initComponents();
     }
@@ -160,13 +162,15 @@ public class FormularioEfectivo extends javax.swing.JPanel {
 
     private boolean calcularCambio(){
         total = app.registrarVenta.getTotalDouble();
+        
         if (validarTextFieldPagaraCon()) {
             pagaraCon = Double.parseDouble(jTextPago.getText());
-            if(pagaraCon < total){
+            NuevoEfectivoDTO nuevoPagoEfectivo = new NuevoEfectivoDTO(total, pagaraCon);
+            if(!procesadorPago.validarEfectivo(nuevoPagoEfectivo)){
                 JOptionPane.showMessageDialog(this, "No te alcanza");
             }
             else{
-                cambio = pagaraCon - total; 
+                cambio = procesadorPago.procesarPagoEfectivo(nuevoPagoEfectivo);
                 app.mostrarFormularioCambio();
                 return true;
             }
@@ -174,8 +178,6 @@ public class FormularioEfectivo extends javax.swing.JPanel {
         return false;
 
     }
-    
-    
     
     //Valida el campo de texto
     private boolean validarTextFieldPagaraCon(){

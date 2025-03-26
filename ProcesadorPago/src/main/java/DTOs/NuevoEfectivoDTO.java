@@ -6,11 +6,11 @@ package DTOs;
  */
 public class NuevoEfectivoDTO {
     double monto;
-    double cambio;
+    double pagoCon;
 
-    public NuevoEfectivoDTO(double monto, double cambio) {
+    public NuevoEfectivoDTO(double monto, double pagoCon) {
         this.monto = monto;
-        this.cambio = cambio;
+        this.pagoCon = pagoCon;
     }
 
     public double getMonto() {
@@ -21,12 +21,12 @@ public class NuevoEfectivoDTO {
         this.monto = monto;
     }
 
-    public double getCambio() {
-        return cambio;
+    public double getPagoCon() {
+        return pagoCon;
     }
 
-    public void setCambio(double cambio) {
-        this.cambio = cambio;
+    public void setPagoCon(double pagoCon) {
+        this.pagoCon = pagoCon;
     }
     
 }

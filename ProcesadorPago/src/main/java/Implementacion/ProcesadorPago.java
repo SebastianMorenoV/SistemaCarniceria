@@ -47,9 +47,14 @@ public class ProcesadorPago implements IProcesadorPago {
                 tarjeta.getCvv() > 99 && tarjeta.getCvv() < 1000;
     }
 
-    private boolean validarEfectivo(NuevoEfectivoDTO efectivo, double monto) {
-        return efectivo.getMonto() >= monto; // El efectivo debe ser suficiente para el pago
+    public boolean validarEfectivo(NuevoEfectivoDTO efectivo) {
+        return efectivo.getPagoCon() >= efectivo.getMonto(); // El efectivo debe ser suficiente para el pago
     }
+    
+    public double procesarPagoEfectivo(NuevoEfectivoDTO efectivo){
+        return efectivo.getPagoCon() - efectivo.getMonto();
+    }
+    
 
 
 }
