@@ -51,15 +51,15 @@ public class RegistrarVenta extends javax.swing.JPanel {
     Aplicacion app;
     private List<ProductoCargadoDTO> listadoProductos;
     public ArrayList<NuevoProductoVentaDTO> listadoProductosVenta;
-    private RealizarVenta realizarVenta;
+    //private RealizarVenta realizarVenta;
     public JDialog dialogTarjeta = null;
 
     public RegistrarVenta(Aplicacion app) {
         this.app = app;
-        this.realizarVenta = new RealizarVenta();
+        //this.realizarVenta = new RealizarVenta();
         this.listadoProductosVenta = new ArrayList<>();
         initComponents();
-        valoresDefault();
+        inicializarValoresDefault();
     }
 
     /**
@@ -478,7 +478,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     //Metodos Auxiliares para presentacion
-    public void tamañoColumnasPreferidos() {
+    public void ajustarTamañoColumnasPreferidos() {
         jTable1.getColumnModel().getColumn(0).setPreferredWidth(80);  // Código
         jTable1.getColumnModel().getColumn(1).setPreferredWidth(300); // Descripción del artículo
         jTable1.getColumnModel().getColumn(2).setPreferredWidth(60);  // Cantidad
@@ -487,12 +487,21 @@ public class RegistrarVenta extends javax.swing.JPanel {
     }
 
     public void cargarEmpleado() {
-        EmpledoCargadoDTO empleadoCargado = realizarVenta.cargarEmpleado();
+        if (app == null) {
+            System.err.println("Error: app es null en RegistrarVenta");
+            return;
+        }
+
+        if (app.realizarVenta == null) {
+            System.err.println("Error: app.realizarVenta es null en RegistrarVenta");
+            return;
+        }
+        EmpledoCargadoDTO empleadoCargado = app.realizarVenta.cargarEmpleado();
         txtCajero.setText("Cajero:  " + empleadoCargado.getNombre());
     }
 
     public void cargarProductos() {
-        listadoProductos = realizarVenta.cargarProductos();
+        listadoProductos = app.realizarVenta.cargarProductos();
         // Crear el modelo para la lista
         DefaultListModel<String> modelo = new DefaultListModel<>();
 
@@ -518,10 +527,10 @@ public class RegistrarVenta extends javax.swing.JPanel {
         inputNombre.setText("");
     }
 
-    public void valoresDefault() {
+    public void inicializarValoresDefault() {
         cargarEmpleado();
         cargarProductos();
-        tamañoColumnasPreferidos();
+        ajustarTamañoColumnasPreferidos();
         crearAtajos();
     }
 
@@ -576,7 +585,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
                     }
 
                     // Agregar el producto convertido a la venta
-                    NuevoProductoVentaDTO productoVenta = realizarVenta.agregarProducto(productoCargado, cantidad);
+                    NuevoProductoVentaDTO productoVenta = app.realizarVenta.agregarProducto(productoCargado, cantidad);
                     // Obtener el modelo de la tabla
                     DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
 
@@ -658,9 +667,9 @@ public class RegistrarVenta extends javax.swing.JPanel {
             // Agregarlo a la lista
             productosVenta.add(productoVenta);
         }
-        double subtotalCalculado = realizarVenta.calcularSubtotal(productosVenta);
-        double iva = realizarVenta.calcularIva(subtotalCalculado);
-        double total = realizarVenta.calcularTotal(subtotalCalculado, iva);
+        double subtotalCalculado = app.realizarVenta.calcularSubtotal(productosVenta);
+        double iva = app.realizarVenta.calcularIva(subtotalCalculado);
+        double total = app.realizarVenta.calcularTotal(subtotalCalculado, iva);
 
         String textoTotal = "Total: $" + String.format("%.2f", total);
         txtTotal.setText(textoTotal);
@@ -720,7 +729,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
             });
         }
     }
-    
+
     public void abrirDialogoAtajos() {
         JDialog dialogo = new JDialog((JFrame) SwingUtilities.getWindowAncestor(this), "Atajos del Sistema", true);
         dialogo.setSize(400, 350);
@@ -765,7 +774,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
     public ventaDTO guardarVenta() {
         LocalDate fecha = LocalDate.now();
-        EmpledoCargadoDTO empleadoCargado = realizarVenta.cargarEmpleado();
+        EmpledoCargadoDTO empleadoCargado = app.realizarVenta.cargarEmpleado();
         ventaDTO ventaNueva = new ventaDTO(empleadoCargado, fecha, listadoProductosVenta);
         return ventaNueva;
     }

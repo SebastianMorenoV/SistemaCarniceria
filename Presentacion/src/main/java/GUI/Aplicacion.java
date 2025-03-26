@@ -9,6 +9,8 @@ package GUI;
  * @author Sebastian Moreno
  */
 import DTOs.ventaDTO;
+import Implementacion.ProcesadorPago;
+import Implementacion.RealizarVenta;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -27,6 +29,8 @@ public class Aplicacion {
     private MenuOpciones menuOpciones;
     private JDialog ventanaActual; // Variable para almacenar la ventana actual
     protected vistaTicketPDF ticket;
+    public RealizarVenta realizarVenta;
+    public ProcesadorPago procesadorPago;
 
     public Aplicacion() {
         framePrincipal = new JFrame("Sistema Carnicería");
@@ -35,10 +39,12 @@ public class Aplicacion {
         framePrincipal.setLocationRelativeTo(null); // Centrar pantalla
 
         // Inicializar pantallas
+        this.realizarVenta = new RealizarVenta(); 
+        this.procesadorPago = new ProcesadorPago();
         registrarVenta = new RegistrarVenta(this);
         formularioTarjeta = new FormularioTarjeta(this);
         formularioEfectivo = new FormularioEfectivo(this);
-        mostrarCambio = new FormularioMostrarCambio(this,0.0,0.0,0.0);
+        mostrarCambio = new FormularioMostrarCambio(this, 0.0, 0.0, 0.0);
         menuOpciones = new MenuOpciones(this);
     }
 
@@ -60,7 +66,7 @@ public class Aplicacion {
     }
 
     public void mostrarFormularioCambio(double total, double pagaraCon, double cambio) {
-        VentanaFormularioMostrarCambio formulario = new VentanaFormularioMostrarCambio(this,total,pagaraCon,cambio);
+        VentanaFormularioMostrarCambio formulario = new VentanaFormularioMostrarCambio(this, total, pagaraCon, cambio);
     }
 
     // Mostrar un mensaje de error si no hay productos

@@ -163,7 +163,7 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         MetodoPagoDTO metodoPago = new MetodoPagoDTO(tarjeta);
         PagoNuevoDTO pago = new PagoNuevoDTO(fechaPago, metodoPago, monto);
         try {
-            boolean ans = proce.verificarPago(pago);
+            boolean ans = app.procesadorPago.verificarPago(pago);
             if (ans) {
                 app.mostrarVentanaProcesandoPago();
                 app.mostrarVentanaExitoProcesandoPago();
