@@ -146,6 +146,7 @@ public class FormularioTarjeta extends javax.swing.JPanel {
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
         // TODO add your handling code here:
         ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();
+        
     }//GEN-LAST:event_btnRegresarMouseClicked
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
@@ -164,13 +165,15 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         try {
             boolean ans = proce.verificarPago(pago);
             if (ans) {
-                app.mostrarProcesandoPago(true);
+                app.mostrarVentanaProcesandoPago();
+                app.mostrarVentanaExitoProcesandoPago();
             } else {
-                
-                app.mostrarProcesandoPago(false);
+                app.mostrarVentanaProcesandoPago();
+                app.mostrarVentanaErrorProcesandoPago();
             }
         } catch (ProcesadorPagoException ex) {
-            app.mostrarProcesandoPago(false);
+            app.mostrarVentanaProcesandoPago();
+            app.mostrarVentanaErrorProcesandoPago();
         }
     }//GEN-LAST:event_btnAceptarMouseClicked
 

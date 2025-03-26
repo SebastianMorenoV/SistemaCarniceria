@@ -51,4 +51,5 @@ public class ProcesadorPago implements IProcesadorPago {
         return efectivo.getMonto() >= monto; // El efectivo debe ser suficiente para el pago
     }
 
+
 }
