@@ -8,7 +8,7 @@ package GUI;
  *
  * @author Lap-064
  */
-import DTOs.EmpledoCargadoDTO;
+import DTOs.EmpleadoCargadoDTO;
 import DTOs.NuevoProductoVentaDTO;
 import DTOs.ProductoCargadoDTO;
 import DTOs.ventaDTO;
@@ -444,7 +444,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
         // TODO add your handling code here:
         int confirmar = JOptionPane.showConfirmDialog(this, "¿Desea finalizar la venta?", "Confirmar Venta", JOptionPane.YES_NO_OPTION);
         if (confirmar == JOptionPane.YES_OPTION) {
-            app.mostrarTicketPDF(guardarVenta());
+            app.mostrarTicketPDF();
         }
     }//GEN-LAST:event_btnFinalizarVentaMouseClicked
 
@@ -491,17 +491,12 @@ public class RegistrarVenta extends javax.swing.JPanel {
             System.err.println("Error: app es null en RegistrarVenta");
             return;
         }
-
-        if (app.realizarVenta == null) {
-            System.err.println("Error: app.realizarVenta es null en RegistrarVenta");
-            return;
-        }
-        EmpledoCargadoDTO empleadoCargado = app.realizarVenta.cargarEmpleado();
+        EmpleadoCargadoDTO empleadoCargado = app.cargarEmpleado();//Carloss - aqui fue donde quite el realizarVenta
         txtCajero.setText("Cajero:  " + empleadoCargado.getNombre());
     }
 
     public void cargarProductos() {
-        listadoProductos = app.realizarVenta.cargarProductos();
+        listadoProductos = app.cargarProductos(); //Carloss - aqui fue donde quite el realizarVenta
         // Crear el modelo para la lista
         DefaultListModel<String> modelo = new DefaultListModel<>();
 
@@ -585,7 +580,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
                     }
 
                     // Agregar el producto convertido a la venta
-                    NuevoProductoVentaDTO productoVenta = app.realizarVenta.agregarProducto(productoCargado, cantidad);
+                    NuevoProductoVentaDTO productoVenta = app.realizarVenta.agregarProducto(productoCargado, cantidad); //Carlos- falta metodo en app
                     // Obtener el modelo de la tabla
                     DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
 
@@ -667,7 +662,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
             // Agregarlo a la lista
             productosVenta.add(productoVenta);
         }
-        double subtotalCalculado = app.realizarVenta.calcularSubtotal(productosVenta);
+        double subtotalCalculado = app.realizarVenta.calcularSubtotal(productosVenta); //Carlos- falta metodo en app
         double iva = app.realizarVenta.calcularIva(subtotalCalculado);
         double total = app.realizarVenta.calcularTotal(subtotalCalculado, iva);
 
@@ -774,7 +769,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
     public ventaDTO guardarVenta() {
         LocalDate fecha = LocalDate.now();
-        EmpledoCargadoDTO empleadoCargado = app.realizarVenta.cargarEmpleado();
+        EmpleadoCargadoDTO empleadoCargado = app.cargarEmpleado();
         ventaDTO ventaNueva = new ventaDTO(empleadoCargado, fecha, listadoProductosVenta);
         return ventaNueva;
     }
@@ -789,6 +784,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
             // Limpiar la selección
             jTable1.getSelectionModel().clearSelection();
+            listadoProductosVenta.remove(filaAEliminar);
         }
     }
 }

@@ -4,7 +4,7 @@
  */
 package Implementacion;
 
-import DTOs.EmpledoCargadoDTO;
+import DTOs.EmpleadoCargadoDTO;
 import DTOs.NuevoProductoVentaDTO;
 import DTOs.PagoNuevoDTO;
 import DTOs.ProductoCargadoDTO;
@@ -23,8 +23,8 @@ public class RealizarVenta implements IRealizarVenta {
     ProcesadorPago proce;
 
     @Override
-    public EmpledoCargadoDTO cargarEmpleado() {
-        return new EmpledoCargadoDTO("Juan Soto");
+    public EmpleadoCargadoDTO cargarEmpleado() {
+        return new EmpleadoCargadoDTO("Juan Soto");
     }
 
     @Override

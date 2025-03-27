@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface IRealizarVenta {
 
-    public EmpledoCargadoDTO cargarEmpleado();
+    public EmpleadoCargadoDTO cargarEmpleado();
 
     public List<ProductoCargadoDTO> cargarProductos();
 

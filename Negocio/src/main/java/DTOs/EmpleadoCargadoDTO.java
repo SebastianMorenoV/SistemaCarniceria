@@ -5,7 +5,7 @@ package DTOs;
  *
  * @author Lap-064
  */
-public class EmpledoCargadoDTO {
+public class EmpleadoCargadoDTO {
     String nombre;
 
     public String getNombre() {
@@ -16,7 +16,7 @@ public class EmpledoCargadoDTO {
         this.nombre = nombre;
     }
 
-    public EmpledoCargadoDTO(String nombre) {
+    public EmpleadoCargadoDTO(String nombre) {
         this.nombre = nombre;
     }
     

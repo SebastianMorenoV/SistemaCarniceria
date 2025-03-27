@@ -14,10 +14,10 @@ import java.util.ArrayList;
 public class ventaDTO {
     protected double total,subtotal,iva;
     protected LocalDate fechaHora;
-    protected EmpledoCargadoDTO empleado;
+    protected EmpleadoCargadoDTO empleado;
     protected ArrayList<NuevoProductoVentaDTO> listadoProductosVenta;
     
-    public ventaDTO(EmpledoCargadoDTO empleado,LocalDate fecha, ArrayList<NuevoProductoVentaDTO> listadoProductos){
+    public ventaDTO(EmpleadoCargadoDTO empleado,LocalDate fecha, ArrayList<NuevoProductoVentaDTO> listadoProductos){
         this.empleado = empleado;
         this.subtotal = calcularSubtotal(listadoProductos);
         this.iva = calcularIva(subtotal);
@@ -84,11 +84,11 @@ public class ventaDTO {
         this.listadoProductosVenta = listadoProductosVenta;
     }
 
-    public EmpledoCargadoDTO getEmpleado() {
+    public EmpleadoCargadoDTO getEmpleado() {
         return empleado;
     }
 
-    public void setEmpleado(EmpledoCargadoDTO empleado) {
+    public void setEmpleado(EmpleadoCargadoDTO empleado) {
         this.empleado = empleado;
     }
 }

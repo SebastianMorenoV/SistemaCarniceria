@@ -8,16 +8,16 @@ package GUI;
  *
  * @author Sebastian Moreno
  */
-import DTOs.ventaDTO;
-import Implementacion.ProcesadorPago;
-import Implementacion.RealizarVenta;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
+import DTOs.*;
+import Implementacion.*;
+import java.util.List;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
+
+
+
 
 public class Aplicacion {
 
@@ -25,10 +25,10 @@ public class Aplicacion {
     public RegistrarVenta registrarVenta;
     public FormularioTarjeta formularioTarjeta;
     public FormularioEfectivo formularioEfectivo;
-    public FormularioMostrarCambio mostrarCambio;
+    private FormularioMostrarCambio mostrarCambio;
     private MenuOpciones menuOpciones;
     private JDialog ventanaActual; // Variable para almacenar la ventana actual
-    protected vistaTicketPDF ticket;
+    private ventanaMostrarTicket ticket;
     public RealizarVenta realizarVenta;
     public ProcesadorPago procesadorPago;
 
@@ -54,10 +54,9 @@ public class Aplicacion {
         VentanaFormularioTarjeta formulario = new VentanaFormularioTarjeta(this);
         formulario.setVisible(true);
     }
-
-    public void mostrarTicketPDF(ventaDTO venta) {
-        ticket = new vistaTicketPDF(venta);
-        abrirPantalla(ticket);
+    
+    public void mostrarTicketPDF() {
+        ventanaMostrarTicket ticket = new ventanaMostrarTicket(this);   
     }
 
     // Método para mostrar FormularioEfectivo
@@ -127,6 +126,15 @@ public class Aplicacion {
         if (ventanaActual != null && ventanaActual.isVisible()) {
             ventanaActual.dispose(); // Cierra el JDialog
         }
+    }
+    public EmpleadoCargadoDTO cargarEmpleado(){
+        return realizarVenta.cargarEmpleado();
+    }
+    public List<ProductoCargadoDTO> cargarProductos(){
+        return realizarVenta.cargarProductos();
+    }
+    public ventaDTO obtenerVenta(){
+        return registrarVenta.guardarVenta();
     }
 
 }

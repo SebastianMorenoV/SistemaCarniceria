@@ -12,46 +12,36 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 import static javax.swing.Box.createVerticalGlue;
 import javax.swing.BoxLayout;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author HP
  */
-public class vistaTicketPDF extends javax.swing.JPanel {
-    protected ventaDTO venta;
-    protected double subtotal, iva, total;
+public class generarTicketVenta extends javax.swing.JPanel {
+    public Aplicacion app;
+    public ventaDTO venta;
+    public double subtotal, iva, total;
     /**
      * Creates new form vistaTicketPDF
+     * @param app
+     * 
      */
-    public vistaTicketPDF(ventaDTO venta) {
+    public generarTicketVenta(Aplicacion app) {
         initComponents();
-        this.venta = venta;
+        this.app = app;
+        this.venta = app.obtenerVenta();
+        acomodarTicket();
         generarTicketVenta();
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        jScrollPane1 = new JScrollPane(jTable1); 
-        add(jScrollPane1);
-        add(createVerticalGlue());
-        panelSumas.setLayout(new GridLayout(3,2));
-        panelSumas.add(campoSubtotal);
-        panelSumas.add(campoSubtotal2);
-        panelSumas.add(campoIVA);
-        panelSumas.add(campoIVATotal);
-        panelSumas.add(campoTotalVenta);
-        panelSumas.add(campoTotal);
-        jPanel1.add(btnImprimirTicket);
-        jPanel1.add(btnSalirTicket);
-        ticket.setAlignmentX(CENTER_ALIGNMENT);
-        campoCarniceria.setAlignmentX(CENTER_ALIGNMENT);
-        campoEmpleado.setAlignmentX(CENTER_ALIGNMENT);
-        campoFechaVenta.setAlignmentX(CENTER_ALIGNMENT);
-        jPanel1.setLayout(new FlowLayout());
-        add(panelSumas);
-        add(jPanel1);
-        
-        
+        acomodarPanelTabla();
+        acomodarPanelSumas();
+        acomodarPanelBotones();
+        setVisible(true);
     }
 
     /**
@@ -76,7 +66,7 @@ public class vistaTicketPDF extends javax.swing.JPanel {
         campoEmpleado = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
+        panelBotones = new javax.swing.JPanel();
         btnImprimirTicket = new javax.swing.JButton();
         btnSalirTicket = new javax.swing.JButton();
 
@@ -134,7 +124,7 @@ public class vistaTicketPDF extends javax.swing.JPanel {
         btnImprimirTicket.setForeground(new java.awt.Color(255, 255, 255));
         btnImprimirTicket.setText("Imprimir");
         btnImprimirTicket.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jPanel1.add(btnImprimirTicket);
+        panelBotones.add(btnImprimirTicket);
 
         btnSalirTicket.setBackground(new java.awt.Color(102, 102, 102));
         btnSalirTicket.setForeground(new java.awt.Color(255, 255, 255));
@@ -145,15 +135,16 @@ public class vistaTicketPDF extends javax.swing.JPanel {
                 btnSalirTicketActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSalirTicket);
+        panelBotones.add(btnSalirTicket);
 
-        add(jPanel1);
-        jPanel1.getAccessibleContext().setAccessibleName("");
-        jPanel1.getAccessibleContext().setAccessibleDescription("");
+        add(panelBotones);
+        panelBotones.getAccessibleContext().setAccessibleName("");
+        panelBotones.getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirTicketActionPerformed
         // TODO add your handling code here:
+        ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();   
     }//GEN-LAST:event_btnSalirTicketActionPerformed
 
 
@@ -169,13 +160,42 @@ public class vistaTicketPDF extends javax.swing.JPanel {
     private javax.swing.JLabel campoSubtotal2;
     private javax.swing.JLabel campoTotal;
     private javax.swing.JLabel campoTotalVenta;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JPanel panelBotones;
     private javax.swing.JPanel panelSumas;
     private javax.swing.JLabel ticket;
     // End of variables declaration//GEN-END:variables
 
+    public void acomodarTicket(){
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        ticket.setAlignmentX(CENTER_ALIGNMENT);
+        campoCarniceria.setAlignmentX(CENTER_ALIGNMENT);
+        campoEmpleado.setAlignmentX(CENTER_ALIGNMENT);
+        campoFechaVenta.setAlignmentX(CENTER_ALIGNMENT);
+    }
+    public void acomodarPanelSumas(){
+        panelSumas.setLayout(new GridLayout(3,2));
+        panelSumas.add(campoSubtotal);
+        panelSumas.add(campoSubtotal2);
+        panelSumas.add(campoIVA);
+        panelSumas.add(campoIVATotal);
+        panelSumas.add(campoTotalVenta);
+        panelSumas.add(campoTotal);
+        add(panelSumas);
+    }
+    public void acomodarPanelTabla(){
+        jTable1.setEnabled(false);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1 = new JScrollPane(jTable1); 
+        add(jScrollPane1);
+    }
+    public void acomodarPanelBotones(){
+        panelBotones.setLayout(new FlowLayout());
+        panelBotones.add(btnImprimirTicket);
+        panelBotones.add(btnSalirTicket);
+        add(panelBotones);
+    }
     public void generarTicketVenta(){
         String columnasTabla[] = {"Producto","cantidad","subtotal"};
         campoEmpleado.setText(venta.getEmpleado().getNombre());
