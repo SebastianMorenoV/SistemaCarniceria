@@ -17,7 +17,7 @@ public class VentanaFormularioEfectivo extends JDialog{
     
 
     public void configuracionVentana(Aplicacion app, FormularioEfectivo formulario){
-        //formulario.jLabelTotal.setText("Total: "+ " $" + app.registrarVenta.getTotalDouble());
+        formulario.jLabelTotal.setText("Total: "+ " $" + app.obtenerVenta().getTotal());
         setTitle("Formulario de Efectivo");
         setSize(width, height);  // Tamaño personalizado
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

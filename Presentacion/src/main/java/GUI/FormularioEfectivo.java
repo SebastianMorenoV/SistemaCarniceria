@@ -161,7 +161,7 @@ public class FormularioEfectivo extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabelRegresarMouseExited
 
     private boolean calcularCambio(){
-        total = app.registrarVenta.getTotalDouble();
+        total = app.obtenerVenta().getTotal();
         
         if (validarTextFieldPagaraCon()) {
             pagaraCon = Double.parseDouble(jTextPago.getText());
