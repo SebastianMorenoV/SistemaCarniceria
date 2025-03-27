@@ -189,5 +189,16 @@ public class Aplicacion {
     public void setTotalTemporal(double totalTemporal) {
         realizarVenta.setearTotal(totalTemporal);
     }
+    
+    public double getPagaraCon(){
+        return formularioEfectivo.getPagaraCon();
+    }
 
+    public boolean validarPago(NuevoEfectivoDTO efectivo){
+       return procesadorPago.validarEfectivo(efectivo);
+    }
+    
+    public double procesarPagoEfectivo(double total, double pagaraCon){
+        return procesadorPago.procesarPagoEfectivo(new NuevoEfectivoDTO(total,pagaraCon));
+    }
 }

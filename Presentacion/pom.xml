@@ -16,12 +16,12 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>ProcesadorPago</artifactId>
+            <artifactId>Negocio</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Negocio</artifactId>
+            <artifactId>ProcesadorPago</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
