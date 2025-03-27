@@ -147,40 +147,16 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         // TODO add your handling code here:
         //((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();
         app.cerrarPantallaDialogo();
-        
+
     }//GEN-LAST:event_btnRegresarMouseClicked
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
-        String titular = inputTitularTarjeta.getText();
-        String numeroTarjeta = inputNumeroTarjeta.getText();
-        String fechaVencimiento = inputFechaExpiracion.getText();
-        String cvvStr = inputCVV.getText();
-        int cvv = Integer.parseInt(cvvStr);
-        double saldo = 200; // tarjeta con 200 pesos
-        NuevaTarjetaDTO tarjeta = new NuevaTarjetaDTO(titular, numeroTarjeta, fechaVencimiento, cvv, saldo);
-        Date fechaPago = new Date();
-        
-        double monto = app.registrarVenta.getTotalDouble();
-        MetodoPagoDTO metodoPago = new MetodoPagoDTO(tarjeta);
-        PagoNuevoDTO pago = new PagoNuevoDTO(fechaPago, metodoPago, monto);
-        try {
-            boolean ans = app.verificarPago(pago);
-            if (ans) {
-                app.mostrarVentanaProcesandoPago();
-                app.mostrarVentanaExitoProcesandoPago();
-            } else {
-                app.mostrarVentanaProcesandoPago();
-                app.mostrarVentanaErrorProcesandoPago();
-            }
-        } catch (ProcesadorPagoException ex) {
-            app.mostrarVentanaProcesandoPago();
-            app.mostrarVentanaErrorProcesandoPago();
-        }
+        pagoTarjeta();
     }//GEN-LAST:event_btnAceptarMouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        // TODO add your handling code here:
-        ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();
+     
+        app.cerrarPantallaDialogo();
     }//GEN-LAST:event_jLabel6MouseClicked
 
 
@@ -199,4 +175,47 @@ public class FormularioTarjeta extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
+
+//metodosAuxiliares
+    public void pagoTarjeta() {
+        String titular = inputTitularTarjeta.getText();
+        String numeroTarjeta = inputNumeroTarjeta.getText();
+        String fechaVencimiento = inputFechaExpiracion.getText();
+        String cvvStr = inputCVV.getText();
+        int cvv = 0;
+        if (!cvvStr.trim().isEmpty()) {
+            try {
+                cvv = Integer.parseInt(cvvStr);
+            } catch (NumberFormatException e) {
+                app.mostrarErrorCvvNecesario();
+                return;
+            }
+        } else {
+            app.mostrarErrorCvvNecesario();
+            return;
+        }
+
+        double saldo = 200; // tarjeta con 200 pesos
+        NuevaTarjetaDTO tarjeta = new NuevaTarjetaDTO(titular, numeroTarjeta, fechaVencimiento, cvv, saldo);
+        Date fechaPago = new Date();
+
+        double monto = app.getTotalTemporal(); // se obtiene desde la app
+
+        MetodoPagoDTO metodoPago = new MetodoPagoDTO(tarjeta);
+        PagoNuevoDTO pago = new PagoNuevoDTO(fechaPago, metodoPago, monto);
+        try {
+            boolean ans = app.verificarPago(pago);
+            if (ans) {
+                app.mostrarVentanaProcesandoPago();
+                app.mostrarVentanaExitoProcesandoPago();
+            } else {
+                app.mostrarVentanaProcesandoPago();
+                app.mostrarVentanaErrorProcesandoPago();
+            }
+        } catch (ProcesadorPagoException ex) {
+            app.mostrarVentanaProcesandoPago();
+            app.mostrarVentanaErrorProcesandoPago();
+        }
+    }
+
 }

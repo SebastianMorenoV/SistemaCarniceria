@@ -192,9 +192,9 @@ public class FormularioMostrarCambio extends javax.swing.JPanel {
     
     private void cargarDatos(){
 
-        total = app.formularioEfectivo.total;
-        pagaraCon = app.formularioEfectivo.pagaraCon;
-        cambio = app.formularioEfectivo.cambio;
+        total = app.getTotalTemporal();
+      //  pagaraCon = app.formularioEfectivo.pagaraCon;
+        //cambio = app.formularioEfectivo.cambio;
         
         jlabelCantTotal.setText("$" + total);
         jlabelCantPagaste.setText("$" + pagaraCon);

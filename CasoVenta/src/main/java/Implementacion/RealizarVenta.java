@@ -20,8 +20,10 @@ import java.util.logging.Logger;
  */
 public class RealizarVenta implements IRealizarVenta {
 
-    ProcesadorPago proce;
-
+    private ProcesadorPago proce;
+    private Double total = 0.0;
+        
+    
     @Override
     public EmpleadoCargadoDTO cargarEmpleado() {
         return new EmpleadoCargadoDTO("Juan Soto");
@@ -78,6 +80,16 @@ public class RealizarVenta implements IRealizarVenta {
         }
         return false;
 
+    }
+
+    @Override
+    public double obtenerTotal() {
+        return total;
+    }
+
+    @Override
+    public void setearTotal(Double total) {
+        this.total = total;
     }
 
 }

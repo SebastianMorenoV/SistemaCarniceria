@@ -27,4 +27,8 @@ public interface IRealizarVenta {
     
     public boolean verificarPago(PagoNuevoDTO pago);
     
+    public double obtenerTotal();
+    
+    public void setearTotal(Double total);
+    
 }
