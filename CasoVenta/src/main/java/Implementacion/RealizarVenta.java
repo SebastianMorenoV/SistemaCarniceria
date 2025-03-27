@@ -8,6 +8,7 @@ import DTOs.EmpleadoCargadoDTO;
 import DTOs.NuevoProductoVentaDTO;
 import DTOs.PagoNuevoDTO;
 import DTOs.ProductoCargadoDTO;
+import DTOs.VentaDTO;
 import excepciones.ProcesadorPagoException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class RealizarVenta implements IRealizarVenta {
 
     private ProcesadorPago proce;
     private Double total = 0.0;
+    private VentaDTO ventaTemporal = null;
         
     
     @Override
@@ -91,5 +93,17 @@ public class RealizarVenta implements IRealizarVenta {
     public void setearTotal(Double total) {
         this.total = total;
     }
+
+    @Override
+    public void setearVenta(VentaDTO ventaNueva) {
+       this.ventaTemporal = ventaNueva;
+    }
+
+    @Override
+    public VentaDTO obtenerVenta() {
+       return ventaTemporal;
+    }
+    
+    
 
 }

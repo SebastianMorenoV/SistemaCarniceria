@@ -5,7 +5,7 @@
 package GUI;
 
 import DTOs.NuevoProductoVentaDTO;
-import DTOs.ventaDTO;
+import DTOs.VentaDTO;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class generarTicketVenta extends javax.swing.JPanel {
     public Aplicacion app;
-    public ventaDTO venta;
+    public VentaDTO venta;
     public double subtotal, iva, total;
     /**
      * Creates new form vistaTicketPDF

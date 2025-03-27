@@ -95,6 +95,18 @@ public class Aplicacion {
         exito.setVisible(true);
     }
 
+    public void mostrarErrorEmpleadoNoCargado() {
+        JOptionPane.showMessageDialog(framePrincipal, "Error: Empleado no cargado correctamente.");
+    }
+
+    public void mostrarErrorVentaSinProducto() {
+        JOptionPane.showMessageDialog(framePrincipal, "No hay productos para finalizar la venta.");
+    }
+
+    public void mostrarVentaCancelada() {
+        JOptionPane.showMessageDialog(framePrincipal, "Venta cancelada o no registrada.");
+    }
+
     public String mostrarIngresarCantidad() {
         return (String) JOptionPane.showInputDialog(framePrincipal, "Ingresa la cantidad del producto:", "Cantidad", JOptionPane.QUESTION_MESSAGE, null, null, "1.0");
     }
@@ -154,10 +166,6 @@ public class Aplicacion {
         return realizarVenta.cargarProductos();
     }
 
-    public ventaDTO obtenerVenta() {
-        return registrarVenta.guardarVenta(); // mal , se necesita modificar , solo acceder a casos de uso
-    }
-
     public boolean verificarPago(PagoNuevoDTO pago) throws ProcesadorPagoException {
         return procesadorPago.verificarPago(pago);
     }
@@ -189,16 +197,25 @@ public class Aplicacion {
     public void setTotalTemporal(double totalTemporal) {
         realizarVenta.setearTotal(totalTemporal);
     }
-    
-    public double getPagaraCon(){
+
+    public double getPagaraCon() {
         return formularioEfectivo.getPagaraCon();
     }
 
-    public boolean validarPago(NuevoEfectivoDTO efectivo){
-       return procesadorPago.validarEfectivo(efectivo);
+    public boolean validarPago(NuevoEfectivoDTO efectivo) {
+        return procesadorPago.validarEfectivo(efectivo);
     }
-    
-    public double procesarPagoEfectivo(double total, double pagaraCon){
-        return procesadorPago.procesarPagoEfectivo(new NuevoEfectivoDTO(total,pagaraCon));
+
+    public double procesarPagoEfectivo(double total, double pagaraCon) {
+        return procesadorPago.procesarPagoEfectivo(new NuevoEfectivoDTO(total, pagaraCon));
     }
+
+    public void setearVenta(VentaDTO ventaNueva) {
+        realizarVenta.setearVenta(ventaNueva);
+    }
+
+    public VentaDTO obtenerVenta() {
+        return realizarVenta.obtenerVenta();
+    }
+
 }

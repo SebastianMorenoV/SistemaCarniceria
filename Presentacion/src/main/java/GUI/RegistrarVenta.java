@@ -11,8 +11,7 @@ package GUI;
 import DTOs.EmpleadoCargadoDTO;
 import DTOs.NuevoProductoVentaDTO;
 import DTOs.ProductoCargadoDTO;
-import DTOs.ventaDTO;
-import Implementacion.RealizarVenta;
+import DTOs.VentaDTO;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -24,7 +23,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import javax.crypto.AEADBadTagException;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.DefaultListModel;
@@ -39,7 +37,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
@@ -437,11 +434,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
     }//GEN-LAST:event_tablaProductosVentaMouseClicked
 
     private void btnFinalizarVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFinalizarVentaMouseClicked
-        // TODO add your handling code here:
-        int confirmar = app.mostrarPreguntaFinalizarVenta();
-        if (confirmar == JOptionPane.YES_OPTION) {
-            app.mostrarTicketPDF();
-        }
+        finalizarVenta();   
     }//GEN-LAST:event_btnFinalizarVentaMouseClicked
 
 
@@ -504,8 +497,10 @@ public class RegistrarVenta extends javax.swing.JPanel {
         DefaultTableModel modelo = (DefaultTableModel) tablaProductosVenta.getModel();
         modelo.setRowCount(0); // Elimina todas las filas
         listadoProductosCargados.clear(); // se elimina de la lista local cargada
+        listadoProductosVenta.clear();
         //resetear totales con la tabla vacia
         calcularTotales();
+        app.setearVenta(null);
 
         inputCodigo.setText("");
         inputNombre.setText("");
@@ -566,7 +561,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
                     // Agregar el producto convertido a la venta
                     NuevoProductoVentaDTO productoVenta = app.agregarProducto(productoCargado, cantidad);
-                    
+
                     // Obtener el modelo de la tabla
                     DefaultTableModel modelo = obtenerTablaProductosVenta();
 
@@ -579,16 +574,16 @@ public class RegistrarVenta extends javax.swing.JPanel {
                         productoVenta.getImporte()
                     };
                     modelo.addRow(fila);
-                    
+
                     // llamadaMetodo actualizarTotal
                     calcularTotales();
 
                     listadoProductosVenta.add(productoVenta); // talvez podria ser en vez de un add un setear que le hable a la app------------------------
                 } catch (NumberFormatException e) {
-                   app.mostrarErrorValorNumericoValido();
+                    app.mostrarErrorValorNumericoValido();
                 }
             } else {
-               app.mostrarErrorConvertirProducto();
+                app.mostrarErrorConvertirProducto();
             }
         } else {
             app.mostrarErrorSeleccionaProductoValido();
@@ -618,7 +613,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return null; 
+            return null;
         }
     }
 
@@ -642,11 +637,11 @@ public class RegistrarVenta extends javax.swing.JPanel {
             NuevoProductoVentaDTO productoVenta = new NuevoProductoVentaDTO(producto, cantidad, precioUnitario, importe);
 
             // Agregarlo a la lista
-            productosVenta.add(productoVenta); 
+            productosVenta.add(productoVenta);
         }
-        double subtotalCalculado = app.calcularSubTotal(productosVenta); 
+        double subtotalCalculado = app.calcularSubTotal(productosVenta);
         double iva = app.calcularIVA(subtotalCalculado);
-        double total = app.calcularTotal(subtotalCalculado, iva);
+        double total = app.calcularTotal(subtotalCalculado, iva); // en este metodo es donde mando el total guardado al subsistema pasando por la aplicacion.
 
         String textoTotal = "Total: $" + String.format("%.2f", total);
         txtTotal.setText(textoTotal);
@@ -684,7 +679,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
                 KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0), app::mostrarFormularioTarjeta,
                 KeyStroke.getKeyStroke(KeyEvent.VK_F8, 0), () -> inputCodigo.requestFocus(), // Asignar foco al inputCodigo
                 KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0), () -> inputNombre.requestFocus(), // Asignar foco al inputNombre
-                // CONFIRMARVENTA -> Aquí agregas el método de finalizar venta cuando lo tengas --------------------------------------------------------                   
+                KeyStroke.getKeyStroke(KeyEvent.VK_F10, 0), app::mostrarTicketPDF,
                 KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0), this::reiniciarVenta,
                 KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK), this::abrirDialogoAtajos
         );
@@ -741,18 +736,13 @@ public class RegistrarVenta extends javax.swing.JPanel {
         dialogo.setVisible(true);
     }
 
-    //metodoAuxiliar para obtener el total entre pantallas
-    public Double getTotalDouble() {
-        String totalS = txtTotal.getText();
-        totalS = totalS.replace("Total: $", "").trim();
-        // Convierte el texto a un número double
-        return Double.parseDouble(totalS);
-    }
-
-    public ventaDTO guardarVenta() {
+    public VentaDTO guardarVenta() {
         LocalDate fecha = LocalDate.now();
         EmpleadoCargadoDTO empleadoCargado = app.cargarEmpleado();
-        ventaDTO ventaNueva = new ventaDTO(empleadoCargado, fecha, listadoProductosVenta);
+        VentaDTO ventaNueva = new VentaDTO(empleadoCargado, fecha, listadoProductosVenta);
+
+        app.setearVenta(ventaNueva);
+
         return ventaNueva;
     }
 
@@ -772,5 +762,34 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
     public DefaultTableModel obtenerTablaProductosVenta() {
         return (DefaultTableModel) tablaProductosVenta.getModel();
+    }
+
+    public void finalizarVenta() {
+        int confirmar = app.mostrarPreguntaFinalizarVenta();
+        EmpleadoCargadoDTO empleado = app.cargarEmpleado();
+
+        // Validar si el empleado se cargó correctamente
+        if (empleado == null) {
+            app.mostrarErrorEmpleadoNoCargado();
+            return;
+        }
+
+        // Validar si la lista de productos es válida
+        if (listadoProductosVenta == null || listadoProductosVenta.isEmpty()) {
+            app.mostrarErrorVentaSinProductos();
+            return;
+        }
+
+        // Crear y setear la venta
+        VentaDTO ventaNueva = new VentaDTO(empleado, LocalDate.now(), listadoProductosVenta);
+        app.setearVenta(ventaNueva);
+
+        // Confirmar si se procede a mostrar el ticket
+        if (confirmar == JOptionPane.YES_OPTION && app.obtenerVenta() != null) {
+            app.mostrarTicketPDF();
+        } else {
+            app.mostrarVentaCancelada();
+            return;
+        }
     }
 }

@@ -11,13 +11,13 @@ import java.util.ArrayList;
  *
  * @author HP
  */
-public class ventaDTO {
+public class VentaDTO {
     protected double total,subtotal,iva;
     protected LocalDate fechaHora;
     protected EmpleadoCargadoDTO empleado;
     protected ArrayList<NuevoProductoVentaDTO> listadoProductosVenta;
     
-    public ventaDTO(EmpleadoCargadoDTO empleado,LocalDate fecha, ArrayList<NuevoProductoVentaDTO> listadoProductos){
+    public VentaDTO(EmpleadoCargadoDTO empleado,LocalDate fecha, ArrayList<NuevoProductoVentaDTO> listadoProductos){
         this.empleado = empleado;
         this.subtotal = calcularSubtotal(listadoProductos);
         this.iva = calcularIva(subtotal);
@@ -33,6 +33,9 @@ public class ventaDTO {
             subtotal += precioConIva / 1.16; // Quitar el IVA para obtener el subtotal
         }
         return subtotal;
+    }
+
+    public VentaDTO() {
     }
 
    

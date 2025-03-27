@@ -31,4 +31,8 @@ public interface IRealizarVenta {
     
     public void setearTotal(Double total);
     
+    public void setearVenta(VentaDTO ventaNueva);
+    
+    public VentaDTO obtenerVenta();
+    
 }

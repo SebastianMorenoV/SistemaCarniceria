@@ -63,7 +63,7 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         inputFechaExpiracion = new javax.swing.JTextField();
         inputCVV = new javax.swing.JTextField();
         btnRegresar = new GUI.PanelRound();
-        jLabel6 = new javax.swing.JLabel();
+        btnTxtRegresar = new javax.swing.JLabel();
         btnAceptar = new GUI.PanelRound();
         jLabel7 = new javax.swing.JLabel();
 
@@ -107,17 +107,17 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         });
         btnRegresar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Regresar");
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnTxtRegresar.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        btnTxtRegresar.setForeground(new java.awt.Color(255, 255, 255));
+        btnTxtRegresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnTxtRegresar.setText("Regresar");
+        btnTxtRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTxtRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel6MouseClicked(evt);
+                btnTxtRegresarMouseClicked(evt);
             }
         });
-        btnRegresar.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 40));
+        btnRegresar.add(btnTxtRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 40));
 
         add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 350, 160, 40));
 
@@ -154,15 +154,16 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         pagoTarjeta();
     }//GEN-LAST:event_btnAceptarMouseClicked
 
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-     
+    private void btnTxtRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtRegresarMouseClicked
+
         app.cerrarPantallaDialogo();
-    }//GEN-LAST:event_jLabel6MouseClicked
+    }//GEN-LAST:event_btnTxtRegresarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.PanelRound btnAceptar;
     private GUI.PanelRound btnRegresar;
+    private javax.swing.JLabel btnTxtRegresar;
     private javax.swing.JTextField inputCVV;
     private javax.swing.JTextField inputFechaExpiracion;
     private javax.swing.JTextField inputNumeroTarjeta;
@@ -172,7 +173,6 @@ public class FormularioTarjeta extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 

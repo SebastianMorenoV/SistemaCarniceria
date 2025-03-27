@@ -158,7 +158,7 @@ public class FormularioEfectivo extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabelRegresarMouseExited
 
     private boolean calcularCambio(){
-        total = app.obtenerVenta().getTotal();
+        total = app.getTotalTemporal();
         
         if (validarTextFieldPagaraCon()) {
             pagaraCon = Double.parseDouble(jTextPago.getText());
@@ -167,6 +167,7 @@ public class FormularioEfectivo extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "No te alcanza");
             }
             else{
+                app.setTotalTemporal(total);
                 app.mostrarFormularioCambio();
                 return true;
             }

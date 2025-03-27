@@ -4,7 +4,7 @@
  */
 package GUI;
 
-import DTOs.ventaDTO;
+import DTOs.VentaDTO;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
