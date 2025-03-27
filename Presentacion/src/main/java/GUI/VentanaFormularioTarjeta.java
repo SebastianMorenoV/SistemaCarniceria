@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 public class VentanaFormularioTarjeta extends JDialog{
         public VentanaFormularioTarjeta(Aplicacion app) {
         // Configuración de la ventana
-        setTitle("Formulario de Tarjeta");
+        super((JFrame) null, "Formulario Tarjeta", true); // Hace la ventana modal
         setSize(800, 500);  // Tamaño personalizado
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);  // Centrar ventana
@@ -23,7 +23,5 @@ public class VentanaFormularioTarjeta extends JDialog{
         // Agregar el formulario a la ventana
         FormularioTarjeta formulario = new FormularioTarjeta(app);
         add(formulario);
-
-        setVisible(true);
     }
 }

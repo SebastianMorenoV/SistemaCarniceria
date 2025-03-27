@@ -145,7 +145,8 @@ public class FormularioTarjeta extends javax.swing.JPanel {
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
         // TODO add your handling code here:
-        ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();
+        //((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();
+        app.cerrarPantallaDialogo();
         
     }//GEN-LAST:event_btnRegresarMouseClicked
 
@@ -163,7 +164,7 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         MetodoPagoDTO metodoPago = new MetodoPagoDTO(tarjeta);
         PagoNuevoDTO pago = new PagoNuevoDTO(fechaPago, metodoPago, monto);
         try {
-            boolean ans = app.procesadorPago.verificarPago(pago);
+            boolean ans = app.verificarPago(pago);
             if (ans) {
                 app.mostrarVentanaProcesandoPago();
                 app.mostrarVentanaExitoProcesandoPago();

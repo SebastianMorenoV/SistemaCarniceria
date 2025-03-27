@@ -10,14 +10,12 @@ package GUI;
  */
 import DTOs.*;
 import Implementacion.*;
+import excepciones.ProcesadorPagoException;
 import java.util.List;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
-
-
-
 
 public class Aplicacion {
 
@@ -39,7 +37,7 @@ public class Aplicacion {
         framePrincipal.setLocationRelativeTo(null); // Centrar pantalla
 
         // Inicializar pantallas
-        this.realizarVenta = new RealizarVenta(); 
+        this.realizarVenta = new RealizarVenta();
         this.procesadorPago = new ProcesadorPago();
         registrarVenta = new RegistrarVenta(this);
         formularioTarjeta = new FormularioTarjeta(this);
@@ -52,16 +50,17 @@ public class Aplicacion {
     // Método para mostrar FormularioTarjeta
     public void mostrarFormularioTarjeta() {
         VentanaFormularioTarjeta formulario = new VentanaFormularioTarjeta(this);
+        formulario.setModal(true);
         formulario.setVisible(true);
     }
-    
+
     public void mostrarTicketPDF() {
-        ventanaMostrarTicket ticket = new ventanaMostrarTicket(this);   
+        ventanaMostrarTicket ticket = new ventanaMostrarTicket(this);
     }
 
     // Método para mostrar FormularioEfectivo
     public void mostrarFormularioEfectivo() {
-        VentanaFormularioEfectivo formulario = new VentanaFormularioEfectivo(this,this.formularioEfectivo);
+        VentanaFormularioEfectivo formulario = new VentanaFormularioEfectivo(this, this.formularioEfectivo);
     }
 
     public void mostrarFormularioCambio() {
@@ -105,36 +104,27 @@ public class Aplicacion {
         framePrincipal.setVisible(true);
     }
 
-    private JDialog abrirPantalla(JPanel nuevaPantalla) {
-        // Cerrar la ventana actual si está abierta
-        if (ventanaActual != null && ventanaActual.isVisible()) {
-            ventanaActual.dispose();
-        }
-        // Crear un nuevo JDialog
-        ventanaActual = new JDialog(framePrincipal, true); // Modal
-        ventanaActual.setIconImage(new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB)); // Icono vacío
-        ventanaActual.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        ventanaActual.getContentPane().add(nuevaPantalla);
-        ventanaActual.pack();
-        ventanaActual.setLocationRelativeTo(framePrincipal);
-        ventanaActual.setVisible(true);
-
-        return ventanaActual;
-    }
 
     public void cerrarPantallaDialogo() {
         if (ventanaActual != null && ventanaActual.isVisible()) {
             ventanaActual.dispose(); // Cierra el JDialog
         }
     }
-    public EmpleadoCargadoDTO cargarEmpleado(){
+
+    public EmpleadoCargadoDTO cargarEmpleado() {
         return realizarVenta.cargarEmpleado();
     }
-    public List<ProductoCargadoDTO> cargarProductos(){
+
+    public List<ProductoCargadoDTO> cargarProductos() {
         return realizarVenta.cargarProductos();
     }
-    public ventaDTO obtenerVenta(){
+
+    public ventaDTO obtenerVenta() {
         return registrarVenta.guardarVenta();
+    }
+
+    public boolean verificarPago(PagoNuevoDTO pago) throws ProcesadorPagoException {
+        return procesadorPago.verificarPago(pago);
     }
 
 }
