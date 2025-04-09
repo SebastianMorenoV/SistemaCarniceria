@@ -65,7 +65,7 @@ public class generarTicketVenta extends javax.swing.JPanel {
         campoFechaVenta = new javax.swing.JLabel();
         campoEmpleado = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaTicket = new javax.swing.JTable();
         panelBotones = new javax.swing.JPanel();
         btnImprimirTicket = new javax.swing.JButton();
         btnSalirTicket = new javax.swing.JButton();
@@ -105,7 +105,9 @@ public class generarTicketVenta extends javax.swing.JPanel {
         campoEmpleado.setText("jLabel1");
         add(campoEmpleado);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jScrollPane1.setBorder(null);
+
+        tablaTicket.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -116,7 +118,7 @@ public class generarTicketVenta extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaTicket);
 
         add(jScrollPane1);
 
@@ -161,9 +163,9 @@ public class generarTicketVenta extends javax.swing.JPanel {
     private javax.swing.JLabel campoTotal;
     private javax.swing.JLabel campoTotalVenta;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel panelBotones;
     private javax.swing.JPanel panelSumas;
+    private javax.swing.JTable tablaTicket;
     private javax.swing.JLabel ticket;
     // End of variables declaration//GEN-END:variables
 
@@ -185,9 +187,9 @@ public class generarTicketVenta extends javax.swing.JPanel {
         add(panelSumas);
     }
     public void acomodarPanelTabla(){
-        jTable1.setEnabled(false);
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1 = new JScrollPane(jTable1); 
+        tablaTicket.setEnabled(false);
+        tablaTicket.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1 = new JScrollPane(tablaTicket); 
         add(jScrollPane1);
     }
     public void acomodarPanelBotones(){
@@ -205,9 +207,9 @@ public class generarTicketVenta extends javax.swing.JPanel {
         for(NuevoProductoVentaDTO producto : venta.getListadoProductosVenta()){
             modelo.addRow(new Object[]{producto.getProducto().getNombre(), producto.getCantidad(),producto.getCantidad()*producto.getImporte()});  
         }
-        jTable1.setModel(modelo);
-        jTable1.setVisible(true);
-        jTable1.setEnabled(false);
+        tablaTicket.setModel(modelo);
+        tablaTicket.setVisible(true);
+        tablaTicket.setEnabled(false);
         subtotal = calcularSubtotal(venta.getListadoProductosVenta());
         iva = calcularIva(subtotal);
         total = calcularTotal(subtotal, iva);
