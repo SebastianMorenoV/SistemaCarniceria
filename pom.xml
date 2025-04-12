@@ -10,6 +10,7 @@
         <module>CasoVenta</module>
         <module>Negocio</module>
         <module>ProcesadorPago</module>
+        <module>persistencia</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
