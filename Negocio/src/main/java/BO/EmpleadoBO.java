@@ -5,24 +5,16 @@
 package BO;
 
 import DTOs.EmpleadoCargadoDTO;
-import adapters.IAdaptadorEmpleadoEntidadAEmpleadoDTO;
+import ADAPTERS.IAdaptadorEmpleadoEntidadAEmpleadoDTO;
 
 /**
  *
  * @author HP
  */
-public class EmpleadoBO implements IAdaptadorEmpleadoEntidadAEmpleadoDTO {
+public class EmpleadoBO  {
     public IAdaptadorEmpleadoEntidadAEmpleadoDTO EmpleadoDAO;
 
-    @Override
-    public EmpleadoCargadoDTO IAdaptadorEmpleadoEntidadAEmpleadoDTO(EmpleadoCargadoDTO empleado) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public EmpleadoCargadoDTO convertirEmpleadoDTOAempleadoEntidad(EmpleadoCargadoDTO empleado) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+ 
   
     
 }

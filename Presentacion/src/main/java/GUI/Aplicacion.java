@@ -1,21 +1,28 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package GUI;
 
 /**
- *
+ * Esta clase representa el control de navegacion en la aplicacion.
  * @author Sebastian Moreno
  */
+import EstrategiaPago.ProcesadorPago;
+import GUI.ModuloRealizarVenta.VentanaExitoProcesandoPago;
+import GUI.ModuloRealizarVenta.VentanaFormularioEfectivo;
+import GUI.ModuloRealizarVenta.VentanaProcesandoPago;
+import GUI.ModuloRealizarVenta.MenuOpciones;
+import GUI.ModuloRealizarVenta.VentanaFormularioMostrarCambio;
+import GUI.ModuloRealizarVenta.FormularioMostrarCambio;
+import GUI.ModuloRealizarVenta.FormularioEfectivo;
+import GUI.ModuloRealizarVenta.FormularioTarjeta;
+import GUI.ModuloRealizarVenta.RegistrarVenta;
+import GUI.ModuloRealizarVenta.VentanaFormularioTarjeta;
+import GUI.ModuloRealizarVenta.VentanaErrorProcesandoPago;
+import GUI.ModuloRealizarVenta.ventanaMostrarTicket;
 import DTOs.*;
-import Implementacion.*;
+import Implementacion.RealizarVenta;
 import excepciones.ProcesadorPagoException;
 import java.util.List;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import javax.swing.*;
-import org.netbeans.lib.awtextra.AbsoluteLayout;
+
 
 public class Aplicacion {
 

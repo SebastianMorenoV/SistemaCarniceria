@@ -5,8 +5,8 @@
 package com.carniceria.presentacion;
 
 import GUI.Aplicacion;
-import GUI.FormularioEfectivo;
-import GUI.MenuOpciones;
+import GUI.ModuloRealizarVenta.FormularioEfectivo;
+import GUI.ModuloRealizarVenta.MenuOpciones;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**

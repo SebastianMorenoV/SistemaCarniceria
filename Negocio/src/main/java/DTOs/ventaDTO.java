@@ -3,50 +3,34 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DTOs;
+import java.time.LocalDateTime;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author HP
  */
 public class VentaDTO {
-    protected double total,subtotal,iva;
-    protected LocalDate fechaHora;
-    protected EmpleadoCargadoDTO empleado;
-    protected ArrayList<NuevoProductoVentaDTO> listadoProductosVenta;
-    
-    public VentaDTO(EmpleadoCargadoDTO empleado,LocalDate fecha, ArrayList<NuevoProductoVentaDTO> listadoProductos){
-        this.empleado = empleado;
-        this.subtotal = calcularSubtotal(listadoProductos);
-        this.iva = calcularIva(subtotal);
-        this.total = calcularTotal(subtotal, iva);
-        this.fechaHora = fecha;
-        this.listadoProductosVenta = listadoProductos;
-    }
-    
-    public double calcularSubtotal(ArrayList<NuevoProductoVentaDTO> productosEnTabla) {
-        double subtotal = 0.0;
-        for (NuevoProductoVentaDTO nuevoProductoVentaDTO : productosEnTabla) {
-            double precioConIva = nuevoProductoVentaDTO.getImporte();
-            subtotal += precioConIva / 1.16; // Quitar el IVA para obtener el subtotal
-        }
-        return subtotal;
-    }
+    private double total,subtotal,iva;
+    private LocalDateTime fechaHora;
+    private EmpleadoCargadoDTO empleado;
+    private List<NuevoProductoVentaDTO> listadoProductosVenta;
+    private MetodoPagoDTO metodoPago;
 
     public VentaDTO() {
     }
 
-   
-    public double calcularIva(double subtotal) {
-        return subtotal * 0.16; // 16% de IVA
+    public VentaDTO(double total, double subtotal, double iva, LocalDateTime fechaHora, EmpleadoCargadoDTO empleado, List<NuevoProductoVentaDTO> listadoProductosVenta, MetodoPagoDTO metodoPago) {
+        this.total = total;
+        this.subtotal = subtotal;
+        this.iva = iva;
+        this.fechaHora = fechaHora;
+        this.empleado = empleado;
+        this.listadoProductosVenta = listadoProductosVenta;
+        this.metodoPago = metodoPago;
     }
 
-    
-    public double calcularTotal(double subtotal, double iva) {
-        return subtotal + iva;
-    }
     public double getTotal() {
         return total;
     }
@@ -71,20 +55,12 @@ public class VentaDTO {
         this.iva = iva;
     }
 
-    public LocalDate getFechaHora() {
+    public LocalDateTime getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(LocalDate fechaHora) {
+    public void setFechaHora(LocalDateTime fechaHora) {
         this.fechaHora = fechaHora;
-    }
-
-    public ArrayList<NuevoProductoVentaDTO> getListadoProductosVenta() {
-        return listadoProductosVenta;
-    }
-
-    public void setListadoProductosVenta(ArrayList<NuevoProductoVentaDTO> listadoProductosVenta) {
-        this.listadoProductosVenta = listadoProductosVenta;
     }
 
     public EmpleadoCargadoDTO getEmpleado() {
@@ -94,4 +70,29 @@ public class VentaDTO {
     public void setEmpleado(EmpleadoCargadoDTO empleado) {
         this.empleado = empleado;
     }
+
+    public List<NuevoProductoVentaDTO> getListadoProductosVenta() {
+        return listadoProductosVenta;
+    }
+
+    public void setListadoProductosVenta(List<NuevoProductoVentaDTO> listadoProductosVenta) {
+        this.listadoProductosVenta = listadoProductosVenta;
+    }
+
+    public MetodoPagoDTO getMetodoPago() {
+        return metodoPago;
+    }
+
+    public void setMetodoPago(MetodoPagoDTO metodoPago) {
+        this.metodoPago = metodoPago;
+    }
+
+    @Override
+    public String toString() {
+        return "VentaDTO{" + "total=" + total + ", subtotal=" + subtotal + ", iva=" + iva + ", fechaHora=" + fechaHora + ", empleado=" + empleado + ", listadoProductosVenta=" + listadoProductosVenta + ", metodoPago=" + metodoPago + '}';
+    }
+    
+    
+    
+    
 }

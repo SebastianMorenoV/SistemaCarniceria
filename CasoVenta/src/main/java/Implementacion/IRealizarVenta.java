@@ -25,7 +25,7 @@ public interface IRealizarVenta {
     
     public double calcularIva(double subtotal);
     
-    public boolean verificarPago(PagoNuevoDTO pago);
+   // public boolean verificarPago(PagoNuevoDTO pago);
     
     public double obtenerTotal();
     
@@ -35,4 +35,6 @@ public interface IRealizarVenta {
     
     public VentaDTO obtenerVenta();
     
+    // para la estrategia
+    public boolean procesarPago(/*MetodoPagoDTO metodo*/);
 }

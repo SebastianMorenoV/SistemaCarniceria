@@ -6,10 +6,14 @@ package Implementacion;
 
 import DTOs.EmpleadoCargadoDTO;
 import DTOs.NuevoProductoVentaDTO;
-import DTOs.PagoNuevoDTO;
+//import DTOs.PagoNuevoDTO;
 import DTOs.ProductoCargadoDTO;
 import DTOs.VentaDTO;
+import EstrategiaPago.IProcesadorPago;
+import EstrategiaPago.PagoEfectivo;
+import EstrategiaPago.ProcesadorPago;
 import excepciones.ProcesadorPagoException;
+//import excepciones.ProcesadorPagoException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -21,10 +25,11 @@ import java.util.logging.Logger;
  */
 public class RealizarVenta implements IRealizarVenta {
 
-    private ProcesadorPago proce;
+  //  private ProcesadorPago proce;
     private Double total = 0.0;
     private VentaDTO ventaTemporal = null;
-        
+    private ProcesadorPago subsistemaPago;
+      
     
     @Override
     public EmpleadoCargadoDTO cargarEmpleado() {
@@ -71,7 +76,19 @@ public class RealizarVenta implements IRealizarVenta {
     public double calcularTotal(double subtotal, double iva) {
         return subtotal + iva;
     }
-
+    
+       @Override
+    public boolean procesarPago() {
+        IProcesadorPago efectivo = new PagoEfectivo();
+        subsistemaPago.SeleccionarMetodoPago(efectivo);
+        try {
+            return subsistemaPago.procesarPago();
+        } catch (ProcesadorPagoException ex) {
+            ex.printStackTrace();
+        }
+       return false; 
+    }
+/*
     @Override
     public boolean verificarPago(PagoNuevoDTO pagoNuevoDTO){
 
@@ -82,7 +99,7 @@ public class RealizarVenta implements IRealizarVenta {
         }
         return false;
 
-    }
+    }*/
 
     @Override
     public double obtenerTotal() {
@@ -103,6 +120,8 @@ public class RealizarVenta implements IRealizarVenta {
     public VentaDTO obtenerVenta() {
        return ventaTemporal;
     }
+
+    
     
     
 

@@ -6,7 +6,7 @@ package BO;
 
 import DTOs.NuevoProductoVentaDTO;
 import DTOs.ProductoCargadoDTO;
-import adapters.IAdaptadorProductoEntidadAproductoVentaDTO;
+import ADAPTERS.IAdaptadorProductoEntidadAproductoVentaDTO;
 
 /**
  *
