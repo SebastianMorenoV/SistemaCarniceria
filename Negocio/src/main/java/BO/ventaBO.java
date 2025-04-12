@@ -4,21 +4,22 @@
  */
 package BO;
 
-import DAO.VentaDAO;
-import FactoryDAO.*;
-import interfaces.*;
-
+import DTOs.VentaDTO;
+import adapters.IAdaptadorVentaEntidadAVentaDTO;
 /**
  *
  * @author HP
  */
-public class ventaBO implements IVentaDAO{
-    IVentaDAO ventaDAO;
+public class ventaBO implements IAdaptadorVentaEntidadAVentaDTO{
+    IAdaptadorVentaEntidadAVentaDTO ventaDAO;
 
     @Override
-    public void obtenerInstanciaDAO(VentaDAO venta) {
+    public VentaDTO convertirVentaEntidadVentaDTO(VentaDTO producto) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-        
-    }
+
+    @Override
+    public VentaDTO convertirVentaDTOAProductoEntidad(VentaDTO producto) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }        
+}

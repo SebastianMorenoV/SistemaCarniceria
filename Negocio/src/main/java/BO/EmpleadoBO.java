@@ -4,18 +4,25 @@
  */
 package BO;
 
-import DAO.EmpleadoDAO;
-import interfaces.IEmpleadoDAO;
+import DTOs.EmpleadoCargadoDTO;
+import adapters.IAdaptadorEmpleadoEntidadAEmpleadoDTO;
 
 /**
  *
  * @author HP
  */
-public class EmpleadoBO implements IEmpleadoDAO {
-    public IEmpleadoDAO EmpleadoDAO;
+public class EmpleadoBO implements IAdaptadorEmpleadoEntidadAEmpleadoDTO {
+    public IAdaptadorEmpleadoEntidadAEmpleadoDTO EmpleadoDAO;
+
     @Override
-    public void obtenerInstanciaDAO(EmpleadoDAO empleado) {
+    public EmpleadoCargadoDTO IAdaptadorEmpleadoEntidadAEmpleadoDTO(EmpleadoCargadoDTO empleado) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public EmpleadoCargadoDTO convertirEmpleadoDTOAempleadoEntidad(EmpleadoCargadoDTO empleado) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+  
     
 }
