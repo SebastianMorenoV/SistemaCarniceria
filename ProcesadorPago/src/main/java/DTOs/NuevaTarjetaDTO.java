@@ -13,6 +13,7 @@ public class NuevaTarjetaDTO {
     double saldoDisponible; // Cantidad de saldo disponible en 
 
     public NuevaTarjetaDTO(String titular, String numeroTarjeta, String fechaVencimiento, int cvv , double  saldo) {
+        super();
         this.titular = titular;
         this.numeroTarjeta = numeroTarjeta;
         this.fechaVencimiento = fechaVencimiento;

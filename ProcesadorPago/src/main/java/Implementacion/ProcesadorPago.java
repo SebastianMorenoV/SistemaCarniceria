@@ -11,13 +11,38 @@ import excepciones.ProcesadorPagoException;
  * @author janot
  */
 public class ProcesadorPago implements IProcesadorPago {
-
+    IProcesadorPago metodoPago;
+    
+    public void seleccionarProcesadorPago(IProcesadorPago metodoPago){
+        this.metodoPago = metodoPago;
+    }
+    
     @Override
-    public PagoViejoDTO registrarPago(PagoNuevoDTO pago) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean procesarPago() {
+        return metodoPago.procesarPago();
     }
 
     @Override
+    public boolean validarPago() {
+        return metodoPago.validarPago();
+    }
+    
+    private boolean validarTarjeta(NuevaTarjetaDTO tarjeta) {
+        return tarjeta.getNumeroTarjeta() != null
+                && tarjeta.getNumeroTarjeta().length() == 16
+                && // Simulación de validación de tarjeta
+                tarjeta.getCvv() > 99 && tarjeta.getCvv() < 1000;
+    }
+
+    public boolean validarEfectivo(NuevoEfectivoDTO efectivo) {
+        return efectivo.getPagoCon() >= efectivo.getMonto(); // El efectivo debe ser suficiente para el pago
+    }
+    
+    public double procesarPagoEfectivo(NuevoEfectivoDTO efectivo){
+        return efectivo.getPagoCon() - efectivo.getMonto();
+    }
+
+
     public boolean verificarPago(PagoNuevoDTO pago) throws ProcesadorPagoException {
         if (pago == null) {
             throw new ProcesadorPagoException("El pago no puede ser nulo.");
@@ -39,22 +64,5 @@ public class ProcesadorPago implements IProcesadorPago {
 
         return false;
     }
-
-    private boolean validarTarjeta(NuevaTarjetaDTO tarjeta) {
-        return tarjeta.getNumeroTarjeta() != null
-                && tarjeta.getNumeroTarjeta().length() == 16
-                && // Simulación de validación de tarjeta
-                tarjeta.getCvv() > 99 && tarjeta.getCvv() < 1000;
-    }
-
-    public boolean validarEfectivo(NuevoEfectivoDTO efectivo) {
-        return efectivo.getPagoCon() >= efectivo.getMonto(); // El efectivo debe ser suficiente para el pago
-    }
-    
-    public double procesarPagoEfectivo(NuevoEfectivoDTO efectivo){
-        return efectivo.getPagoCon() - efectivo.getMonto();
-    }
-    
-
 
 }
