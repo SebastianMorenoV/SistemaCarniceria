@@ -2,7 +2,6 @@ package EstrategiaPago;
 
 import DTOs.MetodoPagoDTO;
 import DTOs.NuevaTarjetaDTO;
-import DTOs.PagoNuevoDTO;
 import excepciones.ProcesadorPagoException;
 
 /**
@@ -13,13 +12,16 @@ public class PagoTarjeta implements IProcesadorPago{
     
 
     @Override
-    public boolean procesarPago() throws ProcesadorPagoException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public double procesarPago(MetodoPagoDTO tarjeta) throws ProcesadorPagoException {
+        return 0.0;
     }
 
     @Override
-    public boolean validarPago() throws ProcesadorPagoException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean validarPago(MetodoPagoDTO tarjeta) throws ProcesadorPagoException {
+        NuevaTarjetaDTO nuevaTarjeta = tarjeta.getNuevaTarjeta();
+        return nuevaTarjeta.getNumeroTarjeta() != null
+                && nuevaTarjeta.getNumeroTarjeta().length() == 16
+                && nuevaTarjeta.getCvv() > 99 && nuevaTarjeta.getCvv() < 1000;
     }
 
    

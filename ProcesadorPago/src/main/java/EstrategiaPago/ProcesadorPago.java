@@ -12,22 +12,22 @@ import excepciones.ProcesadorPagoException;
  * @author janot
  */
 public class ProcesadorPago implements IProcesadorPago {
-    IProcesadorPago metodoPago;
+    IProcesadorPago procesadorPago;
 
 
-    public void SeleccionarMetodoPago(IProcesadorPago metodoPago){
-        this.metodoPago = metodoPago;
+    public void SeleccionarMetodoPago(IProcesadorPago procesadorPago){
+        this.procesadorPago = procesadorPago;
     }
     
      @Override
-    public boolean procesarPago() throws ProcesadorPagoException {
-       return metodoPago.procesarPago();
+    public double procesarPago(MetodoPagoDTO metodoPago) throws ProcesadorPagoException {
+       return procesadorPago.procesarPago(metodoPago);
     }
 
     
     @Override
-    public boolean validarPago() throws ProcesadorPagoException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean validarPago(MetodoPagoDTO metodoPago) throws ProcesadorPagoException {
+        return procesadorPago.validarPago(metodoPago);
     }
 
     
