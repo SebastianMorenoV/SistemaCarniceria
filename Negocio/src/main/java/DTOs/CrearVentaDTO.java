@@ -3,26 +3,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DTOs;
-import java.time.LocalDateTime;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  *
- * @author HP
+ * @author Sebastian Moreno
  */
-public class VentaDTO {
-    private int id;
-    private double total,subtotal,iva;
+public class CrearVentaDTO {
+
+    private double total, subtotal, iva;
     private LocalDateTime fechaHora;
     private EmpleadoCargadoDTO empleado;
     private List<NuevoProductoVentaDTO> listadoProductosVenta;
     private MetodoPagoDTO metodoPago;
 
-    public VentaDTO() {
+    public CrearVentaDTO() {
     }
 
-    public VentaDTO(double total, double subtotal, double iva, LocalDateTime fechaHora, EmpleadoCargadoDTO empleado, List<NuevoProductoVentaDTO> listadoProductosVenta, MetodoPagoDTO metodoPago) {
+    public CrearVentaDTO(double total, double subtotal, double iva, LocalDateTime fechaHora, EmpleadoCargadoDTO empleado, List<NuevoProductoVentaDTO> listadoProductosVenta, MetodoPagoDTO metodoPago) {
         this.total = total;
         this.subtotal = subtotal;
         this.iva = iva;
@@ -30,14 +30,6 @@ public class VentaDTO {
         this.empleado = empleado;
         this.listadoProductosVenta = listadoProductosVenta;
         this.metodoPago = metodoPago;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public double getTotal() {
@@ -95,13 +87,6 @@ public class VentaDTO {
     public void setMetodoPago(MetodoPagoDTO metodoPago) {
         this.metodoPago = metodoPago;
     }
-
-    @Override
-    public String toString() {
-        return "VentaDTO{" + "total=" + total + ", subtotal=" + subtotal + ", iva=" + iva + ", fechaHora=" + fechaHora + ", empleado=" + empleado + ", listadoProductosVenta=" + listadoProductosVenta + ", metodoPago=" + metodoPago + '}';
-    }
-    
-    
     
     
 }

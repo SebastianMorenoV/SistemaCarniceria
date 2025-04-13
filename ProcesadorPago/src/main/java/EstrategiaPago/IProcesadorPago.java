@@ -9,7 +9,7 @@ import excepciones.ProcesadorPagoException;
  */
 public interface IProcesadorPago {
 
-    public double procesarPago(MetodoPagoDTO metodoPago) throws ProcesadorPagoException;
+    public double procesarPago() throws ProcesadorPagoException;
 
-    public boolean validarPago(MetodoPagoDTO metodoPago) throws ProcesadorPagoException;
+    public boolean validarPago() throws ProcesadorPagoException;
 }

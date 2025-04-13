@@ -8,34 +8,23 @@ import DTOs.PagoViejoDTO;
 import excepciones.ProcesadorPagoException;
 
 /**
- *
+ * Esta clase representa un pago.
+ * mediador entre quien lo llama y el cambio de estrategia.
+ * no se sabe cual es la estrategia aqui especificamente. 
+ * el sistema se encarga de llevar segun la estrategia seleccionada antes.
  * @author janot
  */
-public class ProcesadorPago implements IProcesadorPago {
-    IProcesadorPago procesadorPago;
+public class Pago {
 
-
-    public void SeleccionarMetodoPago(IProcesadorPago procesadorPago){
-        this.procesadorPago = procesadorPago;
-    }
-    
-     @Override
-    public double procesarPago(MetodoPagoDTO metodoPago) throws ProcesadorPagoException {
-       return procesadorPago.procesarPago(metodoPago);
+    public double procesarPago(IProcesadorPago estrategia) throws ProcesadorPagoException {
+        return estrategia.procesarPago();
     }
 
-    
-    @Override
-    public boolean validarPago(MetodoPagoDTO metodoPago) throws ProcesadorPagoException {
-        return procesadorPago.validarPago(metodoPago);
+    public boolean validarPago(IProcesadorPago estrategia) throws ProcesadorPagoException {
+        return estrategia.validarPago();
     }
 
-    
-   
- 
-    
-   
-    
+    // metodos anteriores para validar.
     private boolean validarTarjeta(NuevaTarjetaDTO tarjeta) {
         return tarjeta.getNumeroTarjeta() != null
                 && tarjeta.getNumeroTarjeta().length() == 16
@@ -46,11 +35,10 @@ public class ProcesadorPago implements IProcesadorPago {
     public boolean validarEfectivo(NuevoEfectivoDTO efectivo) {
         return efectivo.getPagoCon() >= efectivo.getMonto(); // El efectivo debe ser suficiente para el pago
     }
-    
-    public double procesarPagoEfectivo(NuevoEfectivoDTO efectivo){
+
+    public double procesarPagoEfectivo(NuevoEfectivoDTO efectivo) {
         return efectivo.getPagoCon() - efectivo.getMonto();
     }
-
 
     public boolean verificarPago(PagoNuevoDTO pago) throws ProcesadorPagoException {
         if (pago == null) {
@@ -73,7 +61,5 @@ public class ProcesadorPago implements IProcesadorPago {
 
         return false;
     }
-
-   
 
 }

@@ -2,28 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package BO;
+package DAOS;
 
-import DTOs.NuevoProductoVentaDTO;
-import DTOs.ProductoCargadoDTO;
-import ADAPTERS.IAdaptadorProductoEntidadAproductoVentaDTO;
+import Entidades.Pago;
+import Exception.PersistenciaException;
+import Interfaces.IPagoDAO;
 
 /**
  *
- * @author HP
+ * @author Sebastian Moreno
  */
-public class IProductoVentaBO implements IAdaptadorProductoEntidadAproductoVentaDTO{
-    public IAdaptadorProductoEntidadAproductoVentaDTO productoVentaDAO;
+public class PagoDAO implements IPagoDAO{
 
     @Override
-    public NuevoProductoVentaDTO convertirProductoEntidadAproductoVentaDTO(ProductoCargadoDTO producto) {
+    public Pago registrarPago(Pago pago) throws PersistenciaException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ProductoCargadoDTO convertirproductoVentaDTOAProductoEntidad(NuevoProductoVentaDTO producto) {
+    public Pago consultarPagoPorId(Long id) throws PersistenciaException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
     
 }

@@ -12,13 +12,16 @@ public class ProductoCargadoDTO {
     int codigo;
     String nombre;
     String descripcion;
-    double decimal;
+    double precio;
 
+    public ProductoCargadoDTO() {
+    }
+    
     public ProductoCargadoDTO(int codigo, String nombre, String descripcion, double decimal) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.decimal = decimal;
+        this.precio = decimal;
     }
 
     public int getCodigo() {
@@ -45,18 +48,19 @@ public class ProductoCargadoDTO {
         this.descripcion = descripcion;
     }
 
-    public double getDecimal() {
-        return decimal;
+    public double getPrecio() {
+        return precio;
     }
 
-    public void setDecimal(double decimal) {
-        this.decimal = decimal;
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
     @Override
     public String toString() {
-        return codigo + " " + nombre + descripcion + "  $" + decimal;
+        return "ProductoCargadoDTO{" + "codigo=" + codigo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio + '}';
     }
-    
+
+   
     
 }

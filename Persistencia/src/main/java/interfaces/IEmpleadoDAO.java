@@ -4,14 +4,20 @@
  */
 package Interfaces;
 
+import DAOS.EmpleadoDAO;
 import Entidades.Empleado;
 import Exception.PersistenciaException;
 
 /**
- * 
+ * Interfaz que implementa la DAO 
+ * Se encarga de crear la DAO.
  * @author Sebastian Moreno
  */
 public interface IEmpleadoDAO {
+
+    static IEmpleadoDAO obtenerInstanciaDAO() {
+        return new EmpleadoDAO(); // o podrías usar singleton aquí
+    }
 
     public Empleado consultarEmpleadoPorNombre(String nombre) throws PersistenciaException;
 

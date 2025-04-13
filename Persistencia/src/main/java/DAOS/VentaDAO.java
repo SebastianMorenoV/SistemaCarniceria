@@ -23,23 +23,6 @@ import java.util.List;
 public class VentaDAO implements IVentaDAO {
 
     /*
-    Aqui debe ir el singleton.
-    Constructor privado y atributo instancia
-     */
-    
-    // Singleton: instancia privada y constructor privado
-    private static VentaDAO instancia;
-
-    private VentaDAO() {
-    }
-
-    public static VentaDAO obtenerInstancia() {
-        if (instancia == null) {
-            instancia = new VentaDAO();
-        }
-        return instancia;
-    }
- /*
     Metodos de la interfaz.
      */
     @Override
@@ -74,6 +57,30 @@ public class VentaDAO implements IVentaDAO {
 
     }
 
+    // este metodo lo meti aqui porque asi lo habiamos diagramado.
+    public List<ProductoVenta> consultarProductosVenta() throws PersistenciaException {
+        List<ProductoVenta> listaProductosVenta = new ArrayList<>();
+
+        Producto producto = new Producto();
+        producto.setId(1L);
+        producto.setNombre("Manzana");
+        producto.setDescripcion("Manzana roja fresca");
+        producto.setPrecio(25.50);
+        producto.setEsPesable(true);
+        producto.setUnidad(1.0);
+        producto.setTexto("Fruta");
+
+        ProductoVenta productoVenta = new ProductoVenta();
+        productoVenta.setProducto(producto);
+        productoVenta.setCantidad(1);
+        productoVenta.setPrecioUnitaro(producto.getPrecio());
+        productoVenta.setImporte(producto.getPrecio() * productoVenta.getCantidad());
+
+        listaProductosVenta.add(productoVenta);
+        return listaProductosVenta;
+    }
+
+    /// TALVEZ ESTE METODO NI LO OCUPAMOS.
     @Override
     public Venta consultarVenta(Long id) throws PersistenciaException {
         Empleado cajero = new Empleado(1L, "Juan Soto", "Cajero");

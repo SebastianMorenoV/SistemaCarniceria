@@ -1,41 +1,41 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package conexion;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
- *
+ * Esta clase representa un Singleton para crear una conexion y que todos tengan la instancia a un mismo objeto.
  * @author Admin
  */
 public class Conexion {
 
     private static Conexion instancia;
-    private Connection conexion;
-    private final String url = "jdbc:mysql://localhost:3306/carniceria";
-    private final String usuario = "root";
-    private final String contrasenia = "itson";
+    private static EntityManagerFactory emf;
+    private static final String UNIDAD_PERSISTENCIA = "carniceriaPU";
 
-    private Conexion() throws SQLException {
-        try {
-            conexion = DriverManager.getConnection(url, usuario, contrasenia);
-        } catch (SQLException ex) {
-            throw new SQLException("Error al conectar a la base de datos", ex);
-        }
+    private Conexion() {
+        emf = Persistence.createEntityManagerFactory(UNIDAD_PERSISTENCIA);
     }
 
-    public static Conexion obtenerInstancia() throws SQLException {
-        if (instancia == null || instancia.getConexion().isClosed()) {
+    public static Conexion obtenerInstancia() {
+        if (instancia == null) {
             instancia = new Conexion();
         }
         return instancia;
     }
 
-    public Connection getConexion() {
-        return conexion;
+    public EntityManager crearConexion() {
+        return emf.createEntityManager();
+    }
+
+    public void cerrar() {
+        if (emf != null && emf.isOpen()) {
+            emf.close();
+        }
     }
 }

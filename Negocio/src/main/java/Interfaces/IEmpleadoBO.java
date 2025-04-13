@@ -4,10 +4,13 @@
  */
 package Interfaces;
 
+import DTOs.EmpleadoCargadoDTO;
+import Exception.NegocioException;
+
 /**
  *
  * @author Sebastian Moreno
  */
 public interface IEmpleadoBO {
-    
+     public EmpleadoCargadoDTO consultarEmpleado() throws NegocioException;
 }

@@ -8,7 +8,7 @@ import DTOs.MetodoPagoDTO;
 import DTOs.NuevaTarjetaDTO;
 import DTOs.PagoNuevoDTO;
 import GUI.Aplicacion;
-import EstrategiaPago.ProcesadorPago;
+import EstrategiaPago.Pago;
 import excepciones.ProcesadorPagoException;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -33,14 +33,14 @@ import javax.swing.Timer;
 public class FormularioTarjeta extends javax.swing.JPanel {
 
     Aplicacion app;
-    ProcesadorPago proce;
+    Pago proce;
 
     /**
      * Creates new form FormularioTarjeta
      */
     public FormularioTarjeta(Aplicacion app) {
         this.app = app;
-        this.proce = new ProcesadorPago();
+        this.proce = new Pago();
         initComponents();
 
     }

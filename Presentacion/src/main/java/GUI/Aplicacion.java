@@ -4,7 +4,7 @@ package GUI;
  * Esta clase representa el control de navegacion en la aplicacion.
  * @author Sebastian Moreno
  */
-import EstrategiaPago.ProcesadorPago;
+import EstrategiaPago.Pago;
 import GUI.ModuloRealizarVenta.VentanaExitoProcesandoPago;
 import GUI.ModuloRealizarVenta.VentanaFormularioEfectivo;
 import GUI.ModuloRealizarVenta.VentanaProcesandoPago;
@@ -35,7 +35,7 @@ public class Aplicacion {
     private JDialog ventanaActual; // Variable para almacenar la ventana actual
     private ventanaMostrarTicket ticket;
     private RealizarVenta realizarVenta;
-    private ProcesadorPago procesadorPago;
+    private Pago procesadorPago;
 
     public Aplicacion() {
         framePrincipal = new JFrame("Sistema Carnicería");
@@ -45,7 +45,7 @@ public class Aplicacion {
 
         // Inicializar pantallas
         this.realizarVenta = new RealizarVenta();
-        this.procesadorPago = new ProcesadorPago();
+        this.procesadorPago = new Pago();
         registrarVenta = new RegistrarVenta(this);
         formularioTarjeta = new FormularioTarjeta(this);
         formularioEfectivo = new FormularioEfectivo(this);

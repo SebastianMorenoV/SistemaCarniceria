@@ -488,7 +488,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
         // Recorrer la lista y agregar los elementos al modelo
         for (ProductoCargadoDTO p : listadoProductosCargados) {
-            modelo.addElement(p.getCodigo() + " " + p.getNombre() + " " + p.getDescripcion() + "  $" + p.getDecimal());
+            modelo.addElement(p.getCodigo() + " " + p.getNombre() + " " + p.getDescripcion() + "  $" + p.getPrecio());
         }
         // Asignar el modelo a la listaProductosCargados
         listadoGraficoProductosCargados.setModel(modelo);
@@ -523,7 +523,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
         }
 
         for (ProductoCargadoDTO p : listadoProductosCargados) {
-            String infoProducto = p.getCodigo() + " " + p.getNombre() + " " + p.getDescripcion() + " $" + p.getDecimal();
+            String infoProducto = p.getCodigo() + " " + p.getNombre() + " " + p.getDescripcion() + " $" + p.getPrecio();
             // Convertir todo a minúsculas para búsqueda flexible
             String productoNormalizado = infoProducto.toLowerCase().replaceAll("\\s+", "");
             String textoNormalizado = textoBusqueda.toLowerCase().replaceAll("\\s+", "");

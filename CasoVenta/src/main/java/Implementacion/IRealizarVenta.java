@@ -5,6 +5,8 @@
 package Implementacion;
 
 import DTOs.*;
+import EstrategiaPago.IProcesadorPago;
+import excepciones.ProcesadorPagoException;
 import java.util.List;
 
 /**
@@ -19,22 +21,21 @@ public interface IRealizarVenta {
 
     public NuevoProductoVentaDTO agregarProducto(ProductoCargadoDTO productoCargado, double cantidad);
 
-    public double calcularTotal(double subtotal , double iva);
-    
+    public double calcularTotal(double subtotal, double iva);
+
     public double calcularSubtotal(List<NuevoProductoVentaDTO> productosEnTabla);
-    
+
     public double calcularIva(double subtotal);
-    
-   // public boolean verificarPago(PagoNuevoDTO pago);
-    
+
+    // public boolean verificarPago(PagoNuevoDTO pago);
     public double obtenerTotal();
-    
+
     public void setearTotal(Double total);
-    
+
     public void setearVenta(VentaDTO ventaNueva);
-    
+
     public VentaDTO obtenerVenta();
-    
+
     // para la estrategia
-    public boolean procesarPago(/*MetodoPagoDTO metodo*/);
+     public double procesarPago(MetodoPagoDTO metodoPago)throws ProcesadorPagoException;
 }

@@ -6,7 +6,7 @@ package GUI.ModuloRealizarVenta;
 
 import DTOs.NuevoEfectivoDTO;
 import GUI.Aplicacion;
-import EstrategiaPago.ProcesadorPago;
+import EstrategiaPago.Pago;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

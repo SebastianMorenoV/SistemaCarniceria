@@ -5,13 +5,15 @@
 package Implementacion;
 
 import DTOs.EmpleadoCargadoDTO;
+import DTOs.MetodoPagoDTO;
 import DTOs.NuevoProductoVentaDTO;
 //import DTOs.PagoNuevoDTO;
 import DTOs.ProductoCargadoDTO;
 import DTOs.VentaDTO;
 import EstrategiaPago.IProcesadorPago;
 import EstrategiaPago.PagoEfectivo;
-import EstrategiaPago.ProcesadorPago;
+import EstrategiaPago.PagoTarjeta;
+import EstrategiaPago.Pago;
 import excepciones.ProcesadorPagoException;
 //import excepciones.ProcesadorPagoException;
 import java.util.ArrayList;
@@ -20,17 +22,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Esta clase representa el subsistema de caso de uso. (REALIZAR UNA VENTA)
  *
  * @author Lap-064
  */
 public class RealizarVenta implements IRealizarVenta {
 
-  //  private ProcesadorPago proce;
+    //  private Pago proce;
     private Double total = 0.0;
     private VentaDTO ventaTemporal = null;
-    private ProcesadorPago subsistemaPago;
-      
-    
+    private static Pago procesarPago = new Pago();
+    private static IProcesadorPago estrategia;
+
     @Override
     public EmpleadoCargadoDTO cargarEmpleado() {
         return new EmpleadoCargadoDTO("Juan Soto");
@@ -52,8 +55,8 @@ public class RealizarVenta implements IRealizarVenta {
     @Override
     public NuevoProductoVentaDTO agregarProducto(ProductoCargadoDTO productoCargado, double cantidad) {
 
-        double importe = productoCargado.getDecimal() * cantidad;
-        return new NuevoProductoVentaDTO(productoCargado, cantidad, productoCargado.getDecimal(), importe);
+        double importe = productoCargado.getPrecio() * cantidad;
+        return new NuevoProductoVentaDTO(productoCargado, cantidad, productoCargado.getPrecio(), importe);
 
     }
 
@@ -76,30 +79,31 @@ public class RealizarVenta implements IRealizarVenta {
     public double calcularTotal(double subtotal, double iva) {
         return subtotal + iva;
     }
-    
-       @Override
-    public boolean procesarPago() {
-        IProcesadorPago efectivo = new PagoEfectivo();
-        subsistemaPago.SeleccionarMetodoPago(efectivo);
-        try {
-            return subsistemaPago.procesarPago();
-        } catch (ProcesadorPagoException ex) {
-            ex.printStackTrace();
-        }
-       return false; 
-    }
-/*
+
+    /**
+     * Metodo para procesar un pago , si el metodo de pago es una tarjeta,
+     * cambiamos la estrategia a tarjeta, si no a efectivo.
+     * Retorna el valor doble que proceso, si no logra procesar retorna 0.
+     * @param metodoPago es la manera de pagar de un cliente
+     * @return el valor doble que proceso , si no procesa retorna 0.
+     */
     @Override
-    public boolean verificarPago(PagoNuevoDTO pagoNuevoDTO){
+    public double procesarPago(MetodoPagoDTO metodoPago) {
 
-        try {
-            return proce.verificarPago(pagoNuevoDTO);
-        } catch (ProcesadorPagoException ex) {
-            Logger.getLogger(RealizarVenta.class.getName()).log(Level.SEVERE, null, ex);
+        if (metodoPago.getNuevaTarjeta() != null) {
+            estrategia = new PagoTarjeta();
+        } else {
+            estrategia = new PagoEfectivo();
         }
-        return false;
+        
+        try {
+            return procesarPago.procesarPago(estrategia);
+        } catch (ProcesadorPagoException ex) {
+            ex.getLocalizedMessage();
+            return 0;
+        }
 
-    }*/
+    }
 
     @Override
     public double obtenerTotal() {
@@ -113,16 +117,12 @@ public class RealizarVenta implements IRealizarVenta {
 
     @Override
     public void setearVenta(VentaDTO ventaNueva) {
-       this.ventaTemporal = ventaNueva;
+        this.ventaTemporal = ventaNueva;
     }
 
     @Override
     public VentaDTO obtenerVenta() {
-       return ventaTemporal;
+        return ventaTemporal;
     }
-
-    
-    
-    
 
 }

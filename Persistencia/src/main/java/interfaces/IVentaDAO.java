@@ -4,17 +4,27 @@
  */
 package Interfaces;
 
+import DAOS.VentaDAO;
+import Entidades.ProductoVenta;
 import Entidades.Venta;
 import Exception.PersistenciaException;
+import java.util.List;
 
 /**
- * Esta clase representa la interfaz de la dao Venta
+ * Esta clase representa la interfaz de la dao Venta se encarga de crear la DAO.
+ *
  * @author Sebastian Moreno
  */
 public interface IVentaDAO {
 
+    static IVentaDAO obtenerInstanciaDAO() {
+        return new VentaDAO(); // o podrías usar singleton aquí
+    }
+
     public Venta registrarVenta(Venta venta) throws PersistenciaException;
 
     public Venta consultarVenta(Long id) throws PersistenciaException;
+
+    public List<ProductoVenta> consultarProductosVenta() throws PersistenciaException;
 
 }

@@ -4,13 +4,14 @@
  */
 package Interfaces;
 
-import Exception.PersistenciaException;
+import DAOS.VentaDAO;
 
 /**
  *
- * @author Admin
+ * @author Sebastian Moreno
  */
-public interface ICreadorDAO {
-
-    public IVentaDAO crearVentaDAO();
+public interface IProductoVentaDAO {
+    static IVentaDAO obtenerInstanciaDAO() {
+        return new VentaDAO(); // o podrías usar singleton aquí
+    }
 }

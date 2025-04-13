@@ -52,4 +52,11 @@ public class Empleado {
         this.cargo = cargo;
     }
 
+    @Override
+    public String toString() {
+        return "Empleado{" + "id=" + id + ", nombre=" + nombre + ", cargo=" + cargo + '}';
+    }
+
+    
+    
 }

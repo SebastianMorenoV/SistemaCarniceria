@@ -8,18 +8,33 @@ import DAOS.*;
 import Interfaces.*;
 
 /**
- * Este metodo se encarga de crear objetos DAO
- * 
- * 
+ * Esta clase Fabrica se encarga de crear objetos DAO.
  * @author Admin
  */
-public class CreadorDAO implements ICreadorDAO{
+public class CreadorDAO implements ICreadorDAO {
 
-    //Crea una instancia de IVentaDAO basicamente
     @Override
-    public IVentaDAO crearVentaDAO() {
-        return VentaDAO.obtenerInstancia(); // llama al singleton
+    public IEmpleadoDAO crearEmpleadoDAO() {
+        return new EmpleadoDAO(); // devuelve la implementación concreta
     }
 
-    //Aca abajo pues iran igual para todos
+    @Override
+    public IVentaDAO crearVentaDAO() {
+        return new VentaDAO();
+    }
+
+    @Override
+    public IProductoVentaDAO crearProductoVentaDAO() {
+        return new ProductoVentaDAO();
+    }
+
+    @Override
+    public IProductoDAO crearProductoDAO() {
+       return new ProductoDAO();
+    }
+
+    @Override
+    public IPagoDAO crearPagoDAO() {
+       return new PagoDAO();
+    }
 }

@@ -4,10 +4,18 @@
  */
 package Interfaces;
 
+import DTOs.ProductosVentaDTO;
+import DTOs.VentaDTO;
+import Exception.NegocioException;
+
 /**
  *
  * @author Sebastian Moreno
  */
 public interface IVentaBO {
+
+    public VentaDTO registrarVenta(VentaDTO ventaDTO) throws NegocioException;
+
+    public ProductosVentaDTO obtenerProductosVenta() throws NegocioException;
     
 }
