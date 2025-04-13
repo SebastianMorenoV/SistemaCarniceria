@@ -48,7 +48,7 @@ public class VentaDAO implements IVentaDAO {
         ProductoVenta productoVenta = new ProductoVenta();
         productoVenta.setProducto(producto);
         productoVenta.setCantidad(2.5); // por ejemplo, 2.5 kg
-        productoVenta.setPrecioUnitaro(producto.getPrecio());
+        productoVenta.setPrecioUnitario(producto.getPrecio());
         productoVenta.setImporte(producto.getPrecio() * productoVenta.getCantidad());
 
         List<ProductoVenta> listaProductosVenta = new ArrayList<ProductoVenta>();
@@ -73,7 +73,7 @@ public class VentaDAO implements IVentaDAO {
         ProductoVenta productoVenta = new ProductoVenta();
         productoVenta.setProducto(producto);
         productoVenta.setCantidad(1);
-        productoVenta.setPrecioUnitaro(producto.getPrecio());
+        productoVenta.setPrecioUnitario(producto.getPrecio());
         productoVenta.setImporte(producto.getPrecio() * productoVenta.getCantidad());
 
         listaProductosVenta.add(productoVenta);
@@ -104,7 +104,7 @@ public class VentaDAO implements IVentaDAO {
         ProductoVenta productoVenta = new ProductoVenta();
         productoVenta.setProducto(producto);
         productoVenta.setCantidad(2.5); // por ejemplo, 2.5 kg
-        productoVenta.setPrecioUnitaro(producto.getPrecio());
+        productoVenta.setPrecioUnitario(producto.getPrecio());
         productoVenta.setImporte(producto.getPrecio() * productoVenta.getCantidad());
 
         List<ProductoVenta> listaProductosVenta = new ArrayList<ProductoVenta>();

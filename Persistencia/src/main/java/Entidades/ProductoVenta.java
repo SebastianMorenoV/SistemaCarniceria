@@ -56,11 +56,11 @@ public class ProductoVenta {
         this.importe = importe;
     }
 
-    public double getPrecioUnitaro() {
+    public double getPrecioUnitario() {
         return precioUnitaro;
     }
 
-    public void setPrecioUnitaro(double precioUnitaro) {
+    public void setPrecioUnitario(double precioUnitaro) {
         this.precioUnitaro = precioUnitaro;
     }
     

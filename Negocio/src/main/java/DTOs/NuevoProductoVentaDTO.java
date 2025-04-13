@@ -9,7 +9,6 @@ package DTOs;
  * @author Sebastian Moreno
  */
 public class NuevoProductoVentaDTO {
-
     ProductoCargadoDTO producto;
     double cantidad;
     double precioUnitario;
@@ -21,6 +20,10 @@ public class NuevoProductoVentaDTO {
         this.precioUnitario = precioUnitario;
         this.importe = importe;
     }
+
+    public NuevoProductoVentaDTO() {
+    }
+    
 
     public ProductoCargadoDTO getProducto() {
         return producto;
@@ -58,6 +61,5 @@ public class NuevoProductoVentaDTO {
     public String toString() {
         return "NuevoProductoVentaDTO{" + "producto=" + producto + ", cantidad=" + cantidad + ", precioUnitario=" + precioUnitario + ", importe=" + importe + '}';
     }
-    
     
 }

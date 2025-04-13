@@ -2,39 +2,38 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Entidades;
+package DTOs;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author Sebastian Moreno
+ * @author HP
  */
-public class Ticket {
-
+public class TicketDTO {
     Long id;
-    List<ProductoVenta> listaProductosVenta;
+    List<NuevoProductoVentaDTO> listaProductosVenta;
     LocalDateTime fechaHora;
-    double iva;
-    Empleado cajero;
-    double subtotal;
-    double total;
+    EmpleadoCargadoDTO cajero;
+    double subtotal,total,iva;
 
-    public Ticket() {
+    public TicketDTO() {
     }
 
-    public Ticket(Long id, List<ProductoVenta> listaProductosVenta, LocalDateTime fechaHora, double iva, Empleado cajero, double subtotal, double total) {
+    public TicketDTO(Long id, List<NuevoProductoVentaDTO> listaProductosVenta, LocalDateTime fechaHora, EmpleadoCargadoDTO cajero, double subtotal, double total, double iva) {
         this.id = id;
         this.listaProductosVenta = listaProductosVenta;
         this.fechaHora = fechaHora;
-        this.iva = iva;
         this.cajero = cajero;
         this.subtotal = subtotal;
         this.total = total;
+        this.iva = iva;
     }
+    
 
-    public Ticket(List<ProductoVenta> listaProductosVenta, LocalDateTime fechaHora, double iva, Empleado cajero, double subtotal, double total) {
+        public TicketDTO(ArrayList<NuevoProductoVentaDTO> listaProductosVenta, LocalDateTime fechaHora, double iva, EmpleadoCargadoDTO cajero, double subtotal, double total) {
         this.listaProductosVenta = listaProductosVenta;
         this.fechaHora = fechaHora;
         this.iva = iva;
@@ -42,6 +41,7 @@ public class Ticket {
         this.subtotal = subtotal;
         this.total = total;
     }
+    
 
     public Long getId() {
         return id;
@@ -51,11 +51,11 @@ public class Ticket {
         this.id = id;
     }
 
-    public List<ProductoVenta> getListaProductosVenta() {
+    public List<NuevoProductoVentaDTO> getListaProductosVenta() {
         return listaProductosVenta;
     }
 
-    public void setListaProductosVenta(List<ProductoVenta> listaProductosVenta) {
+    public void setListaProductosVenta(List<NuevoProductoVentaDTO> listaProductosVenta) {
         this.listaProductosVenta = listaProductosVenta;
     }
 
@@ -67,19 +67,11 @@ public class Ticket {
         this.fechaHora = fechaHora;
     }
 
-    public double getIva() {
-        return iva;
-    }
-
-    public void setIva(double iva) {
-        this.iva = iva;
-    }
-
-    public Empleado getCajero() {
+    public EmpleadoCargadoDTO getCajero() {
         return cajero;
     }
 
-    public void setCajero(Empleado cajero) {
+    public void setCajero(EmpleadoCargadoDTO cajero) {
         this.cajero = cajero;
     }
 
@@ -98,5 +90,14 @@ public class Ticket {
     public void setTotal(double total) {
         this.total = total;
     }
+
+    public double getIva() {
+        return iva;
+    }
+
+    public void setIva(double iva) {
+        this.iva = iva;
+    }
+    
 
 }
