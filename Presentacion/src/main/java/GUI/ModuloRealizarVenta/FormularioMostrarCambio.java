@@ -4,14 +4,16 @@
  */
 package GUI.ModuloRealizarVenta;
 
+import DTOs.MetodoPagoDTO;
+import DTOs.NuevoEfectivoDTO;
+import DTOs.PagoNuevoDTO;
 import GUI.Aplicacion;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
+
 
 /**
  *
@@ -194,7 +196,10 @@ public class FormularioMostrarCambio extends javax.swing.JPanel {
     private void cargarDatos(){
         total = app.getTotalTemporal();
         pagaraCon = app.getPagaraCon();
-        cambio = app.procesarPagoEfectivo(total,pagaraCon);
+        MetodoPagoDTO metodoPago = new MetodoPagoDTO();
+        metodoPago.setNuevoEfectivo(new NuevoEfectivoDTO(pagaraCon));
+        PagoNuevoDTO pago = new PagoNuevoDTO(LocalDateTime.MAX, metodoPago, total);
+        cambio = app.procesarPagoEfectivo(pago);
         
         jlabelCantTotal.setText("$" + total);
         jlabelCantPagaste.setText("$" + pagaraCon);

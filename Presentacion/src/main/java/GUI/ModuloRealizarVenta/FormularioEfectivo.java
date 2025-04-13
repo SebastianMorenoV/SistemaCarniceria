@@ -4,12 +4,17 @@
  */
 package GUI.ModuloRealizarVenta;
 
+import DTOs.MetodoPagoDTO;
 import DTOs.NuevoEfectivoDTO;
+import DTOs.PagoNuevoDTO;
 import GUI.Aplicacion;
 import EstrategiaPago.Pago;
+import Exception.NegocioException;
 import java.awt.Color;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -163,14 +168,19 @@ public class FormularioEfectivo extends javax.swing.JPanel {
         
         if (validarTextFieldPagaraCon()) {
             pagaraCon = Double.parseDouble(jTextPago.getText());
-            NuevoEfectivoDTO nuevoPagoEfectivo = new NuevoEfectivoDTO(total, pagaraCon);
-            if(!app.validarPago(nuevoPagoEfectivo)){
-                JOptionPane.showMessageDialog(this, "No te alcanza");
-            }
-            else{
-                app.setTotalTemporal(total);
-                app.mostrarFormularioCambio();
-                return true;
+            NuevoEfectivoDTO nuevoPagoEfectivo = new NuevoEfectivoDTO(pagaraCon);
+            PagoNuevoDTO pago = new PagoNuevoDTO(LocalDateTime.MAX, new MetodoPagoDTO(nuevoPagoEfectivo), total);
+            try {
+                if(!app.validarPago(pago)){
+                    JOptionPane.showMessageDialog(this, "No te alcanza");
+                }
+                else{
+                    app.setTotalTemporal(total);
+                    app.mostrarFormularioCambio();
+                    return true;
+                }
+            } catch (NegocioException | HeadlessException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
             }
         }
         return false;

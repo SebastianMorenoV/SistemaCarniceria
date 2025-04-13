@@ -1,6 +1,7 @@
 package EstrategiaPago;
 
 import DTOs.MetodoPagoDTO;
+import DTOs.PagoNuevoDTO;
 import excepciones.ProcesadorPagoException;
 
 /**
@@ -9,7 +10,7 @@ import excepciones.ProcesadorPagoException;
  */
 public interface IProcesadorPago {
 
-    public double procesarPago() throws ProcesadorPagoException;
+    public double procesarPago(PagoNuevoDTO pago) throws ProcesadorPagoException;
 
-    public boolean validarPago() throws ProcesadorPagoException;
+    public boolean validarPago(PagoNuevoDTO pago) throws ProcesadorPagoException;
 }

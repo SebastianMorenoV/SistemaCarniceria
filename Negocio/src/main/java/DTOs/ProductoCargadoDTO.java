@@ -12,14 +12,13 @@ public class ProductoCargadoDTO {
     int codigo;
     String nombre;
     String descripcion;
-    double decimal;
     double precio; 
     
-    public ProductoCargadoDTO(int codigo, String nombre, String descripcion, double decimal) {
+    public ProductoCargadoDTO(int codigo, String nombre, String descripcion, double precio) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.decimal = decimal;
+        this.precio = precio;
     }
     
 
@@ -48,14 +47,6 @@ public class ProductoCargadoDTO {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public double getDecimal() {
-        return decimal;
-    }
-
-    public void setDecimal(double decimal) {
-        this.decimal = decimal;
     }
 
     public double getPrecio() {

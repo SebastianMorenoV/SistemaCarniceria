@@ -37,5 +37,7 @@ public interface IRealizarVenta {
     public VentaDTO obtenerVenta();
 
     // para la estrategia
-     public double procesarPago(MetodoPagoDTO metodoPago)throws ProcesadorPagoException;
+     public double procesarPago(PagoNuevoDTO pago)throws ProcesadorPagoException;
+     
+     public boolean validarPago(PagoNuevoDTO pago) throws ProcesadorPagoException;
 }

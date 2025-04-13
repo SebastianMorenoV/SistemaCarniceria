@@ -13,6 +13,8 @@ import excepciones.ProcesadorPagoException;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -198,7 +200,7 @@ public class FormularioTarjeta extends javax.swing.JPanel {
 
         double saldo = 200; // tarjeta con 200 pesos
         NuevaTarjetaDTO tarjeta = new NuevaTarjetaDTO(titular, numeroTarjeta, fechaVencimiento, cvv, saldo);
-        Date fechaPago = new Date();
+        LocalDateTime fechaPago = LocalDateTime.now();
 
         double monto = app.getTotalTemporal(); // se obtiene desde la app
 

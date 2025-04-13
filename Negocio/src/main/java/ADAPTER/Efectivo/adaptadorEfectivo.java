@@ -11,8 +11,8 @@ import Entidades.Efectivo;
  *
  * @author HP
  */
-public class adaptadorEfectivo implements IAdaptadorEfectivo{
-
+public class adaptadorEfectivo /*implements IAdaptadorEfectivo*/{
+    /*
     @Override
     public NuevoEfectivoDTO convertiaADTO(Efectivo efectivo) {
         NuevoEfectivoDTO EfectivoDTO =  new NuevoEfectivoDTO(efectivo.getMonto(), (efectivo.getMonto()+efectivo.getCambio()));
@@ -24,4 +24,5 @@ public class adaptadorEfectivo implements IAdaptadorEfectivo{
         Efectivo Efectivo =  new Efectivo(efectivoDTO.getMonto(), (efectivoDTO.getPagoCon()-efectivoDTO.getMonto()));
         return Efectivo;
     }
+*/
 }

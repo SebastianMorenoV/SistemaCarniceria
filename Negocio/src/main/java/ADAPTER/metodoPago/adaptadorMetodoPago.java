@@ -15,8 +15,8 @@ import Entidades.Tarjeta;
  *
  * @author HP
  */
-public class adaptadorMetodoPago implements IAdaptadorMetodoPago {
-        
+public class adaptadorMetodoPago /*implements IAdaptadorMetodoPago*/ {
+    /*
     @Override
         public MetodoPagoDTO convertirTarjetaADTO(MetodoPago metodoPago) {
 
@@ -71,5 +71,5 @@ public class adaptadorMetodoPago implements IAdaptadorMetodoPago {
         MetodoPagoEntidad.setEfectivo(Efectivo);
         return MetodoPagoEntidad;
 }
-
+*/
 }

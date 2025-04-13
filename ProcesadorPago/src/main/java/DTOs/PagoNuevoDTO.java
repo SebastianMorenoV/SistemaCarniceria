@@ -1,5 +1,6 @@
 package DTOs;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -7,21 +8,21 @@ import java.util.Date;
  * @author janot
  */
 public class PagoNuevoDTO {
-    Date fechaHora;
+    LocalDateTime fechaHora;
     MetodoPagoDTO metodoPago;
     double monto;
 
-    public PagoNuevoDTO(Date fechaHora, MetodoPagoDTO metodoPago, double monto) {
+    public PagoNuevoDTO(LocalDateTime fechaHora, MetodoPagoDTO metodoPago, double monto) {
         this.fechaHora = fechaHora;
         this.metodoPago = metodoPago;
         this.monto = monto;
     }
 
-    public Date getFechaHora() {
+    public LocalDateTime getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(Date fechaHora) {
+    public void setFechaHora(LocalDateTime fechaHora) {
         this.fechaHora = fechaHora;
     }
 

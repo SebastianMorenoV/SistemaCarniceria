@@ -7,6 +7,7 @@ package Implementacion;
 import DTOs.EmpleadoCargadoDTO;
 import DTOs.MetodoPagoDTO;
 import DTOs.NuevoProductoVentaDTO;
+import DTOs.PagoNuevoDTO;
 //import DTOs.PagoNuevoDTO;
 import DTOs.ProductoCargadoDTO;
 import DTOs.VentaDTO;
@@ -15,6 +16,7 @@ import EstrategiaPago.PagoEfectivo;
 import EstrategiaPago.PagoTarjeta;
 import EstrategiaPago.Pago;
 import excepciones.ProcesadorPagoException;
+import java.time.LocalDateTime;
 //import excepciones.ProcesadorPagoException;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,22 +90,25 @@ public class RealizarVenta implements IRealizarVenta {
      * @return el valor doble que proceso , si no procesa retorna 0.
      */
     @Override
-    public double procesarPago(MetodoPagoDTO metodoPago) {
+    public double procesarPago(PagoNuevoDTO pago) {
 
-        if (metodoPago.getNuevaTarjeta() != null) {
+        if (pago.getMetodoPago().getNuevaTarjeta() != null) {
             estrategia = new PagoTarjeta();
         } else {
             estrategia = new PagoEfectivo();
         }
         
         try {
-            return procesarPago.procesarPago(estrategia);
+            PagoNuevoDTO p = new PagoNuevoDTO(LocalDateTime.now(), pago.getMetodoPago(), pago.getMonto());
+            return procesarPago.procesarPago(estrategia, p);
         } catch (ProcesadorPagoException ex) {
             ex.getLocalizedMessage();
             return 0;
         }
 
     }
+    
+    
 
     @Override
     public double obtenerTotal() {
@@ -123,6 +128,25 @@ public class RealizarVenta implements IRealizarVenta {
     @Override
     public VentaDTO obtenerVenta() {
         return ventaTemporal;
+    }
+
+    @Override
+    public boolean validarPago(PagoNuevoDTO pago) throws ProcesadorPagoException {
+        boolean validado = false;
+        if (pago.getMetodoPago().getNuevaTarjeta() != null) {
+            estrategia = new PagoTarjeta();
+        } else {
+            estrategia = new PagoEfectivo();
+        }
+        
+        try {
+            PagoNuevoDTO p = new PagoNuevoDTO(LocalDateTime.now(), pago.getMetodoPago(), pago.getMonto());
+            validado =  procesarPago.validarPago(estrategia, p);
+        } catch (ProcesadorPagoException ex) {
+            ex.getLocalizedMessage();
+        }
+        
+        return validado;
     }
 
 }

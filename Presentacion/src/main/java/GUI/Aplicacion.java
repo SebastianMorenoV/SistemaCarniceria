@@ -18,6 +18,7 @@ import GUI.ModuloRealizarVenta.VentanaFormularioTarjeta;
 import GUI.ModuloRealizarVenta.VentanaErrorProcesandoPago;
 import GUI.ModuloRealizarVenta.ventanaMostrarTicket;
 import DTOs.*;
+import Exception.NegocioException;
 import Implementacion.RealizarVenta;
 import excepciones.ProcesadorPagoException;
 import java.util.List;
@@ -174,7 +175,7 @@ public class Aplicacion {
     }
 
     public boolean verificarPago(PagoNuevoDTO pago) throws ProcesadorPagoException {
-        return procesadorPago.verificarPago(pago);
+        return realizarVenta.validarPago(pago);
     }
 
     public NuevoProductoVentaDTO agregarProducto(ProductoCargadoDTO productoCargado, double cantidad) {
@@ -209,12 +210,16 @@ public class Aplicacion {
         return formularioEfectivo.getPagaraCon();
     }
 
-    public boolean validarPago(NuevoEfectivoDTO efectivo) {
-        return procesadorPago.validarEfectivo(efectivo);
+    public boolean validarPago(PagoNuevoDTO pago) throws NegocioException {
+        try {
+            return realizarVenta.validarPago(pago);
+        } catch (ProcesadorPagoException e) {
+            throw new NegocioException(e.getMessage());
+        }
     }
 
-    public double procesarPagoEfectivo(double total, double pagaraCon) {
-        return procesadorPago.procesarPagoEfectivo(new NuevoEfectivoDTO(total, pagaraCon));
+    public double procesarPagoEfectivo(PagoNuevoDTO pago) {
+        return realizarVenta.procesarPago(pago);
     }
 
     public void setearVenta(VentaDTO ventaNueva) {
