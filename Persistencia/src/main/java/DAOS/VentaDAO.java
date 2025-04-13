@@ -26,6 +26,19 @@ public class VentaDAO implements IVentaDAO {
     Aqui debe ir el singleton.
     Constructor privado y atributo instancia
      */
+    
+    // Singleton: instancia privada y constructor privado
+    private static VentaDAO instancia;
+
+    private VentaDAO() {
+    }
+
+    public static VentaDAO obtenerInstancia() {
+        if (instancia == null) {
+            instancia = new VentaDAO();
+        }
+        return instancia;
+    }
  /*
     Metodos de la interfaz.
      */
