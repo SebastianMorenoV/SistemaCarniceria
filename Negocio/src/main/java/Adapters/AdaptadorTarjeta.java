@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ADAPTERS.Venta;
+package Adapters;
 
-import ADAPTERS.IAdaptadorEmpleadoEntidadAEmpleadoDTO;
+import IAdapters.IAdaptadorVenta;
+import IAdapters.IAdaptadorEmpleadoEntidadAEmpleadoDTO;
 import DTOs.CrearVentaDTO;
 import DTOs.EmpleadoCargadoDTO;
 import DTOs.VentaDTO;
@@ -15,7 +16,7 @@ import Entidades.Venta;
  *
  * @author Sebastian Moreno
  */
-public class AdaptadorVenta implements IAdaptadorVenta {
+public class AdaptadorTarjeta implements IAdaptadorVenta {
 
     IAdaptadorEmpleadoEntidadAEmpleadoDTO adaptador; //Llamada al adaptador de Empleado
     

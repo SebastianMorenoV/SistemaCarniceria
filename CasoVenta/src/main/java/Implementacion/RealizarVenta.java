@@ -67,12 +67,13 @@ public class RealizarVenta implements IRealizarVenta {
         return ventaBO.registrarVenta(ventaTemporal);
     }
     
+    // en donde esta su uso?
     public ProductosVentaDTO ConsultarProductosVenta()throws NegocioException{
         return ventaBO.obtenerProductosVenta();
     }
-
+    //
     @Override
-    public NuevoProductoVentaDTO agregarProducto(ProductoCargadoDTO productoCargado, double cantidad) {
+    public NuevoProductoVentaDTO agregarProductoVenta(ProductoCargadoDTO productoCargado, double cantidad) {
 
         double importe = productoCargado.getPrecio() * cantidad;
         return new NuevoProductoVentaDTO(productoCargado, cantidad, productoCargado.getPrecio(), importe);
@@ -125,8 +126,6 @@ public class RealizarVenta implements IRealizarVenta {
 
     }
     
-    
-
     @Override
     public double obtenerTotal() {
         return total;

@@ -4,10 +4,10 @@
  */
 package BO;
 
-import ADAPTER.Empleado.IAdaptadorEmpleado;
-import ADAPTER.Empleado.adaptadorEmpleado;
+import IAdapters.IAdaptadorEmpleado;
+import Adapters.AdaptadorEmpleado;
 import DTOs.EmpleadoCargadoDTO;
-import ADAPTERS.IAdaptadorEmpleadoEntidadAEmpleadoDTO;
+import IAdapters.IAdaptadorEmpleadoEntidadAEmpleadoDTO;
 import Entidades.Empleado;
 import Exception.NegocioException;
 import Exception.PersistenciaException;
@@ -29,7 +29,7 @@ public class EmpleadoBO implements IEmpleadoBO{
 
     public EmpleadoBO(ICreadorDAO fabrica) {
         this.empleadoDAO = fabrica.crearEmpleadoDAO();
-        this.adapterEmpleado =  new adaptadorEmpleado();
+        this.adapterEmpleado =  new AdaptadorEmpleado();
     }
 
     @Override
@@ -38,8 +38,7 @@ public class EmpleadoBO implements IEmpleadoBO{
         Empleado empleado;
         try {
             empleado = empleadoDAO.consultarEmpleadoPorNombre("Juanito");
-            empleadoDTO.setNombre(empleado.getNombre());
-            empleadoDTO.setCargo(empleado.getCargo());
+            empleadoDTO = adapterEmpleado.convertirADTO(empleado);
             return empleadoDTO;
         } catch (PersistenciaException ex) {
             throw new NegocioException("No se pudo consultar el empleado: " + ex.getMessage());
@@ -47,7 +46,6 @@ public class EmpleadoBO implements IEmpleadoBO{
     }
         public EmpleadoCargadoDTO registrarEmpleado(EmpleadoCargadoDTO empleado){
             Empleado empleado1 = adapterEmpleado.convertirAEntidad(empleado);
-            System.out.println(empleado1);
             EmpleadoCargadoDTO empleadoReturn = adapterEmpleado.convertirADTO(empleado1);
             return empleadoReturn;
         }

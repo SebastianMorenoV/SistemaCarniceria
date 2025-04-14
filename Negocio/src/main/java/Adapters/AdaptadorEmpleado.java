@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ADAPTER.Empleado;
+package Adapters;
 
+import IAdapters.IAdaptadorEmpleado;
 import DTOs.EmpleadoCargadoDTO;
 import Entidades.Empleado;
 
@@ -11,7 +12,7 @@ import Entidades.Empleado;
  *
  * @author HP
  */
-public class adaptadorEmpleado implements IAdaptadorEmpleado{
+public class AdaptadorEmpleado implements IAdaptadorEmpleado{
     
     @Override
     public EmpleadoCargadoDTO convertirADTO(Empleado empleado) {

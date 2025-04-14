@@ -4,10 +4,13 @@
  */
 package BO;
 
-import ADAPTER.Producto.IAdaptadorProducto;
-import ADAPTER.Producto.AdaptadorProducto;
+import IAdapters.IAdaptadorProducto;
+import Adapters.AdaptadorProducto;
+import IAdapters.IAdaptadorProductoVenta;
+import Adapters.adaptadorProductoVenta;
+import Adapters.AdaptadorTarjeta;
 import DTOs.VentaDTO;
-import ADAPTERS.Venta.IAdaptadorVenta;
+import IAdapters.IAdaptadorVenta;
 import DTOs.CrearVentaDTO;
 import DTOs.ProductoCargadoDTO;
 import DTOs.ProductoVentaDTO;
@@ -31,9 +34,10 @@ import java.util.logging.Logger;
  */
 public class VentaBO implements IVentaBO {
 
-    private IAdaptadorVenta adaptador;
+    private final IAdaptadorVenta adaptadorVenta = new AdaptadorTarjeta();
     private final IAdaptadorProducto adaptadorProducto = new AdaptadorProducto();
-
+    private final IAdaptadorProductoVenta adaptadorProductoVenta = new adaptadorProductoVenta();
+    
     private final IVentaDAO ventaDAO;
 
     public VentaBO(ICreadorDAO fabrica) {
@@ -45,10 +49,7 @@ public class VentaBO implements IVentaBO {
     @Override
     public VentaDTO registrarVenta(VentaDTO ventaDTO) throws NegocioException {
 
-        Venta venta = new Venta();
-        venta.setIva(ventaDTO.getIva());
-        venta.setSubtotal(ventaDTO.getSubtotal());
-        venta.setTotal(ventaDTO.getTotal());
+        Venta venta = adaptadorVenta.convertirAVenta(ventaDTO);
 
         try {
             venta = ventaDAO.registrarVenta(venta);
@@ -56,10 +57,7 @@ public class VentaBO implements IVentaBO {
             Logger.getLogger(VentaBO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        VentaDTO ventaMapeada = new VentaDTO();
-        //AQUI DEBE BUSCAR EL ID , CON LA CREARVENTADTO
-        ventaMapeada.setTotal(venta.getTotal());
-        ventaMapeada.setIva(venta.getIva());
+        VentaDTO ventaMapeada = adaptadorVenta.convertirADTO(venta);
         return ventaMapeada;
     }
 
@@ -72,12 +70,8 @@ public class VentaBO implements IVentaBO {
             for (ProductoVenta productoVenta : productosVentaConsultado) {
                 ProductoCargadoDTO productoDTO = adaptadorProducto.convertirADTO(productoVenta.getProducto());
 
-                ProductoVentaDTO productoVentaDTO = new ProductoVentaDTO();
-                productoVentaDTO.setProducto(productoDTO);
-                productoVentaDTO.setImporte(productoVenta.getImporte());
-                productoVentaDTO.setPrecioUnitario(productoDTO.getPrecio());
-                productoVentaDTO.setCantidad(productoVenta.getCantidad()); //este valor aun es hardcodeado?? que pedo ahi
-
+                ProductoVentaDTO productoVentaDTO =  adaptadorProductoVenta.convertirProductoVentaADTO(productoVenta);
+               
                 productosVentaDTO.addProductoVenta(productoVentaDTO);
             }
 

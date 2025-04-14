@@ -1,4 +1,4 @@
-package ADAPTERS;
+package IAdapters;
 
 import DTOs.NuevoProductoVentaDTO;
 import DTOs.ProductoCargadoDTO;

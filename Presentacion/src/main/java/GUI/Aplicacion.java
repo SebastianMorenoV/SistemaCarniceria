@@ -177,9 +177,9 @@ public class Aplicacion {
     public boolean verificarPago(PagoNuevoDTO pago) throws ProcesadorPagoException {
         return realizarVenta.validarPago(pago);
     }
-
+    // que pedo aqui 
     public NuevoProductoVentaDTO agregarProducto(ProductoCargadoDTO productoCargado, double cantidad) {
-        return realizarVenta.agregarProducto(productoCargado, cantidad);
+        return realizarVenta.agregarProductoVenta(productoCargado, cantidad);
     }
 
     public double calcularTotal(double subtotalCalculado, double iva) {

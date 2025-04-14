@@ -1,5 +1,5 @@
 
-package ADAPTERS.Venta;
+package IAdapters;
 
 import DTOs.CrearVentaDTO;
 import DTOs.VentaDTO;

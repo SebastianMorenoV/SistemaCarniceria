@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ADAPTER.Efectivo;
+package Adapters;
 
+import IAdapters.IAdaptadorEfectivo;
 import DTOs.NuevoEfectivoDTO;
 import Entidades.Efectivo;
 
@@ -11,7 +12,7 @@ import Entidades.Efectivo;
  *
  * @author HP
  */
-public class adaptadorEfectivo implements IAdaptadorEfectivo{
+public class AdaptadorEfectivo implements IAdaptadorEfectivo{
  
 @Override
     public NuevoEfectivoDTO convertirADTO(Efectivo efectivo) {

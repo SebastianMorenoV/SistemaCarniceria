@@ -4,8 +4,8 @@
  */
 package pruebas;
 
-import ADAPTER.productoVenta.IAdaptadorProductoVenta;
-import ADAPTER.productoVenta.adaptadorProductoVenta;
+import IAdapters.IAdaptadorProductoVenta;
+import Adapters.adaptadorProductoVenta;
 import BO.EmpleadoBO;
 import BO.ProductoBO;
 import BO.VentaBO;

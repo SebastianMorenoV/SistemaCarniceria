@@ -20,7 +20,7 @@ public interface IRealizarVenta {
 
     public List<ProductoCargadoDTO> cargarProductos() throws NegocioException;
 
-    public NuevoProductoVentaDTO agregarProducto(ProductoCargadoDTO productoCargado, double cantidad);
+    public NuevoProductoVentaDTO agregarProductoVenta(ProductoCargadoDTO productoCargado, double cantidad);
 
     public double calcularTotal(double subtotal, double iva);
 

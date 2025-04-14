@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ADAPTER.Ticket;
+package Adapters;
 
-import ADAPTER.Empleado.IAdaptadorEmpleado;
+import IAdapters.IAdaptadorTicket;
+import IAdapters.IAdaptadorEmpleado;
 import DTOs.EmpleadoCargadoDTO;
 import DTOs.TicketDTO;
 import Entidades.Empleado;
@@ -14,7 +15,7 @@ import Entidades.Ticket;
  *
  * @author HP
  */
-public class adaptadorTiciket implements IAdaptadorTicket {
+public class AdaptadorTicket implements IAdaptadorTicket {
     private IAdaptadorEmpleado adapter;
 
     @Override

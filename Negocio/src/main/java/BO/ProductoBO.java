@@ -4,7 +4,7 @@
  */
 package BO;
 
-import ADAPTER.Producto.AdaptadorProducto;
+import Adapters.AdaptadorProducto;
 import DTOs.ProductoCargadoDTO;
 import Entidades.Producto;
 import Exception.NegocioException;
@@ -14,8 +14,6 @@ import Interfaces.IProductoDAO;
 import fabrica.ICreadorDAO;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

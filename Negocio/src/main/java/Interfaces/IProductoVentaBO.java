@@ -6,7 +6,7 @@ package Interfaces;
 
 import DTOs.NuevoProductoVentaDTO;
 import DTOs.ProductoCargadoDTO;
-import ADAPTERS.IAdaptadorProductoEntidadAproductoVentaDTO;
+import IAdapters.IAdaptadorProductoEntidadAproductoVentaDTO;
 
 /**
  *

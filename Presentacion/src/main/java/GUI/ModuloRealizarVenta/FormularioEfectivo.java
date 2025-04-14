@@ -167,6 +167,7 @@ public class FormularioEfectivo extends javax.swing.JPanel {
 
     private boolean calcularCambio() {
         total = app.getTotalTemporal();
+    
 
 
         if (validarTextFieldPagaraCon()) {
