@@ -166,11 +166,11 @@ public class Aplicacion {
         }
     }
 
-    public EmpleadoCargadoDTO cargarEmpleado() {
+    public EmpleadoCargadoDTO cargarEmpleado() throws NegocioException {
         return realizarVenta.cargarEmpleado();
     }
 
-    public List<ProductoCargadoDTO> cargarProductos() {
+    public List<ProductoCargadoDTO> cargarProductos() throws NegocioException {
         return realizarVenta.cargarProductos();
     }
 

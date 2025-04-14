@@ -6,6 +6,7 @@ package Implementacion;
 
 import DTOs.*;
 import EstrategiaPago.IProcesadorPago;
+import Exception.NegocioException;
 import excepciones.ProcesadorPagoException;
 import java.util.List;
 
@@ -15,9 +16,9 @@ import java.util.List;
  */
 public interface IRealizarVenta {
 
-    public EmpleadoCargadoDTO cargarEmpleado();
+    public EmpleadoCargadoDTO cargarEmpleado() throws NegocioException;
 
-    public List<ProductoCargadoDTO> cargarProductos();
+    public List<ProductoCargadoDTO> cargarProductos() throws NegocioException;
 
     public NuevoProductoVentaDTO agregarProducto(ProductoCargadoDTO productoCargado, double cantidad);
 

@@ -4,10 +4,12 @@
  */
 package BO;
 
+import ADAPTER.Producto.AdaptadorProducto;
 import DTOs.ProductoCargadoDTO;
 import Entidades.Producto;
 import Exception.NegocioException;
 import Exception.PersistenciaException;
+import Interfaces.IProductoBO;
 import Interfaces.IProductoDAO;
 import fabrica.ICreadorDAO;
 import java.util.ArrayList;
@@ -19,28 +21,26 @@ import java.util.logging.Logger;
  *
  * @author Sebastian Moreno
  */
-public class ProductoBO {
+public class ProductoBO implements IProductoBO {
 
     private final IProductoDAO productoDAO;
+    private final AdaptadorProducto adaptadorProducto;
 
     public ProductoBO(ICreadorDAO fabrica) {
         this.productoDAO = fabrica.crearProductoDAO();
+        this.adaptadorProducto = new AdaptadorProducto();
     }
-    
-    //IMPLEMENTAR MAPPERS
+
+    @Override
     public List<ProductoCargadoDTO> cargarProductos() throws NegocioException {
         List<ProductoCargadoDTO> listaProductosDTO = new ArrayList<>();
 
         try {
             List<Producto> listaProductos = productoDAO.consultarProductos();
 
+            //usar el adaptador para convertir los Producto a ProductoDTO
             for (Producto producto : listaProductos) {
-                ProductoCargadoDTO dto = new ProductoCargadoDTO();
-               // dto.setCodigo(producto.getId().intValue());
-                dto.setNombre(producto.getNombre());
-                dto.setDescripcion(producto.getDescripcion());
-                dto.setPrecio(producto.getPrecio());
-
+                ProductoCargadoDTO dto = adaptadorProducto.convertirADTO(producto);  //convertir usando el adaptador
                 listaProductosDTO.add(dto);
             }
 

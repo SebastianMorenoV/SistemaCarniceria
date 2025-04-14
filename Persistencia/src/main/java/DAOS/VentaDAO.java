@@ -21,6 +21,25 @@ import java.util.List;
  * @author Sebastian Moreno
  */
 public class VentaDAO implements IVentaDAO {
+    
+    private static VentaDAO instanceVentaDAO;
+
+    public VentaDAO() {
+    }
+
+    /**
+     * Devuelve la unica instancia de esta clase (patron Singleton). Si la
+     * instancia no existe, la crea.
+     *
+     * @return la instancia unica de IngredienteDAO.
+     */
+    public static VentaDAO getInstanceDAO() {
+        if (instanceVentaDAO == null) {
+            instanceVentaDAO = new VentaDAO();
+        }
+
+        return instanceVentaDAO;
+    }
 
     /*
     Metodos de la interfaz.

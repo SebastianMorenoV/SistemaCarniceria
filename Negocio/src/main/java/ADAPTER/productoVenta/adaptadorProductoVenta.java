@@ -5,7 +5,7 @@
 package ADAPTER.productoVenta;
 
 import ADAPTER.Producto.IAdaptadorProducto;
-import ADAPTER.Producto.adaptadorProducto;
+import ADAPTER.Producto.AdaptadorProducto;
 import DTOs.NuevoProductoVentaDTO;
 import DTOs.ProductoCargadoDTO;
 import Entidades.Producto;
@@ -18,7 +18,7 @@ import java.util.List;
  * @author HP
  */
 public class adaptadorProductoVenta implements IAdaptadorProductoVenta{
-    IAdaptadorProducto adapter = new adaptadorProducto();
+    IAdaptadorProducto adapter = new AdaptadorProducto();
     @Override
     public NuevoProductoVentaDTO convertirADTO(ProductoVenta producto) {
         NuevoProductoVentaDTO productoDTO = new NuevoProductoVentaDTO();

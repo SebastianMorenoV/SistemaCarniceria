@@ -4,24 +4,28 @@
  */
 package Implementacion;
 
+import BO.ProductoBO;
 import DTOs.EmpleadoCargadoDTO;
 import DTOs.MetodoPagoDTO;
 import DTOs.NuevoProductoVentaDTO;
 import DTOs.PagoNuevoDTO;
 //import DTOs.PagoNuevoDTO;
 import DTOs.ProductoCargadoDTO;
+import DTOs.ProductosVentaDTO;
 import DTOs.VentaDTO;
 import EstrategiaPago.IProcesadorPago;
 import EstrategiaPago.PagoEfectivo;
 import EstrategiaPago.PagoTarjeta;
 import EstrategiaPago.Pago;
+import Exception.NegocioException;
+import Interfaces.IEmpleadoBO;
+import Interfaces.IProductoBO;
+import Interfaces.IVentaBO;
 import excepciones.ProcesadorPagoException;
+import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 //import excepciones.ProcesadorPagoException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Esta clase representa el subsistema de caso de uso. (REALIZAR UNA VENTA)
@@ -30,28 +34,41 @@ import java.util.logging.Logger;
  */
 public class RealizarVenta implements IRealizarVenta {
 
-    //  private Pago proce;
+    //  private Pago proce; //Encontrar la forma de como hacer para llamarle al prductoBO
+    private IProductoBO productoBO = manejadoresBO.ManejadorObjetosNegocio.crearProductoBO();// esto es tamal
+    private IEmpleadoBO empleadoBO = manejadoresBO.ManejadorObjetosNegocio.crearEmpleadoBO();
+    private IVentaBO ventaBO = manejadoresBO.ManejadorObjetosNegocio.crearVentasBO();
     private Double total = 0.0;
     private VentaDTO ventaTemporal = null;
     private static Pago procesarPago = new Pago();
     private static IProcesadorPago estrategia;
 
     @Override
-    public EmpleadoCargadoDTO cargarEmpleado() {
-        return new EmpleadoCargadoDTO("Juan Soto");
+    public EmpleadoCargadoDTO cargarEmpleado() throws NegocioException{
+        try {
+            return empleadoBO.consultarEmpleado();
+        } catch (NegocioException ex) {
+            throw new NegocioException("No se encontro al empleado");  
+           
+        }
     }
 
     @Override
-    public List<ProductoCargadoDTO> cargarProductos() {
-
-        List<ProductoCargadoDTO> listaProductos = new ArrayList<>();
-        listaProductos.add(new ProductoCargadoDTO(1234, "CocaCola", "1.5lts Retornable", 25.0));
-        listaProductos.add(new ProductoCargadoDTO(1235, "Carne de Res Diezmillo ", "Calidad Premium Cortes Finos", 110.0));
-        listaProductos.add(new ProductoCargadoDTO(1236, "Cebolla Cambray", "kilogramo de cebolla", 60.0));
-        listaProductos.add(new ProductoCargadoDTO(1237, "Sprite", "600ml no Retornable de plastico", 20.0));
-        listaProductos.add(new ProductoCargadoDTO(1238, "Carne de puerco", "Calidad economica", 40.0));
-        listaProductos.add(new ProductoCargadoDTO(1238, "Queso chihuahua", "Calidad economica", 150.0));
-        return listaProductos;
+    public List<ProductoCargadoDTO> cargarProductos() throws NegocioException{
+        try {
+            return  productoBO.cargarProductos();
+            
+        } catch (NegocioException ex) {
+            throw new NegocioException("No hay productos");    
+        }
+    }
+    
+    public VentaDTO registrarVentaBO() throws NegocioException{
+        return ventaBO.registrarVenta(ventaTemporal);
+    }
+    
+    public ProductosVentaDTO ConsultarProductosVenta()throws NegocioException{
+        return ventaBO.obtenerProductosVenta();
     }
 
     @Override
@@ -86,7 +103,7 @@ public class RealizarVenta implements IRealizarVenta {
      * Metodo para procesar un pago , si el metodo de pago es una tarjeta,
      * cambiamos la estrategia a tarjeta, si no a efectivo.
      * Retorna el valor doble que proceso, si no logra procesar retorna 0.
-     * @param metodoPago es la manera de pagar de un cliente
+     * @param pago es la manera de pagar de un cliente
      * @return el valor doble que proceso , si no procesa retorna 0.
      */
     @Override

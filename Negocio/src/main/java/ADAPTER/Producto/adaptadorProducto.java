@@ -11,16 +11,17 @@ import Entidades.Producto;
  *
  * @author HP
  */
-public class adaptadorProducto implements IAdaptadorProducto{
+public class AdaptadorProducto implements IAdaptadorProducto{
     
 
     @Override
     public ProductoCargadoDTO convertirADTO(Producto producto) {
         ProductoCargadoDTO productoDTO = new  ProductoCargadoDTO();
-       // productoDTO.setCodigo(producto.getId());
+       productoDTO.setCodigo(producto.getId());
        productoDTO.setUnidad(producto.getUnidad());
        productoDTO.setDescripcion(producto.getTexto());
        productoDTO.setNombre(producto.getNombre());
+       productoDTO.setPrecio(producto.getPrecio());
        return productoDTO;
        
     }

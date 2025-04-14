@@ -31,6 +31,15 @@ public class VentaDTO {
         this.listadoProductosVenta = listadoProductosVenta;
         this.metodoPago = metodoPago;
     }
+    
+    //(empleado, LocalDate.now(), listadoProductosVenta);
+
+    public VentaDTO(LocalDateTime fechaHora, EmpleadoCargadoDTO empleado, List<NuevoProductoVentaDTO> listadoProductosVenta) {
+        this.fechaHora = fechaHora;
+        this.empleado = empleado;
+        this.listadoProductosVenta = listadoProductosVenta;
+    }
+    
 
     public int getId() {
         return id;

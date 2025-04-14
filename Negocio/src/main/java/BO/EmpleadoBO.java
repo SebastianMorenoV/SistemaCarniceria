@@ -11,6 +11,7 @@ import ADAPTERS.IAdaptadorEmpleadoEntidadAEmpleadoDTO;
 import Entidades.Empleado;
 import Exception.NegocioException;
 import Exception.PersistenciaException;
+import Interfaces.IEmpleadoBO;
 import Interfaces.IEmpleadoDAO;
 import fabrica.ICreadorDAO;
 import java.util.logging.Level;
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
  *
  * @author HP
  */
-public class EmpleadoBO {
+public class EmpleadoBO implements IEmpleadoBO{
 
     public IAdaptadorEmpleado adapterEmpleado;
     //atributo referenciando a la fabrica
@@ -31,6 +32,7 @@ public class EmpleadoBO {
         this.adapterEmpleado =  new adaptadorEmpleado();
     }
 
+    @Override
     public EmpleadoCargadoDTO consultarEmpleado() throws NegocioException {
         EmpleadoCargadoDTO empleadoDTO = new EmpleadoCargadoDTO();
         Empleado empleado;

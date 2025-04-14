@@ -14,4 +14,6 @@ import java.util.List;
  */
 public interface IProductoBO {
     public List<ProductoCargadoDTO> cargarProductos() throws NegocioException;
+    
+    //crear una fabrica para pasar la instancia del BO 
 }

@@ -14,6 +14,8 @@ import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -26,11 +28,11 @@ import javax.swing.Timer;
  * @author janot
  */
 public class FormularioEfectivo extends javax.swing.JPanel {
+
     private Aplicacion app;
     private double total;
     private double pagaraCon;
-    
-    
+
     /**
      * Creates new form FormularioEfectivo
      */
@@ -138,7 +140,7 @@ public class FormularioEfectivo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelRegresarMouseClicked
-        ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();        
+        ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();
     }//GEN-LAST:event_jLabelRegresarMouseClicked
 
     private void jLabelRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelRegresarMouseEntered
@@ -156,25 +158,25 @@ public class FormularioEfectivo extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabelAceptarMouseEntered
 
     private void jLabelAceptarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAceptarMouseExited
-        btnAceptar.setBackground(new Color(60,63,65));
+        btnAceptar.setBackground(new Color(60, 63, 65));
     }//GEN-LAST:event_jLabelAceptarMouseExited
 
     private void jLabelRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelRegresarMouseExited
-        btnCancelar.setBackground(new Color(60,63,65));
+        btnCancelar.setBackground(new Color(60, 63, 65));
     }//GEN-LAST:event_jLabelRegresarMouseExited
 
-    private boolean calcularCambio(){
+    private boolean calcularCambio() {
         total = app.getTotalTemporal();
-        
+
+
         if (validarTextFieldPagaraCon()) {
             pagaraCon = Double.parseDouble(jTextPago.getText());
             NuevoEfectivoDTO nuevoPagoEfectivo = new NuevoEfectivoDTO(pagaraCon);
             PagoNuevoDTO pago = new PagoNuevoDTO(LocalDateTime.MAX, new MetodoPagoDTO(nuevoPagoEfectivo), total);
             try {
-                if(!app.validarPago(pago)){
+                if (!app.validarPago(pago)) {
                     JOptionPane.showMessageDialog(this, "No te alcanza");
-                }
-                else{
+                } else {
                     app.setTotalTemporal(total);
                     app.mostrarFormularioCambio();
                     return true;
@@ -186,31 +188,30 @@ public class FormularioEfectivo extends javax.swing.JPanel {
         return false;
 
     }
-    
+
     //Valida el campo de texto
-    private boolean validarTextFieldPagaraCon(){
+    private boolean validarTextFieldPagaraCon() {
         String pagaraCon = jTextPago.getText();
         //Validar si el campo de texto esta vacio
-        if(pagaraCon.trim().isEmpty()){
+        if (pagaraCon.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "El campo esta vacio");
             return false;
         }
-        
+
         try {
             Double.parseDouble(pagaraCon);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Tiene que ser de tipo numerico");
         }
-        
-        return true;      
+
+        return true;
     }
 
     public double getPagaraCon() {
         return pagaraCon;
     }
 
-    
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLabelPagoEfectivo;
     private GUI.PanelRound btnAceptar;

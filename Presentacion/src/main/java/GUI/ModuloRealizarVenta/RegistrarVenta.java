@@ -12,6 +12,7 @@ import DTOs.EmpleadoCargadoDTO;
 import DTOs.NuevoProductoVentaDTO;
 import DTOs.ProductoCargadoDTO;
 import DTOs.VentaDTO;
+import Exception.NegocioException;
 import GUI.Aplicacion;
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -21,9 +22,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.DefaultListModel;
@@ -54,7 +58,11 @@ public class RegistrarVenta extends javax.swing.JPanel {
         this.app = app;
         this.listadoProductosVenta = new ArrayList<>();
         initComponents();
-        inicializarValoresDefault();
+        try {
+            inicializarValoresDefault();
+        } catch (NegocioException ex) {
+            Logger.getLogger(RegistrarVenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -381,12 +389,20 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
     private void inputCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputCodigoKeyReleased
         String textoBusqueda = inputCodigo.getText().trim();
-        buscarProducto(textoBusqueda);
+        try {
+            buscarProducto(textoBusqueda);
+        } catch (NegocioException ex) {
+            Logger.getLogger(RegistrarVenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_inputCodigoKeyReleased
 
     private void inputNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputNombreKeyReleased
         String textoBusqueda = inputNombre.getText().trim();
-        buscarProducto(textoBusqueda);
+        try {
+            buscarProducto(textoBusqueda);
+        } catch (NegocioException ex) {
+            Logger.getLogger(RegistrarVenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_inputNombreKeyReleased
 
     private void inputCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputCodigoKeyTyped
@@ -435,7 +451,11 @@ public class RegistrarVenta extends javax.swing.JPanel {
     }//GEN-LAST:event_tablaProductosVentaMouseClicked
 
     private void btnFinalizarVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFinalizarVentaMouseClicked
-        finalizarVenta();   
+        try {   
+            finalizarVenta();
+        } catch (NegocioException ex) {
+            Logger.getLogger(RegistrarVenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnFinalizarVentaMouseClicked
 
 
@@ -476,13 +496,14 @@ public class RegistrarVenta extends javax.swing.JPanel {
         tablaProductosVenta.getColumnModel().getColumn(4).setPreferredWidth(80);  // Importe
     }
 
-    public void cargarEmpleado() {
+    public void cargarEmpleado() throws NegocioException {
         EmpleadoCargadoDTO empleadoCargado = app.cargarEmpleado();
         txtCajero.setText("Cajero:  " + empleadoCargado.getNombre());
     }
 
-    public void cargarProductos() {
+    public void cargarProductos() throws NegocioException {
         listadoProductosCargados = app.cargarProductos();
+        System.out.println(listadoProductosCargados);
         // Crear el modelo para la lista
         DefaultListModel<String> modelo = new DefaultListModel<>();
 
@@ -507,14 +528,14 @@ public class RegistrarVenta extends javax.swing.JPanel {
         inputNombre.setText("");
     }
 
-    public void inicializarValoresDefault() {
+    public void inicializarValoresDefault() throws NegocioException {
         cargarEmpleado();
         cargarProductos();
         ajustarTamañoColumnasPreferidos();
         crearAtajos();
     }
 
-    private void buscarProducto(String textoBusqueda) {
+    private void buscarProducto(String textoBusqueda) throws NegocioException {
         DefaultListModel<String> modeloFiltrado = new DefaultListModel<>();
 
         if (textoBusqueda.trim().isEmpty()) {
@@ -545,6 +566,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
         if (infoProducto != null && !infoProducto.isEmpty()) {
             // Convertir el String a ProductoCargadoDTO
             ProductoCargadoDTO productoCargado = convertirStringAProducto(infoProducto); // talvez deberia ir en el caso de uso ?? 
+            System.out.println("Producto: " + productoCargado);
 
             if (productoCargado != null) {
                 try {
@@ -591,25 +613,42 @@ public class RegistrarVenta extends javax.swing.JPanel {
         }
     }
 
-    public ProductoCargadoDTO convertirStringAProducto(String infoProducto) { // talvez deba ir en el caso de uso .
+    public ProductoCargadoDTO convertirStringAProducto(String infoProducto) {
         try {
-            // Dividir el String por espacios para separar los datos
-            String[] partes = infoProducto.split(" ");
-            // Extraer el código como int
-            int codigo = Integer.parseInt(partes[0]);
-            // Unir el nombre del producto 
+            if (infoProducto == null || infoProducto.isBlank()) {
+                return null;
+            }
+
+            String[] partes = infoProducto.trim().split(" ");
+            if (partes.length < 3) {
+                return null;
+            }
+
+            // Validar que el código sea numérico
+            if (partes[0].equalsIgnoreCase("null") || !partes[0].matches("\\d+")) {
+                return null;
+            }
+
+            Long codigo = Long.valueOf(partes[0]);
+
+            // Armar el nombre hasta encontrar el precio
             StringBuilder nombreBuilder = new StringBuilder();
             int i = 1;
             while (i < partes.length && !partes[i].startsWith("$")) {
                 nombreBuilder.append(partes[i]).append(" ");
                 i++;
             }
+
             String nombreCompleto = nombreBuilder.toString().trim();
-            // Extraer precio (el último elemento, sin el signo $)
+
+            // Validar que haya un precio al final
+            if (!partes[partes.length - 1].startsWith("$")) {
+                return null;
+            }
+
             String precioTexto = partes[partes.length - 1].replace("$", "");
             double precio = Double.parseDouble(precioTexto);
 
-            // Crear el objeto ProductoCargadoDTO
             return new ProductoCargadoDTO(codigo, nombreCompleto, "Descripción", precio);
 
         } catch (Exception e) {
@@ -618,6 +657,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
         }
     }
 
+
     public void calcularTotales() {
         List<NuevoProductoVentaDTO> productosVenta = new ArrayList<>();
 
@@ -625,7 +665,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
         // Recorrer todas las filas de la tabla
         for (int i = 0; i < modelo.getRowCount(); i++) {
-            int codigo = (int) modelo.getValueAt(i, 0); // Columna 0 -> Código
+            Long codigo = (Long) modelo.getValueAt(i, 0); // Columna 0 -> Código
             String nombreDescripcion = (String) modelo.getValueAt(i, 1); // Columna 1 -> Nombre + Descripción
             double cantidad = (double) modelo.getValueAt(i, 2); // Columna 2 -> Cantidad
             double precioUnitario = (double) modelo.getValueAt(i, 3); // Columna 3 -> Precio Unitario
@@ -766,7 +806,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
         return (DefaultTableModel) tablaProductosVenta.getModel();
     }
 
-    public void finalizarVenta() {
+    public void finalizarVenta() throws NegocioException {
         int confirmar = app.mostrarPreguntaFinalizarVenta();
         EmpleadoCargadoDTO empleado = app.cargarEmpleado();
 
@@ -783,8 +823,8 @@ public class RegistrarVenta extends javax.swing.JPanel {
         }
 
         // Crear y setear la venta
-        /*
-        VentaDTO ventaNueva = new VentaDTO(empleado, LocalDate.now(), listadoProductosVenta);
+        
+        VentaDTO ventaNueva = new VentaDTO(LocalDateTime.now(), empleado, listadoProductosVenta);
         app.setearVenta(ventaNueva);
 
         // Confirmar si se procede a mostrar el ticket
@@ -793,6 +833,6 @@ public class RegistrarVenta extends javax.swing.JPanel {
         } else {
             app.mostrarVentaCancelada();
             return;
-        }*/
+        }
     }
 }

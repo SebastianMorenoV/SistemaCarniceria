@@ -26,6 +26,15 @@ public class ProductoCargadoDTO {
         this.esPesable = esPesable;
     }
 
+    public ProductoCargadoDTO(Long codigo, String nombre, String descripcion, double precio) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+    }
+    
+    
+
     public ProductoCargadoDTO() {
     }
 
@@ -87,8 +96,9 @@ public class ProductoCargadoDTO {
 
     @Override
     public String toString() {
-        return "ProductoCargadoDTO{" + "codigo=" + codigo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", categoria=" + categoria + ", unidad=" + unidad + ", precio=" + precio + ", esPesable=" + esPesable + '}';
+        return codigo + " " + nombre + " " + descripcion + " $" + precio;
     }
+
   
 }
 
