@@ -5,7 +5,7 @@
 package IAdapters;
 
 import DTOs.MetodoPagoDTO;
-import Entidades.MetodoPago;
+import entidades.MetodoPago;
 
 /**
  *

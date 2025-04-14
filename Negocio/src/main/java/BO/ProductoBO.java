@@ -6,7 +6,7 @@ package BO;
 
 import Adapters.AdaptadorProducto;
 import DTOs.ProductoCargadoDTO;
-import Entidades.Producto;
+import entidades.Producto;
 import Exception.NegocioException;
 import Exception.PersistenciaException;
 import Interfaces.IProductoBO;

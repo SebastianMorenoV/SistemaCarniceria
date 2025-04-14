@@ -4,24 +4,38 @@
  */
 package DAOS;
 
-import entidades.Pago;
 import Exception.PersistenciaException;
-import Interfaces.IPagoDAO;
+import Interfaces.ICrearVentaDAO;
+import entidades.CrearVenta;
 
 /**
  *
- * @author Sebastian Moreno
+ * @author HP
  */
-public class PagoDAO implements IPagoDAO{
+public class CrearVentaDAO implements ICrearVentaDAO{
+    private static CrearVentaDAO crearVentaDAO;
 
-    @Override
-    public Pago registrarPago(Pago pago) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Pago consultarPagoPorId(Long id) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public CrearVentaDAO() {
     }
     
+    public static CrearVentaDAO CrearVentaDAO(){
+        if (crearVentaDAO == null) {
+            crearVentaDAO = new CrearVentaDAO();
+        }
+
+        return crearVentaDAO;
+    }
+
+    @Override
+    public CrearVenta crearVenta() throws PersistenciaException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public CrearVenta consultarVentaPorId(Long id) throws PersistenciaException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+
+   
 }

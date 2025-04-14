@@ -2,26 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DAOS;
+package Adapters;
 
-import entidades.Pago;
-import Exception.PersistenciaException;
-import Interfaces.IPagoDAO;
+import DTOs.CrearVentaDTO;
+import IAdapters.IAdaptadorCrearVenta;
+import entidades.CrearVenta;
 
 /**
  *
- * @author Sebastian Moreno
+ * @author HP
  */
-public class PagoDAO implements IPagoDAO{
+public class adaptadorCrearVenta implements IAdaptadorCrearVenta{
 
     @Override
-    public Pago registrarPago(Pago pago) throws PersistenciaException {
+    public CrearVentaDTO convertirADTO(CrearVenta crearVenta) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Pago consultarPagoPorId(Long id) throws PersistenciaException {
+    public CrearVenta convertirAEntdiad(CrearVentaDTO crearVenta) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+   
+
+
 }

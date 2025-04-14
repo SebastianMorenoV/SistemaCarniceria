@@ -10,8 +10,8 @@ import Adapters.AdaptadorProducto;
 import DTOs.NuevoProductoVentaDTO;
 import DTOs.ProductoCargadoDTO;
 import DTOs.ProductoVentaDTO;
-import Entidades.Producto;
-import Entidades.ProductoVenta;
+import entidades.Producto;
+import entidades.ProductoVenta;
 import java.util.ArrayList;
 import java.util.List;
 

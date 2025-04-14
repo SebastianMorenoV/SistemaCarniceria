@@ -5,12 +5,12 @@
 package Adapters;
 
 import IAdapters.IAdaptadorVenta;
-import IAdapters.IAdaptadorEmpleadoEntidadAEmpleadoDTO;
 import DTOs.CrearVentaDTO;
 import DTOs.EmpleadoCargadoDTO;
 import DTOs.VentaDTO;
-import Entidades.Empleado;
-import Entidades.Venta;
+import entidades.Empleado;
+import entidades.Venta;
+import IAdapters.IAdaptadorEmpleado;
 
 /**
  *
@@ -18,7 +18,7 @@ import Entidades.Venta;
  */
 public class AdaptadorTarjeta implements IAdaptadorVenta {
 
-    IAdaptadorEmpleadoEntidadAEmpleadoDTO adaptador; //Llamada al adaptador de Empleado
+    IAdaptadorEmpleado adaptador; //Llamada al adaptador de Empleado
     
     @Override
     public VentaDTO convertirADTO(Venta venta) {

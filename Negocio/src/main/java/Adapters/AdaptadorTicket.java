@@ -8,8 +8,8 @@ import IAdapters.IAdaptadorTicket;
 import IAdapters.IAdaptadorEmpleado;
 import DTOs.EmpleadoCargadoDTO;
 import DTOs.TicketDTO;
-import Entidades.Empleado;
-import Entidades.Ticket;
+import entidades.Empleado;
+import entidades.Ticket;
 
 /**
  *

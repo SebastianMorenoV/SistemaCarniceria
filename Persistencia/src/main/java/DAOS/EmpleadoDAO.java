@@ -4,7 +4,7 @@
  */
 package DAOS;
 
-import Entidades.Empleado;
+import entidades.Empleado;
 import Exception.PersistenciaException;
 import Interfaces.IEmpleadoDAO;
 

@@ -4,10 +4,12 @@
  */
 package manejadoresBO;
 
+import BO.CrearVentaBO;
 import BO.EmpleadoBO;
 import BO.ProductoBO;
 import BO.VentaBO;
 import DAOS.VentaDAO;
+import Interfaces.ICrearVentaBO;
 import Interfaces.IEmpleadoBO;
 import Interfaces.IProductoBO;
 import Interfaces.IVentaBO;
@@ -41,5 +43,12 @@ public class ManejadorObjetosNegocio {
         return new EmpleadoBO(fabrica);
 
     }
+    public static ICrearVentaBO crearVentaBO() {
+
+        ICreadorDAO fabrica = new CreadorDAO();
+        return new CrearVentaBO(fabrica);
+
+    }
+
 
 }

@@ -7,9 +7,9 @@ package Adapters;
 import DTOs.MetodoPagoDTO;
 import DTOs.NuevaTarjetaDTO;
 import DTOs.NuevoEfectivoDTO;
-import Entidades.Efectivo;
-import Entidades.MetodoPago;
-import Entidades.Tarjeta;
+import entidades.Efectivo;
+import entidades.MetodoPago;
+import entidades.Tarjeta;
 
 /**
  *

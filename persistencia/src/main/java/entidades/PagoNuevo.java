@@ -4,7 +4,7 @@
  */
 package entidades;
 
-import Entidades.MetodoPago;
+import entidades.MetodoPago;
 import java.time.LocalDateTime;
 
 /**

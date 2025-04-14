@@ -5,7 +5,7 @@
 package IAdapters;
 
 import DTOs.EmpleadoCargadoDTO;
-import Entidades.Empleado;
+import entidades.Empleado;
 
 /**
  *

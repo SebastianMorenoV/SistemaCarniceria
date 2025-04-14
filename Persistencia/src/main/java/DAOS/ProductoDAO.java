@@ -1,6 +1,6 @@
 package DAOS;
 
-import Entidades.Producto;
+import entidades.Producto;
 import Exception.PersistenciaException;
 import Interfaces.IProductoDAO;
 import java.util.ArrayList;

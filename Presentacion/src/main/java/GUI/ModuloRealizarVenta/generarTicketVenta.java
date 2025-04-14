@@ -5,11 +5,14 @@
 package GUI.ModuloRealizarVenta;
 
 import DTOs.NuevoProductoVentaDTO;
+import DTOs.TicketDTO;
 import DTOs.VentaDTO;
 import GUI.Aplicacion;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import static javax.swing.Box.createVerticalGlue;
 import javax.swing.BoxLayout;
@@ -37,11 +40,12 @@ public class generarTicketVenta extends javax.swing.JPanel {
         initComponents();
         this.app = app;
         this.venta = app.obtenerVenta();
+        crearTicket();
         acomodarTicket();
-        //generarTicketVenta();
         acomodarPanelTabla();
         acomodarPanelSumas();
         acomodarPanelBotones();
+        generarTicketVenta();
         setVisible(true);
     }
 
@@ -169,7 +173,17 @@ public class generarTicketVenta extends javax.swing.JPanel {
     private javax.swing.JTable tablaTicket;
     private javax.swing.JLabel ticket;
     // End of variables declaration//GEN-END:variables
-
+    
+    public TicketDTO crearTicket(){       
+        TicketDTO ticketNuevo = new TicketDTO(venta.getListadoProductosVenta(), 
+                venta.getFechaHora(), 
+                venta.getIva(), 
+                venta.getEmpleado(), 
+                venta.getSubtotal(), 
+                venta.getTotal());
+        return ticketNuevo;
+    }
+    
     public void acomodarTicket(){
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         ticket.setAlignmentX(CENTER_ALIGNMENT);
@@ -198,26 +212,28 @@ public class generarTicketVenta extends javax.swing.JPanel {
         panelBotones.add(btnImprimirTicket);
         panelBotones.add(btnSalirTicket);
         add(panelBotones);
-    }/*
+    }
     public void generarTicketVenta(){
+        TicketDTO ticket = crearTicket();
         String columnasTabla[] = {"Producto","cantidad","subtotal"};
-        campoEmpleado.setText(venta.getEmpleado().getNombre());
-        campoFechaVenta.setText(venta.getFechaHora().toString());
+        campoEmpleado.setText(ticket.getCajero().getNombre());
+        campoFechaVenta.setText(ticket.getFechaHora().format(DateTimeFormatter.ISO_DATE));
         DefaultTableModel modelo = new DefaultTableModel(columnasTabla, 0);
        
-        for(NuevoProductoVentaDTO producto : venta.getListadoProductosVenta()){
+        for(NuevoProductoVentaDTO producto : ticket.getListaProductosVenta()){
             modelo.addRow(new Object[]{producto.getProducto().getNombre(), producto.getCantidad(),producto.getCantidad()*producto.getImporte()});  
         }
         tablaTicket.setModel(modelo);
         tablaTicket.setVisible(true);
         tablaTicket.setEnabled(false);
-        subtotal = calcularSubtotal(venta.getListadoProductosVenta());
+        subtotal = calcularSubtotal((ArrayList<NuevoProductoVentaDTO>) ticket.getListaProductosVenta());
         iva = calcularIva(subtotal);
         total = calcularTotal(subtotal, iva);
         campoSubtotal2.setText(String.format("%.2f",subtotal));
         campoIVATotal.setText(String.format("%.2f",iva));        
         campoTotal.setText(String.format("%.2f",total));
-    }*/
+    }
+    
     public double calcularSubtotal(ArrayList<NuevoProductoVentaDTO> productosEnTabla) {
         double subtotal = 0.0;
         for (NuevoProductoVentaDTO nuevoProductoVentaDTO : productosEnTabla) {

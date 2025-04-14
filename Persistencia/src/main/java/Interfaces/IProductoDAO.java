@@ -5,7 +5,7 @@
 package Interfaces;
 
 import DAOS.ProductoDAO;
-import Entidades.Producto;
+import entidades.Producto;
 import Exception.PersistenciaException;
 import java.util.List;
 

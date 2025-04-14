@@ -5,7 +5,7 @@
 package IAdapters;
 
 import DTOs.NuevaTarjetaDTO;
-import Entidades.Tarjeta;
+import entidades.Tarjeta;
 
 /**
  *

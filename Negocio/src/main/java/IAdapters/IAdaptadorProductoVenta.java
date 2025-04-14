@@ -6,7 +6,7 @@ package IAdapters;
 
 import DTOs.ProductoVentaDTO;   
 import DTOs.NuevoProductoVentaDTO;
-import Entidades.ProductoVenta;
+import entidades.ProductoVenta;
 import java.util.List;
 
 /**

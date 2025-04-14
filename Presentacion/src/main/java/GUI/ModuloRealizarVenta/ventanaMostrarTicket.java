@@ -22,8 +22,8 @@ public class ventanaMostrarTicket extends JDialog {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null); 
         setResizable(false);
-        generarTicketVenta ticket = new generarTicketVenta(app);
-        add(ticket);
+        generarTicketVenta ventanaTicket = new generarTicketVenta(app);
+        add(ventanaTicket);
         setVisible(true);
     }
          

@@ -6,7 +6,7 @@ package Adapters;
 
 import IAdapters.IAdaptadorProducto;
 import DTOs.ProductoCargadoDTO;
-import Entidades.Producto;
+import entidades.Producto;
 
 /**
  *

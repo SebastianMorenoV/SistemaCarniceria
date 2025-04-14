@@ -5,7 +5,7 @@
 package IAdapters;
 
 import DTOs.ProductoCargadoDTO;
-import Entidades.Producto;
+import entidades.Producto;
 
 /**
  *

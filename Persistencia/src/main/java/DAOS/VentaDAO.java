@@ -4,12 +4,12 @@
  */
 package DAOS;
 
-import Entidades.Empleado;
-import Entidades.MetodoPago;
-import Entidades.Producto;
-import Entidades.ProductoVenta;
-import Entidades.Tarjeta;
-import Entidades.Venta;
+import entidades.Empleado;
+import entidades.MetodoPago;
+import entidades.Producto;
+import entidades.ProductoVenta;
+import entidades.Tarjeta;
+import entidades.Venta;
 import Exception.PersistenciaException;
 import Interfaces.IVentaDAO;
 import java.time.LocalDateTime;

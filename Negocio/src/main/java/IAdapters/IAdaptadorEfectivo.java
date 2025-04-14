@@ -5,7 +5,7 @@
 package IAdapters;
 
 import DTOs.NuevoEfectivoDTO;
-import Entidades.Efectivo;
+import entidades.Efectivo;
 
 /**
  *

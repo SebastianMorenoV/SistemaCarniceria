@@ -37,4 +37,10 @@ public class CreadorDAO implements ICreadorDAO {
     public IPagoDAO crearPagoDAO() {
        return new PagoDAO();
     }
+
+    @Override
+    public ICrearVentaDAO CrearVentaDAO() {
+        return new CrearVentaDAO();
+    }
 }
+

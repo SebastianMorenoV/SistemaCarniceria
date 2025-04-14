@@ -33,7 +33,7 @@ public class TicketDTO {
     }
     
 
-        public TicketDTO(ArrayList<NuevoProductoVentaDTO> listaProductosVenta, LocalDateTime fechaHora, double iva, EmpleadoCargadoDTO cajero, double subtotal, double total) {
+        public TicketDTO(List<NuevoProductoVentaDTO> listaProductosVenta, LocalDateTime fechaHora, double iva, EmpleadoCargadoDTO cajero, double subtotal, double total) {
         this.listaProductosVenta = listaProductosVenta;
         this.fechaHora = fechaHora;
         this.iva = iva;

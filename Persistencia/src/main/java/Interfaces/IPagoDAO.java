@@ -5,7 +5,7 @@
 package Interfaces;
 
 import DAOS.PagoDAO;
-import Entidades.Pago;
+import entidades.Pago;
 import Exception.PersistenciaException;
 
 /**

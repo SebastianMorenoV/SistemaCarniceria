@@ -828,7 +828,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
         app.setearVenta(ventaNueva);
 
         // Confirmar si se procede a mostrar el ticket
-        if (confirmar == JOptionPane.YES_OPTION && app.obtenerVenta() != null) {
+        if (confirmar == JOptionPane.YES_OPTION && app.obtenerVenta() != null) { 
             app.mostrarTicketPDF();
         } else {
             app.mostrarVentaCancelada();

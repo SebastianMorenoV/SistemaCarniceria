@@ -4,6 +4,7 @@
  */
 package fabrica;
 
+import Interfaces.ICrearVentaDAO;
 import Interfaces.IEmpleadoDAO;
 import Interfaces.IPagoDAO;
 import Interfaces.IProductoDAO;
@@ -26,4 +27,7 @@ public interface ICreadorDAO {
     IProductoDAO crearProductoDAO();
     
     IPagoDAO crearPagoDAO();
+    
+    ICrearVentaDAO CrearVentaDAO();
 }
+

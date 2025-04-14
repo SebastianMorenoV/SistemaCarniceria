@@ -3,7 +3,7 @@ package IAdapters;
 
 import DTOs.CrearVentaDTO;
 import DTOs.VentaDTO;
-import Entidades.Venta;
+import entidades.Venta;
 
 /**
  * Esta interfaz representa los metodos abstractos de un Adaptador Venta.   

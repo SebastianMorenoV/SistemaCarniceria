@@ -4,15 +4,15 @@
  */
 package IAdapters;
 
-import DTOs.TicketDTO;
-import entidades.Ticket;
+import DTOs.CrearVentaDTO;
+import entidades.CrearVenta;
 
 /**
  *
  * @author HP
  */
-public interface IAdaptadorTicket {
-    public TicketDTO convertirTicketADTO(Ticket ticket);
-    public Ticket convertirTicketAEntidad(TicketDTO ticketDTO);
+public interface IAdaptadorCrearVenta {
+    public CrearVentaDTO convertirADTO(CrearVenta crearVenta);
+    public CrearVenta convertirAEntdiad(CrearVentaDTO crearVenta);
 
 }

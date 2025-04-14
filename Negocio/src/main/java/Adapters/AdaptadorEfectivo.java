@@ -6,7 +6,7 @@ package Adapters;
 
 import IAdapters.IAdaptadorEfectivo;
 import DTOs.NuevoEfectivoDTO;
-import Entidades.Efectivo;
+import entidades.Efectivo;
 
 /**
  *

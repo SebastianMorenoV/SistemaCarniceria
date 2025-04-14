@@ -65,6 +65,7 @@ public class Aplicacion {
     public void mostrarTicketPDF() {
         ventanaMostrarTicket ticket = new ventanaMostrarTicket(this);
     }
+    
 
     // Método para mostrar FormularioEfectivo
     public void mostrarFormularioEfectivo() {

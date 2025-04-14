@@ -6,22 +6,41 @@ package Interfaces;
 
 import DTOs.NuevoProductoVentaDTO;
 import DTOs.ProductoCargadoDTO;
-import IAdapters.IAdaptadorProductoEntidadAproductoVentaDTO;
+import DTOs.ProductoVentaDTO;
+import entidades.Producto;
+import entidades.ProductoVenta;
+
+import IAdapters.IAdaptadorProductoVenta;
+import java.util.List;
 
 /**
  *
  * @author HP
  */
-public class IProductoVentaBO implements IAdaptadorProductoEntidadAproductoVentaDTO{
-    public IAdaptadorProductoEntidadAproductoVentaDTO productoVentaDAO;
-
+public class IProductoVentaBO implements IAdaptadorProductoVenta{
+    public IAdaptadorProductoVenta productoVentaDAO;
     @Override
-    public NuevoProductoVentaDTO convertirProductoEntidadAproductoVentaDTO(ProductoCargadoDTO producto) {
+    public ProductoVentaDTO convertirProductoVentaADTO(ProductoVenta producto) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ProductoCargadoDTO convertirproductoVentaDTOAProductoEntidad(NuevoProductoVentaDTO producto) {
+    public NuevoProductoVentaDTO convertirADTO(ProductoVenta producto) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ProductoVenta convertirAEntidad(NuevoProductoVentaDTO producto) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<NuevoProductoVentaDTO> convertirListaADTO(List<ProductoVenta> listaProductoVenta) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<ProductoVenta> convertirListaDTOAEntidad(List<NuevoProductoVentaDTO> listaProductoVenta) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
