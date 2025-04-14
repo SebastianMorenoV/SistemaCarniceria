@@ -175,13 +175,7 @@ public class generarTicketVenta extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
     
     public TicketDTO crearTicket(){       
-        TicketDTO ticketNuevo = new TicketDTO(venta.getListadoProductosVenta(), 
-                venta.getFechaHora(), 
-                venta.getIva(), 
-                venta.getEmpleado(), 
-                venta.getSubtotal(), 
-                venta.getTotal());
-        return ticketNuevo;
+        return app.crearTicket(venta);
     }
     
     public void acomodarTicket(){

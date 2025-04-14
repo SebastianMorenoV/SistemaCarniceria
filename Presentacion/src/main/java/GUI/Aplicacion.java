@@ -20,6 +20,7 @@ import GUI.ModuloRealizarVenta.ventanaMostrarTicket;
 import DTOs.*;
 import Exception.NegocioException;
 import Implementacion.RealizarVenta;
+import entidades.Ticket;
 import excepciones.ProcesadorPagoException;
 import java.util.List;
 import javax.swing.*;
@@ -65,8 +66,7 @@ public class Aplicacion {
     public void mostrarTicketPDF() {
         ventanaMostrarTicket ticket = new ventanaMostrarTicket(this);
     }
-    
-
+   
     // Método para mostrar FormularioEfectivo
     public void mostrarFormularioEfectivo() {
         VentanaFormularioEfectivo formulario = new VentanaFormularioEfectivo(this, this.formularioEfectivo);
@@ -229,6 +229,16 @@ public class Aplicacion {
 
     public VentaDTO obtenerVenta() {
         return realizarVenta.obtenerVenta();
+    }
+    
+    public TicketDTO crearTicket(VentaDTO venta){
+        TicketDTO ticketNuevo = new TicketDTO(venta.getListadoProductosVenta(), 
+                venta.getFechaHora(), 
+                venta.getIva(), 
+                venta.getEmpleado(), 
+                venta.getSubtotal(), 
+                venta.getTotal());
+        return ticketNuevo;
     }
 
 }
