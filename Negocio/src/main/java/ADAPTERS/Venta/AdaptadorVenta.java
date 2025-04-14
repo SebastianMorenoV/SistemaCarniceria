@@ -5,6 +5,7 @@
 package ADAPTERS.Venta;
 
 import ADAPTERS.IAdaptadorEmpleadoEntidadAEmpleadoDTO;
+import DTOs.CrearVentaDTO;
 import DTOs.EmpleadoCargadoDTO;
 import DTOs.VentaDTO;
 import Entidades.Empleado;
@@ -46,6 +47,16 @@ public class AdaptadorVenta implements IAdaptadorVenta {
         venta.setTotal(ventaDTO.getTotal());
         
         return venta;
+    }
+
+    @Override
+    public CrearVentaDTO VentaACrearVentaDTO(Venta venta) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Venta CrearVentaDTOAVenta(CrearVentaDTO ventaDTO) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

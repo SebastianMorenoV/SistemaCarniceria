@@ -36,6 +36,8 @@ public class VentaBO {
         this.ventaDAO = fabrica.crearVentaDAO();
     }
 
+
+    //CREAR VENTADTO COMO PARAMETRO DE EL METODO... EN VEZ DE VENTADTO , TENER EL MISMO DTO PARA DATOS CONSULTADOS PUEDE SER CONFUSO.
     //CREAR VENTADTO COMO PARAMETRO DE EL METODO... EN VEZ DE VENTADTO , TENER EL MISMO DTO PARA DATOS CONSULTADOS PUEDE SER CONFUSO.
     public VentaDTO registrarVenta(VentaDTO ventaDTO) throws NegocioException {
 
@@ -57,7 +59,7 @@ public class VentaBO {
         return ventaMapeada;
     }
 
-    public ProductosVentaDTO obtenerProductosVenta() throws NegocioException {
+public ProductosVentaDTO obtenerProductosVenta() throws NegocioException {
         try {
             List<ProductoVenta> productosVentaConsultado = ventaDAO.consultarProductosVenta();
             ProductosVentaDTO productosVentaDTO = new ProductosVentaDTO();
@@ -65,7 +67,7 @@ public class VentaBO {
             for (ProductoVenta productoVenta : productosVentaConsultado) {
                 // sustituido por mapper
                 ProductoCargadoDTO productoDTO = new ProductoCargadoDTO();
-                productoDTO.setCodigo(productoVenta.getProducto().getId().intValue());
+               // productoDTO.setCodigo(productoVenta.getProducto().getId().intValue());
                 productoDTO.setPrecio(productoVenta.getProducto().getPrecio());
                 productoDTO.setDescripcion(productoVenta.getProducto().getDescripcion());
                 productoDTO.setNombre(productoVenta.getProducto().getNombre());

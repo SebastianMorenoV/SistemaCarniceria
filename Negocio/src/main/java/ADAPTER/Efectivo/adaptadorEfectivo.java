@@ -11,18 +11,19 @@ import Entidades.Efectivo;
  *
  * @author HP
  */
-public class adaptadorEfectivo /*implements IAdaptadorEfectivo*/{
-    /*
-    @Override
-    public NuevoEfectivoDTO convertiaADTO(Efectivo efectivo) {
-        NuevoEfectivoDTO EfectivoDTO =  new NuevoEfectivoDTO(efectivo.getMonto(), (efectivo.getMonto()+efectivo.getCambio()));
-        return EfectivoDTO;
+public class adaptadorEfectivo implements IAdaptadorEfectivo{
+ 
+@Override
+    public NuevoEfectivoDTO convertirADTO(Efectivo efectivo) {
+        //NuevoEfectivoDTO EfectivoDTO =  new NuevoEfectivoDTO(efectivo.getMonto(), (efectivo.getMonto()+efectivo.getCambio()));
+        //NuevoEfectivoDTO EfectivoDTO2 = new NuevoEfectivoDTO
+        return null;
     }
 
     @Override
     public Efectivo convertirAEntdiad(NuevoEfectivoDTO efectivoDTO) {
-        Efectivo Efectivo =  new Efectivo(efectivoDTO.getMonto(), (efectivoDTO.getPagoCon()-efectivoDTO.getMonto()));
-        return Efectivo;
+        //Efectivo Efectivo =  new Efectivo(efectivoDTO.getMonto(), (efectivoDTO.getPagoCon()-efectivoDTO.getMonto()));
+        return null;
     }
-*/
+
 }

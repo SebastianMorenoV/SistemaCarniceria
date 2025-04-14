@@ -13,15 +13,12 @@ import Entidades.Producto;
  */
 public class adaptadorProducto implements IAdaptadorProducto{
     
-    // Faltan atributos para poder crear el productoVenta que es la entidad
-    //      Atributos
-                //esPesable, texto
 
     @Override
     public ProductoCargadoDTO convertirADTO(Producto producto) {
         ProductoCargadoDTO productoDTO = new  ProductoCargadoDTO();
        // productoDTO.setCodigo(producto.getId());
-       productoDTO.setDecimal(producto.getUnidad());
+       productoDTO.setUnidad(producto.getUnidad());
        productoDTO.setDescripcion(producto.getTexto());
        productoDTO.setNombre(producto.getNombre());
        return productoDTO;
@@ -35,7 +32,7 @@ public class adaptadorProducto implements IAdaptadorProducto{
        //productoEntidad.setEsPesable(producto.);
        //productoEntidad.setTexto(texto);
        productoEntidad.setPrecio(producto.getPrecio());
-       productoEntidad.setUnidad(producto.getDecimal());
+       productoEntidad.setUnidad(producto.getUnidad());
        productoEntidad.setDescripcion(producto.getDescripcion());
        productoEntidad.setNombre(producto.getNombre());
        

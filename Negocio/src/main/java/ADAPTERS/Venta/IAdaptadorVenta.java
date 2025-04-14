@@ -1,6 +1,7 @@
 
 package ADAPTERS.Venta;
 
+import DTOs.CrearVentaDTO;
 import DTOs.VentaDTO;
 import Entidades.Venta;
 
@@ -11,4 +12,7 @@ import Entidades.Venta;
 public interface IAdaptadorVenta {
     public VentaDTO convertirADTO(Venta venta);
     public Venta convertirAVenta(VentaDTO ventaDTO);
+    public CrearVentaDTO VentaACrearVentaDTO(Venta venta);
+    public Venta CrearVentaDTOAVenta(CrearVentaDTO ventaDTO);
+
 }

@@ -36,7 +36,7 @@ public class ProductoBO {
 
             for (Producto producto : listaProductos) {
                 ProductoCargadoDTO dto = new ProductoCargadoDTO();
-                dto.setCodigo(producto.getId().intValue());
+               // dto.setCodigo(producto.getId().intValue());
                 dto.setNombre(producto.getNombre());
                 dto.setDescripcion(producto.getDescripcion());
                 dto.setPrecio(producto.getPrecio());

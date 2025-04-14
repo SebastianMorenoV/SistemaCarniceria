@@ -12,7 +12,7 @@ import Entidades.Efectivo;
  * @author HP
  */
 public interface IAdaptadorEfectivo {
-    public NuevoEfectivoDTO convertiaADTO(Efectivo efectivo);
+    public NuevoEfectivoDTO convertirADTO(Efectivo efectivo);
     public Efectivo convertirAEntdiad(NuevoEfectivoDTO efectivoDTO);
 
 }

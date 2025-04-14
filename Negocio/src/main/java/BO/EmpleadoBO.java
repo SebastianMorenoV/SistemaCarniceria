@@ -4,6 +4,8 @@
  */
 package BO;
 
+import ADAPTER.Empleado.IAdaptadorEmpleado;
+import ADAPTER.Empleado.adaptadorEmpleado;
 import DTOs.EmpleadoCargadoDTO;
 import ADAPTERS.IAdaptadorEmpleadoEntidadAEmpleadoDTO;
 import Entidades.Empleado;
@@ -20,12 +22,13 @@ import java.util.logging.Logger;
  */
 public class EmpleadoBO {
 
-    public IAdaptadorEmpleadoEntidadAEmpleadoDTO EmpleadoDAO;
+    public IAdaptadorEmpleado adapterEmpleado;
     //atributo referenciando a la fabrica
     private final IEmpleadoDAO empleadoDAO;
 
     public EmpleadoBO(ICreadorDAO fabrica) {
         this.empleadoDAO = fabrica.crearEmpleadoDAO();
+        this.adapterEmpleado =  new adaptadorEmpleado();
     }
 
     public EmpleadoCargadoDTO consultarEmpleado() throws NegocioException {
@@ -39,7 +42,13 @@ public class EmpleadoBO {
         } catch (PersistenciaException ex) {
             throw new NegocioException("No se pudo consultar el empleado: " + ex.getMessage());
         }
-
+    }
+        public EmpleadoCargadoDTO registrarEmpleado(EmpleadoCargadoDTO empleado){
+            Empleado empleado1 = adapterEmpleado.convertirAEntidad(empleado);
+            System.out.println(empleado1);
+            EmpleadoCargadoDTO empleadoReturn = adapterEmpleado.convertirADTO(empleado1);
+            return empleadoReturn;
+        }
+        
     }
 
-}

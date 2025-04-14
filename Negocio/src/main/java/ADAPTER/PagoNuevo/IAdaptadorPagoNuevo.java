@@ -10,6 +10,10 @@ package ADAPTER.PagoNuevo;
  * @author HP
  */
 public interface IAdaptadorPagoNuevo {
-  
+  //    public PagoNuevoDTO convertirPagoEfectivoADTO(PagoNuevo pago);
+//    public PagoNuevo convertirPagoEfectivoAEntidad(PagoNuevoDTO pago);
+//    public PagoNuevoDTO convertirPagoTarjetaADTO(PagoNuevo pago);
+//    public PagoNuevo convertirPagoTarjetaAEntidad(PagoNuevoDTO pago)
+
 
 }

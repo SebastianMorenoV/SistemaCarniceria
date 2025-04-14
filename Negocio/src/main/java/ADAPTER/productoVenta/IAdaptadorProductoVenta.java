@@ -6,6 +6,7 @@ package ADAPTER.productoVenta;
 
 import DTOs.NuevoProductoVentaDTO;
 import Entidades.ProductoVenta;
+import java.util.List;
 
 /**
  *
@@ -14,5 +15,7 @@ import Entidades.ProductoVenta;
 public interface IAdaptadorProductoVenta {
     public NuevoProductoVentaDTO convertirADTO(ProductoVenta producto);
     public ProductoVenta convertirAEntidad(NuevoProductoVentaDTO producto);
+    public List<NuevoProductoVentaDTO> convertirListaADTO(List<ProductoVenta> listaProductoVenta);
+    public List<ProductoVenta> convertirListaDTOAEntidad(List<NuevoProductoVentaDTO> listaProductoVenta);
 
 }

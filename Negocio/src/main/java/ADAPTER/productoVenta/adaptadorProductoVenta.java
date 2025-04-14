@@ -5,17 +5,20 @@
 package ADAPTER.productoVenta;
 
 import ADAPTER.Producto.IAdaptadorProducto;
+import ADAPTER.Producto.adaptadorProducto;
 import DTOs.NuevoProductoVentaDTO;
 import DTOs.ProductoCargadoDTO;
 import Entidades.Producto;
 import Entidades.ProductoVenta;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author HP
  */
 public class adaptadorProductoVenta implements IAdaptadorProductoVenta{
-    IAdaptadorProducto adapter;
+    IAdaptadorProducto adapter = new adaptadorProducto();
     @Override
     public NuevoProductoVentaDTO convertirADTO(ProductoVenta producto) {
         NuevoProductoVentaDTO productoDTO = new NuevoProductoVentaDTO();
@@ -42,7 +45,29 @@ public class adaptadorProductoVenta implements IAdaptadorProductoVenta{
     
     }
     
-   //Habra atributos que aparezcan en null ya que NuevoProductoVenta no tiene cierto atributos para hacer la entidad productoVenta
+  
+    @Override
+    public List<NuevoProductoVentaDTO> convertirListaADTO(List<ProductoVenta> listaProductoVenta) {
+        List<NuevoProductoVentaDTO> listaProductosVentaDTO = new ArrayList<>();
+        for(ProductoVenta producto : listaProductoVenta){
+            listaProductosVentaDTO.add(convertirADTO(producto));
+ 
+        }
+        return listaProductosVentaDTO;
+        
+        
+    }
+
+    @Override
+    public List<ProductoVenta> convertirListaDTOAEntidad(List<NuevoProductoVentaDTO> listaProductoVenta) {
+        List<ProductoVenta> listaProductosVentaDTO = new ArrayList<>();
+           for(NuevoProductoVentaDTO producto : listaProductoVenta){
+               listaProductosVentaDTO.add(convertirAEntidad(producto));
+       
+           }
+           return listaProductosVentaDTO;
+    }
 
   
 }
+
