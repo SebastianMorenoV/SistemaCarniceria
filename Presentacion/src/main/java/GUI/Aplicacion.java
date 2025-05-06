@@ -20,7 +20,6 @@ import GUI.ModuloRealizarVenta.ventanaMostrarTicket;
 import DTOs.*;
 import Exception.NegocioException;
 import Implementacion.RealizarVenta;
-import entidades.Ticket;
 import excepciones.ProcesadorPagoException;
 import java.util.List;
 import javax.swing.*;

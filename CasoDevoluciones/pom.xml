@@ -6,21 +6,13 @@
         <artifactId>SistemaCarniceria</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>Negocio</artifactId>
+    <artifactId>CasoDevoluciones</artifactId>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>ProcesadorPago</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>Persistencia</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE210</version>
         </dependency>
     </dependencies>
-    <properties>
-        <exec.mainClass>com.carniceria.negocio.Negocio</exec.mainClass>
-    </properties>
 </project>
