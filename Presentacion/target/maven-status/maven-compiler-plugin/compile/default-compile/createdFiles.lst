@@ -1,11 +1,13 @@
 GUI\ModuloRealizarVenta\RegistrarVenta$15.class
 GUI\ModuloRealizarVenta\FormularioMostrarCambio.class
+GUI\ModuloGastos\MenuGastos.class
 GUI\ModuloRealizarVenta\FormularioTarjeta$2.class
 GUI\ModuloRealizarVenta\RegistrarVenta$3.class
 GUI\ModuloRealizarVenta\RegistrarVenta.class
 GUI\ModuloRealizarVenta\RegistrarVenta$7.class
 GUI\ModuloRealizarVenta\MenuOpciones.class
 GUI\ModuloRealizarVenta\RegistrarVenta$12.class
+GUI\ModuloGastos\FormularioAgregarProveedor.class
 GUI\ModuloRealizarVenta\FormularioEfectivo$2.class
 GUI\ModuloRealizarVenta\VentanaFormularioTarjeta.class
 GUI\ModuloRealizarVenta\RegistrarVenta$4.class
@@ -14,6 +16,7 @@ GUI\ModuloRealizarVenta\MenuOpciones$1.class
 GUI\ModuloRealizarVenta\FormularioTarjeta$3.class
 GUI\ModuloRealizarVenta\generarTicketVenta.class
 GUI\ModuloRealizarVenta\RegistrarVenta$6.class
+GUI\ModuloGastos\FormularioAgregarProveedor$1.class
 GUI\ModuloRealizarVenta\FormularioMostrarCambio$2.class
 GUI\ModuloRealizarVenta\FormularioEfectivo$1.class
 GUI\ModuloRealizarVenta\RegistrarVenta$13.class
@@ -34,6 +37,7 @@ GUI\ModuloRealizarVenta\VentanaErrorProcesandoPago.class
 GUI\ModuloRealizarVenta\RegistrarVenta$9.class
 GUI\Aplicacion.class
 GUI\ModuloRealizarVenta\VentanaFormularioEfectivo.class
+GUI\ModuloGastos\MenuGastos$1.class
 GUI\ModuloRealizarVenta\VentanaFormularioMostrarCambio.class
 GUI\ModuloRealizarVenta\RegistrarVenta$14.class
 GUI\ModuloRealizarVenta\RegistrarVenta$2.class
