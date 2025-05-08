@@ -2,6 +2,7 @@ package GUI;
 
 /**
  * Esta clase representa el control de navegacion en la aplicacion.
+ *
  * @author Sebastian Moreno
  */
 import EstrategiaPago.Pago;
@@ -18,12 +19,15 @@ import GUI.ModuloRealizarVenta.VentanaFormularioTarjeta;
 import GUI.ModuloRealizarVenta.VentanaErrorProcesandoPago;
 import GUI.ModuloRealizarVenta.ventanaMostrarTicket;
 import DTOs.*;
+import Devolucion.RealizarDevolucion;
 import Exception.NegocioException;
+import GUI.ModuloRealizarDevolucion.PantallaDetallesHistorialDevolucion;
+import GUI.ModuloRealizarDevolucion.PantallaDevolucion;
+import GUI.ModuloRealizarDevolucion.PantallaMenuDevolucion;
 import Implementacion.RealizarVenta;
 import excepciones.ProcesadorPagoException;
 import java.util.List;
 import javax.swing.*;
-
 
 public class Aplicacion {
 
@@ -38,6 +42,12 @@ public class Aplicacion {
     private RealizarVenta realizarVenta;
     private Pago procesadorPago;
 
+    //Caso de uso devolucion.
+    private RealizarDevolucion realizarDevolucion;
+    private PantallaMenuDevolucion menuDevolucion;
+    private PantallaDevolucion pantallaDevolucion;
+    private PantallaDetallesHistorialDevolucion pantallaDetallesHistorialDevolucion;
+    
     public Aplicacion() {
         framePrincipal = new JFrame("Sistema Carnicería");
         framePrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,6 +62,11 @@ public class Aplicacion {
         formularioEfectivo = new FormularioEfectivo(this);
         mostrarCambio = new FormularioMostrarCambio(this);
         menuOpciones = new MenuOpciones(this);
+        
+        //Inicializar Pantallas de Devolucion
+        menuDevolucion = new PantallaMenuDevolucion(this);
+        pantallaDevolucion = new PantallaDevolucion();
+        pantallaDetallesHistorialDevolucion = new PantallaDetallesHistorialDevolucion();
     }
 
     // Método para mostrar RegistrarVenta (Pantalla Principal)
@@ -65,7 +80,7 @@ public class Aplicacion {
     public void mostrarTicketPDF() {
         ventanaMostrarTicket ticket = new ventanaMostrarTicket(this);
     }
-   
+
     // Método para mostrar FormularioEfectivo
     public void mostrarFormularioEfectivo() {
         VentanaFormularioEfectivo formulario = new VentanaFormularioEfectivo(this, this.formularioEfectivo);
@@ -150,7 +165,21 @@ public class Aplicacion {
     public void mostrarErrorCvvNecesario() {
         JOptionPane.showMessageDialog(framePrincipal, "Error: El campo CVV es requerido.");
     }
-
+    
+    
+    
+    /////////////////////////////METODOS PARA EL CASO DE USO DE HACER UNA DEVOLUCION//////////////////////////////////////////////////////////////
+    public void mostrarPantallaTicket(){
+            
+    }
+    public void mostrarPantallaMenuDevolucion(){
+        cambiarPantalla(menuDevolucion);
+    }
+    public void mostrarPantallaDevolucion(){
+    
+    }
+    
+    
     // Cambiar de pantalla dentro del frame principal
     private void cambiarPantalla(JPanel nuevaPantalla) {
         framePrincipal.getContentPane().removeAll(); // Eliminar contenido anterior
@@ -177,6 +206,7 @@ public class Aplicacion {
     public boolean verificarPago(PagoNuevoDTO pago) throws ProcesadorPagoException {
         return realizarVenta.validarPago(pago);
     }
+
     // que pedo aqui 
     public NuevoProductoVentaDTO agregarProducto(ProductoCargadoDTO productoCargado, double cantidad) {
         return realizarVenta.agregarProductoVenta(productoCargado, cantidad);
@@ -229,13 +259,13 @@ public class Aplicacion {
     public VentaDTO obtenerVenta() {
         return realizarVenta.obtenerVenta();
     }
-    
-    public TicketDTO crearTicket(VentaDTO venta){
-        TicketDTO ticketNuevo = new TicketDTO(venta.getListadoProductosVenta(), 
-                venta.getFechaHora(), 
-                venta.getIva(), 
-                venta.getEmpleado(), 
-                venta.getSubtotal(), 
+
+    public TicketDTO crearTicket(VentaDTO venta) {
+        TicketDTO ticketNuevo = new TicketDTO(venta.getListadoProductosVenta(),
+                venta.getFechaHora(),
+                venta.getIva(),
+                venta.getEmpleado(),
+                venta.getSubtotal(),
                 venta.getTotal());
         return ticketNuevo;
     }
