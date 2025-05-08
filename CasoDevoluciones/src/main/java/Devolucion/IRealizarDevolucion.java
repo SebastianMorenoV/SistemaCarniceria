@@ -1,14 +1,29 @@
 package Devolucion;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
+import DTOs.Devolucion.CrearDevolucionDTO;
+import DTOs.Devolucion.DevolucionDTO;
+import Exception.DevolucionException;
+import java.util.List;
 
 /**
  *
- * @author Lap-064
+ * @author Sebastian Moreno
  */
 public interface IRealizarDevolucion {
-    
+
+    public DevolucionDTO registrarDevolucion(CrearDevolucionDTO devolucionDTO) throws DevolucionException;
+
+    public List<DevolucionDTO> consultarDevoluciones() throws DevolucionException;
+
+    public List<DevolucionDTO> consultarDevolucionesPorFiltro(CrearDevolucionDTO devolucionDTO) throws DevolucionException;
+
+    public boolean validarTicket(String ticket);
+
+    public void validarProductoRepetido();
+
+    public void validarCamposLlenos();
+
+    public void calcularResumen();
+
+    public void validarValoresCampos();
 }

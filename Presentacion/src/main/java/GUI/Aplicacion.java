@@ -23,7 +23,9 @@ import Devolucion.RealizarDevolucion;
 import Exception.NegocioException;
 import GUI.ModuloRealizarDevolucion.PantallaDetallesHistorialDevolucion;
 import GUI.ModuloRealizarDevolucion.PantallaDevolucion;
+import GUI.ModuloRealizarDevolucion.PantallaHistorialDevoluciones;
 import GUI.ModuloRealizarDevolucion.PantallaMenuDevolucion;
+import GUI.ModuloRealizarDevolucion.PantallaTicket;
 import Implementacion.RealizarVenta;
 import excepciones.ProcesadorPagoException;
 import java.util.List;
@@ -47,26 +49,33 @@ public class Aplicacion {
     private PantallaMenuDevolucion menuDevolucion;
     private PantallaDevolucion pantallaDevolucion;
     private PantallaDetallesHistorialDevolucion pantallaDetallesHistorialDevolucion;
-    
+    private PantallaTicket pantallaTicketDevolucion;
+    private PantallaHistorialDevoluciones pantallaHistorialDevoluciones;
+
     public Aplicacion() {
         framePrincipal = new JFrame("Sistema Carnicería");
         framePrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         framePrincipal.setSize(1150, 700);
-        framePrincipal.setLocationRelativeTo(null); // Centrar pantalla
+        framePrincipal.setLocationRelativeTo(null);
 
-        // Inicializar pantallas
+        // Incializar implementaciones
         this.realizarVenta = new RealizarVenta();
         this.procesadorPago = new Pago();
+        this.realizarDevolucion = new RealizarDevolucion();
+
+        // Inicializar pantallas Caso de uso Principal (Venta)
         registrarVenta = new RegistrarVenta(this);
         formularioTarjeta = new FormularioTarjeta(this);
         formularioEfectivo = new FormularioEfectivo(this);
         mostrarCambio = new FormularioMostrarCambio(this);
         menuOpciones = new MenuOpciones(this);
-        
+
         //Inicializar Pantallas de Devolucion
         menuDevolucion = new PantallaMenuDevolucion(this);
-        pantallaDevolucion = new PantallaDevolucion();
-        pantallaDetallesHistorialDevolucion = new PantallaDetallesHistorialDevolucion();
+        pantallaTicketDevolucion = new PantallaTicket(this);
+        pantallaDevolucion = new PantallaDevolucion(this);
+        pantallaDetallesHistorialDevolucion = new PantallaDetallesHistorialDevolucion(this);
+        pantallaHistorialDevoluciones = new PantallaHistorialDevoluciones(this);
     }
 
     // Método para mostrar RegistrarVenta (Pantalla Principal)
@@ -165,21 +174,37 @@ public class Aplicacion {
     public void mostrarErrorCvvNecesario() {
         JOptionPane.showMessageDialog(framePrincipal, "Error: El campo CVV es requerido.");
     }
-    
-    
-    
+
     /////////////////////////////METODOS PARA EL CASO DE USO DE HACER UNA DEVOLUCION//////////////////////////////////////////////////////////////
-    public void mostrarPantallaTicket(){
-            
+    public void mostrarPantallaTicketDevolucion() {
+        cambiarPantalla(pantallaTicketDevolucion);
     }
-    public void mostrarPantallaMenuDevolucion(){
+
+    public void mostrarPantallaMenuDevolucion() {
         cambiarPantalla(menuDevolucion);
     }
-    public void mostrarPantallaDevolucion(){
-    
+
+    public void mostrarPantallaDevolucion() {
+        cambiarPantalla(pantallaDevolucion);
     }
-    
-    
+
+    public void mostrarPantallaDetallesHistorialDevolucion() {
+        cambiarPantalla(pantallaDetallesHistorialDevolucion);
+    }
+
+    public void mostrarPantallaHistorialDevolucion() {
+        cambiarPantalla(pantallaHistorialDevoluciones);
+    }
+
+    public boolean validarTicket(String ticket) {
+        try {
+            return realizarDevolucion.validarTicket(ticket);
+        } catch (Exception e) {
+            e.printStackTrace(); // modificar esto es para pruebas
+        }
+        return false;
+    }
+
     // Cambiar de pantalla dentro del frame principal
     private void cambiarPantalla(JPanel nuevaPantalla) {
         framePrincipal.getContentPane().removeAll(); // Eliminar contenido anterior

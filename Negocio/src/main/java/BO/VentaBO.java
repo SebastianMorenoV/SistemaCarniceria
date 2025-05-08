@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package BO;
 
 import IAdapters.IAdaptadorProducto;
@@ -79,6 +76,11 @@ public class VentaBO implements IVentaBO {
         } catch (PersistenciaException ex) {
             throw new NegocioException("Hubo un error consultado los productos venta", ex.getCause());
         }
+    }
+
+    @Override
+    public VentaDTO obtenerVentaPorTicket() throws NegocioException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }
