@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author HP
  */
-public class adaptadorProductoVenta implements IAdaptadorProductoVenta {
+public class AdaptadorProductoVenta implements IAdaptadorProductoVenta {
 
     IAdaptadorProducto adapter = new AdaptadorProducto();
 
@@ -61,10 +61,10 @@ public class adaptadorProductoVenta implements IAdaptadorProductoVenta {
     }
 
     @Override
-    public List<ProductoVenta> convertirListaDTOAEntidad(List<NuevoProductoVentaDTO> listaProductoVenta) {
+    public List<ProductoVenta> convertirListaDTOAEntidad(List<ProductoVentaDTO> listaProductoVenta) {
         List<ProductoVenta> listaProductosVentaDTO = new ArrayList<>();
-        for (NuevoProductoVentaDTO producto : listaProductoVenta) {
-            listaProductosVentaDTO.add(convertirAEntidad(producto));
+        for (ProductoVentaDTO producto : listaProductoVenta) {
+            listaProductosVentaDTO.add(convertirProductoVentaAEntidad(producto));
 
         }
         return listaProductosVentaDTO;
@@ -81,5 +81,17 @@ public class adaptadorProductoVenta implements IAdaptadorProductoVenta {
         
         return productoVenta;
     }
+    
+      @Override
+    public ProductoVenta convertirProductoVentaAEntidad(ProductoVentaDTO producto) {
+        Producto productoCargado = adapter.convertirAEntidad(producto.getProducto());
+        ProductoVenta productoVentaEntidad = new ProductoVenta();
+        productoVentaEntidad.setProducto(productoCargado);
+        productoVentaEntidad.setImporte(producto.getImporte());
+        productoVentaEntidad.setPrecioUnitario(producto.getPrecioUnitario());
+        productoVentaEntidad.setCantidad(producto.getCantidad());
 
+        return productoVentaEntidad;
+
+    }
 }

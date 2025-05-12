@@ -4,6 +4,7 @@
  */
 package DTOs;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import java.util.List;
 
@@ -16,13 +17,13 @@ public class VentaDTO {
     private double total,subtotal,iva;
     private LocalDateTime fechaHora;
     private EmpleadoCargadoDTO empleado;
-    private List<NuevoProductoVentaDTO> listadoProductosVenta;
+    private List<ProductoVentaDTO> listadoProductosVenta = new ArrayList<>();
     private MetodoPagoDTO metodoPago;
 
     public VentaDTO() {
     }
 
-    public VentaDTO(double total, double subtotal, double iva, LocalDateTime fechaHora, EmpleadoCargadoDTO empleado, List<NuevoProductoVentaDTO> listadoProductosVenta, MetodoPagoDTO metodoPago) {
+    public VentaDTO(double total, double subtotal, double iva, LocalDateTime fechaHora, EmpleadoCargadoDTO empleado, List<ProductoVentaDTO> listadoProductosVenta, MetodoPagoDTO metodoPago) {
         this.total = total;
         this.subtotal = subtotal;
         this.iva = iva;
@@ -34,7 +35,7 @@ public class VentaDTO {
     
     //(empleado, LocalDate.now(), listadoProductosVenta);
 
-    public VentaDTO(LocalDateTime fechaHora, EmpleadoCargadoDTO empleado, List<NuevoProductoVentaDTO> listadoProductosVenta) {
+    public VentaDTO(LocalDateTime fechaHora, EmpleadoCargadoDTO empleado, List<ProductoVentaDTO> listadoProductosVenta) {
         this.fechaHora = fechaHora;
         this.empleado = empleado;
         this.listadoProductosVenta = listadoProductosVenta;
@@ -89,11 +90,11 @@ public class VentaDTO {
         this.empleado = empleado;
     }
 
-    public List<NuevoProductoVentaDTO> getListadoProductosVenta() {
+    public List<ProductoVentaDTO> getListadoProductosVenta() {
         return listadoProductosVenta;
     }
 
-    public void setListadoProductosVenta(List<NuevoProductoVentaDTO> listadoProductosVenta) {
+    public void setListadoProductosVenta(List<ProductoVentaDTO> listadoProductosVenta) {
         this.listadoProductosVenta = listadoProductosVenta;
     }
 

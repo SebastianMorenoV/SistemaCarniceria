@@ -19,7 +19,10 @@ import GUI.ModuloRealizarVenta.VentanaFormularioTarjeta;
 import GUI.ModuloRealizarVenta.VentanaErrorProcesandoPago;
 import GUI.ModuloRealizarVenta.ventanaMostrarTicket;
 import DTOs.*;
+import DTOs.Devolucion.CrearDevolucionDTO;
+import DTOs.Devolucion.DevolucionDTO;
 import Devolucion.RealizarDevolucion;
+import Exception.DevolucionException;
 import Exception.NegocioException;
 import GUI.ModuloRealizarDevolucion.PantallaDetallesHistorialDevolucion;
 import GUI.ModuloRealizarDevolucion.PantallaDevolucion;
@@ -29,6 +32,8 @@ import GUI.ModuloRealizarDevolucion.PantallaTicket;
 import Implementacion.RealizarVenta;
 import excepciones.ProcesadorPagoException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 public class Aplicacion {
@@ -52,6 +57,7 @@ public class Aplicacion {
     private PantallaTicket pantallaTicketDevolucion;
     private PantallaHistorialDevoluciones pantallaHistorialDevoluciones;
 
+    //
     public Aplicacion() {
         framePrincipal = new JFrame("Sistema Carnicería");
         framePrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,6 +82,7 @@ public class Aplicacion {
         pantallaDevolucion = new PantallaDevolucion(this);
         pantallaDetallesHistorialDevolucion = new PantallaDetallesHistorialDevolucion(this);
         pantallaHistorialDevoluciones = new PantallaHistorialDevoluciones(this);
+
     }
 
     // Método para mostrar RegistrarVenta (Pantalla Principal)
@@ -185,6 +192,7 @@ public class Aplicacion {
     }
 
     public void mostrarPantallaDevolucion() {
+        pantallaDevolucion = new PantallaDevolucion(this);
         cambiarPantalla(pantallaDevolucion);
     }
 
@@ -196,15 +204,37 @@ public class Aplicacion {
         cambiarPantalla(pantallaHistorialDevoluciones);
     }
 
-    public boolean validarTicket(String ticket) {
+    public int mostrarPreguntaAñadirProducto() {
+        return JOptionPane.showConfirmDialog(framePrincipal, "¿Deseas devolver este producto?", "Seleccionar producto", JOptionPane.YES_NO_OPTION);
+    }
+
+    public VentaDTO validarTicket(String ticket) {
         try {
             return realizarDevolucion.validarTicket(ticket);
         } catch (Exception e) {
             e.printStackTrace(); // modificar esto es para pruebas
         }
-        return false;
+        return null;
+    }
+    
+    public DevolucionDTO registrarDevolucion(CrearDevolucionDTO devolucion) throws DevolucionException{
+        try {
+            return realizarDevolucion.registrarDevolucion(devolucion);
+        } catch (DevolucionException ex) {
+            throw new DevolucionException("Error al registrar una devolucion : " + ex.getLocalizedMessage());
+        }
     }
 
+    public void setVentaEncontradaTicket(VentaDTO venta) {
+        realizarDevolucion.setVentaTemporal(venta);
+    }
+
+    public VentaDTO getVentaEncontradaTicket() {
+        return realizarDevolucion.getVentaTemporal();
+
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Cambiar de pantalla dentro del frame principal
     private void cambiarPantalla(JPanel nuevaPantalla) {
         framePrincipal.getContentPane().removeAll(); // Eliminar contenido anterior
@@ -233,7 +263,7 @@ public class Aplicacion {
     }
 
     // que pedo aqui 
-    public NuevoProductoVentaDTO agregarProducto(ProductoCargadoDTO productoCargado, double cantidad) {
+    public ProductoVentaDTO agregarProducto(ProductoCargadoDTO productoCargado, double cantidad) {
         return realizarVenta.agregarProductoVenta(productoCargado, cantidad);
     }
 

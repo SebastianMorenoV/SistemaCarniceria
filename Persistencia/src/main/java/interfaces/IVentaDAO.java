@@ -26,5 +26,7 @@ public interface IVentaDAO {
     public Venta consultarVenta(Long id) throws PersistenciaException;
 
     public List<ProductoVenta> consultarProductosVenta() throws PersistenciaException;
+    
+    public Venta consultarVentaPorTicket(Long id) throws PersistenciaException;
 
 }

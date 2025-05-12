@@ -40,7 +40,12 @@ public class IProductoVentaBO implements IAdaptadorProductoVenta{
     }
 
     @Override
-    public List<ProductoVenta> convertirListaDTOAEntidad(List<NuevoProductoVentaDTO> listaProductoVenta) {
+    public ProductoVenta convertirProductoVentaAEntidad(ProductoVentaDTO producto) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<ProductoVenta> convertirListaDTOAEntidad(List<ProductoVentaDTO> listaProductoVenta) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

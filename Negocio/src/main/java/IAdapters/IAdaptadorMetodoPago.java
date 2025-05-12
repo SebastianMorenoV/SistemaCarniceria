@@ -12,9 +12,17 @@ import entidades.MetodoPago;
  * @author HP
  */
 public interface IAdaptadorMetodoPago {
+
     public MetodoPagoDTO convertirTarjetaADTO(MetodoPago metodoPago);
+
     public MetodoPago convertirTarjetaDTOAEntidad(MetodoPago metodoPago);
+
     public MetodoPagoDTO convertirEfectivoADTO(MetodoPago metodoPago);
+
     public MetodoPago convertirEfectivoAEntidad(MetodoPago metodoPago);
 
+    //
+    public MetodoPagoDTO convertirADTO(MetodoPago metodoPago);
+
+    public MetodoPago convertirAEntidad(MetodoPagoDTO metodoPago);
 }

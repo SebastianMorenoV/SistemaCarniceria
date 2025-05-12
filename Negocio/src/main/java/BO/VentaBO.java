@@ -1,11 +1,11 @@
-
 package BO;
 
 import IAdapters.IAdaptadorProducto;
 import Adapters.AdaptadorProducto;
 import IAdapters.IAdaptadorProductoVenta;
-import Adapters.adaptadorProductoVenta;
+import Adapters.AdaptadorProductoVenta;
 import Adapters.AdaptadorTarjeta;
+import Adapters.AdaptadorVenta;
 import DTOs.VentaDTO;
 import IAdapters.IAdaptadorVenta;
 import DTOs.CrearVentaDTO;
@@ -31,10 +31,10 @@ import java.util.logging.Logger;
  */
 public class VentaBO implements IVentaBO {
 
-    private final IAdaptadorVenta adaptadorVenta = new AdaptadorTarjeta();
+    private final IAdaptadorVenta adaptadorVenta = new AdaptadorVenta();
     private final IAdaptadorProducto adaptadorProducto = new AdaptadorProducto();
-    private final IAdaptadorProductoVenta adaptadorProductoVenta = new adaptadorProductoVenta();
-    
+    private final IAdaptadorProductoVenta adaptadorProductoVenta = new AdaptadorProductoVenta();
+
     private final IVentaDAO ventaDAO;
 
     public VentaBO(ICreadorDAO fabrica) {
@@ -67,20 +67,29 @@ public class VentaBO implements IVentaBO {
             for (ProductoVenta productoVenta : productosVentaConsultado) {
                 ProductoCargadoDTO productoDTO = adaptadorProducto.convertirADTO(productoVenta.getProducto());
 
-                ProductoVentaDTO productoVentaDTO =  adaptadorProductoVenta.convertirProductoVentaADTO(productoVenta);
-               
-                productosVentaDTO.addProductoVenta(productoVentaDTO);
+                ProductoVentaDTO productoVentaDTO = adaptadorProductoVenta.convertirProductoVentaADTO(productoVenta);
+
+                    productosVentaDTO.addProductoVenta(productoVentaDTO);
+                }
+
+                return productosVentaDTO;
+            } catch (PersistenciaException ex) {
+                throw new NegocioException("Hubo un error consultado los productos venta", ex.getCause());
+            }
+        }
+
+        @Override
+        public VentaDTO obtenerVentaPorTicket(String numeroTicket) throws NegocioException {
+
+            Long idTicket = Long.parseLong(numeroTicket);
+            try {
+                Venta venta = ventaDAO.consultarVentaPorTicket(idTicket);
+                VentaDTO ventaDTO = adaptadorVenta.convertirADTO(venta);
+                return ventaDTO;
+            } catch (PersistenciaException ex) {
+                throw new NegocioException("Ocurrio un error obteniendo la venta por ticket." + ex.getLocalizedMessage());
             }
 
-            return productosVentaDTO;
-        } catch (PersistenciaException ex) {
-            throw new NegocioException("Hubo un error consultado los productos venta", ex.getCause());
-        }
-    }
-
-    @Override
-    public VentaDTO obtenerVentaPorTicket() throws NegocioException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

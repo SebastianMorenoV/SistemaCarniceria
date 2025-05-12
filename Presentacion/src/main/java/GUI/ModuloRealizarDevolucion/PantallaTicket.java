@@ -1,5 +1,6 @@
 package GUI.ModuloRealizarDevolucion;
 
+import DTOs.VentaDTO;
 import GUI.Aplicacion;
 import java.awt.event.KeyEvent;
 
@@ -144,6 +145,7 @@ public class PantallaTicket extends javax.swing.JPanel {
     private void btnTxtIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtIngresarMouseClicked
         if (validarTicket()) {
             app.mostrarPantallaDevolucion();
+            
         }
 
     }//GEN-LAST:event_btnTxtIngresarMouseClicked
@@ -168,9 +170,19 @@ public class PantallaTicket extends javax.swing.JPanel {
 //Metodos auxiliares
     public boolean validarTicket() {
         String texto = inputNumeroTicket.getText().trim();
+
         if (texto == null || texto.isEmpty() || texto.equals("Ingresa el numero")) {
             return false;
         }
-        return app.validarTicket(texto);
+
+        VentaDTO venta = app.validarTicket(texto);
+        System.out.println(venta);
+        if (venta != null) {
+            app.setVentaEncontradaTicket(venta);
+            return true;
+        } else {
+            return false;
+        }
+
     }
 }

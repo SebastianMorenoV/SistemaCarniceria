@@ -18,7 +18,7 @@ import IAdapters.IAdaptadorEmpleado;
  */
 public class AdaptadorTarjeta implements IAdaptadorVenta {
 
-    IAdaptadorEmpleado adaptador; //Llamada al adaptador de Empleado
+    IAdaptadorEmpleado adaptador = new AdaptadorEmpleado(); //Llamada al adaptador de Empleado
     
     @Override
     public VentaDTO convertirADTO(Venta venta) {

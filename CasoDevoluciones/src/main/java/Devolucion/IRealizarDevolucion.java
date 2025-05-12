@@ -2,6 +2,7 @@ package Devolucion;
 
 import DTOs.Devolucion.CrearDevolucionDTO;
 import DTOs.Devolucion.DevolucionDTO;
+import DTOs.VentaDTO;
 import Exception.DevolucionException;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface IRealizarDevolucion {
 
     public List<DevolucionDTO> consultarDevolucionesPorFiltro(CrearDevolucionDTO devolucionDTO) throws DevolucionException;
 
-    public boolean validarTicket(String ticket);
+    public VentaDTO validarTicket(String ticket);
 
     public void validarProductoRepetido();
 

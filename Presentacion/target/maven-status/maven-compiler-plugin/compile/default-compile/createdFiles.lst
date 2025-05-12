@@ -1,7 +1,9 @@
 GUI\ModuloRealizarVenta\RegistrarVenta$15.class
 GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones$8.class
 GUI\ModuloRealizarVenta\FormularioTarjeta$2.class
+GUI\ModuloRealizarDevolucion\PantallaDevolucion$16.class
 GUI\ModuloRealizarVenta\RegistrarVenta$3.class
+GUI\ModuloRealizarDevolucion\PantallaDevolucion$19.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$8.class
 GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones$11.class
 GUI\ModuloRealizarVenta\RegistrarVenta$12.class
@@ -59,7 +61,9 @@ GUI\ModuloRealizarVenta\FormularioTarjeta.class
 GUI\ModuloRealizarVenta\FormularioTarjeta$3.class
 GUI\ModuloRealizarVenta\FormularioMostrarCambio$2.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$4.class
+GUI\ModuloRealizarDevolucion\PantallaDevolucion$15.class
 GUI\ModuloRealizarDevolucion\PantallaTicket$2.class
+GUI\ModuloRealizarDevolucion\PantallaDevolucion$18.class
 GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones$6.class
 GUI\ModuloRealizarVenta\FormularioEfectivo$1.class
 GUI\ModuloRealizarVenta\RegistrarVenta$13.class
@@ -75,6 +79,7 @@ GUI\ModuloRealizarDevolucion\PantallaDevolucion$11.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$6.class
 GUI\ModuloRealizarDevolucion\PantallaTicket$1.class
 GUI\ModuloRealizarVenta\MenuOpciones$5.class
+GUI\ModuloRealizarDevolucion\PantallaDevolucion$17.class
 GUI\ModuloRealizarDevolucion\PantallaMenuDevolucion$2.class
 GUI\ModuloRealizarVenta\VentanaErrorProcesandoPago.class
 GUI\ModuloRealizarVenta\VentanaFormularioEfectivo.class

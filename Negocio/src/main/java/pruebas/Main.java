@@ -5,7 +5,8 @@
 package pruebas;
 
 import IAdapters.IAdaptadorProductoVenta;
-import Adapters.adaptadorProductoVenta;
+import Adapters.AdaptadorProductoVenta;
+import BO.DevolucionBO;
 import BO.EmpleadoBO;
 import BO.ProductoBO;
 import BO.VentaBO;
@@ -36,90 +37,89 @@ public class Main {
      */
     public static void main(String[] args) throws NegocioException {
 
-    /**
-     * Pruebas para la capa BO.
-     */
-   
-        IAdaptadorProductoVenta adapterVenta;
-
-        List<ProductoVenta> listaProductos1 = new ArrayList<>();
-        Producto producto1 = new Producto(
-            "Coca-Cola",
-            "Botella de 1.5L retornable",
-            25.0,
-            false,
-            1.5,
-            "Bebidas"
-        );
-
-        Producto producto2 = new Producto(
-            "Carne de Res",
-            "Corte de diezmillo calidad premium",
-            110.0,
-            true,
-            1.0,
-            "Carnes"
-        );
-
-        listaProductos1.add(new ProductoVenta(producto1, 4, 15, 20));
-        listaProductos1.add(new ProductoVenta(producto2, 4, 10, 15));
-
-        adapterVenta = new adaptadorProductoVenta();
-        List<NuevoProductoVentaDTO> listaProductos1DTO = adapterVenta.convertirListaADTO(listaProductos1);
-        System.out.println("Prueba listaDTO a lista entidades"); 
-        for (NuevoProductoVentaDTO dto : listaProductos1DTO) {
-            System.out.println(dto.getProducto().getNombre());
-            System.out.println(dto.getCantidad());
-            System.out.println(dto.getImporte());                    
-            
-        }
-        System.out.println("----------------");
-        System.out.println("Prueba lista entidades a listaDTO"); 
-        List<NuevoProductoVentaDTO> listaProductos2 = new ArrayList<>();
-        ProductoCargadoDTO dto1 = new ProductoCargadoDTO(
-        1001L,
-        "Coca-Cola",
-        "Botella de 1.5L retornable",
-        "Bebidas",
-        1.5,
-        25.0,
-        false
-         );
-
-    ProductoCargadoDTO dto2 = new ProductoCargadoDTO(
-        1002L,
-        "Carne de Res",
-        "Corte de diezmillo calidad premium",
-        "Carnes",
-        1.0,
-        110.0,
-        true
-        );
-
-    NuevoProductoVentaDTO nuevoProductoVenta1 = new NuevoProductoVentaDTO(
-    dto1,
-    2,              // cantidad
-    25.0,           // precio unitario
-    50.0            // importe (2 * 25.0)
-);
-
-NuevoProductoVentaDTO nuevoProductoVenta2 = new NuevoProductoVentaDTO(
-    dto2,
-    1.5,            // cantidad
-    110.0,          // precio unitario
-    165.0           // importe (1.5 * 110.0)
-);
-    listaProductos2.add(nuevoProductoVenta1);
-    listaProductos2.add(nuevoProductoVenta2);
-    List<ProductoVenta> listaProductos2DTO = adapterVenta.convertirListaDTOAEntidad(listaProductos2);
-    for (ProductoVenta dto : listaProductos2DTO) {
-            System.out.println(dto.getProducto().getNombre());
-            System.out.println(dto.getCantidad());
-            System.out.println(dto.getImporte());                    
-            
-        }
-    }
-    //        // AQUI ESTOY PROBANDO LA FABRICA.
+        /**
+         * Pruebas para la capa BO.
+         */
+//        IAdaptadorProductoVenta adapterVenta;
+//
+//        List<ProductoVenta> listaProductos1 = new ArrayList<>();
+//        Producto producto1 = new Producto(
+//            "Coca-Cola",
+//            "Botella de 1.5L retornable",
+//            25.0,
+//            false,
+//            1.5,
+//            "Bebidas"
+//        );
+//
+//        Producto producto2 = new Producto(
+//            "Carne de Res",
+//            "Corte de diezmillo calidad premium",
+//            110.0,
+//            true,
+//            1.0,
+//            "Carnes"
+//        );
+//
+//        listaProductos1.add(new ProductoVenta(producto1, 4, 15, 20));
+//        listaProductos1.add(new ProductoVenta(producto2, 4, 10, 15));
+//
+//        adapterVenta = new AdaptadorProductoVenta();
+//        List<NuevoProductoVentaDTO> listaProductos1DTO = adapterVenta.convertirListaADTO(listaProductos1);
+//        System.out.println("Prueba listaDTO a lista entidades"); 
+//        for (NuevoProductoVentaDTO dto : listaProductos1DTO) {
+//            System.out.println(dto.getProducto().getNombre());
+//            System.out.println(dto.getCantidad());
+//            System.out.println(dto.getImporte());                    
+//            
+//        }
+//        System.out.println("----------------");
+//        System.out.println("Prueba lista entidades a listaDTO"); 
+//        List<NuevoProductoVentaDTO> listaProductos2 = new ArrayList<>();
+//        ProductoCargadoDTO dto1 = new ProductoCargadoDTO(
+//        1001L,
+//        "Coca-Cola",
+//        "Botella de 1.5L retornable",
+//        "Bebidas",
+//        1.5,
+//        25.0,
+//        false
+//         );
+//
+//    ProductoCargadoDTO dto2 = new ProductoCargadoDTO(
+//        1002L,
+//        "Carne de Res",
+//        "Corte de diezmillo calidad premium",
+//        "Carnes",
+//        1.0,
+//        110.0,
+//        true
+//        );
+//
+//    NuevoProductoVentaDTO nuevoProductoVenta1 = new NuevoProductoVentaDTO(
+//    dto1,
+//    2,              // cantidad
+//    25.0,           // precio unitario
+//    50.0            // importe (2 * 25.0)
+//);
+//
+//NuevoProductoVentaDTO nuevoProductoVenta2 = new NuevoProductoVentaDTO(
+//    dto2,
+//    1.5,            // cantidad
+//    110.0,          // precio unitario
+//    165.0           // importe (1.5 * 110.0)
+//);
+//    listaProductos2.add(nuevoProductoVenta1);
+//    listaProductos2.add(nuevoProductoVenta2);
+//    List<ProductoVenta> listaProductos2DTO = adapterVenta.convertirListaDTOAEntidad(listaProductos2);
+//    for (ProductoVenta dto : listaProductos2DTO) {
+//            System.out.println(dto.getProducto().getNombre());
+//            System.out.println(dto.getCantidad());
+//            System.out.println(dto.getImporte());                    
+//            
+//        }
+//    }
+        //        // AQUI ESTOY PROBANDO LA FABRICA.
 //        ICreadorDAO creador = new CreadorDAO();
 //        EmpleadoBO empleadoBO = new EmpleadoBO(creador);
 //        EmpleadoCargadoDTO empleadoConsultado = empleadoBO.consultarEmpleado();
@@ -145,9 +145,8 @@ NuevoProductoVentaDTO nuevoProductoVenta2 = new NuevoProductoVentaDTO(
 //        ///////////////////////////////////////////
 //        System.err.println("Prueba Adapter");
 //        empleadoBO.registrarEmpleado(empleadoConsultado);
-//          
+//   
+
     
     }
-
-
-
+}

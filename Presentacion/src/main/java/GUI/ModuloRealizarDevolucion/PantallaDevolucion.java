@@ -5,8 +5,20 @@
 package GUI.ModuloRealizarDevolucion;
 
 import DTOs.Devolucion.CrearDevolucionDTO;
+import DTOs.Devolucion.DevolucionDTO;
+import DTOs.ProductoVentaDTO;
+import DTOs.VentaDTO;
+import Exception.DevolucionException;
 import GUI.Aplicacion;
 import java.awt.event.KeyEvent;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,10 +27,16 @@ import java.awt.event.KeyEvent;
 public class PantallaDevolucion extends javax.swing.JPanel {
 
     Aplicacion app;
+    private double totalAcumulado = 0.0;
+    private List<ProductoVentaDTO> productosEnTabla = new ArrayList<>();
+    private List<ProductoVentaDTO> productosDevueltos = new ArrayList<>();
+    private VentaDTO venta = null;
 
     public PantallaDevolucion(Aplicacion app) {
         this.app = app;
+
         initComponents();
+        valoresIniciales();
     }
 
     @SuppressWarnings("unchecked")
@@ -37,12 +55,15 @@ public class PantallaDevolucion extends javax.swing.JPanel {
         txtBusquedaNombre5 = new javax.swing.JLabel();
         btnFinalizarVenta = new GUI.PanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaProductosDevolucion = new javax.swing.JTable();
         btnFinalizarVenta1 = new GUI.PanelRound();
         btnTxtFinalizarVenta1 = new javax.swing.JLabel();
         btnFinalizarVenta2 = new GUI.PanelRound();
         btnTxtFinalizarVenta2 = new javax.swing.JLabel();
         btnAtras = new javax.swing.JLabel();
+        txtBusquedaNombre6 = new javax.swing.JLabel();
+        txtTotalParcial = new javax.swing.JLabel();
+        icnBasura = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -54,7 +75,7 @@ public class PantallaDevolucion extends javax.swing.JPanel {
 
         txtBusquedaNombre1.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         txtBusquedaNombre1.setText("Venta:");
-        add(txtBusquedaNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 150, 80, 30));
+        add(txtBusquedaNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 90, 80, 30));
 
         inputNombre.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         inputNombre.setText("Nombre completo");
@@ -109,6 +130,7 @@ public class PantallaDevolucion extends javax.swing.JPanel {
         txtBusquedaNombre3.setText("Productos devueltos.*:");
         add(txtBusquedaNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 280, 30));
 
+        inputProductosDevueltos.setEditable(false);
         inputProductosDevueltos.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         inputProductosDevueltos.setText("Seleccionar productos");
         inputProductosDevueltos.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -160,7 +182,7 @@ public class PantallaDevolucion extends javax.swing.JPanel {
 
         txtBusquedaNombre5.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         txtBusquedaNombre5.setText("Nombre Completo.*:");
-        add(txtBusquedaNombre5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 280, 30));
+        add(txtBusquedaNombre5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 1100, 30));
 
         btnFinalizarVenta.setBackground(new java.awt.Color(187, 187, 187));
         btnFinalizarVenta.setRoundBottomLeft(15);
@@ -174,20 +196,34 @@ public class PantallaDevolucion extends javax.swing.JPanel {
         });
         btnFinalizarVenta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setBackground(new java.awt.Color(187, 187, 187));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaProductosDevolucion.setBackground(new java.awt.Color(187, 187, 187));
+        tablaProductosDevolucion.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        tablaProductosDevolucion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
                 "Productos", "Precio"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaProductosDevolucion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaProductosDevolucionMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaProductosDevolucion);
 
         btnFinalizarVenta.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 300, 330));
 
-        add(btnFinalizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 190, 300, 360));
+        add(btnFinalizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 130, 300, 360));
 
         btnFinalizarVenta1.setBackground(new java.awt.Color(44, 44, 44));
         btnFinalizarVenta1.setRoundBottomLeft(15);
@@ -206,6 +242,11 @@ public class PantallaDevolucion extends javax.swing.JPanel {
         btnTxtFinalizarVenta1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnTxtFinalizarVenta1.setText("Finalizar");
         btnTxtFinalizarVenta1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTxtFinalizarVenta1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTxtFinalizarVenta1MouseClicked(evt);
+            }
+        });
         btnFinalizarVenta1.add(btnTxtFinalizarVenta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 290, 70));
 
         add(btnFinalizarVenta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 580, 370, 70));
@@ -227,6 +268,11 @@ public class PantallaDevolucion extends javax.swing.JPanel {
         btnTxtFinalizarVenta2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnTxtFinalizarVenta2.setText("Cancelar Devolucion");
         btnTxtFinalizarVenta2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTxtFinalizarVenta2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTxtFinalizarVenta2MouseClicked(evt);
+            }
+        });
         btnFinalizarVenta2.add(btnTxtFinalizarVenta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 350, 70));
 
         add(btnFinalizarVenta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 580, 370, 70));
@@ -239,6 +285,23 @@ public class PantallaDevolucion extends javax.swing.JPanel {
             }
         });
         add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 50));
+
+        txtBusquedaNombre6.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        txtBusquedaNombre6.setText("Nombre Completo.*:");
+        add(txtBusquedaNombre6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 280, 30));
+
+        txtTotalParcial.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        txtTotalParcial.setText("Total a devolver : $ 0.00");
+        add(txtTotalParcial, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 520, 360, 30));
+
+        icnBasura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bote-de-basura.png"))); // NOI18N
+        icnBasura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        icnBasura.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                icnBasuraMouseClicked(evt);
+            }
+        });
+        add(icnBasura, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 400, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void inputNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNombreFocusGained
@@ -349,6 +412,35 @@ public class PantallaDevolucion extends javax.swing.JPanel {
         app.mostrarPantallaTicketDevolucion();
     }//GEN-LAST:event_btnAtrasMouseClicked
 
+    private void tablaProductosDevolucionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosDevolucionMouseClicked
+        if (evt.getClickCount() == 2) { // Doble clic
+            int respuesta = app.mostrarPreguntaAñadirProducto();
+            if (respuesta == JOptionPane.YES_OPTION) { // tambien mandar a abrir jOptionPanes desde aplicacion.
+                seleccionarProducto(); // Llama al método al doble clic --- aqui necesito quitar el producto de la lista local
+
+            } else {
+                // Limpiar la selección
+                tablaProductosDevolucion.getSelectionModel().clearSelection();
+            }
+        }
+    }//GEN-LAST:event_tablaProductosDevolucionMouseClicked
+
+    private void icnBasuraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icnBasuraMouseClicked
+        resetearDevolucion();
+    }//GEN-LAST:event_icnBasuraMouseClicked
+
+    private void btnTxtFinalizarVenta2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtFinalizarVenta2MouseClicked
+        app.mostrarPantallaTicketDevolucion();
+    }//GEN-LAST:event_btnTxtFinalizarVenta2MouseClicked
+
+    private void btnTxtFinalizarVenta1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtFinalizarVenta1MouseClicked
+        try {
+            registrarDevolucion();
+        } catch (DevolucionException ex) {
+            Logger.getLogger(PantallaDevolucion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnTxtFinalizarVenta1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnAtras;
@@ -357,27 +449,139 @@ public class PantallaDevolucion extends javax.swing.JPanel {
     private GUI.PanelRound btnFinalizarVenta2;
     private javax.swing.JLabel btnTxtFinalizarVenta1;
     private javax.swing.JLabel btnTxtFinalizarVenta2;
+    private javax.swing.JLabel icnBasura;
     private javax.swing.JTextField inputNombre;
     private javax.swing.JTextField inputProductosDevueltos;
     private javax.swing.JTextField inputRazon;
     private javax.swing.JTextField inputTelefono;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaProductosDevolucion;
     private javax.swing.JLabel txtBusquedaNombre1;
     private javax.swing.JLabel txtBusquedaNombre2;
     private javax.swing.JLabel txtBusquedaNombre3;
     private javax.swing.JLabel txtBusquedaNombre4;
     private javax.swing.JLabel txtBusquedaNombre5;
+    private javax.swing.JLabel txtBusquedaNombre6;
     private javax.swing.JLabel txtPanelVentaEnCaja;
+    private javax.swing.JLabel txtTotalParcial;
     // End of variables declaration//GEN-END:variables
 
 //Metodos auxiliares:
-    public void registrarDevolucion(){
+    public void registrarDevolucion() throws DevolucionException {
+        String nombre = inputNombre.getText().trim();
+        String razon = inputRazon.getText().trim();
+        String telefono = inputTelefono.getText().trim();
+
+        // Validar que los campos no estén vacíos ni contengan solo el texto por defecto
+        if (nombre.isEmpty() || nombre.equals("Nombre completo")
+                || razon.isEmpty() || razon.equals("Razon")
+                || telefono.isEmpty() || telefono.equals("Ingresar numero telefonico.")
+                || productosDevueltos == null || productosDevueltos.isEmpty()
+                || venta == null) {
+
+            JOptionPane.showMessageDialog(null,
+                    "Por favor, completa todos los campos requeridos y asegúrate de haber agregado productos devueltos.",
+                    "Campos incompletos",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         CrearDevolucionDTO devolucionDTO = new CrearDevolucionDTO();
-        devolucionDTO.setNombreCompleto(inputNombre.getText());
-        devolucionDTO.setRazon(inputRazon.getText());
-        //hacer logica de productos
-        devolucionDTO.setProductosDevueltos(null);
-        devolucionDTO.setTelefono(inputTelefono.getText());
+        devolucionDTO.setNombreCompleto(nombre);
+        devolucionDTO.setRazon(razon);
+        devolucionDTO.setProductosDevueltos(productosDevueltos);
+        devolucionDTO.setTelefono(telefono);
+        devolucionDTO.setFechaHora(LocalDateTime.now());
+        devolucionDTO.setMontoDevuelto(totalAcumulado);
+        devolucionDTO.setVenta(venta);
+
+        try {
+            DevolucionDTO dto = app.registrarDevolucion(devolucionDTO);
+            if (dto != null) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' yyyy - HH:mm");
+                String fechaFormateada = dto.getFechaHora().format(formatter);
+
+                String mensaje = "<html>"
+                        + "<h2 style='color:green;'>Devolución exitosa</h2>"
+                        + "<p>" + fechaFormateada + "</p>"
+                        + "<p><strong>Motivo o Razón:</strong> " + dto.getRazon() + "</p>"
+                        + "<p><strong>Total a regresar:</strong> $" + String.format("%.2f", dto.getMontoDevuelto()) + "</p>"
+                        + "</html>";
+
+                JOptionPane.showMessageDialog(null, mensaje, "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+
+                app.mostrarPantallaMenuDevolucion();
+            }
+        } catch (DevolucionException ex) {
+            throw new DevolucionException("No se pudo registrar la devolución. " + ex.getLocalizedMessage());
+        }
     }
+
+    public void valoresIniciales() {
+        icnBasura.setVisible(false);
+        cargarTabla();
+        cargarTextos();
+    }
+
+    public void cargarTextos() {
+        VentaDTO venta = app.getVentaEncontradaTicket();
+        txtBusquedaNombre5.setText("Venta encontrada con el numero de folio: " + String.valueOf(venta.getId()));
+    }
+
+    public void cargarTabla() {
+        venta = app.getVentaEncontradaTicket();
+        DefaultTableModel model = (DefaultTableModel) tablaProductosDevolucion.getModel();
+        model.setRowCount(0);
+        productosEnTabla.clear(); // Limpia lista auxiliar
+
+        for (ProductoVentaDTO producto : venta.getListadoProductosVenta()) {
+            Object[] fila = new Object[]{
+                producto.getProducto().getNombre(),
+                producto.getImporte()
+            };
+            model.addRow(fila);
+            productosEnTabla.add(producto); // Guarda referencia
+        }
+    }
+
+    public void resetearDevolucion() {
+        inputProductosDevueltos.setText("Seleccionar productos");
+        txtTotalParcial.setText("Total a devolver : $ 0.00");
+        cargarTabla();
+        icnBasura.setVisible(false);
+    }
+
+    public void seleccionarProducto() {
+        DefaultTableModel model = (DefaultTableModel) tablaProductosDevolucion.getModel();
+        int filaSeleccionada = tablaProductosDevolucion.getSelectedRow();
+
+        if (filaSeleccionada != -1) {
+            ProductoVentaDTO productoSeleccionado = productosEnTabla.get(filaSeleccionada);
+            double precio = productoSeleccionado.getImporte();
+
+            model.removeRow(filaSeleccionada);
+            productosEnTabla.remove(filaSeleccionada); // Quita también de la lista
+
+            if (inputProductosDevueltos.getText().equals("Seleccionar productos")) {
+                inputProductosDevueltos.setText("");
+                totalAcumulado = 0.0;
+                productosDevueltos.clear();
+            }
+
+            String textoActual = inputProductosDevueltos.getText();
+            if (!textoActual.isEmpty()) {
+                textoActual += ", ";
+            }
+
+            inputProductosDevueltos.setText(textoActual + productoSeleccionado.getProducto().getNombre());
+
+            icnBasura.setVisible(true);
+            totalAcumulado += precio;
+            txtTotalParcial.setText("Total a devolver: $" + String.format("%.2f", totalAcumulado));
+
+            // Agrega a la lista de productos devueltos
+            productosDevueltos.add(productoSeleccionado);
+        }
+    }
+
 }

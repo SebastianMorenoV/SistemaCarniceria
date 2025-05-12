@@ -18,5 +18,5 @@ public interface IVentaBO {
 
     public ProductosVentaDTO obtenerProductosVenta() throws NegocioException;
     
-    public VentaDTO obtenerVentaPorTicket()throws NegocioException;
+    public VentaDTO obtenerVentaPorTicket(String numeroTicket)throws NegocioException;
 }

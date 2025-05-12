@@ -43,6 +43,7 @@ public class MenuOpciones extends javax.swing.JPanel {
         pnlBotonDevoluciones = new javax.swing.JPanel();
         icnDevolucion = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -127,9 +128,13 @@ public class MenuOpciones extends javax.swing.JPanel {
 
         add(pnlBotonDevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, 190, 170));
 
-        jLabel4.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        jLabel4.setText("Venta en caja");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 150, 30));
+        jLabel4.setFont(new java.awt.Font("Product Sans Infanity", 0, 48)); // NOI18N
+        jLabel4.setText("Bienvenido, Juan Soto!");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 490, 80));
+
+        jLabel5.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        jLabel5.setText("Venta en caja");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 150, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void icnRealizarVentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icnRealizarVentaMouseEntered
@@ -185,6 +190,7 @@ public class MenuOpciones extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private GUI.PanelRound panelRound1;
     private javax.swing.JPanel pnlBotonDevoluciones;
     private javax.swing.JPanel pnlBotonVentaEnCaja;

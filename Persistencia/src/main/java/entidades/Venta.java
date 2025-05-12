@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package entidades;
 
 import java.time.LocalDateTime;
@@ -116,6 +113,11 @@ public class Venta {
 
     public void setListaProductosVenta(List<ProductoVenta> listaProductosVenta) {
         this.listaProductosVenta = listaProductosVenta;
+    }
+
+    @Override
+    public String toString() {
+        return "Venta{" + "id=" + id + ", fechaHora=" + fechaHora + ", cajero=" + cajero + ", subtotal=" + subtotal + ", iva=" + iva + ", total=" + total + ", metodoPago=" + metodoPago + ", listaProductosVenta=" + listaProductosVenta + '}';
     }
     
     
