@@ -69,6 +69,9 @@ public class VentaBO implements IVentaBO {
 
                 ProductoVentaDTO productoVentaDTO = adaptadorProductoVenta.convertirProductoVentaADTO(productoVenta);
 
+                
+                
+                //hola
                     productosVentaDTO.addProductoVenta(productoVentaDTO);
                 }
 
