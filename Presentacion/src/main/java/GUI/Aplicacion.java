@@ -216,8 +216,8 @@ public class Aplicacion {
         }
         return null;
     }
-    
-    public DevolucionDTO registrarDevolucion(CrearDevolucionDTO devolucion) throws DevolucionException{
+
+    public DevolucionDTO registrarDevolucion(CrearDevolucionDTO devolucion) throws DevolucionException {
         try {
             return realizarDevolucion.registrarDevolucion(devolucion);
         } catch (DevolucionException ex) {
@@ -234,8 +234,16 @@ public class Aplicacion {
 
     }
 
+    public List<DevolucionDTO> buscarDevolucionPorFiltro(CrearDevolucionDTO devolucionDTO) throws DevolucionException {
+        try {
+            return realizarDevolucion.consultarDevolucionesPorFiltro(devolucionDTO);
+        } catch (DevolucionException ex) {
+            throw new DevolucionException("Error al consultars una devolucion : " + ex.getLocalizedMessage());
+        }
+    }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Cambiar de pantalla dentro del frame principal
+
     private void cambiarPantalla(JPanel nuevaPantalla) {
         framePrincipal.getContentPane().removeAll(); // Eliminar contenido anterior
         framePrincipal.getContentPane().add(nuevaPantalla);

@@ -1,21 +1,27 @@
 package GUI.ModuloRealizarDevolucion;
 
+import DTOs.Devolucion.CrearDevolucionDTO;
+import DTOs.Devolucion.DevolucionDTO;
+import Exception.DevolucionException;
 import GUI.Aplicacion;
 import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Sebastian Moreno
  */
 public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
-
+    
     private Aplicacion app;
-
+    
     public PantallaHistorialDevoluciones(Aplicacion app) {
         this.app = app;
         initComponents();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -339,4 +345,20 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
     private javax.swing.JLabel txtBusquedaNombre4;
     private javax.swing.JLabel txtPanelVentaEnCaja;
     // End of variables declaration//GEN-END:variables
+
+    public void buscarDevolucionPorFiltro() throws DevolucionException {
+        String nombre = inputNombre.getText();
+        String telefono = inputTelefono.getText();
+        
+        CrearDevolucionDTO devolucionDTO = new CrearDevolucionDTO();
+        devolucionDTO.setTelefono(telefono);
+        devolucionDTO.setNombreCompleto(nombre);
+        // fecha inicio y fecha fin con otro dto de devolucion.
+        try {
+            List<DevolucionDTO> devolucionesFiltrada = app.buscarDevolucionPorFiltro(devolucionDTO);
+        } catch (DevolucionException ex) {
+            throw new DevolucionException("Existio un error consultando la base de datos" + ex.getLocalizedMessage());
+        }
+        
+    }
 }
