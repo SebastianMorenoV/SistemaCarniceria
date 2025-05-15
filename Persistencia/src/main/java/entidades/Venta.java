@@ -9,7 +9,7 @@ import java.util.List;
  * @author Sebastian Moreno
  */
 public class Venta {
-    Long id;
+    int id;
     LocalDateTime fechaHora;
     Empleado cajero;
     double subtotal;
@@ -21,7 +21,7 @@ public class Venta {
     public Venta() {
     }
 
-    public Venta(Long id, LocalDateTime fechaHora, Empleado cajero, double subtotal, double iva, double total, MetodoPago metodoPago, List<ProductoVenta> listaProductosVenta) {
+    public Venta(int id, LocalDateTime fechaHora, Empleado cajero, double subtotal, double iva, double total, MetodoPago metodoPago, List<ProductoVenta> listaProductosVenta) {
         this.id = id;
         this.fechaHora = fechaHora;
         this.cajero = cajero;
@@ -51,11 +51,11 @@ public class Venta {
         this.listaProductosVenta = listaProductosVenta;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

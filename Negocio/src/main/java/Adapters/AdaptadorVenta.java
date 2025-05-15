@@ -34,7 +34,7 @@ public class AdaptadorVenta implements IAdaptadorVenta {
     @Override
     public VentaDTO convertirADTO(Venta venta) {
         VentaDTO ventaDTO = new VentaDTO();
-        ventaDTO.setId(venta.getId().intValue());
+        ventaDTO.setId(venta.getId());
 
         EmpleadoCargadoDTO empleado = empleadoAdapter.convertirADTO(venta.getCajero());
         ventaDTO.setEmpleado(empleado);
@@ -43,7 +43,7 @@ public class AdaptadorVenta implements IAdaptadorVenta {
         List<ProductoVenta> productosVenta = venta.getListaProductosVenta();
         List<ProductoVentaDTO> productosVentaDTO = new ArrayList<>();
         for (ProductoVenta productoVenta : productosVenta) {
-            
+
             ProductoVentaDTO dto = productoVentaAdapter.convertirProductoVentaADTO(productoVenta);
             productosVentaDTO.add(dto);
         }
@@ -56,15 +56,19 @@ public class AdaptadorVenta implements IAdaptadorVenta {
             ventaDTO.setMetodoPago(metodoPagoDTO);
         }
 
-        ventaDTO.setIva(venta.getIva());          
-        ventaDTO.setSubtotal(venta.getSubtotal()); 
-        ventaDTO.setTotal(venta.getTotal());       
+        ventaDTO.setIva(venta.getIva());
+        ventaDTO.setSubtotal(venta.getSubtotal());
+        ventaDTO.setTotal(venta.getTotal());
         return ventaDTO;
     }
 
     @Override
     public Venta convertirAVenta(VentaDTO ventaDTO) {
+        if (ventaDTO == null) {
+            throw new IllegalArgumentException("El objeto ventaDTO es null en AdaptadorVenta.convertirAVenta");
+        }
         Venta venta = new Venta();
+        venta.setId(ventaDTO.getId());
         venta.setIva(ventaDTO.getIva());
         venta.setTotal(venta.getTotal());
         venta.setSubtotal(venta.getSubtotal());

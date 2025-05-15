@@ -5,6 +5,7 @@ package GUI;
  *
  * @author Sebastian Moreno
  */
+import DTOs.FechaDTO;
 import EstrategiaPago.Pago;
 import GUI.ModuloRealizarVenta.VentanaExitoProcesandoPago;
 import GUI.ModuloRealizarVenta.VentanaFormularioEfectivo;
@@ -21,6 +22,7 @@ import GUI.ModuloRealizarVenta.ventanaMostrarTicket;
 import DTOs.*;
 import DTOs.Devolucion.CrearDevolucionDTO;
 import DTOs.Devolucion.DevolucionDTO;
+import DTOs.Devolucion.DevolucionSinVentaDTO;
 import Devolucion.RealizarDevolucion;
 import Exception.DevolucionException;
 import Exception.NegocioException;
@@ -80,7 +82,6 @@ public class Aplicacion {
         menuDevolucion = new PantallaMenuDevolucion(this);
         pantallaTicketDevolucion = new PantallaTicket(this);
         pantallaDevolucion = new PantallaDevolucion(this);
-        pantallaDetallesHistorialDevolucion = new PantallaDetallesHistorialDevolucion(this);
         pantallaHistorialDevoluciones = new PantallaHistorialDevoluciones(this);
 
     }
@@ -197,6 +198,7 @@ public class Aplicacion {
     }
 
     public void mostrarPantallaDetallesHistorialDevolucion() {
+        pantallaDetallesHistorialDevolucion = new PantallaDetallesHistorialDevolucion(this);
         cambiarPantalla(pantallaDetallesHistorialDevolucion);
     }
 
@@ -234,12 +236,24 @@ public class Aplicacion {
 
     }
 
-    public List<DevolucionDTO> buscarDevolucionPorFiltro(CrearDevolucionDTO devolucionDTO) throws DevolucionException {
+    public List<DevolucionDTO> buscarDevolucionPorFiltro(DevolucionSinVentaDTO devolucionDTO) throws DevolucionException {
         try {
             return realizarDevolucion.consultarDevolucionesPorFiltro(devolucionDTO);
         } catch (DevolucionException ex) {
-            throw new DevolucionException("Error al consultars una devolucion : " + ex.getLocalizedMessage());
+            throw new DevolucionException("Error al consultar una devolucion : " + ex.getLocalizedMessage());
         }
+    }
+
+    public void setDevolucionTemporal(DevolucionDTO devolucion) {
+        realizarDevolucion.setDevolucionTemporal(devolucion);
+    }
+
+    public DevolucionDTO getDevolucionTemporal() {
+        return realizarDevolucion.getDevolucionTemporal();
+    }
+
+    public DevolucionDTO buscarDevolucionPorID(String id) throws DevolucionException {
+        return realizarDevolucion.consultarDevolucionPorID(id);
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Cambiar de pantalla dentro del frame principal

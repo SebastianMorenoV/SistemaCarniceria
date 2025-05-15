@@ -39,7 +39,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="txtBusquedaNombre2">
+    <Component class="javax.swing.JLabel" name="txtMotivo">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Product Sans Infanity" size="24" style="0"/>
@@ -52,7 +52,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="txtBusquedaNombre3">
+    <Component class="javax.swing.JLabel" name="txtVentaTitulo">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Product Sans Infanity" size="26" style="1"/>
@@ -61,7 +61,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="740" y="90" width="100" height="30"/>
+          <AbsoluteConstraints x="710" y="100" width="80" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -100,7 +100,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="jTable1">
+            <Component class="javax.swing.JTable" name="tablaProductosDevueltos">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="bb" green="bb" red="bb" type="rgb"/>
@@ -119,46 +119,46 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="txtBusquedaNombre4">
+    <Component class="javax.swing.JLabel" name="txtDevolucion">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Product Sans Infanity" size="24" style="0"/>
+          <Font name="Product Sans Infanity" size="26" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Devolucion : "/>
+        <Property name="text" type="java.lang.String" value="Devolucion"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="20" y="120" width="140" height="30"/>
+          <AbsoluteConstraints x="90" y="140" width="140" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="txtBusquedaNombre5">
+    <Component class="javax.swing.JLabel" name="txtFechaCompra">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Product Sans Infanity" size="24" style="0"/>
+          <Font name="Product Sans Infanity" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Fecha Compra : "/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="430" y="130" width="270" height="30"/>
+          <AbsoluteConstraints x="430" y="130" width="290" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="txtBusquedaNombre6">
+    <Component class="javax.swing.JLabel" name="txtMetodoPago">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Product Sans Infanity" size="24" style="0"/>
+          <Font name="Product Sans Infanity" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Metodo Pago :  "/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="430" y="160" width="270" height="30"/>
+          <AbsoluteConstraints x="430" y="160" width="290" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="txtBusquedaNombre7">
+    <Component class="javax.swing.JLabel" name="txtCajeroVenta">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Product Sans Infanity" size="24" style="0"/>
@@ -171,7 +171,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="txtBusquedaNombre8">
+    <Component class="javax.swing.JLabel" name="txtCajeroDevolucion">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Product Sans Infanity" size="24" style="0"/>
@@ -184,7 +184,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="txtBusquedaNombre9">
+    <Component class="javax.swing.JLabel" name="txtCliente">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Product Sans Infanity" size="24" style="0"/>
@@ -193,11 +193,11 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="10" y="250" width="270" height="30"/>
+          <AbsoluteConstraints x="10" y="250" width="270" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="txtBusquedaNombre10">
+    <Component class="javax.swing.JLabel" name="txtFechaDevolucion">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Product Sans Infanity" size="24" style="0"/>
@@ -210,7 +210,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="txtBusquedaNombre11">
+    <Component class="javax.swing.JLabel" name="txtMontoDevolucion">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Product Sans Infanity" size="24" style="0"/>

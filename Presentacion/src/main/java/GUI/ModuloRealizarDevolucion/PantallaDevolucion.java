@@ -495,6 +495,7 @@ public class PantallaDevolucion extends javax.swing.JPanel {
         devolucionDTO.setMontoDevuelto(totalAcumulado);
         devolucionDTO.setVenta(venta);
 
+        System.out.println("ID DESDE PRESENTACION" + devolucionDTO.getVenta().getId());
         try {
             DevolucionDTO dto = app.registrarDevolucion(devolucionDTO);
             if (dto != null) {

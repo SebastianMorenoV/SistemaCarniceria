@@ -4,7 +4,13 @@
  */
 package GUI.ModuloRealizarDevolucion;
 
+import DTOs.Devolucion.DevolucionDTO;
+import DTOs.ProductoVentaDTO;
 import GUI.Aplicacion;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,9 +19,11 @@ import GUI.Aplicacion;
 public class PantallaDetallesHistorialDevolucion extends javax.swing.JPanel {
 
     Aplicacion app;
+
     public PantallaDetallesHistorialDevolucion(Aplicacion app) {
         this.app = app;
         initComponents();
+        inicializarValores();
     }
 
     @SuppressWarnings("unchecked")
@@ -23,19 +31,19 @@ public class PantallaDetallesHistorialDevolucion extends javax.swing.JPanel {
     private void initComponents() {
 
         txtPanelVentaEnCaja = new javax.swing.JLabel();
-        txtBusquedaNombre2 = new javax.swing.JLabel();
-        txtBusquedaNombre3 = new javax.swing.JLabel();
+        txtMotivo = new javax.swing.JLabel();
+        txtVentaTitulo = new javax.swing.JLabel();
         btnFinalizarVenta = new GUI.PanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        txtBusquedaNombre4 = new javax.swing.JLabel();
-        txtBusquedaNombre5 = new javax.swing.JLabel();
-        txtBusquedaNombre6 = new javax.swing.JLabel();
-        txtBusquedaNombre7 = new javax.swing.JLabel();
-        txtBusquedaNombre8 = new javax.swing.JLabel();
-        txtBusquedaNombre9 = new javax.swing.JLabel();
-        txtBusquedaNombre10 = new javax.swing.JLabel();
-        txtBusquedaNombre11 = new javax.swing.JLabel();
+        tablaProductosDevueltos = new javax.swing.JTable();
+        txtDevolucion = new javax.swing.JLabel();
+        txtFechaCompra = new javax.swing.JLabel();
+        txtMetodoPago = new javax.swing.JLabel();
+        txtCajeroVenta = new javax.swing.JLabel();
+        txtCajeroDevolucion = new javax.swing.JLabel();
+        txtCliente = new javax.swing.JLabel();
+        txtFechaDevolucion = new javax.swing.JLabel();
+        txtMontoDevolucion = new javax.swing.JLabel();
         btnAtras = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -46,13 +54,13 @@ public class PantallaDetallesHistorialDevolucion extends javax.swing.JPanel {
         txtPanelVentaEnCaja.setText("Detalles Devolucion");
         add(txtPanelVentaEnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, 430, -1));
 
-        txtBusquedaNombre2.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        txtBusquedaNombre2.setText("Motivo:");
-        add(txtBusquedaNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 400, 30));
+        txtMotivo.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        txtMotivo.setText("Motivo:");
+        add(txtMotivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 400, 30));
 
-        txtBusquedaNombre3.setFont(new java.awt.Font("Product Sans Infanity", 1, 26)); // NOI18N
-        txtBusquedaNombre3.setText("Venta ");
-        add(txtBusquedaNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 90, 100, 30));
+        txtVentaTitulo.setFont(new java.awt.Font("Product Sans Infanity", 1, 26)); // NOI18N
+        txtVentaTitulo.setText("Venta ");
+        add(txtVentaTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, 80, 30));
 
         btnFinalizarVenta.setBackground(new java.awt.Color(187, 187, 187));
         btnFinalizarVenta.setRoundBottomLeft(15);
@@ -66,8 +74,8 @@ public class PantallaDetallesHistorialDevolucion extends javax.swing.JPanel {
         });
         btnFinalizarVenta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setBackground(new java.awt.Color(187, 187, 187));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaProductosDevueltos.setBackground(new java.awt.Color(187, 187, 187));
+        tablaProductosDevueltos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -75,43 +83,43 @@ public class PantallaDetallesHistorialDevolucion extends javax.swing.JPanel {
                 "Productos", "Cantidad", "Precio Unitario", "Importe"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaProductosDevueltos);
 
         btnFinalizarVenta.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 410));
 
         add(btnFinalizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, 650, 410));
 
-        txtBusquedaNombre4.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        txtBusquedaNombre4.setText("Devolucion : ");
-        add(txtBusquedaNombre4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 140, 30));
+        txtDevolucion.setFont(new java.awt.Font("Product Sans Infanity", 1, 26)); // NOI18N
+        txtDevolucion.setText("Devolucion");
+        add(txtDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 140, 30));
 
-        txtBusquedaNombre5.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        txtBusquedaNombre5.setText("Fecha Compra : ");
-        add(txtBusquedaNombre5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, 270, 30));
+        txtFechaCompra.setFont(new java.awt.Font("Product Sans Infanity", 0, 14)); // NOI18N
+        txtFechaCompra.setText("Fecha Compra : ");
+        add(txtFechaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, 290, 30));
 
-        txtBusquedaNombre6.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        txtBusquedaNombre6.setText("Metodo Pago :  ");
-        add(txtBusquedaNombre6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, 270, 30));
+        txtMetodoPago.setFont(new java.awt.Font("Product Sans Infanity", 0, 14)); // NOI18N
+        txtMetodoPago.setText("Metodo Pago :  ");
+        add(txtMetodoPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, 290, 30));
 
-        txtBusquedaNombre7.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        txtBusquedaNombre7.setText("Cajero:");
-        add(txtBusquedaNombre7, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 160, 270, 30));
+        txtCajeroVenta.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        txtCajeroVenta.setText("Cajero:");
+        add(txtCajeroVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 160, 270, 30));
 
-        txtBusquedaNombre8.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        txtBusquedaNombre8.setText("Cajero:");
-        add(txtBusquedaNombre8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 270, 30));
+        txtCajeroDevolucion.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        txtCajeroDevolucion.setText("Cajero:");
+        add(txtCajeroDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 270, 30));
 
-        txtBusquedaNombre9.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        txtBusquedaNombre9.setText("Cliente:");
-        add(txtBusquedaNombre9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 270, 30));
+        txtCliente.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        txtCliente.setText("Cliente:");
+        add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 270, 40));
 
-        txtBusquedaNombre10.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        txtBusquedaNombre10.setText("Fecha devolucion:");
-        add(txtBusquedaNombre10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 400, 30));
+        txtFechaDevolucion.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        txtFechaDevolucion.setText("Fecha devolucion:");
+        add(txtFechaDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 400, 30));
 
-        txtBusquedaNombre11.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        txtBusquedaNombre11.setText("Monto devolucion:");
-        add(txtBusquedaNombre11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 400, 30));
+        txtMontoDevolucion.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        txtMontoDevolucion.setText("Monto devolucion:");
+        add(txtMontoDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 400, 30));
 
         btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/atras (1).png"))); // NOI18N
         btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -136,17 +144,94 @@ public class PantallaDetallesHistorialDevolucion extends javax.swing.JPanel {
     private javax.swing.JLabel btnAtras;
     private GUI.PanelRound btnFinalizarVenta;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JLabel txtBusquedaNombre10;
-    private javax.swing.JLabel txtBusquedaNombre11;
-    private javax.swing.JLabel txtBusquedaNombre2;
-    private javax.swing.JLabel txtBusquedaNombre3;
-    private javax.swing.JLabel txtBusquedaNombre4;
-    private javax.swing.JLabel txtBusquedaNombre5;
-    private javax.swing.JLabel txtBusquedaNombre6;
-    private javax.swing.JLabel txtBusquedaNombre7;
-    private javax.swing.JLabel txtBusquedaNombre8;
-    private javax.swing.JLabel txtBusquedaNombre9;
+    private javax.swing.JTable tablaProductosDevueltos;
+    private javax.swing.JLabel txtCajeroDevolucion;
+    private javax.swing.JLabel txtCajeroVenta;
+    private javax.swing.JLabel txtCliente;
+    private javax.swing.JLabel txtDevolucion;
+    private javax.swing.JLabel txtFechaCompra;
+    private javax.swing.JLabel txtFechaDevolucion;
+    private javax.swing.JLabel txtMetodoPago;
+    private javax.swing.JLabel txtMontoDevolucion;
+    private javax.swing.JLabel txtMotivo;
     private javax.swing.JLabel txtPanelVentaEnCaja;
+    private javax.swing.JLabel txtVentaTitulo;
     // End of variables declaration//GEN-END:variables
+
+    public void inicializarValores() {
+        cargarTextos();
+        cargarTabla();
+
+    }
+
+    private String formatearFecha(LocalDateTime fecha) {
+        if (fecha == null) {
+            return "No disponible";
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return fecha.format(formatter);
+    }
+
+    private void cargarTextos() {
+        DevolucionDTO devolucionDTO = app.getDevolucionTemporal();
+
+        // Asegúrate de que devolucionDTO no sea null
+        if (devolucionDTO == null || devolucionDTO.getVenta() == null) {
+            System.out.println("No se encontró información de devolución.");
+            return;
+        }
+
+        // Cajero
+        String nombreCajero = devolucionDTO.getVenta().getEmpleado() != null
+                ? devolucionDTO.getVenta().getEmpleado().getNombre()
+                : "No disponible";
+        txtCajeroDevolucion.setText("Cajero: " + nombreCajero);
+
+        // Cliente
+        txtCliente.setText("Cliente: " + devolucionDTO.getNombreCompleto());
+
+        // Fecha de compra
+        LocalDateTime fechaCompra = devolucionDTO.getVenta().getFechaHora();
+        txtFechaCompra.setText("Fecha de compra: " + formatearFecha(fechaCompra));
+
+        // Fecha de devolución
+        LocalDateTime fechaDevolucion = devolucionDTO.getFechaHora();
+        txtFechaDevolucion.setText("Fecha de devolución: " + formatearFecha(fechaDevolucion));
+
+        String metodoPago = "No disponible";
+
+        if (devolucionDTO.getVenta() != null
+                && devolucionDTO.getVenta().getMetodoPago() != null
+                && devolucionDTO.getVenta().getMetodoPago().getNuevaTarjeta() != null) {
+
+            metodoPago = devolucionDTO.getVenta().getMetodoPago().getNuevaTarjeta().toString();
+        }
+
+        txtMetodoPago.setText("Método de pago: " + metodoPago);
+
+        // Monto devuelto
+        txtMontoDevolucion.setText("Monto devuelto: $" + devolucionDTO.getMontoDevuelto());
+
+        // Motivo
+        txtMotivo.setText("Motivo: " + devolucionDTO.getRazon());
+    }
+
+    public void cargarTabla() {
+        DevolucionDTO devolucionDTO = app.getDevolucionTemporal();
+
+        DefaultTableModel model = (DefaultTableModel) tablaProductosDevueltos.getModel();
+        model.setRowCount(0);
+
+        List<ProductoVentaDTO> productosDevueltos = devolucionDTO.getProductosDevueltos();
+
+        for (ProductoVentaDTO productoDevuelto : productosDevueltos) {
+            Object[] fila = new Object[]{
+                productoDevuelto.getProducto().getNombre() + "" + productoDevuelto.getProducto().getDescripcion(),
+                productoDevuelto.getCantidad(),
+                productoDevuelto.getPrecioUnitario(),
+                productoDevuelto.getImporte(),};
+            model.addRow(fila);
+        }
+
+    }
 }

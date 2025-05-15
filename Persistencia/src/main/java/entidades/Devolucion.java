@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package entidades;
 
 import java.time.LocalDateTime;
@@ -11,19 +8,19 @@ import java.util.List;
  *
  * @author Sebastian Moreno
  */
-public class Devolucion {
-    private int id;
-    private Venta venta;
-    private String nombreCompleto;
-    private String telefono;
-    private String razon;
-    private List<ProductoVenta> listadoProductosDevueltos;
-    private LocalDateTime fechaHora;
-    private String numeroDeTicket;
-    private double montoDevuelto;
+    public class Devolucion {
+        private int id;
+        private Venta venta;
+        private String nombreCompleto;
+        private String telefono;
+        private String razon;
+        private List<ProductoVenta> listadoProductosDevueltos;
+        private LocalDateTime fechaHora;
+        private String numeroDeTicket;
+        private double montoDevuelto;
 
-    public Devolucion() {
-    }
+        public Devolucion() {
+        }
 
     public Devolucion(int id, Venta venta, String nombreCompleto, String telefono, String razon, List<ProductoVenta> listadoProductosDevueltos, LocalDateTime fechaHora, String numeroDeTicket, double montoDevuelto) {
         this.id = id;

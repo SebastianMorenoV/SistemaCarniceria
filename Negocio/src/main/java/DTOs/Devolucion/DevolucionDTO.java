@@ -2,6 +2,7 @@
 package DTOs.Devolucion;
 
 import DTOs.ProductoVentaDTO;
+import DTOs.VentaDTO;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -11,7 +12,8 @@ import java.util.List;
  */
 public class DevolucionDTO {
 
-    Long id;
+    int id;
+    VentaDTO venta;
     String nombreCompleto;
     String telefono;
     String razon;
@@ -23,11 +25,11 @@ public class DevolucionDTO {
     public DevolucionDTO() {
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -87,10 +89,20 @@ public class DevolucionDTO {
         this.montoDevuelto = montoDevuelto;
     }
 
+    public VentaDTO getVenta() {
+        return venta;
+    }
+
+    public void setVenta(VentaDTO venta) {
+        this.venta = venta;
+    }
+
     @Override
     public String toString() {
-        return "DevolucionDTO{" + "id=" + id + ", nombreCompleto=" + nombreCompleto + ", telefono=" + telefono + ", razon=" + razon + ", productosDevueltos=" + productosDevueltos + ", fechaHora=" + fechaHora + ", numeroTicket=" + numeroTicket + ", montoDevuelto=" + montoDevuelto + '}';
+        return "DevolucionDTO{" + "id=" + id + ", venta=" + venta + ", nombreCompleto=" + nombreCompleto + ", telefono=" + telefono + ", razon=" + razon + ", productosDevueltos=" + productosDevueltos + ", fechaHora=" + fechaHora + ", numeroTicket=" + numeroTicket + ", montoDevuelto=" + montoDevuelto + '}';
     }
+
+   
 
     
 }

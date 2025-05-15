@@ -1,38 +1,50 @@
 package GUI.ModuloRealizarDevolucion;
 
+import DTOs.FechaDTO;
 import DTOs.Devolucion.CrearDevolucionDTO;
 import DTOs.Devolucion.DevolucionDTO;
+import DTOs.Devolucion.DevolucionSinVentaDTO;
 import Exception.DevolucionException;
 import GUI.Aplicacion;
+import java.awt.Component;
 import java.awt.event.KeyEvent;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Sebastian Moreno
  */
 public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
-    
+
     private Aplicacion app;
-    
+    List<DevolucionDTO> devolucionesFiltradas = new ArrayList<>(); // lista local.
+
     public PantallaHistorialDevoluciones(Aplicacion app) {
         this.app = app;
         initComponents();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         btnFinalizarVenta = new GUI.PanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        fechaFin = new javax.swing.JTextField();
+        tablaDevoluciones = new javax.swing.JTable();
         inputTelefono = new javax.swing.JTextField();
         inputNombre = new javax.swing.JTextField();
-        fechaInicio = new javax.swing.JTextField();
         txtBusquedaNombre1 = new javax.swing.JLabel();
         txtBusquedaNombre2 = new javax.swing.JLabel();
         txtBusquedaNombre3 = new javax.swing.JLabel();
@@ -41,6 +53,8 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
         btnIngresar = new GUI.PanelRound();
         btnTxtIngresar = new javax.swing.JLabel();
         btnAtras = new javax.swing.JLabel();
+        inputFechaInicio = new com.toedter.calendar.JDateChooser();
+        inputFechaFin = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -50,52 +64,22 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
         btnFinalizarVenta.setRoundBottomRight(15);
         btnFinalizarVenta.setRoundTopLeft(15);
         btnFinalizarVenta.setRoundTopRight(15);
-        btnFinalizarVenta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnFinalizarVentaMouseClicked(evt);
-            }
-        });
         btnFinalizarVenta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setBackground(new java.awt.Color(187, 187, 187));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaDevoluciones.setBackground(new java.awt.Color(187, 187, 187));
+        tablaDevoluciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Codigo reembolso", "Articulos Reembolsados", "Razon", "Fecha", "ID", "Cliente", "Total Regresado", "Detalles"
+                "Codigo reembolso", "Articulos Reembolsados", "Razon", "Fecha", "Cliente", "Total Regresado", "Detalles"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaDevoluciones);
 
-        btnFinalizarVenta.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 990, 330));
+        btnFinalizarVenta.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 990, 340));
 
         add(btnFinalizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 1010, 360));
-
-        fechaFin.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        fechaFin.setText("Seleccionar Fecha");
-        fechaFin.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                fechaFinFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                fechaFinFocusLost(evt);
-            }
-        });
-        fechaFin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fechaFinActionPerformed(evt);
-            }
-        });
-        fechaFin.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                fechaFinKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                fechaFinKeyTyped(evt);
-            }
-        });
-        add(fechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 150, 270, 50));
 
         inputTelefono.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         inputTelefono.setText("Telefono");
@@ -107,15 +91,7 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
                 inputTelefonoFocusLost(evt);
             }
         });
-        inputTelefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputTelefonoActionPerformed(evt);
-            }
-        });
         inputTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                inputTelefonoKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 inputTelefonoKeyTyped(evt);
             }
@@ -133,43 +109,15 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
             }
         });
         inputNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                inputNombreKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 inputNombreKeyTyped(evt);
             }
         });
         add(inputNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, 270, 50));
 
-        fechaInicio.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        fechaInicio.setText("Seleccionar Fecha");
-        fechaInicio.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                fechaInicioFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                fechaInicioFocusLost(evt);
-            }
-        });
-        fechaInicio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fechaInicioActionPerformed(evt);
-            }
-        });
-        fechaInicio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                fechaInicioKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                fechaInicioKeyTyped(evt);
-            }
-        });
-        add(fechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 150, 270, 50));
-
         txtBusquedaNombre1.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         txtBusquedaNombre1.setText("Fecha Fin:");
-        add(txtBusquedaNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 120, 230, 30));
+        add(txtBusquedaNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 120, 230, 30));
 
         txtBusquedaNombre2.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         txtBusquedaNombre2.setText("Telefono cliente : ");
@@ -217,31 +165,9 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
             }
         });
         add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 50));
+        add(inputFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 150, 240, 50));
+        add(inputFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 150, 220, 50));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnFinalizarVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFinalizarVentaMouseClicked
-
-    }//GEN-LAST:event_btnFinalizarVentaMouseClicked
-
-    private void fechaFinFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fechaFinFocusGained
-        if (fechaFin.getText().equals("Nombre Producto")) {
-            fechaFin.setText("");
-        }
-    }//GEN-LAST:event_fechaFinFocusGained
-
-    private void fechaFinFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fechaFinFocusLost
-        if (fechaFin.getText().trim().isEmpty()) {
-            fechaFin.setText("Nombre Producto");
-        }
-    }//GEN-LAST:event_fechaFinFocusLost
-
-    private void fechaFinKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaFinKeyReleased
-
-    }//GEN-LAST:event_fechaFinKeyReleased
-
-    private void fechaFinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaFinKeyTyped
-
-    }//GEN-LAST:event_fechaFinKeyTyped
 
     private void inputTelefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputTelefonoFocusGained
         if (inputTelefono.getText().equals("Telefono")) {
@@ -255,10 +181,6 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_inputTelefonoFocusLost
 
-    private void inputTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputTelefonoKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputTelefonoKeyReleased
-
     private void inputTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputTelefonoKeyTyped
         char c = evt.getKeyChar();
         // Solo permite números (0-9) y retroceso
@@ -266,10 +188,6 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
             evt.consume(); // Ignora la entrada si no es válida
         }
     }//GEN-LAST:event_inputTelefonoKeyTyped
-
-    private void inputTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTelefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputTelefonoActionPerformed
 
     private void inputNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNombreFocusGained
         if (inputNombre.getText().equals("Nombre")) {
@@ -283,45 +201,19 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_inputNombreFocusLost
 
-    private void inputNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputNombreKeyReleased
-        char c = evt.getKeyChar();
-        // Permitir solo letras, espacios y retroceso
-        if (!Character.isLetter(c) && c != ' ' && c != KeyEvent.VK_BACK_SPACE) {
-            evt.consume(); // Ignorar entrada si no es válida
-        }
-    }//GEN-LAST:event_inputNombreKeyReleased
-
     private void inputNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputNombreKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_inputNombreKeyTyped
 
-    private void fechaInicioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fechaInicioFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fechaInicioFocusGained
-
-    private void fechaInicioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fechaInicioFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fechaInicioFocusLost
-
-    private void fechaInicioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaInicioKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fechaInicioKeyReleased
-
-    private void fechaInicioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaInicioKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fechaInicioKeyTyped
-
-    private void fechaInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaInicioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fechaInicioActionPerformed
-
     private void btnTxtIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtIngresarMouseClicked
-        app.mostrarPantallaDetallesHistorialDevolucion();
-    }//GEN-LAST:event_btnTxtIngresarMouseClicked
 
-    private void fechaFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaFinActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fechaFinActionPerformed
+        try {
+            buscarDevolucionPorFiltro();
+        } catch (DevolucionException ex) {
+            Logger.getLogger(PantallaHistorialDevoluciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnTxtIngresarMouseClicked
 
     private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
         app.mostrarPantallaMenuDevolucion();
@@ -333,12 +225,12 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
     private GUI.PanelRound btnFinalizarVenta;
     private GUI.PanelRound btnIngresar;
     private javax.swing.JLabel btnTxtIngresar;
-    private javax.swing.JTextField fechaFin;
-    private javax.swing.JTextField fechaInicio;
+    private com.toedter.calendar.JDateChooser inputFechaFin;
+    private com.toedter.calendar.JDateChooser inputFechaInicio;
     private javax.swing.JTextField inputNombre;
     private javax.swing.JTextField inputTelefono;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaDevoluciones;
     private javax.swing.JLabel txtBusquedaNombre1;
     private javax.swing.JLabel txtBusquedaNombre2;
     private javax.swing.JLabel txtBusquedaNombre3;
@@ -349,16 +241,112 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
     public void buscarDevolucionPorFiltro() throws DevolucionException {
         String nombre = inputNombre.getText();
         String telefono = inputTelefono.getText();
-        
-        CrearDevolucionDTO devolucionDTO = new CrearDevolucionDTO();
+
+        // DTO con los datos de filtro
+        DevolucionSinVentaDTO devolucionDTO = new DevolucionSinVentaDTO();
         devolucionDTO.setTelefono(telefono);
         devolucionDTO.setNombreCompleto(nombre);
-        // fecha inicio y fecha fin con otro dto de devolucion.
-        try {
-            List<DevolucionDTO> devolucionesFiltrada = app.buscarDevolucionPorFiltro(devolucionDTO);
-        } catch (DevolucionException ex) {
-            throw new DevolucionException("Existio un error consultando la base de datos" + ex.getLocalizedMessage());
+
+        // Obtener fechas desde los JDateChooser
+        Date fechaInicioDate = inputFechaInicio.getDate();
+        Date fechaFinDate = inputFechaFin.getDate();
+
+        if (fechaInicioDate == null || fechaFinDate == null) {
+            throw new DevolucionException("Debe seleccionar ambas fechas: inicio y fin.");
         }
-        
+
+        LocalDateTime fechaInicio = fechaInicioDate.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+
+        LocalDateTime fechaFin = fechaFinDate.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+
+        devolucionDTO.setFechaInicio(fechaInicio);
+        devolucionDTO.setFechaFin(fechaFin);
+
+        try {
+            devolucionesFiltradas = app.buscarDevolucionPorFiltro(devolucionDTO);
+            llenarTabla();
+        } catch (DevolucionException ex) {
+            throw new DevolucionException("Existió un error consultando la base de datos: " + ex.getLocalizedMessage());
+        }
     }
+
+    public void llenarTabla() {
+        DefaultTableModel model = (DefaultTableModel) tablaDevoluciones.getModel();
+        model.setRowCount(0);
+        System.out.println("Devoluciones encontradas: " + devolucionesFiltradas.size());
+
+        for (DevolucionDTO devolucion : devolucionesFiltradas) {
+            Object[] fila = new Object[]{
+                devolucion.getId(),
+                devolucion.getProductosDevueltos(),
+                devolucion.getRazon(),
+                devolucion.getFechaHora(),
+                devolucion.getNombreCompleto(),
+                devolucion.getMontoDevuelto(),
+                 "Detalles"
+            };
+            model.addRow(fila);
+        }
+
+        // Configurar el botón solo una vez
+        if (tablaDevoluciones.getColumn("Detalles") != null
+                && !(tablaDevoluciones.getColumn("Detalles").getCellRenderer() instanceof ButtonRenderer)) {
+
+            tablaDevoluciones.getColumn("Detalles").setCellRenderer(new ButtonRenderer());
+            tablaDevoluciones.getColumn("Detalles").setCellEditor(new ButtonEditor(tablaDevoluciones));
+        }
+    }
+
+    // Dentro de tu clase del formulario (por ejemplo: public class RealizarDevolucion extends JFrame { ... })
+    private class ButtonRenderer extends JButton implements javax.swing.table.TableCellRenderer {
+
+        public ButtonRenderer() {
+            setOpaque(true);
+        }
+
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+            setText("Detalles");
+            return this;
+        }
+    }
+
+    private class ButtonEditor extends DefaultCellEditor {
+
+        private JButton button;
+        private JTable table;
+
+        public ButtonEditor(JTable table) {
+            super(new JCheckBox());
+            this.table = table;
+            button = new JButton("Detalles");
+            button.setOpaque(true);
+            button.addActionListener(e -> {
+                fireEditingStopped();
+                int row = table.getSelectedRow();
+                Object id = table.getValueAt(row, 0); // Ajusta si tu ID está en otra columna
+                try {
+                    DevolucionDTO devolucionDTO = app.buscarDevolucionPorID(id.toString());
+                    app.setDevolucionTemporal(devolucionDTO);
+                    app.mostrarPantallaDetallesHistorialDevolucion();
+                } catch (DevolucionException ex) {
+                    Logger.getLogger(PantallaHistorialDevoluciones.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+        }
+
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            return button;
+        }
+
+        public Object getCellEditorValue() {
+            return "Detalles";
+        }
+    }
+
+    
+    
 }

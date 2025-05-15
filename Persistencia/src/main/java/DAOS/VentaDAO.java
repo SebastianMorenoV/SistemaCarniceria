@@ -73,7 +73,7 @@ public class VentaDAO implements IVentaDAO {
 
         List<ProductoVenta> listaProductosVenta = new ArrayList<ProductoVenta>();
         listaProductosVenta.add(productoVenta);
-        return new Venta(1L, LocalDateTime.now(), cajero, 200, 200, 250, metodo, listaProductosVenta);
+        return new Venta(1, LocalDateTime.now(), cajero, 200, 200, 250, metodo, listaProductosVenta);
 
     }
 
@@ -129,7 +129,7 @@ public class VentaDAO implements IVentaDAO {
 
         List<ProductoVenta> listaProductosVenta = new ArrayList<ProductoVenta>();
         listaProductosVenta.add(productoVenta);
-        return new Venta(1L, LocalDateTime.now(), cajero, 200, 200, 250, metodo, listaProductosVenta);
+        return new Venta(1, LocalDateTime.now(), cajero, 200, 200, 250, metodo, listaProductosVenta);
     }
     // Empezar a codificar en MongoDB
 
@@ -183,6 +183,6 @@ public class VentaDAO implements IVentaDAO {
         double iva = subtotal * 0.16;
         double total = subtotal + iva;
 
-        return new Venta(50L, LocalDateTime.now(), cajero, subtotal, iva, total, metodoPago, listaProductosVenta);
+        return new Venta(50, LocalDateTime.now(), cajero, subtotal, iva, total, metodoPago, listaProductosVenta);
     }
 }
