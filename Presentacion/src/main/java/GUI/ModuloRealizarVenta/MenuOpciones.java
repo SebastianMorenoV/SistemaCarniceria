@@ -40,6 +40,10 @@ public class MenuOpciones extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         panelRound1 = new GUI.PanelRound();
         jLabel3 = new javax.swing.JLabel();
+        pnlBotonDevoluciones = new javax.swing.JPanel();
+        icnDevolucion = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -69,8 +73,8 @@ public class MenuOpciones extends javax.swing.JPanel {
         add(pnlBotonVentaEnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 190, 170));
 
         jLabel2.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        jLabel2.setText("Venta en caja");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 150, 30));
+        jLabel2.setText("Devoluciones");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 610, 150, 30));
 
         panelRound1.setBackground(new java.awt.Color(44, 44, 44));
         panelRound1.setRoundBottomLeft(30);
@@ -87,6 +91,50 @@ public class MenuOpciones extends javax.swing.JPanel {
         panelRound1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 120, 40));
 
         add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 600, 220, 40));
+
+        pnlBotonDevoluciones.setBackground(new java.awt.Color(73, 69, 79));
+        pnlBotonDevoluciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlBotonDevoluciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnlBotonDevolucionesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlBotonDevolucionesMouseExited(evt);
+            }
+        });
+        pnlBotonDevoluciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        icnDevolucion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icnDevolucion.png"))); // NOI18N
+        icnDevolucion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                icnDevolucionFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                icnDevolucionFocusLost(evt);
+            }
+        });
+        icnDevolucion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                icnDevolucionMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                icnDevolucionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                icnDevolucionMouseExited(evt);
+            }
+        });
+        pnlBotonDevoluciones.add(icnDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 130, 150));
+
+        add(pnlBotonDevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, 190, 170));
+
+        jLabel4.setFont(new java.awt.Font("Product Sans Infanity", 0, 48)); // NOI18N
+        jLabel4.setText("Bienvenido, Juan Soto!");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 490, 80));
+
+        jLabel5.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        jLabel5.setText("Venta en caja");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 150, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void icnRealizarVentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icnRealizarVentaMouseEntered
@@ -96,12 +144,10 @@ public class MenuOpciones extends javax.swing.JPanel {
     }//GEN-LAST:event_icnRealizarVentaMouseEntered
 
     private void pnlBotonVentaEnCajaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBotonVentaEnCajaMouseEntered
-        // TODO add your handling code here:
         pnlBotonVentaEnCaja.setBackground(new Color(100, 100, 120, 180));
     }//GEN-LAST:event_pnlBotonVentaEnCajaMouseEntered
 
     private void pnlBotonVentaEnCajaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBotonVentaEnCajaMouseExited
-        // TODO add your handling code here:
         pnlBotonVentaEnCaja.setBackground(new Color(73, 69, 79, 150));
     }//GEN-LAST:event_pnlBotonVentaEnCajaMouseExited
 
@@ -109,12 +155,44 @@ public class MenuOpciones extends javax.swing.JPanel {
         app.mostrarRegistrarVenta();
     }//GEN-LAST:event_icnRealizarVentaMouseClicked
 
+    private void icnDevolucionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icnDevolucionMouseClicked
+          app.mostrarPantallaMenuDevolucion();
+    }//GEN-LAST:event_icnDevolucionMouseClicked
+
+    private void icnDevolucionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icnDevolucionMouseEntered
+          pnlBotonDevoluciones.setBackground(new Color(100, 100, 120, 180));
+    }//GEN-LAST:event_icnDevolucionMouseEntered
+
+    private void pnlBotonDevolucionesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBotonDevolucionesMouseEntered
+     
+    }//GEN-LAST:event_pnlBotonDevolucionesMouseEntered
+
+    private void pnlBotonDevolucionesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBotonDevolucionesMouseExited
+       
+    }//GEN-LAST:event_pnlBotonDevolucionesMouseExited
+
+    private void icnDevolucionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_icnDevolucionFocusGained
+           pnlBotonDevoluciones.setBackground(new Color(100, 100, 120, 180));
+    }//GEN-LAST:event_icnDevolucionFocusGained
+
+    private void icnDevolucionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_icnDevolucionFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_icnDevolucionFocusLost
+
+    private void icnDevolucionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icnDevolucionMouseExited
+         pnlBotonDevoluciones.setBackground(new Color(73, 69, 79, 150));
+    }//GEN-LAST:event_icnDevolucionMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel icnDevolucion;
     private javax.swing.JLabel icnRealizarVenta;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private GUI.PanelRound panelRound1;
+    private javax.swing.JPanel pnlBotonDevoluciones;
     private javax.swing.JPanel pnlBotonVentaEnCaja;
     // End of variables declaration//GEN-END:variables
 }

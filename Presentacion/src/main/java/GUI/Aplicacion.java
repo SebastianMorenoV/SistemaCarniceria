@@ -2,8 +2,10 @@ package GUI;
 
 /**
  * Esta clase representa el control de navegacion en la aplicacion.
+ *
  * @author Sebastian Moreno
  */
+import DTOs.FechaDTO;
 import EstrategiaPago.Pago;
 import GUI.ModuloRealizarVenta.VentanaExitoProcesandoPago;
 import GUI.ModuloRealizarVenta.VentanaFormularioEfectivo;
@@ -18,13 +20,23 @@ import GUI.ModuloRealizarVenta.VentanaFormularioTarjeta;
 import GUI.ModuloRealizarVenta.VentanaErrorProcesandoPago;
 import GUI.ModuloRealizarVenta.ventanaMostrarTicket;
 import DTOs.*;
+import DTOs.Devolucion.CrearDevolucionDTO;
+import DTOs.Devolucion.DevolucionDTO;
+import DTOs.Devolucion.DevolucionSinVentaDTO;
+import Devolucion.RealizarDevolucion;
+import Exception.DevolucionException;
 import Exception.NegocioException;
+import GUI.ModuloRealizarDevolucion.PantallaDetallesHistorialDevolucion;
+import GUI.ModuloRealizarDevolucion.PantallaDevolucion;
+import GUI.ModuloRealizarDevolucion.PantallaHistorialDevoluciones;
+import GUI.ModuloRealizarDevolucion.PantallaMenuDevolucion;
+import GUI.ModuloRealizarDevolucion.PantallaTicket;
 import Implementacion.RealizarVenta;
-import entidades.Ticket;
 import excepciones.ProcesadorPagoException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
-
 
 public class Aplicacion {
 
@@ -39,20 +51,39 @@ public class Aplicacion {
     private RealizarVenta realizarVenta;
     private Pago procesadorPago;
 
+    //Caso de uso devolucion.
+    private RealizarDevolucion realizarDevolucion;
+    private PantallaMenuDevolucion menuDevolucion;
+    private PantallaDevolucion pantallaDevolucion;
+    private PantallaDetallesHistorialDevolucion pantallaDetallesHistorialDevolucion;
+    private PantallaTicket pantallaTicketDevolucion;
+    private PantallaHistorialDevoluciones pantallaHistorialDevoluciones;
+
+    //
     public Aplicacion() {
         framePrincipal = new JFrame("Sistema Carnicería");
         framePrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         framePrincipal.setSize(1150, 700);
-        framePrincipal.setLocationRelativeTo(null); // Centrar pantalla
+        framePrincipal.setLocationRelativeTo(null);
 
-        // Inicializar pantallas
+        // Incializar implementaciones
         this.realizarVenta = new RealizarVenta();
         this.procesadorPago = new Pago();
+        this.realizarDevolucion = new RealizarDevolucion();
+
+        // Inicializar pantallas Caso de uso Principal (Venta)
         registrarVenta = new RegistrarVenta(this);
         formularioTarjeta = new FormularioTarjeta(this);
         formularioEfectivo = new FormularioEfectivo(this);
         mostrarCambio = new FormularioMostrarCambio(this);
         menuOpciones = new MenuOpciones(this);
+
+        //Inicializar Pantallas de Devolucion
+        menuDevolucion = new PantallaMenuDevolucion(this);
+        pantallaTicketDevolucion = new PantallaTicket(this);
+        pantallaDevolucion = new PantallaDevolucion(this);
+        pantallaHistorialDevoluciones = new PantallaHistorialDevoluciones(this);
+
     }
 
     // Método para mostrar RegistrarVenta (Pantalla Principal)
@@ -66,7 +97,7 @@ public class Aplicacion {
     public void mostrarTicketPDF() {
         ventanaMostrarTicket ticket = new ventanaMostrarTicket(this);
     }
-   
+
     // Método para mostrar FormularioEfectivo
     public void mostrarFormularioEfectivo() {
         VentanaFormularioEfectivo formulario = new VentanaFormularioEfectivo(this, this.formularioEfectivo);
@@ -152,7 +183,81 @@ public class Aplicacion {
         JOptionPane.showMessageDialog(framePrincipal, "Error: El campo CVV es requerido.");
     }
 
+    /////////////////////////////METODOS PARA EL CASO DE USO DE HACER UNA DEVOLUCION//////////////////////////////////////////////////////////////
+    public void mostrarPantallaTicketDevolucion() {
+        cambiarPantalla(pantallaTicketDevolucion);
+    }
+
+    public void mostrarPantallaMenuDevolucion() {
+        cambiarPantalla(menuDevolucion);
+    }
+
+    public void mostrarPantallaDevolucion() {
+        pantallaDevolucion = new PantallaDevolucion(this);
+        cambiarPantalla(pantallaDevolucion);
+    }
+
+    public void mostrarPantallaDetallesHistorialDevolucion() {
+        pantallaDetallesHistorialDevolucion = new PantallaDetallesHistorialDevolucion(this);
+        cambiarPantalla(pantallaDetallesHistorialDevolucion);
+    }
+
+    public void mostrarPantallaHistorialDevolucion() {
+        cambiarPantalla(pantallaHistorialDevoluciones);
+    }
+
+    public int mostrarPreguntaAñadirProducto() {
+        return JOptionPane.showConfirmDialog(framePrincipal, "¿Deseas devolver este producto?", "Seleccionar producto", JOptionPane.YES_NO_OPTION);
+    }
+
+    public VentaDTO validarTicket(String ticket) {
+        try {
+            return realizarDevolucion.validarTicket(ticket);
+        } catch (Exception e) {
+            e.printStackTrace(); // modificar esto es para pruebas
+        }
+        return null;
+    }
+
+    public DevolucionDTO registrarDevolucion(CrearDevolucionDTO devolucion) throws DevolucionException {
+        try {
+            return realizarDevolucion.registrarDevolucion(devolucion);
+        } catch (DevolucionException ex) {
+            throw new DevolucionException("Error al registrar una devolucion : " + ex.getLocalizedMessage());
+        }
+    }
+
+    public void setVentaEncontradaTicket(VentaDTO venta) {
+        realizarDevolucion.setVentaTemporal(venta);
+    }
+
+    public VentaDTO getVentaEncontradaTicket() {
+        return realizarDevolucion.getVentaTemporal();
+
+    }
+
+    public List<DevolucionDTO> buscarDevolucionPorFiltro(DevolucionSinVentaDTO devolucionDTO) throws DevolucionException {
+        try {
+            return realizarDevolucion.consultarDevolucionesPorFiltro(devolucionDTO);
+        } catch (DevolucionException ex) {
+            throw new DevolucionException("Error al consultar una devolucion : " + ex.getLocalizedMessage());
+        }
+    }
+
+    public void setDevolucionTemporal(DevolucionDTO devolucion) {
+        realizarDevolucion.setDevolucionTemporal(devolucion);
+    }
+
+    public DevolucionDTO getDevolucionTemporal() {
+        return realizarDevolucion.getDevolucionTemporal();
+    }
+
+    public DevolucionDTO buscarDevolucionPorID(String id) throws DevolucionException {
+        return realizarDevolucion.consultarDevolucionPorID(id);
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Cambiar de pantalla dentro del frame principal
+
     private void cambiarPantalla(JPanel nuevaPantalla) {
         framePrincipal.getContentPane().removeAll(); // Eliminar contenido anterior
         framePrincipal.getContentPane().add(nuevaPantalla);
@@ -178,8 +283,9 @@ public class Aplicacion {
     public boolean verificarPago(PagoNuevoDTO pago) throws ProcesadorPagoException {
         return realizarVenta.validarPago(pago);
     }
+
     // que pedo aqui 
-    public NuevoProductoVentaDTO agregarProducto(ProductoCargadoDTO productoCargado, double cantidad) {
+    public ProductoVentaDTO agregarProducto(ProductoCargadoDTO productoCargado, double cantidad) {
         return realizarVenta.agregarProductoVenta(productoCargado, cantidad);
     }
 
@@ -230,13 +336,13 @@ public class Aplicacion {
     public VentaDTO obtenerVenta() {
         return realizarVenta.obtenerVenta();
     }
-    
-    public TicketDTO crearTicket(VentaDTO venta){
-        TicketDTO ticketNuevo = new TicketDTO(venta.getListadoProductosVenta(), 
-                venta.getFechaHora(), 
-                venta.getIva(), 
-                venta.getEmpleado(), 
-                venta.getSubtotal(), 
+
+    public TicketDTO crearTicket(VentaDTO venta) {
+        TicketDTO ticketNuevo = new TicketDTO(venta.getListadoProductosVenta(),
+                venta.getFechaHora(),
+                venta.getIva(),
+                venta.getEmpleado(),
+                venta.getSubtotal(),
                 venta.getTotal());
         return ticketNuevo;
     }

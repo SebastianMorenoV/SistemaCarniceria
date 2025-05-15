@@ -4,7 +4,7 @@
  */
 package IAdapters;
 
-import DTOs.ProductoVentaDTO;   
+import DTOs.ProductoVentaDTO;
 import DTOs.NuevoProductoVentaDTO;
 import entidades.ProductoVenta;
 import java.util.List;
@@ -24,6 +24,8 @@ public interface IAdaptadorProductoVenta {
 
     public List<NuevoProductoVentaDTO> convertirListaADTO(List<ProductoVenta> listaProductoVenta);
 
-    public List<ProductoVenta> convertirListaDTOAEntidad(List<NuevoProductoVentaDTO> listaProductoVenta);
+    public List<ProductoVenta> convertirListaDTOAEntidad(List<ProductoVentaDTO> listaProductoVenta);
+
+    public ProductoVenta convertirProductoVentaAEntidad(ProductoVentaDTO producto);
 
 }

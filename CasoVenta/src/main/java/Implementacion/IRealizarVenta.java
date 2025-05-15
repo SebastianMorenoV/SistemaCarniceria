@@ -20,7 +20,7 @@ public interface IRealizarVenta {
 
     public List<ProductoCargadoDTO> cargarProductos() throws NegocioException;
 
-    public NuevoProductoVentaDTO agregarProductoVenta(ProductoCargadoDTO productoCargado, double cantidad);
+    public ProductoVentaDTO agregarProductoVenta(ProductoCargadoDTO productoCargado, double cantidad);
 
     public double calcularTotal(double subtotal, double iva);
 
@@ -38,7 +38,7 @@ public interface IRealizarVenta {
     public VentaDTO obtenerVenta();
 
     // para la estrategia
-     public double procesarPago(PagoNuevoDTO pago)throws ProcesadorPagoException;
-     
-     public boolean validarPago(PagoNuevoDTO pago) throws ProcesadorPagoException;
+    public double procesarPago(PagoNuevoDTO pago) throws ProcesadorPagoException;
+
+    public boolean validarPago(PagoNuevoDTO pago) throws ProcesadorPagoException;
 }

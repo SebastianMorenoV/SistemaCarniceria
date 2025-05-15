@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package entidades;
 
 import java.time.LocalDateTime;
@@ -12,7 +9,7 @@ import java.util.List;
  * @author Sebastian Moreno
  */
 public class Venta {
-    Long id;
+    int id;
     LocalDateTime fechaHora;
     Empleado cajero;
     double subtotal;
@@ -24,7 +21,7 @@ public class Venta {
     public Venta() {
     }
 
-    public Venta(Long id, LocalDateTime fechaHora, Empleado cajero, double subtotal, double iva, double total, MetodoPago metodoPago, List<ProductoVenta> listaProductosVenta) {
+    public Venta(int id, LocalDateTime fechaHora, Empleado cajero, double subtotal, double iva, double total, MetodoPago metodoPago, List<ProductoVenta> listaProductosVenta) {
         this.id = id;
         this.fechaHora = fechaHora;
         this.cajero = cajero;
@@ -54,11 +51,11 @@ public class Venta {
         this.listaProductosVenta = listaProductosVenta;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -116,6 +113,11 @@ public class Venta {
 
     public void setListaProductosVenta(List<ProductoVenta> listaProductosVenta) {
         this.listaProductosVenta = listaProductosVenta;
+    }
+
+    @Override
+    public String toString() {
+        return "Venta{" + "id=" + id + ", fechaHora=" + fechaHora + ", cajero=" + cajero + ", subtotal=" + subtotal + ", iva=" + iva + ", total=" + total + ", metodoPago=" + metodoPago + ", listaProductosVenta=" + listaProductosVenta + '}';
     }
     
     

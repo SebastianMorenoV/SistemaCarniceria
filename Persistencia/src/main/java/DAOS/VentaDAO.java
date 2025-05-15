@@ -4,14 +4,15 @@
  */
 package DAOS;
 
+import entidades.Venta;
 import entidades.Empleado;
 import entidades.MetodoPago;
 import entidades.Producto;
 import entidades.ProductoVenta;
 import entidades.Tarjeta;
-import entidades.Venta;
 import Exception.PersistenciaException;
 import Interfaces.IVentaDAO;
+import entidades.Efectivo;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
  * @author Sebastian Moreno
  */
 public class VentaDAO implements IVentaDAO {
-    
+
     private static VentaDAO instanceVentaDAO;
 
     public VentaDAO() {
@@ -72,7 +73,7 @@ public class VentaDAO implements IVentaDAO {
 
         List<ProductoVenta> listaProductosVenta = new ArrayList<ProductoVenta>();
         listaProductosVenta.add(productoVenta);
-        return new Venta(1L, LocalDateTime.now(), cajero, 200, 200, 250, metodo, listaProductosVenta);
+        return new Venta(1, LocalDateTime.now(), cajero, 200, 200, 250, metodo, listaProductosVenta);
 
     }
 
@@ -128,6 +129,60 @@ public class VentaDAO implements IVentaDAO {
 
         List<ProductoVenta> listaProductosVenta = new ArrayList<ProductoVenta>();
         listaProductosVenta.add(productoVenta);
-        return new Venta(1L, LocalDateTime.now(), cajero, 200, 200, 250, metodo, listaProductosVenta);
+        return new Venta(1, LocalDateTime.now(), cajero, 200, 200, 250, metodo, listaProductosVenta);
+    }
+    // Empezar a codificar en MongoDB
+
+    @Override
+    public Venta consultarVentaPorTicket(Long id) throws PersistenciaException {
+        Empleado cajero = new Empleado(2L, "Yeremy", "Cajero");
+
+        // Crear método de pago
+        Efectivo efectivo = new Efectivo();
+        MetodoPago metodoPago = new MetodoPago(efectivo);
+
+        // Producto 1
+        Producto producto1 = new Producto();
+        producto1.setId(1L);
+        producto1.setNombre("Pan");
+        producto1.setDescripcion("Pan integral");
+        producto1.setPrecio(15.0);
+        producto1.setEsPesable(false);
+        producto1.setUnidad(1.0);
+        producto1.setTexto("Panadería");
+
+        ProductoVenta productoVenta1 = new ProductoVenta();
+        productoVenta1.setProducto(producto1);
+        productoVenta1.setCantidad(2);
+        productoVenta1.setPrecioUnitario(producto1.getPrecio());
+        productoVenta1.setImporte(producto1.getPrecio() * productoVenta1.getCantidad());
+
+        // Producto 2
+        Producto producto2 = new Producto();
+        producto2.setId(2L);
+        producto2.setNombre("Leche");
+        producto2.setDescripcion("Leche entera 1L");
+        producto2.setPrecio(22.5);
+        producto2.setEsPesable(false);
+        producto2.setUnidad(1.0);
+        producto2.setTexto("Lácteos");
+
+        ProductoVenta productoVenta2 = new ProductoVenta();
+        productoVenta2.setProducto(producto2);
+        productoVenta2.setCantidad(1);
+        productoVenta2.setPrecioUnitario(producto2.getPrecio());
+        productoVenta2.setImporte(producto2.getPrecio());
+
+        // Lista de productos
+        List<ProductoVenta> listaProductosVenta = new ArrayList<>();
+        listaProductosVenta.add(productoVenta1);
+        listaProductosVenta.add(productoVenta2);
+
+        // Totales
+        double subtotal = productoVenta1.getImporte() + productoVenta2.getImporte();
+        double iva = subtotal * 0.16;
+        double total = subtotal + iva;
+
+        return new Venta(50, LocalDateTime.now(), cajero, subtotal, iva, total, metodoPago, listaProductosVenta);
     }
 }

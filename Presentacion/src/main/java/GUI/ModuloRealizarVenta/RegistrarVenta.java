@@ -11,6 +11,7 @@ package GUI.ModuloRealizarVenta;
 import DTOs.EmpleadoCargadoDTO;
 import DTOs.NuevoProductoVentaDTO;
 import DTOs.ProductoCargadoDTO;
+import DTOs.ProductoVentaDTO;
 import DTOs.VentaDTO;
 import Exception.NegocioException;
 import GUI.Aplicacion;
@@ -52,7 +53,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
      */
     private Aplicacion app;
     private List<ProductoCargadoDTO> listadoProductosCargados;
-    private ArrayList<NuevoProductoVentaDTO> listadoProductosVenta;
+    private ArrayList<ProductoVentaDTO> listadoProductosVenta;
 
     public RegistrarVenta(Aplicacion app) {
         this.app = app;
@@ -583,7 +584,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
                     }
 
                     // Agregar el producto convertido a la venta
-                    NuevoProductoVentaDTO productoVenta = app.agregarProducto(productoCargado, cantidad);
+                    ProductoVentaDTO productoVenta = app.agregarProducto(productoCargado, cantidad);
 
                     // Obtener el modelo de la tabla
                     DefaultTableModel modelo = obtenerTablaProductosVenta();
