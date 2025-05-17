@@ -11,6 +11,7 @@ import DTOs.NuevoProductoVentaDTO;
 import DTOs.PagoNuevoDTO;
 //import DTOs.PagoNuevoDTO;
 import DTOs.ProductoCargadoDTO;
+import DTOs.ProductoVentaDTO;
 import DTOs.ProductosVentaDTO;
 import DTOs.VentaDTO;
 import EstrategiaPago.IProcesadorPago;
@@ -73,10 +74,10 @@ public class RealizarVenta implements IRealizarVenta {
     }
     //
     @Override
-    public NuevoProductoVentaDTO agregarProductoVenta(ProductoCargadoDTO productoCargado, double cantidad) {
+    public ProductoVentaDTO agregarProductoVenta(ProductoCargadoDTO productoCargado, double cantidad) {
 
         double importe = productoCargado.getPrecio() * cantidad;
-        return new NuevoProductoVentaDTO(productoCargado, cantidad, productoCargado.getPrecio(), importe);
+        return new ProductoVentaDTO(productoCargado, cantidad, productoCargado.getPrecio(), importe);
 
     }
 

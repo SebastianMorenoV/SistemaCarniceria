@@ -1,9 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package fabrica;
 
+import DAOS.VentaDAO;
 import DAOS.*;
 import Interfaces.*;
 
@@ -44,8 +42,8 @@ public class CreadorDAO implements ICreadorDAO {
     }
 
     @Override
-    public IEntradaDAO CrearEntradaDAO() {
-        return new EntradaDAO();
+    public IDevolucionDAO crearDevolucionDAO() {
+       return new DevolucionDAO();
     }
 }
 

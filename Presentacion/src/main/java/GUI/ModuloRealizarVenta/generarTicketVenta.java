@@ -5,6 +5,7 @@
 package GUI.ModuloRealizarVenta;
 
 import DTOs.NuevoProductoVentaDTO;
+import DTOs.ProductoVentaDTO;
 import DTOs.TicketDTO;
 import DTOs.VentaDTO;
 import GUI.Aplicacion;
@@ -214,13 +215,13 @@ public class generarTicketVenta extends javax.swing.JPanel {
         campoFechaVenta.setText(ticket.getFechaHora().format(DateTimeFormatter.ISO_DATE));
         DefaultTableModel modelo = new DefaultTableModel(columnasTabla, 0);
        
-        for(NuevoProductoVentaDTO producto : ticket.getListaProductosVenta()){
+        for(ProductoVentaDTO producto : ticket.getListaProductosVenta()){
             modelo.addRow(new Object[]{producto.getProducto().getNombre(), producto.getCantidad(),producto.getCantidad()*producto.getImporte()});  
         }
         tablaTicket.setModel(modelo);
         tablaTicket.setVisible(true);
         tablaTicket.setEnabled(false);
-        subtotal = calcularSubtotal((ArrayList<NuevoProductoVentaDTO>) ticket.getListaProductosVenta());
+        subtotal = calcularSubtotal((ArrayList<ProductoVentaDTO>) ticket.getListaProductosVenta());
         iva = calcularIva(subtotal);
         total = calcularTotal(subtotal, iva);
         campoSubtotal2.setText(String.format("%.2f",subtotal));
@@ -228,9 +229,9 @@ public class generarTicketVenta extends javax.swing.JPanel {
         campoTotal.setText(String.format("%.2f",total));
     }
     
-    public double calcularSubtotal(ArrayList<NuevoProductoVentaDTO> productosEnTabla) {
+    public double calcularSubtotal(ArrayList<ProductoVentaDTO> productosEnTabla) {
         double subtotal = 0.0;
-        for (NuevoProductoVentaDTO nuevoProductoVentaDTO : productosEnTabla) {
+        for (ProductoVentaDTO nuevoProductoVentaDTO : productosEnTabla) {
             double precioConIva = nuevoProductoVentaDTO.getImporte();
             subtotal += precioConIva / 1.16; // Quitar el IVA para obtener el subtotal
         }

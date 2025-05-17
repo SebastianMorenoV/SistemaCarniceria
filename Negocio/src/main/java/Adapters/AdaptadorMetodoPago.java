@@ -7,6 +7,7 @@ package Adapters;
 import DTOs.MetodoPagoDTO;
 import DTOs.NuevaTarjetaDTO;
 import DTOs.NuevoEfectivoDTO;
+import IAdapters.IAdaptadorMetodoPago;
 import entidades.Efectivo;
 import entidades.MetodoPago;
 import entidades.Tarjeta;
@@ -15,7 +16,50 @@ import entidades.Tarjeta;
  *
  * @author HP
  */
-public class adaptadorMetodoPago /*implements IAdaptadorMetodoPago*/ {
+public class AdaptadorMetodoPago implements IAdaptadorMetodoPago {
+    
+    @Override
+    public MetodoPagoDTO convertirTarjetaADTO(MetodoPago metodoPago) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public MetodoPago convertirTarjetaDTOAEntidad(MetodoPago metodoPago) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public MetodoPagoDTO convertirEfectivoADTO(MetodoPago metodoPago) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public MetodoPago convertirEfectivoAEntidad(MetodoPago metodoPago) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public MetodoPagoDTO convertirADTO(MetodoPago metodoPago) {
+        MetodoPagoDTO dto = new MetodoPagoDTO();
+        if (metodoPago.getEfectivo() != null) {
+            dto.setNuevoEfectivo(new NuevoEfectivoDTO());
+        } else {
+            dto.setNuevaTarjeta(new NuevaTarjetaDTO());
+        }
+
+        return dto;
+    }
+
+    @Override
+    public MetodoPago convertirAEntidad(MetodoPagoDTO metodoPagoDTO) {
+        MetodoPago metodoPago = new MetodoPago();
+        if (metodoPagoDTO.getNuevoEfectivo() != null) {
+            metodoPago.setTarjeta(new Tarjeta());
+        } else {
+            metodoPago.setEfectivo(new Efectivo());
+        }
+        return metodoPago;  
+    }
     /*
     @Override
         public MetodoPagoDTO convertirTarjetaADTO(MetodoPago metodoPago) {
@@ -71,5 +115,5 @@ public class adaptadorMetodoPago /*implements IAdaptadorMetodoPago*/ {
         MetodoPagoEntidad.setEfectivo(Efectivo);
         return MetodoPagoEntidad;
 }
-*/
+     */
 }

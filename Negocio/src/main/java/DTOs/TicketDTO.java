@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class TicketDTO {
     Long id;
-    List<NuevoProductoVentaDTO> listaProductosVenta;
+    List<ProductoVentaDTO> listaProductosVenta;
     LocalDateTime fechaHora;
     EmpleadoCargadoDTO cajero;
     double subtotal,total,iva;
@@ -22,7 +22,7 @@ public class TicketDTO {
     public TicketDTO() {
     }
 
-    public TicketDTO(Long id, List<NuevoProductoVentaDTO> listaProductosVenta, LocalDateTime fechaHora, EmpleadoCargadoDTO cajero, double subtotal, double total, double iva) {
+    public TicketDTO(Long id, List<ProductoVentaDTO> listaProductosVenta, LocalDateTime fechaHora, EmpleadoCargadoDTO cajero, double subtotal, double total, double iva) {
         this.id = id;
         this.listaProductosVenta = listaProductosVenta;
         this.fechaHora = fechaHora;
@@ -33,7 +33,7 @@ public class TicketDTO {
     }
     
 
-        public TicketDTO(List<NuevoProductoVentaDTO> listaProductosVenta, LocalDateTime fechaHora, double iva, EmpleadoCargadoDTO cajero, double subtotal, double total) {
+        public TicketDTO(List<ProductoVentaDTO> listaProductosVenta, LocalDateTime fechaHora, double iva, EmpleadoCargadoDTO cajero, double subtotal, double total) {
         this.listaProductosVenta = listaProductosVenta;
         this.fechaHora = fechaHora;
         this.iva = iva;
@@ -51,11 +51,11 @@ public class TicketDTO {
         this.id = id;
     }
 
-    public List<NuevoProductoVentaDTO> getListaProductosVenta() {
+    public List<ProductoVentaDTO> getListaProductosVenta() {
         return listaProductosVenta;
     }
 
-    public void setListaProductosVenta(List<NuevoProductoVentaDTO> listaProductosVenta) {
+    public void setListaProductosVenta(List<ProductoVentaDTO> listaProductosVenta) {
         this.listaProductosVenta = listaProductosVenta;
     }
 
