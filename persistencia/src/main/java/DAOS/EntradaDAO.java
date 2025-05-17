@@ -8,12 +8,16 @@ package DAOS;
 import Exception.PersistenciaException;
 import Interfaces.IEntradaDAO;
 import entidades.Entrada;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author $Luis Carlos Manjarrez Gonzalez
  */
 public class EntradaDAO implements IEntradaDAO{
+    private List<Entrada> listaEntradas = new ArrayList<>();
+    
     private static EntradaDAO instanceEntradaDAO;
     
     public EntradaDAO(){
@@ -28,7 +32,8 @@ public class EntradaDAO implements IEntradaDAO{
 
     @Override
     public Entrada registrarEntrada(Entrada entrada) throws PersistenciaException {
-        return new Entrada();
+        listaEntradas.add(entrada);
+        return entrada;
     
     }
     

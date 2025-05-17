@@ -4,10 +4,8 @@
  */
 package Interfaces;
 
+import DAOS.EntradaDAO;
 import DTOs.EntradaDTO;
-import entidades.CrearEntrada;
-import entidades.Entrada;
-import DTOs.CrearEntradaDTO;
 import DTOs.ProductosEntradaDTO;
 import Exception.NegocioException;
 
@@ -16,11 +14,9 @@ import Exception.NegocioException;
  * @author HP
  */
 public interface IEntradaBO {
-    // va en los adapter
-//    public EntradaDTO convertirADTO(Entrada entrada);
-//    public Entrada convertirAEntidad(EntradaDTO entrada);
-//    public CrearEntradaDTO EntradaACrearEntradaDTO(Entrada entrada);
-//    public CrearEntrada CrearEntradaDTOAEntidad(CrearEntradaDTO ventaDTO);
-    public EntradaDTO RegistrarEntrada();
-    public ProductosEntradaDTO obtenerProductosVenta() throws NegocioException;
+    static IEntradaDAO obtenerInstanciaDAO(){
+        return new EntradaDAO();
+    }
+    public EntradaDTO RegistrarEntrada(EntradaDTO entrada);
+    public ProductosEntradaDTO obtenerProductosEntrada() throws NegocioException;
 }

@@ -42,8 +42,8 @@ public class seleccionarProveedor extends javax.swing.JPanel {
         };
         for(ProveedorDTO proveedor : control.cargarProveedores()){
             modelo.addRow(new Object[]{
-                proveedor.getiDProveedor(),
-                proveedor.getNombreProveedor(),
+                proveedor.getId(),
+                proveedor.getNombre(),
                 proveedor.getTelefono()}
             );
         }

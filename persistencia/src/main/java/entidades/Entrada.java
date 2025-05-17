@@ -5,7 +5,7 @@
 
 package entidades;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -14,13 +14,13 @@ import java.util.List;
  */
 public class Entrada {
     public int id;
-    public LocalDateTime FechaHora;
+    public LocalDate FechaHora;
     public Empleado Empleado;
     public Proveedor Proveedor;
     public double subtotal=0.0, total = 0.0;
     public List<ProductoEntrada> listaProductosEntrada;
 
-    public Entrada(int id, LocalDateTime FechaHora, Empleado Empleado, Proveedor Proveedor, List listaProductosEntrada) {
+    public Entrada(int id, LocalDate FechaHora, Empleado Empleado, Proveedor Proveedor, List listaProductosEntrada) {
         this.id = id;
         this.FechaHora = FechaHora;
         this.Empleado = Empleado;
@@ -28,7 +28,7 @@ public class Entrada {
         this.listaProductosEntrada = listaProductosEntrada;
     }
 
-    public Entrada(LocalDateTime FechaHora, Empleado Empleado, Proveedor Proveedor, List listaProductosEntrada) {
+    public Entrada(LocalDate FechaHora, Empleado Empleado, Proveedor Proveedor, List listaProductosEntrada) {
         this.FechaHora = FechaHora;
         this.Empleado = Empleado;
         this.Proveedor = Proveedor;
@@ -46,11 +46,11 @@ public class Entrada {
         this.id = id;
     }
 
-    public LocalDateTime getFechaHora() {
+    public LocalDate getFechaHora() {
         return FechaHora;
     }
 
-    public void setFechaHora(LocalDateTime FechaHora) {
+    public void setFechaHora(LocalDate FechaHora) {
         this.FechaHora = FechaHora;
     }
 

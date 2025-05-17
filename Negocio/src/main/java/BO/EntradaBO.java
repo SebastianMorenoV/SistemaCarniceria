@@ -5,32 +5,48 @@
 
 package BO;
 
-import Adapters.AdaptadorCrearEntrada;
-import DTOs.CrearEntradaDTO;
+import Adapters.AdaptadorEntrada;
+import DAOS.EntradaDAO;
 import DTOs.EntradaDTO;
 import DTOs.ProductosEntradaDTO;
 import Exception.NegocioException;
-import IAdapters.IAdaptadorCrearEntrada;
+import Exception.PersistenciaException;
+import IAdapters.IAdaptadorEntrada;
 import Interfaces.IEntradaBO;
-import entidades.CrearEntrada;
+import Interfaces.IEntradaDAO;
 import entidades.Entrada;
+import fabrica.ICreadorDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author $Luis Carlos Manjarrez Gonzalez
  */
 public class EntradaBO implements IEntradaBO{
-    private final IAdaptadorCrearEntrada adaptadorEntrada = new AdaptadorCrearEntrada();
-//    private final IAdaptadorProducto adaptadorProducto = new AdaptadorProducto();
-//    private final IAdaptadorProductoVenta adaptadorProductoVenta = new adaptadorProductoVenta();
+    private final IAdaptadorEntrada adaptadorEntrada = new AdaptadorEntrada();
 
+    private final IEntradaDAO entradaDAO;
+    
+    public EntradaBO(ICreadorDAO fabrica){
+        this.entradaDAO = fabrica.CrearEntradaDAO();
+    }
+    
     @Override
-    public EntradaDTO RegistrarEntrada() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public EntradaDTO RegistrarEntrada(EntradaDTO entrada) {
+        Entrada entradaARegistrar = adaptadorEntrada.convertirAEntidad(entrada);
+        try {
+            entradaARegistrar = entradaDAO.registrarEntrada(entradaARegistrar);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(EntradaBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        EntradaDTO entradaMapeada = adaptadorEntrada.convertirADTO(entradaARegistrar);
+        return entradaMapeada;
+        
     }
 
     @Override
-    public ProductosEntradaDTO obtenerProductosVenta() throws NegocioException {
+    public ProductosEntradaDTO obtenerProductosEntrada() throws NegocioException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

@@ -4,15 +4,15 @@
  */
 package IAdapters;
 
-import DTOs.CrearEntradaDTO;
-import entidades.CrearEntrada;
+import DTOs.ProveedorDTO;
+import entidades.Proveedor;
 
 /**
  *
  * @author HP
  */
-public interface IAdaptadorCrearEntrada {
-    public CrearEntradaDTO convertirADTO(CrearEntrada entrada);
-    public CrearEntrada convertirAEntidad(CrearEntradaDTO entrada);
+public interface IAdaptadorProveedor {
+    public ProveedorDTO convertirADTO(Proveedor proveedor);
+    public Proveedor convertirAEntidad(ProveedorDTO proveedor);
     
 }

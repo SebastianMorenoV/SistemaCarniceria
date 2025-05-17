@@ -10,33 +10,33 @@ package DTOs;
  * @author $Luis Carlos Manjarrez Gonzalez
  */
 public class ProveedorDTO {
-    int iDProveedor;
-    String nombreProveedor;
+    int id;
+    String nombre;
     String telefono;
 
     public ProveedorDTO(int iDProveedor, String nombreProveedor, String telefono) {
-        this.iDProveedor = iDProveedor;
-        this.nombreProveedor = nombreProveedor;
+        this.id = iDProveedor;
+        this.nombre = nombreProveedor;
         this.telefono = telefono;
     }
 
     public ProveedorDTO() {
     }
 
-    public int getiDProveedor() {
-        return iDProveedor;
+    public int getId() {
+        return id;
     }
 
-    public void setiDProveedor(int iDProveedor) {
-        this.iDProveedor = iDProveedor;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getNombreProveedor() {
-        return nombreProveedor;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreProveedor(String nombreProveedor) {
-        this.nombreProveedor = nombreProveedor;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getTelefono() {
@@ -49,7 +49,7 @@ public class ProveedorDTO {
     
      @Override
     public String toString() {
-        return "ProveedorDTO{" + "iDProveedor=" + iDProveedor + ", nombreProveedor=" + nombreProveedor + ", telefono=" + telefono + '}';
+        return "ProveedorDTO{" + "iDProveedor=" + id + ", nombreProveedor=" + nombre + ", telefono=" + telefono + '}';
     }
     
 }

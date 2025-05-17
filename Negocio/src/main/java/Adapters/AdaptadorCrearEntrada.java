@@ -5,9 +5,10 @@
 
 package Adapters;
 
-import DTOs.EntradaDTO;
+import DTOs.CrearEntradaDTO;
 import IAdapters.IAdaptadorCrearEntrada;
-import entidades.Entrada;
+import entidades.CrearEntrada;
+
 
 /**
  *
@@ -16,13 +17,14 @@ import entidades.Entrada;
 public class AdaptadorCrearEntrada implements IAdaptadorCrearEntrada{
 
     @Override
-    public EntradaDTO convertirADTO(Entrada entrada) {
+    public CrearEntradaDTO convertirADTO(CrearEntrada entrada) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Entrada convertirAEntidad(EntradaDTO entrada) {
+    public CrearEntrada convertirAEntidad(CrearEntradaDTO entrada) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
     
 }
