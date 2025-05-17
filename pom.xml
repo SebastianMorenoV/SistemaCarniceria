@@ -11,6 +11,7 @@
         <module>Negocio</module>
         <module>ProcesadorPago</module>
         <module>Persistencia</module>
+        <module>CasoRegistrarEntrada</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

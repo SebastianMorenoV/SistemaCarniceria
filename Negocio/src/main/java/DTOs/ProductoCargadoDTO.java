@@ -9,12 +9,13 @@ package DTOs;
  * @author Sebastian Moreno
  */
 public class ProductoCargadoDTO {
-    Long codigo;
-    String nombre;
-    String descripcion, categoria;
-    double unidad;
-    double precio; 
-    boolean esPesable;
+    public Long codigo;
+    public String nombre;
+    public String descripcion, categoria;
+    public double unidad;
+    public double precio; 
+    public boolean esPesable;
+    public double Stock;
 
     public ProductoCargadoDTO(Long codigo, String nombre, String descripcion, String categoria, double unidad, double precio, boolean esPesable) {
         this.codigo = codigo;
@@ -33,11 +34,9 @@ public class ProductoCargadoDTO {
         this.precio = precio;
     }
     
-    
-
     public ProductoCargadoDTO() {
     }
-
+    
     public Long getCodigo() {
         return codigo;
     }
@@ -93,7 +92,14 @@ public class ProductoCargadoDTO {
     public void setEsPesable(boolean esPesable) {
         this.esPesable = esPesable;
     }
-
+    
+    public void setStock(double unidades){
+        this.Stock += unidades;
+    }
+    public double getStock(){
+        return Stock;
+    }
+    
     @Override
     public String toString() {
         return codigo + " " + nombre + " " + descripcion + " $" + precio;
