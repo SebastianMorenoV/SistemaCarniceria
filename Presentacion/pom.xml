@@ -46,6 +46,11 @@
             <artifactId>jcalendar</artifactId>
             <version>1.4</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CasoGastos</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <properties>
         <maven.compiler.source>21</maven.compiler.source>

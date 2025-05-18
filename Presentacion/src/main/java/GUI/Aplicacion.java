@@ -25,13 +25,21 @@ import DTOs.Devolucion.DevolucionDTO;
 import DTOs.Devolucion.DevolucionSinVentaDTO;
 import Devolucion.RealizarDevolucion;
 import Exception.DevolucionException;
+import Exception.GastoException;
 import Exception.NegocioException;
+import GUI.ModuloGastos.FormularioAgregarProveedor;
+import GUI.ModuloGastos.FormularioEditarGasto;
+import GUI.ModuloGastos.FormularioRegistrarGasto;
+import GUI.ModuloGastos.MenuGastos;
+import GUI.ModuloGastos.TablaHistorialGastos;
 import GUI.ModuloRealizarDevolucion.PantallaDetallesHistorialDevolucion;
 import GUI.ModuloRealizarDevolucion.PantallaDevolucion;
 import GUI.ModuloRealizarDevolucion.PantallaHistorialDevoluciones;
 import GUI.ModuloRealizarDevolucion.PantallaMenuDevolucion;
 import GUI.ModuloRealizarDevolucion.PantallaTicket;
+import Gasto.RegistrarGasto;
 import Implementacion.RealizarVenta;
+import Proveedor.RegistrarProveedor;
 import excepciones.ProcesadorPagoException;
 import java.util.List;
 import java.util.logging.Level;
@@ -59,6 +67,17 @@ public class Aplicacion {
     private PantallaTicket pantallaTicketDevolucion;
     private PantallaHistorialDevoluciones pantallaHistorialDevoluciones;
 
+    //Caso de uso Gastos
+    private RegistrarGasto registrarGasto;
+    private FormularioAgregarProveedor formularioAgregarProveedor;
+    private FormularioEditarGasto formularioEditarGasto;
+    private FormularioRegistrarGasto formularioRegistrarGasto;
+    private MenuGastos menuGastos;
+    private TablaHistorialGastos tablaHistorialGastos;
+
+    //Proveedor
+    private RegistrarProveedor registrarProveedor;
+
     //
     public Aplicacion() {
         framePrincipal = new JFrame("Sistema Carnicería");
@@ -70,6 +89,8 @@ public class Aplicacion {
         this.realizarVenta = new RealizarVenta();
         this.procesadorPago = new Pago();
         this.realizarDevolucion = new RealizarDevolucion();
+        this.registrarGasto = new RegistrarGasto();
+        this.registrarProveedor = new RegistrarProveedor();
 
         // Inicializar pantallas Caso de uso Principal (Venta)
         registrarVenta = new RegistrarVenta(this);
@@ -83,6 +104,13 @@ public class Aplicacion {
         pantallaTicketDevolucion = new PantallaTicket(this);
         pantallaDevolucion = new PantallaDevolucion(this);
         pantallaHistorialDevoluciones = new PantallaHistorialDevoluciones(this);
+
+        //Pantallas de caso gastos inicializadas
+        formularioAgregarProveedor = new FormularioAgregarProveedor(this);
+        
+        formularioRegistrarGasto = new FormularioRegistrarGasto(this);
+        menuGastos = new MenuGastos(this);
+        tablaHistorialGastos = new TablaHistorialGastos(this);
 
     }
 
@@ -118,6 +146,15 @@ public class Aplicacion {
 
     public void mostrarRegistrarVenta() {
         cambiarPantalla(registrarVenta);
+    }
+
+    //Gastos
+    public void mostrarRegistrarGasto() {
+        cambiarPantalla(formularioRegistrarGasto);
+    }
+
+    public void mostrarAgregarProveedor() {
+        cambiarPantalla(formularioAgregarProveedor);
     }
 
     public void mostrarVentanaProcesandoPago() {
@@ -204,6 +241,19 @@ public class Aplicacion {
 
     public void mostrarPantallaHistorialDevolucion() {
         cambiarPantalla(pantallaHistorialDevoluciones);
+    }
+
+    public void mostrarPantallaMenuGastos() {
+        cambiarPantalla(menuGastos);
+    }
+
+    public void mostrarPantallaHistorialGastos() {
+        cambiarPantalla(tablaHistorialGastos);
+    }
+
+    public void mostrarPantallaEditarGasto() {
+        formularioEditarGasto = new FormularioEditarGasto(this);
+        cambiarPantalla(formularioEditarGasto);
     }
 
     public int mostrarPreguntaAñadirProducto() {
@@ -345,6 +395,41 @@ public class Aplicacion {
                 venta.getSubtotal(),
                 venta.getTotal());
         return ticketNuevo;
+    }
+
+    //Caso gastos
+    public GastoDTO registrarGasto(CrearGastoDTO gasto) throws GastoException {
+        try {
+            return registrarGasto.agregarGasto(gasto);
+
+        } catch (GastoException ex) {
+            throw new GastoException("Error al registrar el gasto" + ex.getLocalizedMessage());
+        }
+    }
+
+    public List<GastoDTO> consultarGastos() throws GastoException {
+        return registrarGasto.consultarGastos();
+    }
+
+    public void setCrearGastoDTO(CrearGastoDTO gasto) {
+        registrarGasto.setGastoPasable(gasto);
+    }
+
+    public CrearGastoDTO getCrearGastoDTO() {
+        return registrarGasto.getGastoPasable();
+    }
+
+    //Proveedor
+    public ProveedorDTO registrarProveedor(CrearProveedorDTO proveedor) throws GastoException {
+        try {
+            return registrarProveedor.agregarProveedor(proveedor);
+        } catch (GastoException ex) {
+            throw new GastoException("Error al registrar el proveedor" + ex.getLocalizedMessage());
+        }
+    }
+
+    public List<ProveedorDTO> consultarProveedores() throws GastoException {
+        return registrarProveedor.consultarProveedores();
     }
 
 }

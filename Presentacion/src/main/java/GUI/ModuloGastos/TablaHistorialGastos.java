@@ -4,17 +4,36 @@
  */
 package GUI.ModuloGastos;
 
+import DTOs.CrearGastoDTO;
+import DTOs.CrearProveedorDTO;
+import DTOs.GastoDTO;
+import DTOs.ProveedorDTO;
+import Exception.GastoException;
+import GUI.Aplicacion;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Admin
  */
 public class TablaHistorialGastos extends javax.swing.JPanel {
 
+    Aplicacion app;
+
     /**
      * Creates new form tableHistorialGastos
      */
-    public TablaHistorialGastos() {
+    public TablaHistorialGastos(Aplicacion app) {
+        this.app = app;
         initComponents();
+        llenarTablaInicial();
+        
     }
 
     /**
@@ -28,8 +47,16 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaHisotrialGastos = new javax.swing.JTable();
         btnGenerarReporte = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        bntAtras = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -37,7 +64,8 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
         jLabel1.setText("Historial Gastos");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 450, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaHisotrialGastos.setFont(new java.awt.Font("Product Sans Infanity", 0, 14)); // NOI18N
+        tablaHisotrialGastos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -48,21 +76,168 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
                 "Categoria", "Folio", "Concepto", "Metodo de pago utilizado", "Fecha del gasto", "Monto del gasto", "Proveedor", ""
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tablaHisotrialGastos.setFocusable(false);
+        tablaHisotrialGastos = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        tablaHisotrialGastos.getTableHeader().setResizingAllowed(false);
+        tablaHisotrialGastos.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tablaHisotrialGastos);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 1150, -1));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 1150, 550));
 
         btnGenerarReporte.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
         btnGenerarReporte.setText(" Generar Reporte.pdf");
         btnGenerarReporte.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         add(btnGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 30, 180, 40));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Tarjeta" }));
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 100, -1));
+        add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 100, -1));
+
+        bntAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icnAtras.png"))); // NOI18N
+        bntAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bntAtras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bntAtrasMouseClicked(evt);
+            }
+        });
+        add(bntAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setText("Filtros");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
+
+        jLabel4.setText("Metodo de pago");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, -1, -1));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Insumos", "Materias Primas", "Mantenimiento/Servicios" }));
+        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 140, -1));
+
+        jLabel5.setText("Categoria");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, -1, 20));
+
+        jLabel6.setText("Fecha");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bntAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntAtrasMouseClicked
+        // TODO add your handling code here:
+        app.mostrarPantallaMenuGastos();
+    }//GEN-LAST:event_bntAtrasMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel bntAtras;
     private javax.swing.JLabel btnGenerarReporte;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaHisotrialGastos;
     // End of variables declaration//GEN-END:variables
+
+    public void llenarTablaInicial() {
+        try {
+            List<GastoDTO> gastos = app.consultarGastos();
+            String[] columnas = {
+                "Categoria", "Folio", "Concepto", "Metodo de pago utilizado",
+                "Fecha del gasto", "Monto del gasto", "Proveedor", "Editar"
+            };
+
+            javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel(columnas, 0) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false; // ninguna celda editable
+                }
+            };
+
+            for (GastoDTO gasto : gastos) {
+                Object[] fila = new Object[]{
+                    gasto.getCategoria(),
+                    gasto.getFolio(),
+                    gasto.getConcepto(),
+                    gasto.getMetodoPago(),
+                    gasto.getFechaGasto().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                    gasto.getMontoGasto(),
+                    gasto.getProveedor() != null ? gasto.getProveedor().getNombre() : "Sin proveedor",
+                    "<html><span style='color:blue; text-decoration:underline;'>Editar</span></html>"
+                };
+                modelo.addRow(fila);
+            }
+
+            tablaHisotrialGastos.setModel(modelo);
+
+            tablaHisotrialGastos.addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mouseClicked(java.awt.event.MouseEvent e) {
+                    int fila = tablaHisotrialGastos.rowAtPoint(e.getPoint());
+                    int columna = tablaHisotrialGastos.columnAtPoint(e.getPoint());
+
+                    if (columna == 7 && fila != -1) { // Columna "Editar"
+                        
+                        //Categoria
+                        Object categoria = tablaHisotrialGastos.getValueAt(fila, 0);
+                        String categoriaString = String.valueOf(categoria);
+                        
+                        //Folio
+                        Object folio = tablaHisotrialGastos.getValueAt(fila, 1);
+                        String folioString = String.valueOf(folio);
+                        
+                        //Concepto
+                        Object concepto = tablaHisotrialGastos.getValueAt(fila, 2);
+                        String conceptoString = String.valueOf(concepto);
+                        
+                        //Metodo de pago
+                        Object metodoPago = tablaHisotrialGastos.getValueAt(fila, 3);
+                        String metodoPagoString = String.valueOf(metodoPago);
+                        
+                        //Fecha del gasto
+                        String fechaString = String.valueOf(tablaHisotrialGastos.getValueAt(fila, 4));
+                        LocalDate fechaGasto = LocalDate.parse(fechaString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                                
+                        //Monto
+                        String montoString = String.valueOf(tablaHisotrialGastos.getValueAt(fila, 5));
+                        double montoGasto = Double.parseDouble(montoString);
+                        //Proveedor
+                        String nombreProveedor = String.valueOf(tablaHisotrialGastos.getValueAt(fila, 6));
+                        CrearProveedorDTO proveedor = new CrearProveedorDTO();
+                        proveedor.setNombre(nombreProveedor);
+                        
+                        CrearGastoDTO gastoEditable = new CrearGastoDTO();
+                        gastoEditable.setCategoria(categoriaString);
+                        gastoEditable.setFolio(folioString);
+                        gastoEditable.setConcepto(conceptoString);
+                        gastoEditable.setMetodoPago(metodoPagoString);
+                        gastoEditable.setFechaGasto(fechaGasto);
+                        gastoEditable.setMontoGasto(montoGasto);
+                        gastoEditable.setProveedor(proveedor);
+                        
+                        
+                        app.setCrearGastoDTO(gastoEditable);
+                        
+                        
+                        app.mostrarPantallaEditarGasto();
+                        // GastoDTO gasto = app.buscarGastoPorFolio(folio.toString());
+                        // app.mostrarFormularioEdicionGasto(gasto);
+                        // algo asi seria este show oq?
+                    }
+                }
+            });
+
+        } catch (GastoException ex) {
+            Logger.getLogger(TablaHistorialGastos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+        
+
+
 }

@@ -1,0 +1,25 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ */
+package Interfaces;
+
+import DTOs.CrearGastoDTO;
+import DTOs.GastoDTO;
+import Exception.NegocioException;
+import java.util.List;
+
+/**
+ *
+ * @author Admin
+ */
+public interface IGastoBO {
+    
+    public GastoDTO agregarGasto(CrearGastoDTO gastoDTO) throws NegocioException;
+    
+    public void eliminarGasto(String folio) throws NegocioException;
+    
+    public GastoDTO modificarGasto(CrearGastoDTO gastoDTO) throws NegocioException;
+    
+    public List<GastoDTO> consultarGastos() throws NegocioException;
+}

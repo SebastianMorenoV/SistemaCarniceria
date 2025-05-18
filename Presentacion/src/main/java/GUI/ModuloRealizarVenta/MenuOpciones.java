@@ -44,6 +44,9 @@ public class MenuOpciones extends javax.swing.JPanel {
         icnDevolucion = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        panelRound2 = new GUI.PanelRound();
+        btnGastos = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -90,7 +93,7 @@ public class MenuOpciones extends javax.swing.JPanel {
         jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelRound1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 120, 40));
 
-        add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 600, 220, 40));
+        add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 600, 220, 40));
 
         pnlBotonDevoluciones.setBackground(new java.awt.Color(73, 69, 79));
         pnlBotonDevoluciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -133,8 +136,28 @@ public class MenuOpciones extends javax.swing.JPanel {
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 490, 80));
 
         jLabel5.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        jLabel5.setText("Venta en caja");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 150, 30));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Gastos");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 380, 190, 30));
+
+        panelRound2.setBackground(new java.awt.Color(73, 69, 79));
+        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnGastos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnGastos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/gastando-dinero (2).png"))); // NOI18N
+        btnGastos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGastos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGastosMouseClicked(evt);
+            }
+        });
+        panelRound2.add(btnGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 170));
+
+        add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 200, 190, 170));
+
+        jLabel7.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        jLabel7.setText("Venta en caja");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 150, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void icnRealizarVentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icnRealizarVentaMouseEntered
@@ -183,15 +206,23 @@ public class MenuOpciones extends javax.swing.JPanel {
          pnlBotonDevoluciones.setBackground(new Color(73, 69, 79, 150));
     }//GEN-LAST:event_icnDevolucionMouseExited
 
+    private void btnGastosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGastosMouseClicked
+        // TODO add your handling code here:
+        app.mostrarPantallaMenuGastos();
+    }//GEN-LAST:event_btnGastosMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnGastos;
     private javax.swing.JLabel icnDevolucion;
     private javax.swing.JLabel icnRealizarVenta;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
     private GUI.PanelRound panelRound1;
+    private GUI.PanelRound panelRound2;
     private javax.swing.JPanel pnlBotonDevoluciones;
     private javax.swing.JPanel pnlBotonVentaEnCaja;
     // End of variables declaration//GEN-END:variables

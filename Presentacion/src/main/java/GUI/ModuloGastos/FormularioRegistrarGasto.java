@@ -4,17 +4,42 @@
  */
 package GUI.ModuloGastos;
 
+import DTOs.CrearGastoDTO;
+import DTOs.CrearProveedorDTO;
+import DTOs.GastoDTO;
+import DTOs.ProveedorDTO;
+import Exception.GastoException;
+import GUI.Aplicacion;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author Admin
  */
 public class FormularioRegistrarGasto extends javax.swing.JPanel {
 
+    Aplicacion app;
+    private byte[] comprobanteSeleccionado;
+
     /**
      * Creates new form FormularioRegistrarGasto
      */
-    public FormularioRegistrarGasto() {
+    public FormularioRegistrarGasto(Aplicacion app) {
+        this.app = app;
         initComponents();
+        cargarProveedores();
+        btnSubirArchivo.setText("Subir Archivo");
     }
 
     /**
@@ -30,24 +55,26 @@ public class FormularioRegistrarGasto extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         inputConcepto = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        cbxMetodoPago = new javax.swing.JComboBox<>();
+        comboMetodoPago = new javax.swing.JComboBox<>();
         inputFolio = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        cbxCategorias = new javax.swing.JComboBox<>();
-        inputMontoGasto = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboCategoria = new javax.swing.JComboBox<>();
+        inputMonto = new javax.swing.JTextField();
+        comboProveedor = new javax.swing.JComboBox<>();
         panelRound1 = new GUI.PanelRound();
         jLabel4 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        imgJPG = new javax.swing.JLabel();
+        imgPNG = new javax.swing.JLabel();
+        btnSubirArchivo = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        panelRound2 = new GUI.PanelRound();
-        jLabel12 = new javax.swing.JLabel();
+        btnGuardarGasto = new GUI.PanelRound();
+        btn = new javax.swing.JLabel();
+        btnAtras = new javax.swing.JLabel();
+        inputFecha = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(228, 233, 236));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -55,7 +82,7 @@ public class FormularioRegistrarGasto extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Product Sans Infanity", 0, 60)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Registrar Gasto");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 1150, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, 480, -1));
 
         jLabel2.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
         jLabel2.setText("Categoria");
@@ -68,8 +95,8 @@ public class FormularioRegistrarGasto extends javax.swing.JPanel {
         jLabel3.setText("Concepto");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
 
-        cbxMetodoPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Tarjeta" }));
-        add(cbxMetodoPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 100, 30));
+        comboMetodoPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Tarjeta" }));
+        add(comboMetodoPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 100, 30));
 
         inputFolio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,28 +125,28 @@ public class FormularioRegistrarGasto extends javax.swing.JPanel {
         jLabel9.setText("Folio");
         add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, -1, -1));
 
-        cbxCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Utencilios", "Productos Carnicos", " " }));
-        cbxCategorias.addActionListener(new java.awt.event.ActionListener() {
+        comboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Insumos", "Materias Primas", "Mantenimiento/Servicios" }));
+        comboCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxCategoriasActionPerformed(evt);
+                comboCategoriaActionPerformed(evt);
             }
         });
-        add(cbxCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 350, 140, 30));
+        add(comboCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 350, 140, 30));
 
-        inputMontoGasto.addActionListener(new java.awt.event.ActionListener() {
+        inputMonto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputMontoGastoActionPerformed(evt);
+                inputMontoActionPerformed(evt);
             }
         });
-        add(inputMontoGasto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 420, 200, 40));
+        add(inputMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 420, 200, 40));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Proveedor" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        comboProveedor.setModel(new javax.swing.DefaultComboBoxModel<>());
+        comboProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                comboProveedorActionPerformed(evt);
             }
         });
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, 190, 30));
+        add(comboProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, 190, 30));
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
         panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -127,16 +154,22 @@ public class FormularioRegistrarGasto extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
         panelRound1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 570, -1, 20));
 
-        jLabel10.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(117, 117, 117));
-        jLabel10.setText("Subir Archivo");
-        panelRound1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 50));
+        imgJPG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/archivo-jpg.png"))); // NOI18N
+        panelRound1.add(imgJPG, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/archivo-jpg.png"))); // NOI18N
-        panelRound1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
+        imgPNG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/archivo-png.png"))); // NOI18N
+        panelRound1.add(imgPNG, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/archivo-png.png"))); // NOI18N
-        panelRound1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
+        btnSubirArchivo.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        btnSubirArchivo.setForeground(new java.awt.Color(117, 117, 117));
+        btnSubirArchivo.setText("Subir Archivo");
+        btnSubirArchivo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSubirArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSubirArchivoMouseClicked(evt);
+            }
+        });
+        panelRound1.add(btnSubirArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 50));
 
         add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 580, 240, 50));
 
@@ -144,52 +177,99 @@ public class FormularioRegistrarGasto extends javax.swing.JPanel {
         jLabel11.setText("Comprobante Gasto");
         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 550, -1, 20));
 
-        panelRound2.setBackground(new java.awt.Color(44, 44, 44));
-        panelRound2.setRoundBottomLeft(20);
-        panelRound2.setRoundBottomRight(20);
-        panelRound2.setRoundTopLeft(20);
-        panelRound2.setRoundTopRight(20);
-        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnGuardarGasto.setBackground(new java.awt.Color(44, 44, 44));
+        btnGuardarGasto.setRoundBottomLeft(20);
+        btnGuardarGasto.setRoundBottomRight(20);
+        btnGuardarGasto.setRoundTopLeft(20);
+        btnGuardarGasto.setRoundTopRight(20);
+        btnGuardarGasto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGuardarGastoMouseClicked(evt);
+            }
+        });
+        btnGuardarGasto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel12.setFont(new java.awt.Font("Product Sans Infanity", 0, 48)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Guardar");
-        panelRound2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 390, 80));
+        btn.setFont(new java.awt.Font("Product Sans Infanity", 0, 48)); // NOI18N
+        btn.setForeground(new java.awt.Color(255, 255, 255));
+        btn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btn.setText("Guardar");
+        btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMouseClicked(evt);
+            }
+        });
+        btnGuardarGasto.add(btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 390, 80));
 
-        add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 540, 390, 90));
+        add(btnGuardarGasto, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 540, 390, 90));
+
+        btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icnAtras.png"))); // NOI18N
+        btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAtrasMouseClicked(evt);
+            }
+        });
+        add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+        add(inputFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 150, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void inputFolioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputFolioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inputFolioActionPerformed
 
-    private void cbxCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCategoriasActionPerformed
+    private void comboCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCategoriaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbxCategoriasActionPerformed
+    }//GEN-LAST:event_comboCategoriaActionPerformed
 
-    private void inputMontoGastoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputMontoGastoActionPerformed
+    private void inputMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputMontoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_inputMontoGastoActionPerformed
+    }//GEN-LAST:event_inputMontoActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void btnGuardarGastoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarGastoMouseClicked
+
+    }//GEN-LAST:event_btnGuardarGastoMouseClicked
+
+    private void btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMouseClicked
+        try {
+            registrarGasto();
+        } catch (GastoException ex) {
+            Logger.getLogger(FormularioRegistrarGasto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnMouseClicked
+
+    private void comboProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboProveedorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_comboProveedorActionPerformed
 
+    private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
+        // TODO add your handling code here:
+        app.mostrarPantallaMenuGastos();
+    }//GEN-LAST:event_btnAtrasMouseClicked
+
+    private void btnSubirArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSubirArchivoMouseClicked
+        // TODO add your handling code here:
+        subirArchivo();
+    }//GEN-LAST:event_btnSubirArchivoMouseClicked
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cbxCategorias;
-    private javax.swing.JComboBox<String> cbxMetodoPago;
+    private javax.swing.JLabel btn;
+    private javax.swing.JLabel btnAtras;
+    private GUI.PanelRound btnGuardarGasto;
+    private javax.swing.JLabel btnSubirArchivo;
+    private javax.swing.JComboBox<String> comboCategoria;
+    private javax.swing.JComboBox<String> comboMetodoPago;
+    private javax.swing.JComboBox<CrearProveedorDTO> comboProveedor;
+    private javax.swing.JLabel imgJPG;
+    private javax.swing.JLabel imgPNG;
     private javax.swing.JTextField inputConcepto;
+    private com.toedter.calendar.JDateChooser inputFecha;
     private javax.swing.JTextField inputFolio;
-    private javax.swing.JTextField inputMontoGasto;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JTextField inputMonto;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -199,6 +279,86 @@ public class FormularioRegistrarGasto extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private GUI.PanelRound panelRound1;
-    private GUI.PanelRound panelRound2;
     // End of variables declaration//GEN-END:variables
+
+    public void registrarGasto() throws GastoException{
+        String concepto = inputConcepto.getText().trim();
+        String metodoPago = comboMetodoPago.getSelectedItem().toString();
+        String folio = inputFolio.getText().trim();
+        
+        Date fechaSeleccionada = inputFecha.getDate();
+        if (fechaSeleccionada == null) {
+            throw new GastoException("Debes seleccionar una fecha.");
+        }
+        LocalDate fechaGasto = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        
+        String categoria = comboCategoria.getSelectedItem().toString();
+        double monto = Double.parseDouble(inputMonto.getText());
+        CrearProveedorDTO proveedor = (CrearProveedorDTO) comboProveedor.getSelectedItem();
+        byte[] comprobante = comprobanteSeleccionado;
+        
+        CrearGastoDTO gasto = new CrearGastoDTO();
+        gasto.setConcepto(concepto);
+        gasto.setMetodoPago(metodoPago);
+        gasto.setFolio(folio);
+        gasto.setFechaGasto(fechaGasto);
+        gasto.setCategoria(categoria);
+        gasto.setMontoGasto(monto);
+        gasto.setProveedor(proveedor);
+        gasto.setComprobante(comprobante);
+        System.out.println(gasto);
+        GastoDTO resultado = app.registrarGasto(gasto);
+        
+        if(resultado!=null){
+            System.out.println("Gasto registrado correctamente: " + resultado);
+            JOptionPane.showMessageDialog(null, "Gasto registrado exitosamente", "Gasto registrado", JOptionPane.INFORMATION_MESSAGE);    
+            app.mostrarPantallaMenuGastos();
+        }
+        
+
+        
+    }
+    
+    public void cargarProveedores(){
+        
+        try {
+            List<ProveedorDTO> proveedores = app.consultarProveedores();
+            for(ProveedorDTO proveedor: proveedores){
+                CrearProveedorDTO cpdto = new CrearProveedorDTO(proveedor.getNombre());
+                comboProveedor.addItem(cpdto);
+            }
+        } catch (GastoException ex) {
+            Logger.getLogger(FormularioRegistrarGasto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }
+    
+    public void subirArchivo(){
+        JFileChooser fileChooser = new JFileChooser();
+
+        // Crear filtro para archivos JPG y PNG
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Imagenes (JPG, PNG)", "jpg", "jpeg", "png");
+        fileChooser.setFileFilter(filter);
+
+        int resultado = fileChooser.showOpenDialog(this);
+
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+            File archivoSeleccionado = fileChooser.getSelectedFile();
+            try {
+                // Leer el archivo como arreglo de bytes
+                comprobanteSeleccionado = Files.readAllBytes(archivoSeleccionado.toPath());
+                // Aquí podrías guardar el archivo en un atributo de clase para luego usarlo al registrar el gasto
+                //this.comprobanteSeleccionado = comprobante;
+
+                // Opcional: cambiar el texto del botón o mostrar mensaje
+                btnSubirArchivo.setText("Archivo seleccionado");
+                imgJPG.setVisible(false);
+                imgPNG.setVisible(false);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Error al leer el archivo: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
 }
+
