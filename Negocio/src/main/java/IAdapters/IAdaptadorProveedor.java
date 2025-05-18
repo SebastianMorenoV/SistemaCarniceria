@@ -4,15 +4,17 @@
  */
 package IAdapters;
 
+import DTOs.CrearProveedorDTO;
 import DTOs.ProveedorDTO;
 import entidades.Proveedor;
+import Exception.NegocioException;
 
 /**
  *
- * @author HP
+ * @author Admin
  */
 public interface IAdaptadorProveedor {
-    public ProveedorDTO convertirADTO(Proveedor proveedor);
-    public Proveedor convertirAEntidad(ProveedorDTO proveedor);
+    public ProveedorDTO ConvertirADTO(Proveedor proveedor);
     
+    public Proveedor ConvertirAEntidad(CrearProveedorDTO proveedorDTO);
 }

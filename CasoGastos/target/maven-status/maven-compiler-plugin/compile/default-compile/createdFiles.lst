@@ -1,0 +1,5 @@
+Exception\GastoException.class
+Gasto\RegistrarGasto.class
+Proveedor\RegistrarProveedor.class
+Gasto\IRegistrarGasto.class
+Proveedor\IRegistrarProveedor.class

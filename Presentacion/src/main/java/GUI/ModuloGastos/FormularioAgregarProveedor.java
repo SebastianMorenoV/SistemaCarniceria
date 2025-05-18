@@ -4,16 +4,26 @@
  */
 package GUI.ModuloGastos;
 
+import DTOs.CrearProveedorDTO;
+import DTOs.ProveedorDTO;
+import Exception.GastoException;
+import GUI.Aplicacion;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Admin
  */
 public class FormularioAgregarProveedor extends javax.swing.JPanel {
 
+    Aplicacion app;
     /**
      * Creates new form FormularioAgregarProveedor
      */
-    public FormularioAgregarProveedor() {
+    public FormularioAgregarProveedor(Aplicacion app) {
+        this.app = app;
         initComponents();
     }
 
@@ -28,9 +38,10 @@ public class FormularioAgregarProveedor extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        inputNombre = new javax.swing.JTextField();
         agregarProveedorPanelRound = new GUI.PanelRound();
         btnAgregarProveedor = new javax.swing.JLabel();
+        btnAtras = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -42,12 +53,12 @@ public class FormularioAgregarProveedor extends javax.swing.JPanel {
         jLabel2.setText("Nombre del proveedor");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, -1, -1));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        inputNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                inputNombreActionPerformed(evt);
             }
         });
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 300, 310, 40));
+        add(inputNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 300, 310, 40));
 
         agregarProveedorPanelRound.setBackground(new java.awt.Color(44, 44, 44));
         agregarProveedorPanelRound.setRoundBottomLeft(10);
@@ -60,21 +71,66 @@ public class FormularioAgregarProveedor extends javax.swing.JPanel {
         btnAgregarProveedor.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregarProveedor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnAgregarProveedor.setText("Agregar");
+        btnAgregarProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregarProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAgregarProveedorMouseClicked(evt);
+            }
+        });
         agregarProveedorPanelRound.add(btnAgregarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 80));
 
         add(agregarProveedorPanelRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 390, 350, 80));
+
+        btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icnAtras.png"))); // NOI18N
+        btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAtrasMouseClicked(evt);
+            }
+        });
+        add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void inputNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_inputNombreActionPerformed
+
+    private void btnAgregarProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarProveedorMouseClicked
+        try {
+            // TODO add your handling code here:
+            agregarProveedor();
+        } catch (GastoException ex) {
+            Logger.getLogger(FormularioAgregarProveedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnAgregarProveedorMouseClicked
+
+    private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
+        // TODO add your handling code here:
+        app.mostrarPantallaMenuGastos();
+    }//GEN-LAST:event_btnAtrasMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.PanelRound agregarProveedorPanelRound;
     private javax.swing.JLabel btnAgregarProveedor;
+    private javax.swing.JLabel btnAtras;
+    private javax.swing.JTextField inputNombre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    public void agregarProveedor() throws GastoException{
+        String nombre = inputNombre.getText().trim();
+        
+        CrearProveedorDTO proveedor = new CrearProveedorDTO();
+        proveedor.setNombre(nombre);
+        
+        ProveedorDTO resultado = app.registrarProveedor(proveedor);
+        
+        if(resultado!=null){
+            System.out.println("Proveedor agregado: " + resultado);
+            JOptionPane.showMessageDialog(null, "Proveedor registrado exitosamente", "Proveedor agregado", JOptionPane.INFORMATION_MESSAGE);
+            app.mostrarPantallaMenuGastos();
+        }
+    }
 }

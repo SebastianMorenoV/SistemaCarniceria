@@ -1,4 +1,3 @@
-
 package fabrica;
 
 import DAOS.VentaDAO;
@@ -7,6 +6,7 @@ import Interfaces.*;
 
 /**
  * Esta clase Fabrica se encarga de crear objetos DAO.
+ *
  * @author Admin
  */
 public class CreadorDAO implements ICreadorDAO {
@@ -28,12 +28,12 @@ public class CreadorDAO implements ICreadorDAO {
 
     @Override
     public IProductoDAO crearProductoDAO() {
-       return new ProductoDAO();
+        return new ProductoDAO();
     }
 
     @Override
     public IPagoDAO crearPagoDAO() {
-       return new PagoDAO();
+        return new PagoDAO();
     }
 
     @Override
@@ -43,7 +43,17 @@ public class CreadorDAO implements ICreadorDAO {
 
     @Override
     public IDevolucionDAO crearDevolucionDAO() {
-       return new DevolucionDAO();
+        return new DevolucionDAO();
+    }
+
+    @Override
+    public IGastoDAO crearGastoDAO() {
+        return new GastoDAO();
+    }
+
+    @Override
+    public IProveedorDAO crearProveedorDAO() {
+        return new ProveedorDAO();
     }
     
     @Override
@@ -56,4 +66,3 @@ public class CreadorDAO implements ICreadorDAO {
         return new ProveedorDAO();
     }
 }
-

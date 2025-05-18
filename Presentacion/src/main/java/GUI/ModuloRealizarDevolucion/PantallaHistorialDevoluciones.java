@@ -4,6 +4,7 @@ import DTOs.FechaDTO;
 import DTOs.Devolucion.CrearDevolucionDTO;
 import DTOs.Devolucion.DevolucionDTO;
 import DTOs.Devolucion.DevolucionSinVentaDTO;
+import DTOs.ProductoVentaDTO;
 import Exception.DevolucionException;
 import GUI.Aplicacion;
 import java.awt.Component;
@@ -15,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -34,6 +36,7 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
     public PantallaHistorialDevoluciones(Aplicacion app) {
         this.app = app;
         initComponents();
+        ajustarTamañoColumnasPreferidos();
     }
 
     @SuppressWarnings("unchecked")
@@ -67,6 +70,7 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
         btnFinalizarVenta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablaDevoluciones.setBackground(new java.awt.Color(187, 187, 187));
+        tablaDevoluciones.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         tablaDevoluciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -75,6 +79,7 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
                 "Codigo reembolso", "Articulos Reembolsados", "Razon", "Fecha", "Cliente", "Total Regresado", "Detalles"
             }
         ));
+        tablaDevoluciones.setRowHeight(24);
         jScrollPane1.setViewportView(tablaDevoluciones);
 
         btnFinalizarVenta.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 990, 340));
@@ -277,17 +282,21 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
     public void llenarTabla() {
         DefaultTableModel model = (DefaultTableModel) tablaDevoluciones.getModel();
         model.setRowCount(0);
-        System.out.println("Devoluciones encontradas: " + devolucionesFiltradas.size());
 
         for (DevolucionDTO devolucion : devolucionesFiltradas) {
+            String nombresProductos = devolucion.getProductosDevueltos()
+                    .stream()
+                    .map(pv -> pv.getProducto().getNombre())
+                    .collect(Collectors.joining(", "));
+
             Object[] fila = new Object[]{
                 devolucion.getId(),
-                devolucion.getProductosDevueltos(),
+                nombresProductos,
                 devolucion.getRazon(),
                 devolucion.getFechaHora(),
                 devolucion.getNombreCompleto(),
                 devolucion.getMontoDevuelto(),
-                 "Detalles"
+                "Detalles"
             };
             model.addRow(fila);
         }
@@ -299,6 +308,16 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
             tablaDevoluciones.getColumn("Detalles").setCellRenderer(new ButtonRenderer());
             tablaDevoluciones.getColumn("Detalles").setCellEditor(new ButtonEditor(tablaDevoluciones));
         }
+    }
+
+    public void ajustarTamañoColumnasPreferidos() {
+        tablaDevoluciones.getColumnModel().getColumn(0).setPreferredWidth(40);  // Código
+        tablaDevoluciones.getColumnModel().getColumn(1).setPreferredWidth(280); // Descripción del artículo
+        tablaDevoluciones.getColumnModel().getColumn(2).setPreferredWidth(150);  // Cantidad
+        tablaDevoluciones.getColumnModel().getColumn(3).setPreferredWidth(100);  // Precio
+        tablaDevoluciones.getColumnModel().getColumn(4).setPreferredWidth(80);  // Importe
+        tablaDevoluciones.getColumnModel().getColumn(4).setPreferredWidth(80);  // Importe
+        tablaDevoluciones.getColumnModel().getColumn(4).setPreferredWidth(50);  // Importe
     }
 
     // Dentro de tu clase del formulario (por ejemplo: public class RealizarDevolucion extends JFrame { ... })
@@ -347,6 +366,4 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
         }
     }
 
-    
-    
 }

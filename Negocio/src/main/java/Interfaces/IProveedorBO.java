@@ -4,15 +4,19 @@
  */
 package Interfaces;
 
+import DTOs.CrearProveedorDTO;
 import DTOs.ProveedorDTO;
 import Exception.NegocioException;
 import java.util.List;
 
 /**
  *
- * @author HP
+ * @author Admin
  */
 public interface IProveedorBO {
-    public List<ProveedorDTO> cargarProveedores() throws NegocioException;
-    public void registrarProveedor(ProveedorDTO proveedor)throws NegocioException;
+    
+    public ProveedorDTO agregarProveedor(CrearProveedorDTO proveedor) throws NegocioException;
+    
+    public List<ProveedorDTO> consultarProveedores() throws NegocioException;
+    
 }

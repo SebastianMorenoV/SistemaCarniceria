@@ -4,16 +4,20 @@
  */
 package GUI.ModuloGastos;
 
+import GUI.Aplicacion;
+
 /**
  *
  * @author Admin
  */
-public class MenuGas extends javax.swing.JPanel {
+public class MenuGastos extends javax.swing.JPanel {
 
+    Aplicacion app;
     /**
      * Creates new form MenuGas
      */
-    public MenuGas() {
+    public MenuGastos(Aplicacion app) {
+        this.app = app;
         initComponents();
     }
 
@@ -51,6 +55,12 @@ public class MenuGas extends javax.swing.JPanel {
         btnRegistrarGasto.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarGasto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnRegistrarGasto.setText("Registrar un nuevo Gasto");
+        btnRegistrarGasto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistrarGasto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegistrarGastoMouseClicked(evt);
+            }
+        });
         regisrarGastoPanelRound.add(btnRegistrarGasto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 320, 80));
 
         add(regisrarGastoPanelRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 340, 80));
@@ -66,7 +76,13 @@ public class MenuGas extends javax.swing.JPanel {
         btnHistorialGastos.setForeground(new java.awt.Color(255, 255, 255));
         btnHistorialGastos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnHistorialGastos.setText("Historial de Gastos");
-        historialGastosPanelRound.add(btnHistorialGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 320, 80));
+        btnHistorialGastos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnHistorialGastos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHistorialGastosMouseClicked(evt);
+            }
+        });
+        historialGastosPanelRound.add(btnHistorialGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 80));
 
         add(historialGastosPanelRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 310, 340, 80));
 
@@ -81,10 +97,31 @@ public class MenuGas extends javax.swing.JPanel {
         btnAgregarProveedor.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregarProveedor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnAgregarProveedor.setText("Agregar Proveedor");
-        agregarProveedorPanelRound.add(btnAgregarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 300, 80));
+        btnAgregarProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregarProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAgregarProveedorMouseClicked(evt);
+            }
+        });
+        agregarProveedorPanelRound.add(btnAgregarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 80));
 
         add(agregarProveedorPanelRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 490, 320, 80));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnHistorialGastosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHistorialGastosMouseClicked
+        // TODO add your handling code here:
+        app.mostrarPantallaHistorialGastos();
+    }//GEN-LAST:event_btnHistorialGastosMouseClicked
+
+    private void btnRegistrarGastoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarGastoMouseClicked
+        // TODO add your handling code here:
+        app.mostrarRegistrarGasto();
+    }//GEN-LAST:event_btnRegistrarGastoMouseClicked
+
+    private void btnAgregarProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarProveedorMouseClicked
+        // TODO add your handling code here:
+        app.mostrarAgregarProveedor();
+    }//GEN-LAST:event_btnAgregarProveedorMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

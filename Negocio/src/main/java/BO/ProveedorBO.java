@@ -2,16 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package BO;
 
 import Adapters.AdaptadorProveedor;
+import DTOs.CrearProveedorDTO;
 import DTOs.ProveedorDTO;
+import entidades.Proveedor;
 import Exception.NegocioException;
 import Exception.PersistenciaException;
+import IAdapters.IAdaptadorProveedor;
 import Interfaces.IProveedorBO;
 import Interfaces.IProveedorDAO;
-import entidades.Proveedor;
 import fabrica.ICreadorDAO;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,41 +21,52 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author $Luis Carlos Manjarrez Gonzalez
+ * @author Admin
  */
 public class ProveedorBO implements IProveedorBO{
-    private AdaptadorProveedor adaptadorProveedor;
-    private IProveedorDAO proveedorDAO;
-
+    
+    private final IAdaptadorProveedor adaptadorProveedor = new AdaptadorProveedor();
+    private final IProveedorDAO proveedorDAO;
+    
     public ProveedorBO(ICreadorDAO fabrica) {
         this.proveedorDAO = fabrica.crearProveedorDAO();
-        this.adaptadorProveedor = new AdaptadorProveedor();
+        
     }
 
     @Override
-    public List<ProveedorDTO> cargarProveedores() throws NegocioException {
-        List<ProveedorDTO> listaProveedoresDTO = new ArrayList<>();
-        try {
-            List<Proveedor> listaProveedores = proveedorDAO.ConsultarProveedores();
+    public ProveedorDTO agregarProveedor(CrearProveedorDTO proveedorDTO) throws NegocioException{
+        
+        Proveedor proveedor = adaptadorProveedor.ConvertirAEntidad(proveedorDTO);
 
-            for (Proveedor proveedor : listaProveedores) {
-                ProveedorDTO dto = adaptadorProveedor.convertirADTO(proveedor);  //convertir usando el adaptador
-                listaProveedoresDTO.add(dto);
+        try {
+            proveedor = proveedorDAO.agregarProveedor(proveedor);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(GastoBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //
+        ProveedorDTO proveedorMapeado = adaptadorProveedor.ConvertirADTO(proveedor);
+        
+        return proveedorMapeado;
+        
+    }
+
+    @Override
+    public List<ProveedorDTO> consultarProveedores() throws NegocioException {
+        List<Proveedor> proveedores = null;
+        List<ProveedorDTO> proveedoresDTO = new ArrayList<>();
+        
+        try {
+            proveedores = proveedorDAO.consultarProveedores();
+            for (Proveedor proveedor : proveedores) {
+                ProveedorDTO proveedorDTO = adaptadorProveedor.ConvertirADTO(proveedor);
+                proveedoresDTO.add(proveedorDTO);
             }
         } catch (PersistenciaException ex) {
-            throw new NegocioException("No se pudo consultar los productos: " + ex.getMessage(), ex);
+            Logger.getLogger(GastoBO.class.getName()).log(Level.SEVERE, null, ex);
+            return new ArrayList<>();
         }
-
-        return listaProveedoresDTO;
+        
+        return proveedoresDTO;
     }
-
-    @Override
-    public void registrarProveedor(ProveedorDTO proveedor)throws NegocioException {
-        try {
-            Proveedor provedorEntidad =  adaptadorProveedor.convertirAEntidad(proveedor);
-            proveedorDAO.registrarProveedor(provedorEntidad);
-        } catch (PersistenciaException ex) {
-            throw new NegocioException("No se pudo consultar los productos: " + ex.getMessage(), ex);
-        } 
-    }
+    
 }

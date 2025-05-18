@@ -1,8 +1,12 @@
 package GUI.ModuloRealizarDevolucion;
 
 import DTOs.VentaDTO;
+import Exception.DevolucionException;
 import GUI.Aplicacion;
 import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -145,7 +149,7 @@ public class PantallaTicket extends javax.swing.JPanel {
     private void btnTxtIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtIngresarMouseClicked
         if (validarTicket()) {
             app.mostrarPantallaDevolucion();
-            
+
         }
 
     }//GEN-LAST:event_btnTxtIngresarMouseClicked
@@ -171,18 +175,39 @@ public class PantallaTicket extends javax.swing.JPanel {
     public boolean validarTicket() {
         String texto = inputNumeroTicket.getText().trim();
 
-        if (texto == null || texto.isEmpty() || texto.equals("Ingresa el numero")) {
+        if (texto == null || texto.isEmpty() || texto.equalsIgnoreCase("Ingresa el numero")) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "<html><h3 style='color:red;'>Debe ingresar un número de ticket.</h3></html>",
+                    "Campo requerido",
+                    JOptionPane.WARNING_MESSAGE
+            );
             return false;
         }
 
-        VentaDTO venta = app.validarTicket(texto);
-        System.out.println(venta);
-        if (venta != null) {
-            app.setVentaEncontradaTicket(venta);
-            return true;
-        } else {
+        try {
+            VentaDTO venta = app.validarTicket(texto);
+            if (venta != null) {
+                app.setVentaEncontradaTicket(venta);
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "<html><h3 style='color:red;'>No se encontró ninguna venta asociada al ticket ingresado.</h3></html>",
+                        "Ticket inválido",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                return false;
+            }
+        } catch (DevolucionException ex) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "<html><h3 style='color:red;'>Error al validar el ticket:</h3><p>" + ex.getMessage() + "</p></html>",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
             return false;
         }
-
     }
+
 }
