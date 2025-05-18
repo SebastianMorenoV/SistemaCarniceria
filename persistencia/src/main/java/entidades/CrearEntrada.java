@@ -10,5 +10,5 @@ package entidades;
  * @author $Luis Carlos Manjarrez Gonzalez
  */
 public class CrearEntrada {
-
+    
 }

@@ -7,9 +7,11 @@ package fabrica;
 import Interfaces.ICrearVentaDAO;
 import Interfaces.IDevolucionDAO;
 import Interfaces.IEmpleadoDAO;
+import Interfaces.IEntradaDAO;
 import Interfaces.IPagoDAO;
 import Interfaces.IProductoDAO;
 import Interfaces.IProductoVentaDAO;
+import Interfaces.IProveedorDAO;
 import Interfaces.IVentaDAO;
 
 /**
@@ -22,6 +24,8 @@ public interface ICreadorDAO {
     IEmpleadoDAO crearEmpleadoDAO();
 
     IVentaDAO crearVentaDAO();
+    
+    IProveedorDAO crearProveedorDAO();
 
     IProductoVentaDAO crearProductoVentaDAO();
     
@@ -30,6 +34,8 @@ public interface ICreadorDAO {
     IPagoDAO crearPagoDAO();
     
     ICrearVentaDAO CrearVentaDAO();
+    
+    IEntradaDAO CrearEntradaDAO();
     
     IDevolucionDAO crearDevolucionDAO();
 }

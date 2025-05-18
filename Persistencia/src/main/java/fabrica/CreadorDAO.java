@@ -45,5 +45,15 @@ public class CreadorDAO implements ICreadorDAO {
     public IDevolucionDAO crearDevolucionDAO() {
        return new DevolucionDAO();
     }
+    
+    @Override
+    public IEntradaDAO CrearEntradaDAO() {
+        return new EntradaDAO();
+    }
+
+    @Override
+    public IProveedorDAO crearProveedorDAO() {
+        return new ProveedorDAO();
+    }
 }
 

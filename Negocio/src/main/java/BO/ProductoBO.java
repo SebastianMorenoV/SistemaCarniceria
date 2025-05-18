@@ -48,4 +48,19 @@ public class ProductoBO implements IProductoBO {
 
         return listaProductosDTO;
     }
+//    //Codigo para setear el stock despues de una entrada o una salida... 1.1 
+//    //ocupo un metodo en la DAO para consultar al producto por id o por nombre... tambien un metodo de setStockProducto?? para simplificar aqui?
+//        public void setStockProducto(ProductoCargadoDTO producto,double unidades) throws NegocioException {
+//        double stockNuevo ; //para ver el nuevo stock una vez agregada la entrada? pero no se utiliza para nada mejor lo dejare en void
+//        ProductoCargadoDTO producto = new ProductoCargadoDTO(); //para regresar el producto??
+//        try {
+//            Producto productoEncontrado = productoDAO.ConsultarProductoPorId(Producto.getId());
+//            //En entidad Producto falta metodo setStock...
+//            productoEncontrado.setStock(unidades);
+//
+//        } catch (PersistenciaException ex) {
+//            throw new NegocioException("No se pudo consultar los productos: " + ex.getMessage(), ex);
+//        }
+//
+//    }
 }

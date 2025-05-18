@@ -10,47 +10,58 @@ import DTOs.EntradaDTO;
 import DTOs.ProductoCargadoDTO;
 import DTOs.ProductoEntradaDTO;
 import DTOs.ProveedorDTO;
+import Exception.NegocioException;
+import Interfaces.IEntradaBO;
+import Interfaces.IProductoBO;
+import Interfaces.IProveedorBO;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author $Luis Carlos Manjarrez Gonzalez
  */
 public class RegistrarEntrada implements IRegistrarEntrada{
-   
-    private List<ProveedorDTO> listaProveedores = new ArrayList<>();
-    private List<ProductoCargadoDTO> listaProductos = new ArrayList<>();
-    private List<ProductoEntradaDTO> listaProductosEntrada = new ArrayList<>();
+   //manejadores de BO
+    private IProductoBO productoBO = manejadoresBO.ManejadorObjetosNegocio.crearProductoBO();
+    private IProveedorBO proveedorBO = manejadoresBO.ManejadorObjetosNegocio.crearProveedorBO();
+    private IEntradaBO entradaBO = manejadoresBO.ManejadorObjetosNegocio.crearEntradaBO();
+    private EntradaDTO entradaTemporal = new EntradaDTO();
     private double precioCompra, unidades;
     private ProductoCargadoDTO productoSeleccionado;
     private ProveedorDTO proveedorSeleccionado;
     
-    //Volver a comentar 
+    //Quitar y utilizar cargar______ para utilizar el metodo necesario 
     @Override
     public void crearListas() {
-        listaProveedores.add(new ProveedorDTO(1, "Kowi Central", "555-1234"));
-        listaProveedores.add(new ProveedorDTO(3, "Verduras Frescas", "555-9012"));
-        listaProveedores.add(new ProveedorDTO(7, "Bachoco norte", "412-212"));
-        listaProveedores.add(new ProveedorDTO(4, "Carnes del Norte", "555-3456"));
-        listaProveedores.add(new ProveedorDTO(5, "Lácteos El Campo", "555-7890"));
-        listaProveedores.add(new ProveedorDTO(6, "Panadería San Juan", "555-2345")); 
-        listaProductos.add(new ProductoCargadoDTO((long)1,"Pierna de cerdo", "Pierna sin hueso, fresca", "Cerdo", 1.0, 40.00, true));
-        listaProductos.add(new ProductoCargadoDTO((long)2, "Carne molida", "80% carne, 20% grasa", "Res", 1.0, 45.00, true));
-        listaProductos.add(new ProductoCargadoDTO((long)3, "Costilla res", "Costilla para asar con hueso", "Res", 1.0, 62.25, true));
-        listaProductos.add(new ProductoCargadoDTO((long)4, "Chuleta ahumada", "Chuleta lista para freír", "Cerdo", 1.0, 40.00, true));
-        listaProductos.add(new ProductoCargadoDTO((long)5, "Filete de pollo", "Pechuga sin piel ni hueso", "Pollo", 1.0, 50.00, true));
+//        listaProveedores.add(new ProveedorDTO(1, "Kowi Central", "555-1234"));
+//        listaProveedores.add(new ProveedorDTO(3, "Verduras Frescas", "555-9012"));
+//        listaProveedores.add(new ProveedorDTO(7, "Bachoco norte", "412-212"));
+//        listaProveedores.add(new ProveedorDTO(4, "Carnes del Norte", "555-3456"));
+//        listaProveedores.add(new ProveedorDTO(5, "Lácteos El Campo", "555-7890"));
+//        listaProveedores.add(new ProveedorDTO(6, "Panadería San Juan", "555-2345")); 
+
     }
 
     @Override
-    public List<ProveedorDTO> cargarProveedores() {
-      return listaProveedores;
+    public List<ProveedorDTO> cargarProveedores() throws NegocioException{ 
+        try {
+            return proveedorBO.cargarProveedores();
+        } catch (NegocioException ex) {
+            throw new NegocioException("No hay proveedores");
+        }
     }
 
     @Override
-    public List<ProductoCargadoDTO> cargarProductos() {
-      return listaProductos;
+    public List<ProductoCargadoDTO> cargarProductos()throws NegocioException{
+        try {
+            return productoBO.cargarProductos();
+        } catch (NegocioException ex) {
+            throw new NegocioException("No hay productos"); 
+        }
     }
 
     @Override
@@ -61,12 +72,16 @@ public class RegistrarEntrada implements IRegistrarEntrada{
     @Override
     public void agregarProductoEntrada() {
         ProductoEntradaDTO producto = new ProductoEntradaDTO(this.productoSeleccionado, this.unidades, this.precioCompra);             
-        listaProductosEntrada.add(producto);
+        entradaTemporal.listaProductosEntrada.add(producto);
     }
 
     @Override
-    public void agregarProveedor() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void agregarProveedor(ProveedorDTO proveedor) throws NegocioException {
+        try {
+            proveedorBO.registrarProveedor(proveedor);
+        } catch (NegocioException ex) {
+           throw new NegocioException("No se pudo agregar al proveedor" + ex.getMessage());
+        }
     }
 
     @Override
@@ -112,7 +127,8 @@ public class RegistrarEntrada implements IRegistrarEntrada{
 
     @Override
     public List<ProductoEntradaDTO> cargarProductosEntrada() {
-        return listaProductosEntrada;
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody     
+//        return listaProductosEntrada;
     }
 
     @Override
@@ -124,9 +140,9 @@ public class RegistrarEntrada implements IRegistrarEntrada{
         }
         return subtotal;
     }
-
+//¿¿Este metodo ira en control?? o puede ir en clase productoBO
     @Override
-    public void setStock(double unidades) {
+    public void setStockProducto(ProductoCargadoDTO producto,double unidades) {
         this.productoSeleccionado.setStock(unidades);
     }
 

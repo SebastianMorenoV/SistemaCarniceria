@@ -39,6 +39,13 @@ public class Producto {
         this.texto = texto;
     }
 
+    public Producto(Long id, String nombre, String descripcion) {
+        this.id = id;
+        this.descripcion = descripcion;
+        this.nombre = nombre;
+    }
+    
+
     public Long getId() {
         return id;
     }

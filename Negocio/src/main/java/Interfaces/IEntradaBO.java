@@ -6,8 +6,9 @@ package Interfaces;
 
 import DAOS.EntradaDAO;
 import DTOs.EntradaDTO;
-import DTOs.ProductosEntradaDTO;
+import DTOs.ProductoCargadoDTO;
 import Exception.NegocioException;
+import java.util.List;
 
 /**
  *
@@ -17,6 +18,9 @@ public interface IEntradaBO {
     static IEntradaDAO obtenerInstanciaDAO(){
         return new EntradaDAO();
     }
-    public EntradaDTO RegistrarEntrada(EntradaDTO entrada);
-    public ProductosEntradaDTO obtenerProductosEntrada() throws NegocioException;
+    // ¿¿¿Agregar como parametro ProductoEntradaDTO producto??? para persistir el producto
+    
+    public EntradaDTO RegistrarEntrada(EntradaDTO entrada)throws NegocioException;
+    
+    public List<ProductoCargadoDTO> obtenerProductosEntrada() throws NegocioException;
 }

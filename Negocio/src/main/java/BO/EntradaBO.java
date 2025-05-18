@@ -8,6 +8,7 @@ package BO;
 import Adapters.AdaptadorEntrada;
 import DAOS.EntradaDAO;
 import DTOs.EntradaDTO;
+import DTOs.ProductoCargadoDTO;
 import DTOs.ProductosEntradaDTO;
 import Exception.NegocioException;
 import Exception.PersistenciaException;
@@ -16,6 +17,7 @@ import Interfaces.IEntradaBO;
 import Interfaces.IEntradaDAO;
 import entidades.Entrada;
 import fabrica.ICreadorDAO;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -46,11 +48,8 @@ public class EntradaBO implements IEntradaBO{
     }
 
     @Override
-    public ProductosEntradaDTO obtenerProductosEntrada() throws NegocioException {
+    public List<ProductoCargadoDTO> obtenerProductosEntrada() throws NegocioException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-
-
 
 }

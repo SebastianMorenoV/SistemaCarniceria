@@ -7,6 +7,8 @@ package Interfaces;
 import DAOS.EntradaDAO;
 import Exception.PersistenciaException;
 import entidades.Entrada;
+import entidades.Producto;
+import java.util.List;
 
 /**
  *
@@ -18,5 +20,5 @@ public interface IEntradaDAO {
         return new EntradaDAO();
     }
     public Entrada registrarEntrada(Entrada entrada)throws PersistenciaException;
-
+    public List<Producto> ConsultarProductos()throws PersistenciaException;
 }

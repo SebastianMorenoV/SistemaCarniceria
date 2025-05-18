@@ -5,7 +5,7 @@
 
 package DTOs;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -14,12 +14,12 @@ import java.util.List;
  */
 public class EntradaDTO {
     public int id;
-    public LocalDate fechaHora;
+    public LocalDateTime fechaHora;
     public EmpleadoCargadoDTO Empleado;
     public List<ProductoEntradaDTO> listaProductosEntrada;
     public ProveedorDTO Proveedor;
 
-    public EntradaDTO(int id, LocalDate fechaHora, EmpleadoCargadoDTO Empleado, List<ProductoEntradaDTO> listaProductosEntrada, ProveedorDTO Proveedor) {
+    public EntradaDTO(int id, LocalDateTime fechaHora, EmpleadoCargadoDTO Empleado, List<ProductoEntradaDTO> listaProductosEntrada, ProveedorDTO Proveedor) {
         this.id = id;
         this.fechaHora = fechaHora;
         this.Empleado = Empleado;
@@ -27,7 +27,7 @@ public class EntradaDTO {
         this.Proveedor = Proveedor;
     }
 
-    public EntradaDTO(LocalDate fechaHora, EmpleadoCargadoDTO Empleado, List<ProductoEntradaDTO> listaProductosEntrada, ProveedorDTO Proveedor) {
+    public EntradaDTO(LocalDateTime fechaHora, EmpleadoCargadoDTO Empleado, List<ProductoEntradaDTO> listaProductosEntrada, ProveedorDTO Proveedor) {
         this.fechaHora = fechaHora;
         this.Empleado = Empleado;
         this.listaProductosEntrada = listaProductosEntrada;
@@ -45,11 +45,11 @@ public class EntradaDTO {
         this.id = id;
     }
 
-    public LocalDate getFechaHora() {
+    public LocalDateTime getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(LocalDate fechaHora) {
+    public void setFechaHora(LocalDateTime fechaHora) {
         this.fechaHora = fechaHora;
     }
 
