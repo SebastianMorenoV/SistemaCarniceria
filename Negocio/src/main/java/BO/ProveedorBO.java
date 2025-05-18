@@ -57,16 +57,34 @@ public class ProveedorBO implements IProveedorBO{
         
         try {
             proveedores = proveedorDAO.consultarProveedores();
+            System.out.println(proveedores);
             for (Proveedor proveedor : proveedores) {
-                ProveedorDTO proveedorDTO = adaptadorProveedor.ConvertirADTO(proveedor);
+                ProveedorDTO proveedorDTO = adaptadorProveedor.ConvertirADTOEntrada(proveedor);
+                System.out.println(proveedorDTO.toString());
+                
                 proveedoresDTO.add(proveedorDTO);
             }
         } catch (PersistenciaException ex) {
             Logger.getLogger(GastoBO.class.getName()).log(Level.SEVERE, null, ex);
-            return new ArrayList<>();
         }
         
         return proveedoresDTO;
+    }
+
+    @Override
+    public ProveedorDTO agregarProveedor(ProveedorDTO proveedor) throws NegocioException {
+                
+        Proveedor proveedorEntidad = adaptadorProveedor.ConvertirAEntidad(proveedor);
+
+        try {
+            proveedorEntidad = proveedorDAO.agregarProveedor(proveedorEntidad);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(GastoBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //
+        ProveedorDTO proveedorMapeado = adaptadorProveedor.ConvertirADTO(proveedorEntidad);
+        
+        return proveedorMapeado;
     }
     
 }

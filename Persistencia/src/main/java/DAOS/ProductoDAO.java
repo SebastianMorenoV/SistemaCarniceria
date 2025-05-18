@@ -11,6 +11,18 @@ import java.util.List;
  * @author Sebastian Moreno
  */
 public class ProductoDAO implements IProductoDAO {
+    private static ProductoDAO instanceProductoDAO;
+    
+    public ProductoDAO(){
+        
+    }
+    
+    public static ProductoDAO getInstanciaDAO(){
+        if(instanceProductoDAO == null){
+            instanceProductoDAO = new ProductoDAO();
+        }
+        return instanceProductoDAO;
+    }
 
     @Override
     public List<Producto> consultarProductos() throws PersistenciaException {

@@ -26,6 +26,7 @@ import DTOs.Devolucion.DevolucionSinVentaDTO;
 import Devolucion.RealizarDevolucion;
 import Exception.DevolucionException;
 import Exception.GastoException;
+import Exception.InventarioException;
 import Exception.NegocioException;
 import GUI.ModuloGastos.FormularioAgregarProveedor;
 import GUI.ModuloGastos.FormularioEditarGasto;
@@ -37,10 +38,19 @@ import GUI.ModuloRealizarDevolucion.PantallaDevolucion;
 import GUI.ModuloRealizarDevolucion.PantallaHistorialDevoluciones;
 import GUI.ModuloRealizarDevolucion.PantallaMenuDevolucion;
 import GUI.ModuloRealizarDevolucion.PantallaTicket;
+
+import GUI.ModuloRegistrarEntrada.FormularioDatosEntrada;
+import GUI.ModuloRegistrarEntrada.OpcionesInventario;
+import GUI.ModuloRegistrarEntrada.PanelRegistrarProductosEntrada;
+import GUI.ModuloRegistrarEntrada.SeleccionarProducto;
+import GUI.ModuloRegistrarEntrada.SeleccionarProveedor;
+
 import Gasto.RegistrarGasto;
 import Implementacion.RealizarVenta;
+import Implementacion.RegistrarEntrada;
 import Proveedor.RegistrarProveedor;
 import excepciones.ProcesadorPagoException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -78,8 +88,14 @@ public class Aplicacion {
     //Proveedor
     private RegistrarProveedor registrarProveedor;
 
+    //caso registrarEntrada
+    private RegistrarEntrada registrarEntrada;
+    private PanelRegistrarProductosEntrada panelResumenEntrada;
+    private SeleccionarProducto seleccionarProducto;
+    private SeleccionarProveedor seleccionarProveedor;
+    private OpcionesInventario menuInventario;
     //
-    public Aplicacion() {
+    public Aplicacion(){
         framePrincipal = new JFrame("Sistema Carnicería");
         framePrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         framePrincipal.setSize(1150, 700);
@@ -91,7 +107,10 @@ public class Aplicacion {
         this.realizarDevolucion = new RealizarDevolucion();
         this.registrarGasto = new RegistrarGasto();
         this.registrarProveedor = new RegistrarProveedor();
-
+        this.registrarEntrada = new RegistrarEntrada();
+        
+        
+        
         // Inicializar pantallas Caso de uso Principal (Venta)
         registrarVenta = new RegistrarVenta(this);
         formularioTarjeta = new FormularioTarjeta(this);
@@ -111,7 +130,7 @@ public class Aplicacion {
         formularioRegistrarGasto = new FormularioRegistrarGasto(this);
         menuGastos = new MenuGastos(this);
         tablaHistorialGastos = new TablaHistorialGastos(this);
-
+         
     }
 
     // Método para mostrar RegistrarVenta (Pantalla Principal)
@@ -396,7 +415,7 @@ public class Aplicacion {
         return ticketNuevo;
     }
 
-    //Caso gastos
+//    Caso gastos
     public GastoDTO registrarGasto(CrearGastoDTO gasto) throws GastoException {
         try {
             return registrarGasto.agregarGasto(gasto);
@@ -430,5 +449,73 @@ public class Aplicacion {
     public List<ProveedorDTO> consultarProveedores() throws GastoException {
         return registrarProveedor.consultarProveedores();
     }
+    
+    //Caso Registrar entrada ----------------------------------------
+    public void MostrarErrorNumeroInvalido(){ 
+         JOptionPane.showMessageDialog(framePrincipal, "Error: Ingresa un valor numérico válido.");
+         mostrarVentanaDatosEntrada();
+    }
+    public void MostrarErrorUsarioCancelo(){
+        JOptionPane.showMessageDialog(framePrincipal, "El Usuario cancelo la operacion");
+    }
+    
+    public void mostrarVentanaOpcionesInventario(){
+        menuInventario = new OpcionesInventario(this);
+        cambiarPantalla(menuInventario);
+         
+    }
+    
+    public void mostrarVentanaSeleccionarProveedor() throws InventarioException{
+        seleccionarProveedor = new SeleccionarProveedor(this); 
+        cambiarPantalla(seleccionarProveedor);
+    }
+    public void mostrarVentanaSeleccionarProductosEntrada() throws NegocioException{    
+        seleccionarProducto = new SeleccionarProducto(this); 
+        cambiarPantalla(seleccionarProducto);
+    }
+
+    public void mostrarVentanaInformacionEntrada() throws InventarioException{
+        panelResumenEntrada = new PanelRegistrarProductosEntrada(this); 
+        cambiarPantalla(panelResumenEntrada);        
+    }
+
+    public void mostrarVentanaDatosEntrada() {
+         FormularioDatosEntrada ventanaDatos = new FormularioDatosEntrada(this);
+    }
+    
+    public void setProveedor(ProveedorDTO proveedor){
+        registrarEntrada.setProveedor(proveedor);
+    }
+    
+    public void setPrecioCompra(double precioCompra){
+       registrarEntrada.setPrecioCompra(precioCompra);
+    }
+    
+    public void setUnidades(double Unidades){
+       registrarEntrada.setUnidades(Unidades);    
+    }
+    public void setProducto(ProductoCargadoDTO producto){
+       registrarEntrada.setProductoEntrada(producto);
+    }
+    
+    public List<ProveedorDTO> cargarProveedores() throws InventarioException{
+        return registrarEntrada.cargarProveedores();
+    }
+    public List<ProductoEntradaDTO> cargarProductosEntrada(){
+        return registrarEntrada.cargarProductosEntrada();   
+    }
+    
+    public void agregarProductoEntrada() throws InventarioException{
+        registrarEntrada.agregarProductoEntrada();
+        mostrarVentanaInformacionEntrada();
+    }
+    public void setEntradaTemporal(EntradaDTO entrada){
+        registrarEntrada.setEntradaTemporal(entrada);
+    }
+    public EntradaDTO getEntradaTemporal(){
+        return registrarEntrada.getEntradaTemporal();
+    }
+    
+    //Caso Registrar entrada----------------------------------------
 
 }

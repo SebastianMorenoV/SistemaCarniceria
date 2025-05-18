@@ -29,5 +29,20 @@ public class AdaptadorProveedor implements IAdaptadorProveedor{
         proveedorEntidad.setNombre(proveedorDTO.getNombre());
         return proveedorEntidad;
     }
+
+    @Override
+    public Proveedor ConvertirAEntidad(ProveedorDTO proveedorDTO) {
+        Proveedor proveedorEntidad = new Proveedor(proveedorDTO.getId(), proveedorDTO.getNombre(),proveedorDTO.getTelefono());
+        return proveedorEntidad;
+        
+    }
+
+    @Override
+    public ProveedorDTO ConvertirADTOEntrada(Proveedor proveedor) {
+        ProveedorDTO proveedorDTO = new ProveedorDTO();
+        proveedorDTO.setNombre(proveedor.getNombre());
+        proveedorDTO.setTelefono(proveedor.getNumero());
+        return proveedorDTO;
+    }
     
 }

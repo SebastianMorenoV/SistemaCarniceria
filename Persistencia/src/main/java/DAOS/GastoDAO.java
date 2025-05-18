@@ -25,7 +25,7 @@ public class GastoDAO implements IGastoDAO {
         
         try {
             LocalDate fechaGasto = LocalDate.of(2025, 1, 1);
-            Proveedor proveedor = new Proveedor("MrSteaks777");
+            Proveedor proveedor = new Proveedor("MrSteaks777", "141223");
             byte[] comprobante = null;           
             return new Gasto(1, "asd123", fechaGasto, "Utencilios", proveedor, "compra de cuchillos", 750.0, comprobante, "Efectivo");
         } catch (Exception e) {
@@ -46,9 +46,9 @@ public class GastoDAO implements IGastoDAO {
     public List<Gasto> consultarGastos() throws PersistenciaException {
         List<Gasto> listaGastos = new ArrayList<>();
 
-        Proveedor proveedor1 = new Proveedor("Super Carnes La Norteña");
-        Proveedor proveedor2 = new Proveedor("Abarrotes El Güero");
-        Proveedor proveedor3 = new Proveedor("MrSteaks777");
+        Proveedor proveedor1 = new Proveedor("Super Carnes La Norteña", "141223");
+        Proveedor proveedor2 = new Proveedor("Abarrotes El Güero",  "141223");
+        Proveedor proveedor3 = new Proveedor("MrSteaks777",  "141223");
 
         LocalDate fecha1 = LocalDate.of(2025, 5, 10);
         byte[] comprobante1 = "comprobante1.pdf".getBytes();

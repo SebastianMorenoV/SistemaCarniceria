@@ -11,9 +11,17 @@ package DTOs;
 public class ProveedorDTO {
     int id;
     String nombre;
+    String telefono;
 
     public ProveedorDTO() {
     }
+
+    public ProveedorDTO(int id, String nombre, String telefono) {
+        this.id = id;
+        this.nombre = nombre;
+        this.telefono = telefono;
+    }
+    
 
     public ProveedorDTO(int id, String nombre) {
         this.id = id;
@@ -36,9 +44,18 @@ public class ProveedorDTO {
         this.nombre = nombre;
     }
 
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+    
+
     @Override
     public String toString() {
-        return  nombre ;
+        return  nombre + telefono;
     }
     
     

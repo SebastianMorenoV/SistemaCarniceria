@@ -54,5 +54,13 @@ public class CreadorDAO implements ICreadorDAO {
     @Override
     public IProveedorDAO crearProveedorDAO() {
         return new ProveedorDAO();
+<<<<<<< Updated upstream
     }
+=======
+    }  
+
+    @Override
+    public IEntradaDAO crearEntradaDAO() {
+        return new EntradaDAO();}
+>>>>>>> Stashed changes
 }

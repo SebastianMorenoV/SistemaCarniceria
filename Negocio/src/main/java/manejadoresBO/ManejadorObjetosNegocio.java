@@ -7,6 +7,7 @@ package manejadoresBO;
 import BO.CrearVentaBO;
 import BO.DevolucionBO;
 import BO.EmpleadoBO;
+import BO.EntradaBO;
 import BO.GastoBO;
 import BO.ProductoBO;
 import BO.ProveedorBO;
@@ -15,6 +16,7 @@ import DAOS.VentaDAO;
 import Interfaces.ICrearVentaBO;
 import Interfaces.IDevolucionBO;
 import Interfaces.IEmpleadoBO;
+import Interfaces.IEntradaBO;
 import Interfaces.IGastoBO;
 import Interfaces.IProductoBO;
 import Interfaces.IProveedorBO;
@@ -72,6 +74,11 @@ public class ManejadorObjetosNegocio {
     public static IProveedorBO crearProveedorBO(){
         ICreadorDAO fabrica = new CreadorDAO();
         return new ProveedorBO(fabrica);
+    }
+    
+    public static IEntradaBO crearEntradaBO(){
+        ICreadorDAO fabrica = new CreadorDAO();
+        return new EntradaBO(fabrica);
     }
 
 }

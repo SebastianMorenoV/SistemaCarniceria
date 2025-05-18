@@ -16,6 +16,8 @@ import java.util.List;
 public interface IProveedorBO {
     
     public ProveedorDTO agregarProveedor(CrearProveedorDTO proveedor) throws NegocioException;
+
+    public ProveedorDTO agregarProveedor(ProveedorDTO proveedor) throws NegocioException;
     
     public List<ProveedorDTO> consultarProveedores() throws NegocioException;
     

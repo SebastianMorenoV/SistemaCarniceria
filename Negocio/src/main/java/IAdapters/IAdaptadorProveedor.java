@@ -16,5 +16,9 @@ import Exception.NegocioException;
 public interface IAdaptadorProveedor {
     public ProveedorDTO ConvertirADTO(Proveedor proveedor);
     
+    public ProveedorDTO ConvertirADTOEntrada(Proveedor proveedor);
+    
     public Proveedor ConvertirAEntidad(CrearProveedorDTO proveedorDTO);
+    
+    public Proveedor ConvertirAEntidad(ProveedorDTO proveedorDTO);
 }

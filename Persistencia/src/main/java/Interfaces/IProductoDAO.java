@@ -14,7 +14,6 @@ import java.util.List;
  * @author Sebastian Moreno
  */
 public interface IProductoDAO {
-    
      static IProductoDAO obtenerInstanciaDAO() {
         return new ProductoDAO(); // o podrías usar singleton aquí
     }

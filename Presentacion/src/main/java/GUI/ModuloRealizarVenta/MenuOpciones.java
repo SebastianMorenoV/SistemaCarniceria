@@ -47,6 +47,9 @@ public class MenuOpciones extends javax.swing.JPanel {
         panelRound2 = new GUI.PanelRound();
         btnGastos = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        panelBtnInventario = new javax.swing.JPanel();
+        iconInventario = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -156,8 +159,28 @@ public class MenuOpciones extends javax.swing.JPanel {
         add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 200, 190, 170));
 
         jLabel7.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        jLabel7.setText("Venta en caja");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 150, 30));
+        jLabel7.setText("Inventario");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 380, 110, 30));
+
+        panelBtnInventario.setBackground(new java.awt.Color(73, 69, 79));
+        panelBtnInventario.setMinimumSize(new java.awt.Dimension(160, 160));
+        panelBtnInventario.setPreferredSize(new java.awt.Dimension(160, 160));
+        panelBtnInventario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        iconInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconInventario.png"))); // NOI18N
+        iconInventario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        iconInventario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                iconInventarioMouseClicked(evt);
+            }
+        });
+        panelBtnInventario.add(iconInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 100, -1));
+
+        add(panelBtnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, 200, 170));
+
+        jLabel8.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        jLabel8.setText("Venta en caja");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 150, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void icnRealizarVentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icnRealizarVentaMouseEntered
@@ -211,16 +234,24 @@ public class MenuOpciones extends javax.swing.JPanel {
         app.mostrarPantallaMenuGastos();
     }//GEN-LAST:event_btnGastosMouseClicked
 
+    private void iconInventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconInventarioMouseClicked
+        // TODO add your handling code here:
+        app.mostrarVentanaOpcionesInventario();
+    }//GEN-LAST:event_iconInventarioMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnGastos;
     private javax.swing.JLabel icnDevolucion;
     private javax.swing.JLabel icnRealizarVenta;
+    private javax.swing.JLabel iconInventario;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel panelBtnInventario;
     private GUI.PanelRound panelRound1;
     private GUI.PanelRound panelRound2;
     private javax.swing.JPanel pnlBotonDevoluciones;

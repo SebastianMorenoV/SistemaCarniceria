@@ -4,6 +4,7 @@
  */
 package Interfaces;
 
+import DAOS.ProductoDAO;
 import DTOs.ProductoCargadoDTO;
 import Exception.NegocioException;
 import java.util.List;
@@ -13,7 +14,12 @@ import java.util.List;
  * @author Sebastian Moreno
  */
 public interface IProductoBO {
+    
+    static IProductoDAO obtenerInstanciaDAO(){
+        return new ProductoDAO();
+    }
     public List<ProductoCargadoDTO> cargarProductos() throws NegocioException;
     
     //crear una fabrica para pasar la instancia del BO 
+    
 }
