@@ -260,13 +260,12 @@ public class Aplicacion {
         return JOptionPane.showConfirmDialog(framePrincipal, "¿Deseas devolver este producto?", "Seleccionar producto", JOptionPane.YES_NO_OPTION);
     }
 
-    public VentaDTO validarTicket(String ticket) {
+   public VentaDTO validarTicket(String ticket) throws DevolucionException {
         try {
             return realizarDevolucion.validarTicket(ticket);
-        } catch (Exception e) {
-            e.printStackTrace(); // modificar esto es para pruebas
+        } catch (DevolucionException ex) {
+           throw new DevolucionException("Error al consultar un ticket : " + ex.getLocalizedMessage());
         }
-        return null;
     }
 
     public DevolucionDTO registrarDevolucion(CrearDevolucionDTO devolucion) throws DevolucionException {

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package GUI.ModuloRealizarDevolucion;
 
 import DTOs.Devolucion.CrearDevolucionDTO;
@@ -495,7 +491,6 @@ public class PantallaDevolucion extends javax.swing.JPanel {
         devolucionDTO.setMontoDevuelto(totalAcumulado);
         devolucionDTO.setVenta(venta);
 
-        System.out.println("ID DESDE PRESENTACION" + devolucionDTO.getVenta().getId());
         try {
             DevolucionDTO dto = app.registrarDevolucion(devolucionDTO);
             if (dto != null) {
@@ -514,7 +509,12 @@ public class PantallaDevolucion extends javax.swing.JPanel {
                 app.mostrarPantallaMenuDevolucion();
             }
         } catch (DevolucionException ex) {
-            throw new DevolucionException("No se pudo registrar la devolución. " + ex.getLocalizedMessage());
+            String mensajeError = "<html>"
+                    + "<h2 style='color:red;'>Error al registrar la devolución</h2>"
+                    + "<p>" + ex.getMessage() + "</p>"
+                    + "</html>";
+
+            JOptionPane.showMessageDialog(null, mensajeError, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 

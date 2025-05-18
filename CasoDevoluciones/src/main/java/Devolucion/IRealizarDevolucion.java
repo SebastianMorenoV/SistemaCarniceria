@@ -22,7 +22,7 @@ public interface IRealizarDevolucion {
 
     public DevolucionDTO consultarDevolucionPorID(String id) throws DevolucionException;
 
-    public VentaDTO validarTicket(String ticket);
+    public VentaDTO validarTicket(String ticket) throws DevolucionException;
 
     public void validarProductoRepetido();
 
