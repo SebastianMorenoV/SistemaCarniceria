@@ -22,6 +22,9 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -53,8 +56,6 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
         txtBusquedaNombre3 = new javax.swing.JLabel();
         txtBusquedaNombre4 = new javax.swing.JLabel();
         txtPanelVentaEnCaja = new javax.swing.JLabel();
-        btnIngresar = new GUI.PanelRound();
-        btnTxtIngresar = new javax.swing.JLabel();
         btnAtras = new javax.swing.JLabel();
         inputFechaInicio = new com.toedter.calendar.JDateChooser();
         inputFechaFin = new com.toedter.calendar.JDateChooser();
@@ -141,27 +142,6 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
         txtPanelVentaEnCaja.setText("Historial de Devoluciones");
         add(txtPanelVentaEnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 540, -1));
 
-        btnIngresar.setBackground(new java.awt.Color(8, 124, 252));
-        btnIngresar.setRoundBottomLeft(15);
-        btnIngresar.setRoundBottomRight(15);
-        btnIngresar.setRoundTopLeft(15);
-        btnIngresar.setRoundTopRight(15);
-        btnIngresar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnTxtIngresar.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        btnTxtIngresar.setForeground(new java.awt.Color(255, 255, 255));
-        btnTxtIngresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnTxtIngresar.setText("INGRESAR");
-        btnTxtIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnTxtIngresar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnTxtIngresarMouseClicked(evt);
-            }
-        });
-        btnIngresar.add(btnTxtIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 440, 40));
-
-        add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 460, 40));
-
         btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/atras (1).png"))); // NOI18N
         btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -170,19 +150,33 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
             }
         });
         add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 50));
+
+        inputFechaInicio.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                inputFechaInicioPropertyChange(evt);
+            }
+        });
         add(inputFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 150, 240, 50));
+
+        inputFechaFin.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                inputFechaFinPropertyChange(evt);
+            }
+        });
         add(inputFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 150, 220, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void inputTelefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputTelefonoFocusGained
         if (inputTelefono.getText().equals("Telefono")) {
             inputTelefono.setText("");
+            inputNombre.setText("");
         }
     }//GEN-LAST:event_inputTelefonoFocusGained
 
     private void inputTelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputTelefonoFocusLost
         if (inputTelefono.getText().trim().isEmpty()) {
-            inputTelefono.setText("Telefono");
+            inputTelefono.setText("");
+
         }
     }//GEN-LAST:event_inputTelefonoFocusLost
 
@@ -202,7 +196,7 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
 
     private void inputNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNombreFocusLost
         if (inputNombre.getText().trim().isEmpty()) {
-            inputNombre.setText("Nombre");
+            inputNombre.setText("");
         }
     }//GEN-LAST:event_inputNombreFocusLost
 
@@ -210,26 +204,30 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_inputNombreKeyTyped
 
-    private void btnTxtIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtIngresarMouseClicked
+    private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
+        app.mostrarPantallaMenuDevolucion();
+    }//GEN-LAST:event_btnAtrasMouseClicked
 
+    private void inputFechaInicioPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_inputFechaInicioPropertyChange
         try {
             buscarDevolucionPorFiltro();
         } catch (DevolucionException ex) {
             Logger.getLogger(PantallaHistorialDevoluciones.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }//GEN-LAST:event_inputFechaInicioPropertyChange
 
-    }//GEN-LAST:event_btnTxtIngresarMouseClicked
-
-    private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
-        app.mostrarPantallaMenuDevolucion();
-    }//GEN-LAST:event_btnAtrasMouseClicked
+    private void inputFechaFinPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_inputFechaFinPropertyChange
+        try {
+            buscarDevolucionPorFiltro();
+        } catch (DevolucionException ex) {
+            Logger.getLogger(PantallaHistorialDevoluciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_inputFechaFinPropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnAtras;
     private GUI.PanelRound btnFinalizarVenta;
-    private GUI.PanelRound btnIngresar;
-    private javax.swing.JLabel btnTxtIngresar;
     private com.toedter.calendar.JDateChooser inputFechaFin;
     private com.toedter.calendar.JDateChooser inputFechaInicio;
     private javax.swing.JTextField inputNombre;
@@ -242,6 +240,37 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
     private javax.swing.JLabel txtBusquedaNombre4;
     private javax.swing.JLabel txtPanelVentaEnCaja;
     // End of variables declaration//GEN-END:variables
+
+    private void agregarDocumentListener(JTextField textField) {
+        textField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                try {
+                    buscarDevolucionPorFiltro();
+                } catch (DevolucionException ex) {
+                    Logger.getLogger(PantallaHistorialDevoluciones.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                try {
+                    buscarDevolucionPorFiltro();
+                } catch (DevolucionException ex) {
+                    Logger.getLogger(PantallaHistorialDevoluciones.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                try {
+                    buscarDevolucionPorFiltro();
+                } catch (DevolucionException ex) {
+                    Logger.getLogger(PantallaHistorialDevoluciones.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
 
     public void buscarDevolucionPorFiltro() throws DevolucionException {
         String nombre = inputNombre.getText();
@@ -257,7 +286,10 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
         Date fechaFinDate = inputFechaFin.getDate();
 
         if (fechaInicioDate == null || fechaFinDate == null) {
-            throw new DevolucionException("Debe seleccionar ambas fechas: inicio y fin.");
+            fechaInicioDate = new Date();
+            fechaFinDate = new Date();
+            devolucionesFiltradas = app.obtenerDevoluciones();
+            llenarTabla();
         }
 
         LocalDateTime fechaInicio = fechaInicioDate.toInstant()
@@ -319,13 +351,26 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
         tablaDevoluciones.getColumnModel().getColumn(4).setPreferredWidth(80);  // Importe
         tablaDevoluciones.getColumnModel().getColumn(4).setPreferredWidth(50);  // Importe
     }
-    
-    
-    public void incializarValoresDefault(){
-      inputFechaInicio.setDate(new Date());
-      inputFechaFin.setDate(new Date());
+
+    public void incializarValoresDefault() {
+        inputFechaInicio.setDate(new Date());
+        inputFechaFin.setDate(new Date());
         ajustarTamañoColumnasPreferidos();
+        cargarDevoluciones();
+        agregarDocumentListener(inputNombre);
+        agregarDocumentListener(inputTelefono);
     }
+
+    public void cargarDevoluciones() {
+        try {
+            devolucionesFiltradas = app.obtenerDevoluciones();
+            llenarTabla();
+
+        } catch (DevolucionException ex) {
+            Logger.getLogger(PantallaHistorialDevoluciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     // Dentro de tu clase del formulario (por ejemplo: public class RealizarDevolucion extends JFrame { ... })
     private class ButtonRenderer extends JButton implements javax.swing.table.TableCellRenderer {
 

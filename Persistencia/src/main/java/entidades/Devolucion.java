@@ -3,6 +3,9 @@ package entidades;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.codecs.pojo.annotations.BsonIgnore;
+import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 
 /**
@@ -10,7 +13,9 @@ import org.bson.types.ObjectId;
  * @author Sebastian Moreno
  */
     public class Devolucion {
+        @BsonId
         private ObjectId _id;
+        @BsonProperty("codigo")
         private Integer id;
         private Venta venta;
         private String nombreCompleto;

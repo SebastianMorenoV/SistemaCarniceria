@@ -7,11 +7,18 @@ package MONGO.DAOS;
 import Exception.PersistenciaException;
 import Interfaces.IDevolucionDAO;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
+import static com.mongodb.client.model.Filters.eq;
 import conexion.ConexionMongo;
 import entidades.Devolucion;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.PersistenceException;
+import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 /**
@@ -34,6 +41,7 @@ public class DevolucionMongoDAO implements IDevolucionDAO {
                 devolucion.setId(new ObjectId().getTimestamp());
             }
 
+            System.out.println(devolucion.getId() + "persisntecia");
             coleccion.insertOne(devolucion);
             return devolucion;
         } catch (Exception e) {
@@ -41,20 +49,44 @@ public class DevolucionMongoDAO implements IDevolucionDAO {
         }
     }
 
-    @Override
-    public List<Devolucion> buscarDevolucionPorFiltro(Devolucion devolucion, LocalDateTime inicio, LocalDateTime fin) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Devolucion> buscarDevolucionPorFiltro(Devolucion filtro, LocalDateTime inicio, LocalDateTime fin) {
+        List<Bson> filtros = new ArrayList<>();
+
+        if (filtro.getTelefono() != null && !filtro.getTelefono().isEmpty()) {
+            filtros.add(Filters.eq("telefono", filtro.getTelefono()));
+        }
+
+        if (filtro.getNombreCompleto() != null && !filtro.getNombreCompleto().isEmpty()) {
+            filtros.add(Filters.regex("nombreCompleto", filtro.getNombreCompleto(), "i"));
+        }
+
+        // filtro de fecha
+        if (inicio != null && fin != null) {
+            filtros.add(Filters.and(
+                    Filters.gte("fechaHora", Date.from(inicio.atZone(ZoneId.systemDefault()).toInstant())),
+                    Filters.lte("fechaHora", Date.from(fin.atZone(ZoneId.systemDefault()).toInstant()))
+            ));
+        }
+
+        Bson filtroFinal = filtros.isEmpty() ? new Document() : Filters.and(filtros);
+
+        return coleccion.find(filtroFinal).into(new ArrayList<>());
     }
 
     @Override
     public List<Devolucion> buscarDevoluciones() throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return coleccion.find().into(new ArrayList<>());
     }
 
     @Override
     public Devolucion buscarPorID(String id) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            int codigo = Integer.parseInt(id);
+            Devolucion devolucion = coleccion.find(eq("codigo", codigo)).first();
+            return devolucion;
+        } catch (Exception e) {
+            throw new PersistenciaException("No se pudo buscar la devolución por ID.", e);
+        }
     }
-
 
 }

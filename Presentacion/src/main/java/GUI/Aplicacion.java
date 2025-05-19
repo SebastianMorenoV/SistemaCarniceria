@@ -135,7 +135,6 @@ public class Aplicacion {
         menuDevolucion = new PantallaMenuDevolucion(this);
         pantallaTicketDevolucion = new PantallaTicket(this);
         pantallaDevolucion = new PantallaDevolucion(this);
-        pantallaHistorialDevoluciones = new PantallaHistorialDevoluciones(this);
 
         //Pantallas de caso gastos inicializadas
         formularioAgregarProveedor = new FormularioAgregarProveedor(this);
@@ -275,6 +274,7 @@ public class Aplicacion {
     }
 
     public void mostrarPantallaHistorialDevolucion() {
+        pantallaHistorialDevoluciones = new PantallaHistorialDevoluciones(this);
         cambiarPantalla(pantallaHistorialDevoluciones);
     }
 
@@ -338,6 +338,11 @@ public class Aplicacion {
 
     public DevolucionDTO buscarDevolucionPorID(String id) throws DevolucionException {
         return realizarDevolucion.consultarDevolucionPorID(id);
+        
+    }
+    
+    public List<DevolucionDTO> obtenerDevoluciones() throws DevolucionException{
+        return realizarDevolucion.consultarDevoluciones();
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Cambiar de pantalla dentro del frame principal

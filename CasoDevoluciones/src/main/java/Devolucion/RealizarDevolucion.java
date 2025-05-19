@@ -56,7 +56,11 @@ public class RealizarDevolucion implements IRealizarDevolucion {
 
     @Override
     public List<DevolucionDTO> consultarDevoluciones() throws DevolucionException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            return devolucionBO.consultarDevoluciones();
+        } catch (NegocioException ex) {
+            throw new DevolucionException("Ocurrio un error encontrando devoluciones ." + ex.getMessage());
+        }
     }
 
     @Override

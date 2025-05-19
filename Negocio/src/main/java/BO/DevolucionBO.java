@@ -36,7 +36,7 @@ public class DevolucionBO implements IDevolucionBO {
 
     @Override
     public DevolucionDTO registrarDevolucion(CrearDevolucionDTO devolucion) throws NegocioException {
-       
+
         Devolucion devolucionEntidad = adaptadorDevolucion.convertirAEntidad(devolucion);
         try {
             Devolucion devolucionInsertada = devolucionDAO.registrarDevolucion(devolucionEntidad);
@@ -49,7 +49,20 @@ public class DevolucionBO implements IDevolucionBO {
 
     @Override
     public List<DevolucionDTO> consultarDevoluciones() throws NegocioException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            List<Devolucion> devolucionesEncontradas = devolucionDAO.buscarDevoluciones();
+            List<DevolucionDTO> devolucionesEncontradasDTO = new ArrayList<>();
+
+            for (Devolucion devolucion : devolucionesEncontradas) {
+                DevolucionDTO dto = adaptadorDevolucion.convertirADTO(devolucion);
+                devolucionesEncontradasDTO.add(dto);
+            }
+
+            return devolucionesEncontradasDTO;
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(DevolucionBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException("Error al consultar devoluciones", ex);
+        }
     }
 
     @Override
@@ -59,8 +72,6 @@ public class DevolucionBO implements IDevolucionBO {
             Devolucion devolucionEntidad = new Devolucion();
             devolucionEntidad.setNombreCompleto(devolucionDTO.getNombreCompleto());
             devolucionEntidad.setTelefono(devolucionDTO.getTelefono());
-            System.out.println(devolucionDTO.getFechaInicio());
-            System.out.println(devolucionDTO.getFechaFin());
 
             List<Devolucion> devolucionesEncontradas = devolucionDAO.buscarDevolucionPorFiltro(devolucionEntidad, devolucionDTO.getFechaInicio(), devolucionDTO.getFechaFin());
             List<DevolucionDTO> devolucionesEncontradasDTO = new ArrayList<>();

@@ -4,8 +4,10 @@ GUI\ModuloRegistrarSalida\DialogoFiltrarPorProducto.class
 GUI\ModuloGastos\FormularioRegistrarGasto$6.class
 GUI\ModuloRegistrarEntrada\PanelRegistrarProductosEntrada$5.class
 GUI\ModuloGastos\MenuGastos.class
+GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones$8.class
 GUI\ModuloRegistrarEntrada\SeleccionarProveedor$1.class
 GUI\ModuloGastos\FormularioAgregarProveedor$2.class
+GUI\ModuloRegistrarSalida\VentanaHistorialSalidas$2.class
 GUI\ModuloRealizarVenta\FormularioTarjeta$2.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$16.class
 GUI\ModuloRealizarVenta\RegistrarVenta$3.class
@@ -13,6 +15,7 @@ GUI\ModuloRealizarDevolucion\PantallaDevolucion$19.class
 GUI\ModuloRealizarVenta\MenuOpciones$7.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$8.class
 GUI\ModuloRealizarVenta\RegistrarVenta$12.class
+GUI\ModuloRegistrarSalida\DialogoFiltrarPorFecha$1.class
 GUI\ModuloGastos\FormularioAgregarProveedor.class
 GUI\ModuloRealizarVenta\FormularioEfectivo$2.class
 GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones$5.class
@@ -21,6 +24,8 @@ GUI\ModuloRegistrarEntrada\PanelRegistrarProductosEntrada$2.class
 GUI\ModuloRealizarDevolucion\PantallaTicket$3.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion.class
 GUI\ModuloRealizarVenta\VentanaFormularioTarjeta.class
+GUI\ModuloRegistrarSalida\VentanaHistorialSalidas$5.class
+GUI\ModuloRegistrarSalida\DialogoRegistrarSalida$2.class
 GUI\ModuloRealizarDevolucion\PantallaMenuDevolucion$3.class
 GUI\ModuloRealizarVenta\MenuOpciones$1.class
 GUI\ModuloRegistrarEntrada\FormularioDatosEntrada$2.class
@@ -44,6 +49,7 @@ GUI\ModuloGastos\FormularioRegistrarGasto$4.class
 GUI\ModuloRealizarVenta\FormularioEfectivo.class
 GUI\ModuloRealizarVenta\RegistrarVenta$10.class
 GUI\ModuloRealizarVenta\VentanaProcesandoPago.class
+GUI\ModuloRegistrarSalida\VentanaHistorialSalidas$7.class
 GUI\ModuloRealizarDevolucion\PantallaMenuDevolucion.class
 GUI\ModuloRegistrarEntrada\PanelRegistrarProductosEntrada$7.class
 GUI\ModuloGastos\TablaHistorialGastos$1.class
@@ -61,6 +67,8 @@ GUI\ModuloGastos\FormularioEditarGasto$1.class
 GUI\ModuloGastos\FormularioRegistrarGasto$5.class
 GUI\ModuloRegistrarEntrada\FormularioProductoNuevo$2.class
 GUI\ModuloRegistrarEntrada\PanelRegistrarProductosEntrada$6.class
+GUI\ModuloRegistrarSalida\DialogoFiltrarPorMes$1.class
+GUI\ModuloRegistrarSalida\VentanaHistorialSalidas$8.class
 GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones.class
 GUI\ModuloRealizarDevolucion\PantallaTicket$4.class
 GUI\ModuloRealizarVenta\RegistrarVenta$2.class
@@ -99,8 +107,10 @@ GUI\ModuloRealizarDevolucion\PantallaDevolucion$4.class
 GUI\ModuloRegistrarEntrada\SeleccionarProveedor$2.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$15.class
 GUI\ModuloRegistrarSalida\DialogoRegistrarSalida.class
+GUI\ModuloRegistrarSalida\VentanaHistorialSalidas$3.class
 GUI\ModuloRealizarDevolucion\PantallaTicket$2.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$18.class
+GUI\ModuloRegistrarSalida\VentanaHistorialSalidas$6.class
 GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones$6.class
 GUI\ModuloRealizarVenta\FormularioEfectivo$1.class
 GUI\ModuloRealizarVenta\RegistrarVenta$13.class
@@ -117,6 +127,7 @@ GUI\PanelRound.class
 GUI\ModuloRealizarVenta\RegistrarVenta$5.class
 GUI\ModuloRegistrarEntrada\FormularioDatosEntrada.class
 GUI\ModuloRealizarDevolucion\PantallaDetallesHistorialDevolucion$2.class
+GUI\ModuloRegistrarSalida\VentanaHistorialSalidas$4.class
 GUI\ModuloGastos\TablaHistorialGastos$4.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$11.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$6.class
@@ -135,6 +146,7 @@ GUI\ModuloRealizarVenta\VentanaFormularioMostrarCambio.class
 GUI\ModuloRealizarVenta\MenuOpciones$6.class
 GUI\ModuloGastos\FormularioEditarGasto.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$10.class
+GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones$7.class
 GUI\ModuloRealizarVenta\RegistrarVenta$14.class
 GUI\ModuloGastos\FormularioRegistrarGasto$8.class
 GUI\ModuloRegistrarSalida\DialogoFiltrarPorFecha.class
