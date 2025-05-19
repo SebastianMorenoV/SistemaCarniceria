@@ -84,6 +84,9 @@ public class DialogoFiltrarPorProducto extends javax.swing.JDialog {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel2MouseEntered(evt);
+            }
         });
         panelRound2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 30));
 
@@ -105,6 +108,10 @@ public class DialogoFiltrarPorProducto extends javax.swing.JDialog {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
+
+    }//GEN-LAST:event_jLabel2MouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -69,6 +69,11 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Filtrar Por Producto");
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
         panelRound3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 40));
 
         add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 540, 130, 40));
@@ -200,7 +205,7 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        app.mostrarDialogoAgregarSalida();
+
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
@@ -208,7 +213,7 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-        app.mostrarDialogoAgregarSalida();
+        
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
@@ -218,6 +223,10 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         app.mostrarDialogoFiltrarPorFecha();
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        app.mostrarDialogoFiltrarPorProducto();
+    }//GEN-LAST:event_jLabel2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

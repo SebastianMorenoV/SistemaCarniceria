@@ -94,6 +94,11 @@ public class DialogoFiltrarPorMes extends javax.swing.JDialog {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Cancelar");
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
         panelRound2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 30));
 
         jPanel1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 80, 30));
@@ -102,6 +107,10 @@ public class DialogoFiltrarPorMes extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        dispose();
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     
     

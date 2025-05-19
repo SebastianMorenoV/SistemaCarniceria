@@ -122,6 +122,11 @@ public class DialogoRegistrarSalida extends javax.swing.JDialog {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Cancelar");
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
         panelRound2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 30));
 
         jPanel1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 430, 80, 30));
@@ -130,6 +135,10 @@ public class DialogoRegistrarSalida extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        dispose();
+    }//GEN-LAST:event_jLabel5MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
