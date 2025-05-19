@@ -4,6 +4,7 @@
  */
 package GUI.ModuloRegistrarEntrada;
 
+import DTOs.EntradaDTO;
 import DTOs.ProductoEntradaDTO;
 import DTOs.ProductoEntradaDTO;
 import Exception.InventarioException;
@@ -19,6 +20,7 @@ import javax.security.auth.x500.X500Principal;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,6 +29,7 @@ import javax.swing.table.DefaultTableModel;
  */
   public class PanelRegistrarProductosEntrada extends javax.swing.JPanel {
     private Aplicacion control;
+    private EntradaDTO entrada;
     /**
      * Creates new form registrarProductosEntrada
      * @param control
@@ -317,6 +320,13 @@ import javax.swing.table.DefaultTableModel;
 
     private void btnConfirmarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEntradaActionPerformed
         // TODO add your handling code here:
+         entrada = control.getEntradaTemporal();
+        try {
+            JOptionPane.showConfirmDialog(null, "¿Desea registrar la entrada?");
+            control.registrarEntrada(entrada);
+        } catch (InventarioException ex) {
+            Logger.getLogger(PanelRegistrarProductosEntrada.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnConfirmarEntradaActionPerformed
 
     private void tablaProductosEntradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosEntradaMouseClicked
@@ -329,10 +339,11 @@ import javax.swing.table.DefaultTableModel;
 
     private void btnAgregarProductoInventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarProductoInventarioMouseClicked
         // TODO add your handling code here:
+        control.mostrarVentanaProductoNuevo();
     }//GEN-LAST:event_btnAgregarProductoInventarioMouseClicked
 
     private void btnCancelarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarRegistroMouseClicked
-        // TODO add your handling code here:
+        // TODO add your handling code here:                   
     }//GEN-LAST:event_btnCancelarRegistroMouseClicked
 
     private void btnAgregarProductoEntradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarProductoEntradaMouseClicked
@@ -349,6 +360,7 @@ import javax.swing.table.DefaultTableModel;
 
     private void btnAgregarProductoInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductoInventarioActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnAgregarProductoInventarioActionPerformed
 
 

@@ -20,6 +20,6 @@ public interface IProductoBO {
     }
     public List<ProductoCargadoDTO> cargarProductos() throws NegocioException;
     
-    //crear una fabrica para pasar la instancia del BO 
+    public ProductoCargadoDTO agregarProducto(ProductoCargadoDTO producto);
     
 }

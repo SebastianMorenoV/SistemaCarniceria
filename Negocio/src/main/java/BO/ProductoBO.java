@@ -48,4 +48,12 @@ public class ProductoBO implements IProductoBO {
 
         return listaProductosDTO;
     }
+
+    @Override
+    public ProductoCargadoDTO agregarProducto(ProductoCargadoDTO producto) {
+        Producto productoEntidad = adaptadorProducto.convertirAEntidad(producto);
+        Producto productoDevuelto = productoDAO.agregarProducto(productoEntidad);
+        ProductoCargadoDTO productoDTO = adaptadorProducto.convertirADTO(productoDevuelto);
+        return productoDTO;
+    }
 }

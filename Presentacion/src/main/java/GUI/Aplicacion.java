@@ -41,6 +41,7 @@ import GUI.ModuloRealizarDevolucion.PantallaMenuDevolucion;
 import GUI.ModuloRealizarDevolucion.PantallaTicket;
 
 import GUI.ModuloRegistrarEntrada.FormularioDatosEntrada;
+import GUI.ModuloRegistrarEntrada.FormularioProductoNuevo;
 import GUI.ModuloRegistrarEntrada.OpcionesInventario;
 import GUI.ModuloRegistrarEntrada.PanelRegistrarProductosEntrada;
 import GUI.ModuloRegistrarEntrada.SeleccionarProducto;
@@ -91,12 +92,14 @@ public class Aplicacion {
     //Proveedor
     private RegistrarProveedor registrarProveedor;
     
+    
     //caso registrarEntrada
     private RegistrarEntrada registrarEntrada;
     private PanelRegistrarProductosEntrada panelResumenEntrada;
     private SeleccionarProducto seleccionarProducto;
     private SeleccionarProveedor seleccionarProveedor;
     private OpcionesInventario menuInventario;
+    private FormularioProductoNuevo formularioProducto;
     
     //Caso de Uso Registrar Salidas
     private VentanaHistorialSalidas ventanaHistorialSalidas;
@@ -470,14 +473,19 @@ public class Aplicacion {
     
     public void mostrarVentanaOpcionesInventario(){
         menuInventario = new OpcionesInventario(this);
-        cambiarPantalla(menuInventario);
-         
+        cambiarPantalla(menuInventario);        
+    }
+    
+    public void mostrarVentanaProductoNuevo(){
+        formularioProducto = new FormularioProductoNuevo(this);
+        cambiarPantalla(formularioProducto);
     }
     
     public void mostrarVentanaSeleccionarProveedor() throws InventarioException{
         seleccionarProveedor = new SeleccionarProveedor(this); 
         cambiarPantalla(seleccionarProveedor);
     }
+    
     public void mostrarVentanaSeleccionarProductosEntrada() throws NegocioException{    
         seleccionarProducto = new SeleccionarProducto(this); 
         cambiarPantalla(seleccionarProducto);
@@ -523,6 +531,13 @@ public class Aplicacion {
     }
     public EntradaDTO getEntradaTemporal(){
         return registrarEntrada.getEntradaTemporal();
+    }
+    
+    public void agregarProductoNuevo(ProductoCargadoDTO producto){
+        registrarEntrada.agregarProducto(producto);
+    }
+    public void registrarEntrada(EntradaDTO entrada) throws InventarioException{
+        registrarEntrada.registrarEntrada(entrada);
     }
     
     //Caso Registrar entrada----------------------------------------

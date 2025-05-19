@@ -39,7 +39,6 @@ public class RegistrarEntrada implements IRegistrarEntrada{
     @Override
     public List<ProveedorDTO> cargarProveedores() throws InventarioException{ 
         try {
-            System.out.println(proveedorBO.consultarProveedores()+ "Desde Caso uso");
             return proveedorBO.consultarProveedores();
         } catch (NegocioException ex) {
             throw new InventarioException("No hay proveedores");
@@ -66,6 +65,8 @@ public class RegistrarEntrada implements IRegistrarEntrada{
         if(entradaTemporal == null){
             entradaTemporal = new EntradaDTO();
             entradaTemporal.listaProductosEntrada.add(producto);
+            entradaTemporal.setEmpleado(cargarEmpleado());
+            entradaTemporal.setProveedor(proveedorSeleccionado);
         }else{
             entradaTemporal.listaProductosEntrada.add(producto);
         }
@@ -75,7 +76,7 @@ public class RegistrarEntrada implements IRegistrarEntrada{
     @Override
     public void agregarProveedor(ProveedorDTO proveedor) throws InventarioException {
         try {
-            proveedorBO.agregarProveedor(proveedor);
+            proveedorBO.agregarProveedorEntrada(proveedor);
         } catch (NegocioException ex) {
            throw new InventarioException("No se pudo agregar al proveedor" + ex.getMessage());
         }
@@ -107,10 +108,18 @@ public class RegistrarEntrada implements IRegistrarEntrada{
         this.proveedorSeleccionado = proveedor;
     }
 
-    public void RegistrarEntrada(EntradaDTO entada) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    @Override
+    public void registrarEntrada(EntradaDTO entada) throws InventarioException {
+        try {
+            entradaBO.registrarEntrada(entada);
+            System.out.println(entada.toString()+ "Entrada agregada desde caso d usooo-");
+                    
+        } catch (NegocioException ex) {
+            throw new InventarioException("No se pudo registrar la entrada" + ex.getMessage());
+        }
     }
 
+    @Override
     public List<ProductoEntradaDTO> cargarProductosEntrada() {
         return entradaTemporal.listaProductosEntrada;
     }
@@ -125,6 +134,7 @@ public class RegistrarEntrada implements IRegistrarEntrada{
     }
 //¿¿Este metodo ira en control?? o puede ir en clase productoBO
     
+    @Override
     public void setStockProducto(ProductoCargadoDTO producto,int unidades) {
         this.productoSeleccionado.setStock(unidades);
         
@@ -147,6 +157,11 @@ public class RegistrarEntrada implements IRegistrarEntrada{
 
     public void setEntradaTemporal(EntradaDTO entradaTemporal) {
         this.entradaTemporal = entradaTemporal;
+    }
+    
+    public ProductoCargadoDTO agregarProducto(ProductoCargadoDTO producto){
+        ProductoCargadoDTO productoDTO = productoBO.agregarProducto(producto);
+        return productoDTO;
     }
     
 }

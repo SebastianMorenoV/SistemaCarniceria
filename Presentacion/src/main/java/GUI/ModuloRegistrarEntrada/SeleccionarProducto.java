@@ -75,6 +75,7 @@ public class SeleccionarProducto extends javax.swing.JPanel {
         panelTablaProductos = new javax.swing.JPanel();
         scrollTablaProductos = new javax.swing.JScrollPane();
         tablaProductos = new javax.swing.JTable();
+        BtnAgregarProducto = new javax.swing.JButton();
 
         setToolTipText("");
         setMaximumSize(new java.awt.Dimension(650, 670));
@@ -188,10 +189,21 @@ public class SeleccionarProducto extends javax.swing.JPanel {
             .addGroup(panelTablaProductosLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(scrollTablaProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(274, Short.MAX_VALUE))
+                .addContainerGap(247, Short.MAX_VALUE))
         );
 
         add(panelTablaProductos);
+
+        BtnAgregarProducto.setBackground(new java.awt.Color(0, 0, 0));
+        BtnAgregarProducto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BtnAgregarProducto.setForeground(new java.awt.Color(255, 255, 255));
+        BtnAgregarProducto.setText("Agregar producto");
+        BtnAgregarProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnAgregarProductoMouseClicked(evt);
+            }
+        });
+        add(BtnAgregarProducto);
     }// </editor-fold>//GEN-END:initComponents
     
     private void tablaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosMouseClicked
@@ -207,7 +219,13 @@ public class SeleccionarProducto extends javax.swing.JPanel {
         }        
     }//GEN-LAST:event_tablaProductosMouseClicked
 
+    private void BtnAgregarProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAgregarProductoMouseClicked
+        // TODO add your handling code here:
+        control.mostrarVentanaProductoNuevo();
+    }//GEN-LAST:event_BtnAgregarProductoMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnAgregarProducto;
     private javax.swing.JTextField campoBusqueda;
     private javax.swing.JLabel labelIndicaciones;
     private javax.swing.JLabel labelProveedor;

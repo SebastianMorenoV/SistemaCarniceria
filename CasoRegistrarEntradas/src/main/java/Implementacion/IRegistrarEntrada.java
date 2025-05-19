@@ -28,6 +28,7 @@ public interface IRegistrarEntrada {
         
         public List<ProductoEntradaDTO> cargarProductosEntrada();
         
-        public void RegistrarEntrada(EntradaDTO entada);
+        public void registrarEntrada(EntradaDTO entada)throws InventarioException;
+        
 
 }

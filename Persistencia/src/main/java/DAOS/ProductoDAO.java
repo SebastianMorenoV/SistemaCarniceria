@@ -12,6 +12,7 @@ import java.util.List;
  */
 public class ProductoDAO implements IProductoDAO {
     private static ProductoDAO instanceProductoDAO;
+    private List<Producto> productos = new ArrayList<>();
     
     public ProductoDAO(){
         
@@ -26,7 +27,6 @@ public class ProductoDAO implements IProductoDAO {
 
     @Override
     public List<Producto> consultarProductos() throws PersistenciaException {
-        List<Producto> productos = new ArrayList<>();
         Producto producto1 = new Producto();
         producto1.setId(1L);
         producto1.setNombre("Manzana");
@@ -58,6 +58,12 @@ public class ProductoDAO implements IProductoDAO {
         productos.add(producto2);
         productos.add(producto3);
         return productos;
+    }
+
+    @Override
+    public Producto agregarProducto(Producto producto) {
+        productos.add(producto);
+        return producto;
     }
 
 }

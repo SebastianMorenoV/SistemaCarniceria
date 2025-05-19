@@ -16,6 +16,6 @@ public class Presentacion {
 
     public static void main(String[] args) throws UnsupportedLookAndFeelException{
         Aplicacion app = new Aplicacion();
-        app.mostrarVentanaOpcionesInventario();
+        app.mostrarMenuOpciones();
     }
 }

@@ -18,4 +18,6 @@ public interface IProductoDAO {
         return new ProductoDAO(); // o podrías usar singleton aquí
     }
     public List<Producto> consultarProductos() throws PersistenciaException;
+    
+    public Producto agregarProducto(Producto producto);
 }

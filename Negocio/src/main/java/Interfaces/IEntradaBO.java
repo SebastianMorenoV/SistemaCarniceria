@@ -21,7 +21,7 @@ public interface IEntradaBO {
     }
     // ¿¿¿Agregar como parametro ProductoEntradaDTO producto??? para persistir el producto
     
-    public EntradaDTO RegistrarEntrada(EntradaDTO entrada)throws NegocioException;
+    public EntradaDTO registrarEntrada(EntradaDTO entrada)throws NegocioException;
     
     public List<ProductoCargadoDTO> obtenerProductosEntrada() throws NegocioException;
 }

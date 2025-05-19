@@ -57,11 +57,8 @@ public class ProveedorBO implements IProveedorBO{
         
         try {
             proveedores = proveedorDAO.consultarProveedores();
-            System.out.println(proveedores);
             for (Proveedor proveedor : proveedores) {
                 ProveedorDTO proveedorDTO = adaptadorProveedor.ConvertirADTOEntrada(proveedor);
-                System.out.println(proveedorDTO.toString());
-                
                 proveedoresDTO.add(proveedorDTO);
             }
         } catch (PersistenciaException ex) {
@@ -72,7 +69,7 @@ public class ProveedorBO implements IProveedorBO{
     }
 
     @Override
-    public ProveedorDTO agregarProveedor(ProveedorDTO proveedor) throws NegocioException {
+    public ProveedorDTO agregarProveedorEntrada(ProveedorDTO proveedor) throws NegocioException {
                 
         Proveedor proveedorEntidad = adaptadorProveedor.ConvertirAEntidad(proveedor);
 

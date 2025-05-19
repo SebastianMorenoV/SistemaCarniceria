@@ -34,7 +34,7 @@ public class EntradaBO implements IEntradaBO{
     }
     
     @Override
-    public EntradaDTO RegistrarEntrada(EntradaDTO entrada) {
+    public EntradaDTO registrarEntrada(EntradaDTO entrada) {
         Entrada entradaARegistrar = adaptadorEntrada.convertirAEntidad(entrada);
         try {
             entradaARegistrar = entradaDAO.registrarEntrada(entradaARegistrar);

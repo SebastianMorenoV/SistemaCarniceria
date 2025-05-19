@@ -33,6 +33,7 @@ GUI\ModuloRegistrarEntrada\SeleccionarProducto$1.class
 GUI\ModuloGastos\TablaHistorialGastos$2.class
 GUI\ModuloRealizarDevolucion\PantallaTicket.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$3.class
+GUI\ModuloRegistrarEntrada\FormularioProductoNuevo$1.class
 GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones$3.class
 GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones$ButtonRenderer.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$14.class
@@ -56,11 +57,13 @@ GUI\ModuloRealizarDevolucion\PantallaDevolucion$9.class
 GUI\Aplicacion.class
 GUI\ModuloGastos\FormularioEditarGasto$1.class
 GUI\ModuloGastos\FormularioRegistrarGasto$5.class
+GUI\ModuloRegistrarEntrada\FormularioProductoNuevo$2.class
 GUI\ModuloRegistrarEntrada\PanelRegistrarProductosEntrada$6.class
 GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones.class
 GUI\ModuloRealizarDevolucion\PantallaTicket$4.class
 GUI\ModuloRealizarVenta\RegistrarVenta$2.class
 GUI\ModuloRealizarVenta\RegistrarVenta$8.class
+GUI\ModuloRegistrarEntrada\FormularioProductoNuevo.class
 GUI\ModuloGastos\MenuGastos$4.class
 GUI\ModuloRealizarVenta\VentanaExitoProcesandoPago.class
 GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones$4.class
@@ -74,6 +77,7 @@ GUI\ModuloRegistrarSalida\VentanaHistorialSalidas.class
 GUI\ModuloRealizarVenta\RegistrarVenta.class
 GUI\ModuloRealizarVenta\RegistrarVenta$7.class
 GUI\ModuloRealizarVenta\MenuOpciones.class
+GUI\ModuloRegistrarEntrada\SeleccionarProducto$3.class
 GUI\ModuloGastos\FormularioRegistrarGasto$2.class
 GUI\ModuloRegistrarEntrada\PanelRegistrarProductosEntrada$1.class
 GUI\ModuloRealizarVenta\MenuOpciones$3.class
