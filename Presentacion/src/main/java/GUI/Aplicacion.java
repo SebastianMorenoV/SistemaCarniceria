@@ -46,6 +46,10 @@ import GUI.ModuloRegistrarEntrada.OpcionesInventario;
 import GUI.ModuloRegistrarEntrada.PanelRegistrarProductosEntrada;
 import GUI.ModuloRegistrarEntrada.SeleccionarProducto;
 import GUI.ModuloRegistrarEntrada.SeleccionarProveedor;
+import GUI.ModuloRegistrarSalida.DialogoFiltrarPorFecha;
+import GUI.ModuloRegistrarSalida.DialogoFiltrarPorMes;
+import GUI.ModuloRegistrarSalida.DialogoFiltrarPorProducto;
+import GUI.ModuloRegistrarSalida.DialogoRegistrarSalida;
 
 import GUI.ModuloRegistrarSalida.VentanaHistorialSalidas;
 
@@ -546,6 +550,30 @@ public class Aplicacion {
     //Caso Registrar salidas----------------------------------------
     public void mostrarVentanaHistorialSalidas(){
         cambiarPantalla(ventanaHistorialSalidas);
+    }
+    
+        public void mostrarDialogoAgregarSalida(){
+        DialogoRegistrarSalida ven = new DialogoRegistrarSalida(framePrincipal, true);
+        ven.setLocationRelativeTo(null);
+        ven.setVisible(true);
+    }
+    
+    public void mostrarDialogoFiltrarPorMes(){
+        DialogoFiltrarPorMes ven = new DialogoFiltrarPorMes(framePrincipal, true);
+        ven.setLocationRelativeTo(null);
+        ven.setVisible(true);
+    }
+    
+    public void mostrarDialogoFiltrarPorFecha(){
+        DialogoFiltrarPorFecha ven = new DialogoFiltrarPorFecha(framePrincipal, true);
+        ven.setLocationRelativeTo(null);
+        ven.setVisible(true);
+    }
+    
+    public void mostrarDialogoFiltrarPorProducto(){
+        DialogoFiltrarPorProducto ven = new DialogoFiltrarPorProducto(framePrincipal, true);
+        ven.setLocationRelativeTo(null);
+        ven.setVisible(true);
     }
 
 }
