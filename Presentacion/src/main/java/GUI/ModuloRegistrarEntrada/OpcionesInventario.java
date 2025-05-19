@@ -66,6 +66,12 @@ public class OpcionesInventario extends javax.swing.JPanel {
         add(panelBtnRegistrarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(811, 325, -1, -1));
 
         panelBtnRegistrarSalida.setBackground(new java.awt.Color(102, 102, 102));
+        panelBtnRegistrarSalida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        panelBtnRegistrarSalida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelBtnRegistrarSalidaMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelBtnRegistrarSalidaLayout = new javax.swing.GroupLayout(panelBtnRegistrarSalida);
         panelBtnRegistrarSalida.setLayout(panelBtnRegistrarSalidaLayout);
@@ -142,6 +148,10 @@ public class OpcionesInventario extends javax.swing.JPanel {
     private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
         control.mostrarMenuOpciones();
     }//GEN-LAST:event_btnAtrasMouseClicked
+
+    private void panelBtnRegistrarSalidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnRegistrarSalidaMouseClicked
+        control.mostrarVentanaHistorialSalidas();
+    }//GEN-LAST:event_panelBtnRegistrarSalidaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

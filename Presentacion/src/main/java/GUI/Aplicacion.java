@@ -46,6 +46,8 @@ import GUI.ModuloRegistrarEntrada.PanelRegistrarProductosEntrada;
 import GUI.ModuloRegistrarEntrada.SeleccionarProducto;
 import GUI.ModuloRegistrarEntrada.SeleccionarProveedor;
 
+import GUI.ModuloRegistrarSalida.VentanaHistorialSalidas;
+
 import Gasto.RegistrarGasto;
 import Implementacion.RealizarVenta;
 import Implementacion.RegistrarEntrada;
@@ -88,14 +90,17 @@ public class Aplicacion {
 
     //Proveedor
     private RegistrarProveedor registrarProveedor;
-
+    
     //caso registrarEntrada
     private RegistrarEntrada registrarEntrada;
     private PanelRegistrarProductosEntrada panelResumenEntrada;
     private SeleccionarProducto seleccionarProducto;
     private SeleccionarProveedor seleccionarProveedor;
     private OpcionesInventario menuInventario;
-    //
+    
+    //Caso de Uso Registrar Salidas
+    private VentanaHistorialSalidas ventanaHistorialSalidas;
+    
     public Aplicacion(){
         framePrincipal = new JFrame("Sistema Carnicería");
         framePrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -131,6 +136,9 @@ public class Aplicacion {
         formularioRegistrarGasto = new FormularioRegistrarGasto(this);
         menuGastos = new MenuGastos(this);
         tablaHistorialGastos = new TablaHistorialGastos(this);
+        
+        //Caso de Uso Registrar Salidas
+        ventanaHistorialSalidas = new VentanaHistorialSalidas(this);
          
     }
 
@@ -518,5 +526,11 @@ public class Aplicacion {
     }
     
     //Caso Registrar entrada----------------------------------------
+    
+    
+    //Caso Registrar salidas----------------------------------------
+    public void mostrarVentanaHistorialSalidas(){
+        cambiarPantalla(ventanaHistorialSalidas);
+    }
 
 }
