@@ -5,6 +5,7 @@
 package GUI.ModuloRegistrarEntrada;
 
 import DTOs.ProductoEntradaDTO;
+import DTOs.ProductoEntradaDTO;
 import Exception.InventarioException;
 import Exception.NegocioException;
 import GUI.Aplicacion;

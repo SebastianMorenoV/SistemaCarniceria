@@ -37,11 +37,6 @@ public class CreadorDAO implements ICreadorDAO {
     }
 
     @Override
-    public ICrearVentaDAO CrearVentaDAO() {
-        return new CrearVentaDAO();
-    }
-
-    @Override
     public IDevolucionDAO crearDevolucionDAO() {
         return new DevolucionDAO();
     }
@@ -54,13 +49,11 @@ public class CreadorDAO implements ICreadorDAO {
     @Override
     public IProveedorDAO crearProveedorDAO() {
         return new ProveedorDAO();
-<<<<<<< Updated upstream
     }
-=======
-    }  
 
     @Override
     public IEntradaDAO crearEntradaDAO() {
-        return new EntradaDAO();}
->>>>>>> Stashed changes
+        return new EntradaDAO();
+    }
+
 }

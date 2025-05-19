@@ -36,7 +36,7 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
     public PantallaHistorialDevoluciones(Aplicacion app) {
         this.app = app;
         initComponents();
-        ajustarTamañoColumnasPreferidos();
+        incializarValoresDefault();
     }
 
     @SuppressWarnings("unchecked")
@@ -319,7 +319,13 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
         tablaDevoluciones.getColumnModel().getColumn(4).setPreferredWidth(80);  // Importe
         tablaDevoluciones.getColumnModel().getColumn(4).setPreferredWidth(50);  // Importe
     }
-
+    
+    
+    public void incializarValoresDefault(){
+      inputFechaInicio.setDate(new Date());
+      inputFechaFin.setDate(new Date());
+        ajustarTamañoColumnasPreferidos();
+    }
     // Dentro de tu clase del formulario (por ejemplo: public class RealizarDevolucion extends JFrame { ... })
     private class ButtonRenderer extends JButton implements javax.swing.table.TableCellRenderer {
 

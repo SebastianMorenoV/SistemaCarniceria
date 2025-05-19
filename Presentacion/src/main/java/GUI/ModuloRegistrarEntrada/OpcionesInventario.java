@@ -46,6 +46,7 @@ public class OpcionesInventario extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         labelEmpleado = new javax.swing.JLabel();
+        btnAtras = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -118,6 +119,15 @@ public class OpcionesInventario extends javax.swing.JPanel {
         labelEmpleado.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         labelEmpleado.setText("Bienvenido, ");
         add(labelEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 55, -1, -1));
+
+        btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/atras (1).png"))); // NOI18N
+        btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAtrasMouseClicked(evt);
+            }
+        });
+        add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void panelBtnRegistrarEntradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnRegistrarEntradaMouseClicked
@@ -129,8 +139,13 @@ public class OpcionesInventario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_panelBtnRegistrarEntradaMouseClicked
 
+    private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
+        control.mostrarMenuOpciones();
+    }//GEN-LAST:event_btnAtrasMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnAtras;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel labelEmpleado;

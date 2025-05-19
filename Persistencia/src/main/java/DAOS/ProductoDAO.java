@@ -34,7 +34,7 @@ public class ProductoDAO implements IProductoDAO {
         producto1.setPrecio(25.50);
         producto1.setEsPesable(true);
         producto1.setUnidad(0.5);
-        producto1.setTexto("Por kilo");
+        producto1.setStock(1);
 
         Producto producto2 = new Producto();
         producto2.setId(2L);
@@ -43,7 +43,7 @@ public class ProductoDAO implements IProductoDAO {
         producto2.setPrecio(40.00);
         producto2.setEsPesable(false);
         producto2.setUnidad(1);
-        producto2.setTexto("Por pieza");
+        producto2.setStock(2);
 
         Producto producto3 = new Producto();
         producto3.setId(3L);
@@ -52,7 +52,7 @@ public class ProductoDAO implements IProductoDAO {
         producto3.setPrecio(24.90);
         producto3.setEsPesable(false);
         producto3.setUnidad(1);
-        producto3.setTexto("Por litro");
+        producto3.setStock(3);
 
         productos.add(producto1);
         productos.add(producto2);

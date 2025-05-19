@@ -37,6 +37,7 @@ public class MenuGastos extends javax.swing.JPanel {
         btnHistorialGastos = new javax.swing.JLabel();
         agregarProveedorPanelRound = new GUI.PanelRound();
         btnAgregarProveedor = new javax.swing.JLabel();
+        btnAtras = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -106,6 +107,15 @@ public class MenuGastos extends javax.swing.JPanel {
         agregarProveedorPanelRound.add(btnAgregarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 80));
 
         add(agregarProveedorPanelRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 490, 320, 80));
+
+        btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/atras (1).png"))); // NOI18N
+        btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAtrasMouseClicked(evt);
+            }
+        });
+        add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHistorialGastosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHistorialGastosMouseClicked
@@ -123,10 +133,15 @@ public class MenuGastos extends javax.swing.JPanel {
         app.mostrarAgregarProveedor();
     }//GEN-LAST:event_btnAgregarProveedorMouseClicked
 
+    private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
+        app.mostrarMenuOpciones();
+    }//GEN-LAST:event_btnAtrasMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.PanelRound agregarProveedorPanelRound;
     private javax.swing.JLabel btnAgregarProveedor;
+    private javax.swing.JLabel btnAtras;
     private javax.swing.JLabel btnHistorialGastos;
     private javax.swing.JLabel btnRegistrarGasto;
     private GUI.PanelRound historialGastosPanelRound;

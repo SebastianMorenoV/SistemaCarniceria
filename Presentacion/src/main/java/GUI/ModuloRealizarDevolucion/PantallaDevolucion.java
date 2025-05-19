@@ -30,7 +30,6 @@ public class PantallaDevolucion extends javax.swing.JPanel {
 
     public PantallaDevolucion(Aplicacion app) {
         this.app = app;
-
         initComponents();
         valoresIniciales();
     }
@@ -129,6 +128,7 @@ public class PantallaDevolucion extends javax.swing.JPanel {
         inputProductosDevueltos.setEditable(false);
         inputProductosDevueltos.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         inputProductosDevueltos.setText("Seleccionar productos");
+        inputProductosDevueltos.setToolTipText("Selecciona los productos en la tabla de Venta que se desean devolver.");
         inputProductosDevueltos.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 inputProductosDevueltosFocusGained(evt);
@@ -193,7 +193,7 @@ public class PantallaDevolucion extends javax.swing.JPanel {
         btnFinalizarVenta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablaProductosDevolucion.setBackground(new java.awt.Color(187, 187, 187));
-        tablaProductosDevolucion.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        tablaProductosDevolucion.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
         tablaProductosDevolucion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -210,6 +210,8 @@ public class PantallaDevolucion extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tablaProductosDevolucion.setToolTipText("Selecciona los productos que se desean devolver");
+        tablaProductosDevolucion.setRowHeight(18);
         tablaProductosDevolucion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaProductosDevolucionMouseClicked(evt);
@@ -522,6 +524,7 @@ public class PantallaDevolucion extends javax.swing.JPanel {
         icnBasura.setVisible(false);
         cargarTabla();
         cargarTextos();
+        ajustarTamañoColumnasPreferidos();
     }
 
     public void cargarTextos() {
@@ -583,6 +586,11 @@ public class PantallaDevolucion extends javax.swing.JPanel {
             // Agrega a la lista de productos devueltos
             productosDevueltos.add(productoSeleccionado);
         }
+    }
+    
+     public void ajustarTamañoColumnasPreferidos() {
+        tablaProductosDevolucion.getColumnModel().getColumn(0).setPreferredWidth(200);  // Nombre Producto
+        tablaProductosDevolucion.getColumnModel().getColumn(1).setPreferredWidth(80); // Precio
     }
 
 }

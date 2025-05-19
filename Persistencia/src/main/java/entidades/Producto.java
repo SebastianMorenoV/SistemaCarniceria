@@ -15,29 +15,36 @@ public class Producto {
     double precio;
     boolean esPesable;
     double unidad;
-    String texto;
+    int stock;
 
     public Producto() {
     }
     
-    public Producto(Long id, String nombre, String descripcion, double precio, boolean esPesable, double unidad, String texto) {
+    public Producto(Long id, String nombre, String descripcion, double precio, boolean esPesable, double unidad, int texto) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.esPesable = esPesable;
         this.unidad = unidad;
-        this.texto = texto;
+        this.stock = texto;
     }
 
-    public Producto(String nombre, String descripcion, double precio, boolean esPesable, double unidad, String texto) {
+    public Producto(String nombre, String descripcion, double precio, boolean esPesable, double unidad, int texto) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.esPesable = esPesable;
         this.unidad = unidad;
-        this.texto = texto;
+        this.stock = texto;
     }
+
+    public Producto(Long id, String nombre, String descripcion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+    
 
     public Long getId() {
         return id;
@@ -87,12 +94,12 @@ public class Producto {
         this.unidad = unidad;
     }
 
-    public String getTexto() {
-        return texto;
+    public int getStock() {
+        return stock;
     }
 
-    public void setTexto(String texto) {
-        this.texto = texto;
+    public void setStock(int texto) {
+        this.stock = texto;
     }
     
     

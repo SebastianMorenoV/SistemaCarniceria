@@ -37,11 +37,6 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>Negocio</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.toedter</groupId>
             <artifactId>jcalendar</artifactId>
             <version>1.4</version>
@@ -49,6 +44,11 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>CasoGastos</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CasoRegistrarEntradas</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

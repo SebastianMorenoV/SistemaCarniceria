@@ -5,6 +5,7 @@ package GUI;
  *
  * @author Sebastian Moreno
  */
+import DTOs.ProductoEntradaDTO;
 import DTOs.FechaDTO;
 import EstrategiaPago.Pago;
 import GUI.ModuloRealizarVenta.VentanaExitoProcesandoPago;

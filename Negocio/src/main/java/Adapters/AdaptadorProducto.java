@@ -20,7 +20,7 @@ public class AdaptadorProducto implements IAdaptadorProducto{
         ProductoCargadoDTO productoDTO = new  ProductoCargadoDTO();
        productoDTO.setCodigo(producto.getId());
        productoDTO.setUnidad(producto.getUnidad());
-       productoDTO.setDescripcion(producto.getTexto());
+       productoDTO.setDescripcion(producto.getDescripcion());
        productoDTO.setNombre(producto.getNombre());
        productoDTO.setPrecio(producto.getPrecio());
        return productoDTO;

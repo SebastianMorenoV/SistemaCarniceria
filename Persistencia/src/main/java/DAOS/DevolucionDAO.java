@@ -102,7 +102,7 @@ public class DevolucionDAO implements IDevolucionDAO {
         venta2.setSubtotal(200.00);
         venta2.setIva(32.00);
         venta2.setTotal(232.00);
-        venta2.setMetodoPago(new MetodoPago(new Tarjeta("Sebas","Visa", "1234567890123456",12)));
+        venta2.setMetodoPago(new MetodoPago(new Tarjeta("Sebas", "Visa", "1234567890123456", 12)));
         venta2.setListaProductosVenta(productos);
 
         Venta venta3 = new Venta();
@@ -221,6 +221,17 @@ public class DevolucionDAO implements IDevolucionDAO {
 
         List<ProductoVenta> productos = new ArrayList<>();
         productos.add(pv);
+
+        Producto producto2 = new Producto();
+        producto2.setNombre("Leche 1LT Kowi");
+
+        ProductoVenta pv2 = new ProductoVenta();
+        pv2.setProducto(producto2);
+        pv2.setCantidad(1);
+        pv2.setPrecioUnitario(270.00);
+        pv2.setImporte(pv2.getCantidad() * pv2.getPrecioUnitario());
+
+        productos.add(pv2);
 
         // Simular datos del empleado (cajero)
         Empleado cajero = new Empleado();

@@ -15,6 +15,7 @@ public class ProductoCargadoDTO {
     double unidad;
     double precio; 
     boolean esPesable;
+    int stock;
 
     public ProductoCargadoDTO(Long codigo, String nombre, String descripcion, String categoria, double unidad, double precio, boolean esPesable) {
         this.codigo = codigo;
@@ -92,6 +93,14 @@ public class ProductoCargadoDTO {
 
     public void setEsPesable(boolean esPesable) {
         this.esPesable = esPesable;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     @Override

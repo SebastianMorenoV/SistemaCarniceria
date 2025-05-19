@@ -4,7 +4,6 @@
  */
 package manejadoresBO;
 
-import BO.CrearVentaBO;
 import BO.DevolucionBO;
 import BO.EmpleadoBO;
 import BO.EntradaBO;
@@ -49,13 +48,6 @@ public class ManejadorObjetosNegocio {
 
         ICreadorDAO fabrica = new CreadorDAO();
         return new EmpleadoBO(fabrica);
-
-    }
-
-    public static ICrearVentaBO crearVentaBO() {
-
-        ICreadorDAO fabrica = new CreadorDAO();
-        return new CrearVentaBO(fabrica);
 
     }
 

@@ -45,7 +45,7 @@ public class PantallaMenuDevolucion extends javax.swing.JPanel {
         txtBusquedaNombre1.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
         txtBusquedaNombre1.setForeground(new java.awt.Color(255, 255, 255));
         txtBusquedaNombre1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtBusquedaNombre1.setText("Realizar Reembolso");
+        txtBusquedaNombre1.setText("Realizar Devolución");
         txtBusquedaNombre1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtBusquedaNombre1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

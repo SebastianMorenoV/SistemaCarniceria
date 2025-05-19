@@ -63,7 +63,7 @@ public class VentaDAO implements IVentaDAO {
         producto.setPrecio(25.50);
         producto.setEsPesable(true);
         producto.setUnidad(1.0);
-        producto.setTexto("Fruta");
+        producto.setStock(5);
 
         ProductoVenta productoVenta = new ProductoVenta();
         productoVenta.setProducto(producto);
@@ -88,7 +88,7 @@ public class VentaDAO implements IVentaDAO {
         producto.setPrecio(25.50);
         producto.setEsPesable(true);
         producto.setUnidad(1.0);
-        producto.setTexto("Fruta");
+        producto.setStock(2);
 
         ProductoVenta productoVenta = new ProductoVenta();
         productoVenta.setProducto(producto);
@@ -119,7 +119,7 @@ public class VentaDAO implements IVentaDAO {
         producto.setPrecio(25.50);
         producto.setEsPesable(true);
         producto.setUnidad(1.0);
-        producto.setTexto("Fruta");
+        producto.setStock(1);
 
         ProductoVenta productoVenta = new ProductoVenta();
         productoVenta.setProducto(producto);
@@ -149,7 +149,7 @@ public class VentaDAO implements IVentaDAO {
         producto1.setPrecio(15.0);
         producto1.setEsPesable(false);
         producto1.setUnidad(1.0);
-        producto1.setTexto("Panadería");
+        producto1.setStock(5);
 
         ProductoVenta productoVenta1 = new ProductoVenta();
         productoVenta1.setProducto(producto1);
@@ -165,7 +165,7 @@ public class VentaDAO implements IVentaDAO {
         producto2.setPrecio(22.5);
         producto2.setEsPesable(false);
         producto2.setUnidad(1.0);
-        producto2.setTexto("Lácteos");
+        producto2.setStock(1);
 
         ProductoVenta productoVenta2 = new ProductoVenta();
         productoVenta2.setProducto(producto2);

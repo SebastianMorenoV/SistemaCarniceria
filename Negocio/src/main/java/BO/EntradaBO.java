@@ -9,7 +9,6 @@ import Adapters.AdaptadorEntrada;
 import DAOS.EntradaDAO;
 import DTOs.EntradaDTO;
 import DTOs.ProductoCargadoDTO;
-import DTOs.ProductosEntradaDTO;
 import Exception.NegocioException;
 import Exception.PersistenciaException;
 import IAdapters.IAdaptadorEntrada;
