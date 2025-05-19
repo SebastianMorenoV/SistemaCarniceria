@@ -12,6 +12,7 @@ import Interfaces.IPagoDAO;
 import Interfaces.IProductoDAO;
 import Interfaces.IProductoVentaDAO;
 import Interfaces.IProveedorDAO;
+import Interfaces.ISalidaDAO;
 import Interfaces.IVentaDAO;
 
 /**
@@ -38,5 +39,7 @@ public interface ICreadorDAO {
     IEntradaDAO crearEntradaDAO();
     
     IProveedorDAO crearProveedorDAO();
+    
+    ISalidaDAO crearSalidaDAO();
 }
 
