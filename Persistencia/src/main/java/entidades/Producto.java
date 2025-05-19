@@ -4,12 +4,15 @@
  */
 package entidades;
 
+import org.bson.types.ObjectId;
+
 /**
  * Esta clase representa una entidad Producto en el sistema.
  * @author Sebastian Moreno
  */
 public class Producto {
-    Long id;
+    ObjectId _id;
+    int id;
     String nombre;
     String descripcion;
     double precio;
@@ -20,7 +23,7 @@ public class Producto {
     public Producto() {
     }
     
-    public Producto(Long id, String nombre, String descripcion, double precio, boolean esPesable, double unidad, int texto) {
+    public Producto(int id, String nombre, String descripcion, double precio, boolean esPesable, double unidad, int texto) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -39,20 +42,30 @@ public class Producto {
         this.stock = texto;
     }
 
-    public Producto(Long id, String nombre, String descripcion) {
+    public Producto(int id, String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
     
 
-    public Long getId() {
+    public ObjectId get_Id() {
+        return _id;
+    }
+
+    public void set_Id(ObjectId id) {
+        this._id = id;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
+
+    
 
     public String getNombre() {
         return nombre;

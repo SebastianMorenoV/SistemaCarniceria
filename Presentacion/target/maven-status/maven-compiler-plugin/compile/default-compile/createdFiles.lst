@@ -5,7 +5,6 @@ GUI\ModuloGastos\FormularioRegistrarGasto$6.class
 GUI\ModuloRegistrarEntrada\PanelRegistrarProductosEntrada$5.class
 GUI\ModuloGastos\MenuGastos.class
 GUI\ModuloRegistrarEntrada\SeleccionarProveedor$1.class
-GUI\ModuloRegistrarSalida\PantallaPrincipal$1.class
 GUI\ModuloGastos\FormularioAgregarProveedor$2.class
 GUI\ModuloRealizarVenta\FormularioTarjeta$2.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$16.class
@@ -13,7 +12,6 @@ GUI\ModuloRealizarVenta\RegistrarVenta$3.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$19.class
 GUI\ModuloRealizarVenta\MenuOpciones$7.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$8.class
-GUI\ModuloRegistrarSalida\PantallaPrincipal.class
 GUI\ModuloRealizarVenta\RegistrarVenta$12.class
 GUI\ModuloGastos\FormularioAgregarProveedor.class
 GUI\ModuloRealizarVenta\FormularioEfectivo$2.class

@@ -3,13 +3,15 @@ package entidades;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author Sebastian Moreno
  */
     public class Devolucion {
-        private int id;
+        private ObjectId _id;
+        private Integer id;
         private Venta venta;
         private String nombreCompleto;
         private String telefono;
@@ -22,8 +24,8 @@ import java.util.List;
         public Devolucion() {
         }
 
-    public Devolucion(int id, Venta venta, String nombreCompleto, String telefono, String razon, List<ProductoVenta> listadoProductosDevueltos, LocalDateTime fechaHora, String numeroDeTicket, double montoDevuelto) {
-        this.id = id;
+    public Devolucion(ObjectId id, Venta venta, String nombreCompleto, String telefono, String razon, List<ProductoVenta> listadoProductosDevueltos, LocalDateTime fechaHora, String numeroDeTicket, double montoDevuelto) {
+        this._id = id;
         this.venta = venta;
         this.nombreCompleto = nombreCompleto;
         this.telefono = telefono;
@@ -34,12 +36,20 @@ import java.util.List;
         this.montoDevuelto = montoDevuelto;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(Integer codigo) {
+        this.id = codigo;
+    }
+
+    public ObjectId get_Id() {
+        return _id;
+    }
+
+    public void set_Id(ObjectId id) {
+        this._id = id;
     }
 
     public Venta getVenta() {
@@ -108,7 +118,7 @@ import java.util.List;
 
     @Override
     public String toString() {
-        return "Devolucion{" + "id=" + id + ", venta=" + venta + ", nombreCompleto=" + nombreCompleto + ", telefono=" + telefono + ", razon=" + razon + ", listadoProductosDevueltos=" + listadoProductosDevueltos + ", fechaHora=" + fechaHora + ", numeroDeTicket=" + numeroDeTicket + ", montoDevuelto=" + montoDevuelto + '}';
+        return "Devolucion{" + "id=" + _id + ", venta=" + venta + ", nombreCompleto=" + nombreCompleto + ", telefono=" + telefono + ", razon=" + razon + ", listadoProductosDevueltos=" + listadoProductosDevueltos + ", fechaHora=" + fechaHora + ", numeroDeTicket=" + numeroDeTicket + ", montoDevuelto=" + montoDevuelto + '}';
     }
     
     

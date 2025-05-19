@@ -28,7 +28,7 @@ public class ProductoDAO implements IProductoDAO {
     @Override
     public List<Producto> consultarProductos() throws PersistenciaException {
         Producto producto1 = new Producto();
-        producto1.setId(1L);
+        producto1.setId(1);
         producto1.setNombre("Manzana");
         producto1.setDescripcion("Fruta roja y jugosa");
         producto1.setPrecio(25.50);
@@ -37,7 +37,7 @@ public class ProductoDAO implements IProductoDAO {
         producto1.setStock(1);
 
         Producto producto2 = new Producto();
-        producto2.setId(2L);
+        producto2.setId(2);
         producto2.setNombre("Pan de caja");
         producto2.setDescripcion("Pan integral Bimbo");
         producto2.setPrecio(40.00);
@@ -46,7 +46,7 @@ public class ProductoDAO implements IProductoDAO {
         producto2.setStock(2);
 
         Producto producto3 = new Producto();
-        producto3.setId(3L);
+        producto3.setId(3);
         producto3.setNombre("Leche entera");
         producto3.setDescripcion("Leche Lala 1L");
         producto3.setPrecio(24.90);

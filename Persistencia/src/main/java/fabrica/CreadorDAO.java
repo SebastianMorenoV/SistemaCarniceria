@@ -3,6 +3,7 @@ package fabrica;
 import DAOS.VentaDAO;
 import DAOS.*;
 import Interfaces.*;
+import MONGO.DAOS.DevolucionMongoDAO;
 
 /**
  * Esta clase Fabrica se encarga de crear objetos DAO.
@@ -38,7 +39,7 @@ public class CreadorDAO implements ICreadorDAO {
 
     @Override
     public IDevolucionDAO crearDevolucionDAO() {
-        return new DevolucionDAO();
+        return new DevolucionMongoDAO();
     }
 
     @Override

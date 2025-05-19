@@ -6,6 +6,7 @@ import DTOs.Devolucion.CrearDevolucionDTO;
 import DTOs.Devolucion.DevolucionDTO;
 import DTOs.Devolucion.DevolucionSinVentaDTO;
 import Exception.NegocioException;
+import Exception.PersistenciaException;
 import IAdapters.IAdaptadorDevolucion;
 import Interfaces.IDevolucionBO;
 import Interfaces.IDevolucionDAO;
@@ -14,6 +15,8 @@ import fabrica.ICreadorDAO;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -33,10 +36,13 @@ public class DevolucionBO implements IDevolucionBO {
 
     @Override
     public DevolucionDTO registrarDevolucion(CrearDevolucionDTO devolucion) throws NegocioException {
-        System.out.println("Devolucion antes de mapper  BOOOO" + devolucion.getVenta().getId());
+       
         Devolucion devolucionEntidad = adaptadorDevolucion.convertirAEntidad(devolucion);
-        System.out.println("Devolucion desde la bo: + " + devolucionEntidad.getVenta().getId());
-        Devolucion devolucionInsertada = devolucionDAO.registrarDevolucion(devolucionEntidad);
+        try {
+            Devolucion devolucionInsertada = devolucionDAO.registrarDevolucion(devolucionEntidad);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(DevolucionBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         DevolucionDTO devolucionDTO = adaptadorDevolucion.convertirADTO(devolucionEntidad);
         return devolucionDTO;
     }
@@ -48,26 +54,37 @@ public class DevolucionBO implements IDevolucionBO {
 
     @Override
     public List<DevolucionDTO> consultarDevolucionesPorFiltro(DevolucionSinVentaDTO devolucionDTO) throws NegocioException {
-        
-        Devolucion devolucionEntidad = new Devolucion();
-        devolucionEntidad.setNombreCompleto(devolucionDTO.getNombreCompleto());
-        devolucionEntidad.setTelefono(devolucionDTO.getTelefono());
-        System.out.println(devolucionDTO.getFechaInicio());
-        System.out.println(devolucionDTO.getFechaFin());
-        
-        List<Devolucion> devolucionesEncontradas = devolucionDAO.buscarDevolucionPorFiltro(devolucionEntidad, devolucionDTO.getFechaInicio(), devolucionDTO.getFechaFin());
-        List<DevolucionDTO> devolucionesEncontradasDTO = new ArrayList<>();
 
-        for (Devolucion devolucionesEncontrada : devolucionesEncontradas) {
-            DevolucionDTO devolucion = adaptadorDevolucion.convertirADTO(devolucionesEncontrada);
-            devolucionesEncontradasDTO.add(devolucion);
+        try {
+            Devolucion devolucionEntidad = new Devolucion();
+            devolucionEntidad.setNombreCompleto(devolucionDTO.getNombreCompleto());
+            devolucionEntidad.setTelefono(devolucionDTO.getTelefono());
+            System.out.println(devolucionDTO.getFechaInicio());
+            System.out.println(devolucionDTO.getFechaFin());
+
+            List<Devolucion> devolucionesEncontradas = devolucionDAO.buscarDevolucionPorFiltro(devolucionEntidad, devolucionDTO.getFechaInicio(), devolucionDTO.getFechaFin());
+            List<DevolucionDTO> devolucionesEncontradasDTO = new ArrayList<>();
+
+            for (Devolucion devolucionesEncontrada : devolucionesEncontradas) {
+                DevolucionDTO devolucion = adaptadorDevolucion.convertirADTO(devolucionesEncontrada);
+                devolucionesEncontradasDTO.add(devolucion);
+            }
+            return devolucionesEncontradasDTO;
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(DevolucionBO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return devolucionesEncontradasDTO;
+        return null;
     }
-    
-    public DevolucionDTO consultarDevolucionPorID(String id) throws NegocioException{ // poner throws
-        Devolucion devolucion = devolucionDAO.buscarPorID(id);
-        DevolucionDTO devolucionDTO = adaptadorDevolucion.convertirADTO(devolucion);
-        return devolucionDTO;
+
+    public DevolucionDTO consultarDevolucionPorID(String id) throws NegocioException {
+        try {
+            // poner throws
+            Devolucion devolucion = devolucionDAO.buscarPorID(id);
+            DevolucionDTO devolucionDTO = adaptadorDevolucion.convertirADTO(devolucion);
+            return devolucionDTO;
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(DevolucionBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

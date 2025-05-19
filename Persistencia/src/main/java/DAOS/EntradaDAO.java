@@ -37,9 +37,9 @@ public class EntradaDAO implements IEntradaDAO{
     @Override
     public List<Producto> ConsultarProductos() throws PersistenciaException {
         List<Producto> listaProductos = new ArrayList<>();
-        listaProductos.add(new Producto((long)01, "Filete Pollo", "pollo"));
-        listaProductos.add(new Producto((long)01, "Nuggets Pollo", "pz"));
-        listaProductos.add(new Producto((long)01, "Carne para asar", "Selecta"));
+        listaProductos.add(new Producto(1, "Filete Pollo", "pollo"));
+        listaProductos.add(new Producto(1, "Nuggets Pollo", "pz"));
+        listaProductos.add(new Producto(1, "Carne para asar", "Selecta"));
 
 
 //        listaProductos.add(new ProductoCargadoDTO((long)1,"Pierna de cerdo", "Pierna sin hueso, fresca", "Cerdo", 1.0, 40.00, true));

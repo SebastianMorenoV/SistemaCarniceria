@@ -57,7 +57,7 @@ public class VentaDAO implements IVentaDAO {
         MetodoPago metodo = new MetodoPago(tarjeta);
 
         Producto producto = new Producto();
-        producto.setId(1L);
+        producto.setId(1);
         producto.setNombre("Manzana");
         producto.setDescripcion("Manzana roja fresca");
         producto.setPrecio(25.50);
@@ -82,7 +82,7 @@ public class VentaDAO implements IVentaDAO {
         List<ProductoVenta> listaProductosVenta = new ArrayList<>();
 
         Producto producto = new Producto();
-        producto.setId(1L);
+        producto.setId(1);
         producto.setNombre("Manzana");
         producto.setDescripcion("Manzana roja fresca");
         producto.setPrecio(25.50);
@@ -113,7 +113,7 @@ public class VentaDAO implements IVentaDAO {
         MetodoPago metodo = new MetodoPago(tarjeta);
 
         Producto producto = new Producto();
-        producto.setId(1L);
+        producto.setId(1);
         producto.setNombre("Manzana");
         producto.setDescripcion("Manzana roja fresca");
         producto.setPrecio(25.50);
@@ -143,7 +143,7 @@ public class VentaDAO implements IVentaDAO {
 
         // Producto 1
         Producto producto1 = new Producto();
-        producto1.setId(1L);
+        producto1.setId(1);
         producto1.setNombre("Pan");
         producto1.setDescripcion("Pan integral");
         producto1.setPrecio(15.0);
@@ -159,7 +159,7 @@ public class VentaDAO implements IVentaDAO {
 
         // Producto 2
         Producto producto2 = new Producto();
-        producto2.setId(2L);
+        producto2.setId(2);
         producto2.setNombre("Leche");
         producto2.setDescripcion("Leche entera 1L");
         producto2.setPrecio(22.5);

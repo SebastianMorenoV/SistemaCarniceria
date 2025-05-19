@@ -57,7 +57,6 @@ public class AdaptadorDevolucion implements IAdaptadorDevolucion {
         
         devolucion.setNombreCompleto(devolucionDTO.getNombreCompleto());
         devolucion.setMontoDevuelto(devolucionDTO.getMontoDevuelto());
-        devolucion.setId(devolucionDTO.getNumeroTicket()); // o setNumeroTicket si tu entidad lo requiere
         devolucion.setFechaHora(devolucionDTO.getFechaHora());
         devolucion.setRazon(devolucionDTO.getRazon());
         devolucion.setTelefono(devolucionDTO.getTelefono());
@@ -79,7 +78,6 @@ public class AdaptadorDevolucion implements IAdaptadorDevolucion {
         
         devolucion.setListadoProductosDevueltos(productosDevueltos);
         
-        System.out.println("dese el adaptador a entidad: " +devolucion.getVenta().getId());
         return devolucion;
     }
     

@@ -627,7 +627,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
                 return null;
             }
 
-            Long codigo = Long.valueOf(partes[0]);
+            int codigo = Integer.parseInt(partes[0]);
 
             // Armar el nombre hasta encontrar el precio
             StringBuilder nombreBuilder = new StringBuilder();
@@ -663,7 +663,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
         // Recorrer todas las filas de la tabla
         for (int i = 0; i < modelo.getRowCount(); i++) {
-            Long codigo = (Long) modelo.getValueAt(i, 0); // Columna 0 -> Código
+            int codigo = (int) modelo.getValueAt(i, 0); // Columna 0 -> Código
             String nombreDescripcion = (String) modelo.getValueAt(i, 1); // Columna 1 -> Nombre + Descripción
             double cantidad = (double) modelo.getValueAt(i, 2); // Columna 2 -> Cantidad
             double precioUnitario = (double) modelo.getValueAt(i, 3); // Columna 3 -> Precio Unitario

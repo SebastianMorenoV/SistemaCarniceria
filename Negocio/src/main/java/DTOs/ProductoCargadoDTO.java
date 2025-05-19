@@ -9,7 +9,7 @@ package DTOs;
  * @author Sebastian Moreno
  */
 public class ProductoCargadoDTO {
-    Long codigo;
+    int codigo;
     String nombre;
     String descripcion, categoria;
     double unidad;
@@ -17,7 +17,7 @@ public class ProductoCargadoDTO {
     boolean esPesable;
     int stock;
 
-    public ProductoCargadoDTO(Long codigo, String nombre, String descripcion, String categoria, double unidad, double precio, boolean esPesable) {
+    public ProductoCargadoDTO(int codigo, String nombre, String descripcion, String categoria, double unidad, double precio, boolean esPesable) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -27,7 +27,7 @@ public class ProductoCargadoDTO {
         this.esPesable = esPesable;
     }
 
-    public ProductoCargadoDTO(Long codigo, String nombre, String descripcion, double precio) {
+    public ProductoCargadoDTO(int codigo, String nombre, String descripcion, double precio) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -39,11 +39,11 @@ public class ProductoCargadoDTO {
     public ProductoCargadoDTO() {
     }
 
-    public Long getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(Long codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
