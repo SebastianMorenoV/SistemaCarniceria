@@ -11,12 +11,22 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Negocio</artifactId>
+            <artifactId>ReportesExterno</artifactId>
             <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.carniceria</groupId>
+                    <artifactId>Persistencia</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.carniceria</groupId>
+                    <artifactId>Negocio</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>ReportesExterno</artifactId>
+            <artifactId>Negocio</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
