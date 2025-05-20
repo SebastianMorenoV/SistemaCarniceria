@@ -206,6 +206,11 @@ public class Aplicacion {
     public void mostrarRegistrarVenta() {
         cambiarPantalla(registrarVenta);
     }
+    public void reconstruirRegistrarVenta(){
+        
+       registrarVenta.reiniciarVenta();
+       cambiarPantalla(registrarVenta);
+    }
 
     //Gastos
     public void mostrarRegistrarGasto() {
@@ -241,9 +246,11 @@ public class Aplicacion {
     }
 
     public void mostrarVentaCancelada() {
-        JOptionPane.showMessageDialog(framePrincipal, "Venta cancelada o no registrada.");
+        JOptionPane.showMessageDialog(framePrincipal, "La venta aun no ha sido pagada.");
     }
-
+     public void mostrarVentaYaPagada() {
+        JOptionPane.showMessageDialog(framePrincipal, "La venta ya ha sido pagada, porfavor finaliza la venta.");
+    }
     public String mostrarIngresarCantidad() {
         return (String) JOptionPane.showInputDialog(framePrincipal, "Ingresa la cantidad del producto:", "Cantidad", JOptionPane.QUESTION_MESSAGE, null, null, "1.0");
     }

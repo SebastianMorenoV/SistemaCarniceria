@@ -171,7 +171,7 @@ public class FormularioMostrarCambio extends javax.swing.JPanel {
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();
-        
+      
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
@@ -196,10 +196,14 @@ public class FormularioMostrarCambio extends javax.swing.JPanel {
         metodoPago.setNuevoEfectivo(new NuevoEfectivoDTO(pagaraCon));
         PagoNuevoDTO pago = new PagoNuevoDTO(LocalDateTime.MAX, metodoPago, total);
         cambio = app.procesarPagoEfectivo(pago);
-        
-        jlabelCantTotal.setText("$" + total);
-        jlabelCantPagaste.setText("$" + pagaraCon);
-        jLabelCantCambio.setText("$" + cambio);
+       
+        String totalFormateado = String.format("%.2f", total);
+        String pagaraConFormateado = String.format("%.2f", pagaraCon);
+        String cambioFormateado = String.format("%.2f", cambio);
+        jlabelCantTotal.setText("$" + totalFormateado);
+        jlabelCantPagaste.setText("$" + pagaraConFormateado);
+        jLabelCantCambio.setText("$" + cambioFormateado);
+     
     }
    
     

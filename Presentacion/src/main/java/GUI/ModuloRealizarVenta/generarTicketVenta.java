@@ -29,13 +29,16 @@ import javax.swing.table.DefaultTableModel;
  * @author HP
  */
 public class generarTicketVenta extends javax.swing.JPanel {
+
     public Aplicacion app;
     public VentaDTO venta;
     public double subtotal, iva, total;
+
     /**
      * Creates new form vistaTicketPDF
+     *
      * @param app
-     * 
+     *
      */
     public generarTicketVenta(Aplicacion app) {
         initComponents();
@@ -152,7 +155,9 @@ public class generarTicketVenta extends javax.swing.JPanel {
 
     private void btnSalirTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirTicketActionPerformed
         // TODO add your handling code here:
-        ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();   
+
+        ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();
+        app.reconstruirRegistrarVenta();
     }//GEN-LAST:event_btnSalirTicketActionPerformed
 
 
@@ -174,20 +179,21 @@ public class generarTicketVenta extends javax.swing.JPanel {
     private javax.swing.JTable tablaTicket;
     private javax.swing.JLabel ticket;
     // End of variables declaration//GEN-END:variables
-    
-    public TicketDTO crearTicket(){       
+
+    public TicketDTO crearTicket() {
         return app.crearTicket(venta);
     }
-    
-    public void acomodarTicket(){
+
+    public void acomodarTicket() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         ticket.setAlignmentX(CENTER_ALIGNMENT);
         campoCarniceria.setAlignmentX(CENTER_ALIGNMENT);
         campoEmpleado.setAlignmentX(CENTER_ALIGNMENT);
         campoFechaVenta.setAlignmentX(CENTER_ALIGNMENT);
     }
-    public void acomodarPanelSumas(){
-        panelSumas.setLayout(new GridLayout(3,2));
+
+    public void acomodarPanelSumas() {
+        panelSumas.setLayout(new GridLayout(3, 2));
         panelSumas.add(campoSubtotal);
         panelSumas.add(campoSubtotal2);
         panelSumas.add(campoIVA);
@@ -196,27 +202,30 @@ public class generarTicketVenta extends javax.swing.JPanel {
         panelSumas.add(campoTotal);
         add(panelSumas);
     }
-    public void acomodarPanelTabla(){
+
+    public void acomodarPanelTabla() {
         tablaTicket.setEnabled(false);
         tablaTicket.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1 = new JScrollPane(tablaTicket); 
+        jScrollPane1 = new JScrollPane(tablaTicket);
         add(jScrollPane1);
     }
-    public void acomodarPanelBotones(){
+
+    public void acomodarPanelBotones() {
         panelBotones.setLayout(new FlowLayout());
         panelBotones.add(btnImprimirTicket);
         panelBotones.add(btnSalirTicket);
         add(panelBotones);
     }
-    public void generarTicketVenta(){
+
+    public void generarTicketVenta() {
         TicketDTO ticket = crearTicket();
-        String columnasTabla[] = {"Producto","cantidad","subtotal"};
+        String columnasTabla[] = {"Producto", "cantidad", "subtotal"};
         campoEmpleado.setText(ticket.getCajero().getNombre());
         campoFechaVenta.setText(ticket.getFechaHora().format(DateTimeFormatter.ISO_DATE));
         DefaultTableModel modelo = new DefaultTableModel(columnasTabla, 0);
-       
-        for(ProductoVentaDTO producto : ticket.getListaProductosVenta()){
-            modelo.addRow(new Object[]{producto.getProducto().getNombre(), producto.getCantidad(),producto.getCantidad()*producto.getImporte()});  
+
+        for (ProductoVentaDTO producto : ticket.getListaProductosVenta()) {
+            modelo.addRow(new Object[]{producto.getProducto().getNombre(), producto.getCantidad(), producto.getCantidad() * producto.getImporte()});
         }
         tablaTicket.setModel(modelo);
         tablaTicket.setVisible(true);
@@ -224,11 +233,11 @@ public class generarTicketVenta extends javax.swing.JPanel {
         subtotal = calcularSubtotal((ArrayList<ProductoVentaDTO>) ticket.getListaProductosVenta());
         iva = calcularIva(subtotal);
         total = calcularTotal(subtotal, iva);
-        campoSubtotal2.setText(String.format("%.2f",subtotal));
-        campoIVATotal.setText(String.format("%.2f",iva));        
-        campoTotal.setText(String.format("%.2f",total));
+        campoSubtotal2.setText(String.format("%.2f", subtotal));
+        campoIVATotal.setText(String.format("%.2f", iva));
+        campoTotal.setText(String.format("%.2f", total));
     }
-    
+
     public double calcularSubtotal(ArrayList<ProductoVentaDTO> productosEnTabla) {
         double subtotal = 0.0;
         for (ProductoVentaDTO nuevoProductoVentaDTO : productosEnTabla) {
@@ -237,12 +246,11 @@ public class generarTicketVenta extends javax.swing.JPanel {
         }
         return subtotal;
     }
-     
+
     public double calcularIva(double subtotal) {
         return subtotal * 0.16; // 16% de IVA
     }
 
-    
     public double calcularTotal(double subtotal, double iva) {
         return subtotal + iva;
     }
