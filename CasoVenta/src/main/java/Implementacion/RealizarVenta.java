@@ -4,6 +4,7 @@ package Implementacion;
 import BO.ProductoBO;
 import DTOs.EmpleadoCargadoDTO;
 import DTOs.MetodoPagoDTO;
+import DTOs.NuevaTarjetaDTO;
 import DTOs.NuevoProductoVentaDTO;
 import DTOs.PagoNuevoDTO;
 import DTOs.PagoViejoDTO;
@@ -149,6 +150,11 @@ public class RealizarVenta implements IRealizarVenta {
         }
         
         return validado;
+    }
+    
+    public NuevaTarjetaDTO buscarTarjeta(String titular, String numeroTarjeta, String fechaVencimiento, int cvv) throws ProcesadorPagoException {
+        IProcesadorPago estrategia = new PagoTarjeta();
+        return procesarPago.buscarTarjeta(estrategia, titular, numeroTarjeta, fechaVencimiento, cvv);
     }
 
    

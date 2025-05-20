@@ -12,6 +12,11 @@ public class NuevaTarjetaDTO {
     int cvv;
     double saldoDisponible; // Cantidad de saldo disponible en 
 
+    public NuevaTarjetaDTO() {
+    }
+    
+    
+
     public NuevaTarjetaDTO(String titular, String numeroTarjeta, String fechaVencimiento, int cvv , double  saldo) {
         super();
         this.titular = titular;
@@ -19,6 +24,14 @@ public class NuevaTarjetaDTO {
         this.fechaVencimiento = fechaVencimiento;
         this.cvv = cvv;
         this.saldoDisponible = saldo;
+    }
+    
+    public NuevaTarjetaDTO(String titular, String numeroTarjeta, String fechaVencimiento, int cvv) {
+        super();
+        this.titular = titular;
+        this.numeroTarjeta = numeroTarjeta;
+        this.fechaVencimiento = fechaVencimiento;
+        this.cvv = cvv;
     }
 
     public double getSaldoDisponible() {

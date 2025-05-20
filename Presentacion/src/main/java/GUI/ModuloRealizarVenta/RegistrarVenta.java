@@ -373,7 +373,27 @@ public class RegistrarVenta extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAtrasMouseClicked
 
     private void btnTxtTarjetaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtTarjetaMouseClicked
-        app.mostrarFormularioTarjeta();
+        
+        try {
+            // setear la venta con los totales y los productosVenta
+
+            if (app.obtenerVenta() != null && app.obtenerVenta().getPago() != null) {
+                app.mostrarVentaYaPagada();
+            } else {
+                VentaDTO venta = new VentaDTO();
+                venta.setEmpleado(app.cargarEmpleado());
+                venta.setFechaHora(LocalDateTime.now());
+                venta.setIva(app.getIvaVenta());
+                venta.setTotal(app.getTotalVenta());
+                venta.setSubtotal(app.getSubtotalVenta());
+                venta.setListadoProductosVenta(listadoProductosVenta);
+
+                app.setearVenta(venta);
+                app.mostrarFormularioTarjeta();
+            }
+        } catch (NegocioException ex) {
+            Logger.getLogger(RegistrarVenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnTxtTarjetaMouseClicked
 
     private void btnTxtEfectivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtEfectivoMouseClicked
@@ -381,7 +401,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
         try {
             // setear la venta con los totales y los productosVenta
 
-            if (app.obtenerVenta() != null) {
+            if (app.obtenerVenta() != null && app.obtenerVenta().getPago() != null) {
                 app.mostrarVentaYaPagada();
             } else {
                 VentaDTO venta = new VentaDTO();

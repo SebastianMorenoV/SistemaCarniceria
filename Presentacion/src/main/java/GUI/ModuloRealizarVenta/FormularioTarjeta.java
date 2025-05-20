@@ -8,6 +8,7 @@ import DTOs.MetodoPagoDTO;
 import DTOs.NuevaTarjetaDTO;
 import DTOs.PagoNuevoDTO;
 import DTOs.PagoViejoDTO;
+import DTOs.VentaDTO;
 import GUI.Aplicacion;
 import EstrategiaPago.Pago;
 import excepciones.ProcesadorPagoException;
@@ -45,6 +46,8 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         this.app = app;
         this.proce = new Pago();
         initComponents();
+        
+        double totalTemporal = app.getTotalTemporal();
 
     }
 
@@ -155,7 +158,11 @@ public class FormularioTarjeta extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRegresarMouseClicked
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
-        pagoTarjeta();
+        try {
+            pagoTarjeta();
+        } catch (ProcesadorPagoException ex) {
+            Logger.getLogger(FormularioTarjeta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAceptarMouseClicked
 
     private void btnTxtRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtRegresarMouseClicked
@@ -181,7 +188,7 @@ public class FormularioTarjeta extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
 //metodosAuxiliares
-    public void pagoTarjeta() {
+    public void pagoTarjeta() throws ProcesadorPagoException {
         String titular = inputTitularTarjeta.getText();
         String numeroTarjeta = inputNumeroTarjeta.getText();
         String fechaVencimiento = inputFechaExpiracion.getText();
@@ -198,18 +205,22 @@ public class FormularioTarjeta extends javax.swing.JPanel {
             app.mostrarErrorCvvNecesario();
             return;
         }
+        //NuevaTarjetaDTO tarjeta = new NuevaTarjetaDTO(titular, numeroTarjeta, fechaVencimiento, cvv); 
+        NuevaTarjetaDTO tarjeta = app.buscarTarjeta(titular, numeroTarjeta, fechaVencimiento, cvv);
 
-        double saldo = 200; // tarjeta con 200 pesos
-        NuevaTarjetaDTO tarjeta = new NuevaTarjetaDTO(titular, numeroTarjeta, fechaVencimiento, cvv, saldo);
+
         LocalDateTime fechaPago = LocalDateTime.now();
 
         double monto = app.getTotalTemporal(); // se obtiene desde la app
 
         MetodoPagoDTO metodoPago = new MetodoPagoDTO(tarjeta);
         PagoViejoDTO pago = new PagoViejoDTO(fechaPago, metodoPago, monto);
+        VentaDTO venta = app.obtenerVenta();
         try {
             boolean ans = app.verificarPago(pago);
             if (ans) {
+                pago.setEstado("Pagado");
+                venta.setPago(pago);
                 app.mostrarVentanaProcesandoPago();
                 app.mostrarVentanaExitoProcesandoPago();
             } else {

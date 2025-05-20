@@ -695,6 +695,11 @@ public class Aplicacion {
             throw new SalidaException("Error al cargar las salidas filtradas", e);
         }
     } 
+    
+    public NuevaTarjetaDTO buscarTarjeta(String titular, String numeroTarjeta, String fechaVencimiento, int cvv) throws ProcesadorPagoException {
+        return realizarVenta.buscarTarjeta(titular, numeroTarjeta, fechaVencimiento, cvv);
+    }
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
 }

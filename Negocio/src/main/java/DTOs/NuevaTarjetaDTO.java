@@ -23,6 +23,14 @@ public class NuevaTarjetaDTO {
         this.cvv = cvv;
         this.saldoDisponible = saldo;
     }
+    
+    public NuevaTarjetaDTO(String titular, String numeroTarjeta, String fechaVencimiento, int cvv) {
+        super();
+        this.titular = titular;
+        this.numeroTarjeta = numeroTarjeta;
+        this.fechaVencimiento = fechaVencimiento;
+        this.cvv = cvv;
+    }
 
     public NuevaTarjetaDTO() {
     }

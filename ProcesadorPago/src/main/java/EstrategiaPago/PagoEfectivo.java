@@ -1,6 +1,7 @@
 package EstrategiaPago;
 
 import DTOs.MetodoPagoDTO;
+import DTOs.NuevaTarjetaDTO;
 import DTOs.NuevoEfectivoDTO;
 import DTOs.PagoNuevoDTO;
 import excepciones.ProcesadorPagoException;
@@ -32,4 +33,11 @@ public class PagoEfectivo implements IProcesadorPago{
         NuevoEfectivoDTO nuevoEfectivoDTO = pago.getMetodoPago().getNuevoEfectivo();
         return nuevoEfectivoDTO.getPagoCon() >= pago.getMonto();
     }
+
+    @Override
+    public NuevaTarjetaDTO buscarTarjeta(String titular, String numeroTarjeta, String fechaVencimiento, int cvv) throws ProcesadorPagoException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+
 }

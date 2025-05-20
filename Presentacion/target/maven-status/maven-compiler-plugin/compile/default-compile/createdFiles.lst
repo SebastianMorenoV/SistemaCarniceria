@@ -80,6 +80,7 @@ GUI\ModuloRealizarVenta\RegistrarVenta$11.class
 GUI\ModuloRegistrarEntrada\FormularioDatosEntrada$1.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$13.class
 GUI\ModuloRegistrarSalida\VentanaHistorialSalidas$1.class
+GUI\ModuloRegistrarSalida\VentanaHistorialSalidas$9.class
 GUI\ModuloRealizarVenta\FormularioMostrarCambio.class
 GUI\ModuloRegistrarSalida\VentanaHistorialSalidas.class
 GUI\ModuloRealizarVenta\RegistrarVenta.class

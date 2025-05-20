@@ -23,5 +23,10 @@ public class Pago {
     public boolean validarPago(IProcesadorPago estrategia, PagoNuevoDTO pago) throws ProcesadorPagoException {
         return estrategia.validarPago(pago);
     }
+    
+    public NuevaTarjetaDTO buscarTarjeta(IProcesadorPago estrategia,String titular, String numeroTarjeta, String fechaVencimiento, int cvv) throws ProcesadorPagoException {
+        return estrategia.buscarTarjeta(titular, numeroTarjeta, fechaVencimiento, cvv);
+    }
+
 
 }
