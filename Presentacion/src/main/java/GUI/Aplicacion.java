@@ -44,9 +44,7 @@ import GUI.ModuloRegistrarEntrada.OpcionesInventario;
 import GUI.ModuloRegistrarEntrada.PanelRegistrarProductosEntrada;
 import GUI.ModuloRegistrarEntrada.SeleccionarProducto;
 import GUI.ModuloRegistrarEntrada.SeleccionarProveedor;
-import GUI.ModuloRegistrarSalida.DialogoFiltrarPorFecha;
-import GUI.ModuloRegistrarSalida.DialogoFiltrarPorMes;
-import GUI.ModuloRegistrarSalida.DialogoFiltrarPorProducto;
+
 import GUI.ModuloRegistrarSalida.DialogoRegistrarSalida;
 
 import GUI.ModuloRegistrarSalida.VentanaHistorialSalidas;
@@ -56,6 +54,7 @@ import Implementacion.RealizarVenta;
 import Implementacion.RegistrarEntrada;
 import Proveedor.RegistrarProveedor;
 import excepciones.ProcesadorPagoException;
+import exception.SalidaException;
 
 import java.time.LocalDate;
 
@@ -69,6 +68,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import salidas.IRealizarSalida;
+import salidas.RealizarSalida;
+
+
 
 public class Aplicacion {
 
@@ -112,6 +115,7 @@ public class Aplicacion {
 
     //Caso de Uso Registrar Salidas
     private VentanaHistorialSalidas ventanaHistorialSalidas;
+    private IRealizarSalida realizarSalida;
     
     //Pago con Efectivo
     private FormularioMostrarCambio fomularioMostrarCambio;
@@ -129,6 +133,7 @@ public class Aplicacion {
         this.registrarGasto = new RegistrarGasto();
         this.registrarProveedor = new RegistrarProveedor();
         this.registrarEntrada = new RegistrarEntrada();
+        this.realizarSalida = new RealizarSalida();
 
         // Inicializar pantallas Caso de uso Principal (Venta)
         registrarVenta = new RegistrarVenta(this);
@@ -624,35 +629,9 @@ public class Aplicacion {
         registrarEntrada.registrarEntrada(entrada);
     }
 
-    //Caso Registrar entrada----------------------------------------
-    //Caso Registrar salidas----------------------------------------
-    public void mostrarVentanaHistorialSalidas() {
-        cambiarPantalla(ventanaHistorialSalidas);
-    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void mostrarDialogoAgregarSalida() {
-        DialogoRegistrarSalida ven = new DialogoRegistrarSalida(framePrincipal, true);
-        ven.setLocationRelativeTo(null);
-        ven.setVisible(true);
-    }
 
-    public void mostrarDialogoFiltrarPorMes() {
-        DialogoFiltrarPorMes ven = new DialogoFiltrarPorMes(framePrincipal, true);
-        ven.setLocationRelativeTo(null);
-        ven.setVisible(true);
-    }
-
-    public void mostrarDialogoFiltrarPorFecha() {
-        DialogoFiltrarPorFecha ven = new DialogoFiltrarPorFecha(framePrincipal, true);
-        ven.setLocationRelativeTo(null);
-        ven.setVisible(true);
-    }
-
-    public void mostrarDialogoFiltrarPorProducto() {
-        DialogoFiltrarPorProducto ven = new DialogoFiltrarPorProducto(framePrincipal, true);
-        ven.setLocationRelativeTo(null);
-        ven.setVisible(true);
-    }
 
     //////////////////////////////METODOS NUEVOS PARA CASOVENTA///////////////////////////////////////
     public void setTotalVenta(double totalTemporal) {
@@ -687,4 +666,27 @@ public class Aplicacion {
         return realizarVenta.getPagaraCon();
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
+    /////////////////////////////METODOS PARA EL CASO DE USO DE HACER UNA SALIDA//////////////////////////////////////////////////////////////
+    public void mostrarVentanaHistorialSalidas() {
+        cambiarPantalla(ventanaHistorialSalidas);
+    }
+    
+    public void mostrarDialogoAgregarSalida() {
+        DialogoRegistrarSalida ven = new DialogoRegistrarSalida(framePrincipal, true);
+        ven.setLocationRelativeTo(null);
+        ven.setVisible(true);
+    }
+    
+    public List<SalidaDTO> cargarSalidas() throws SalidaException{
+        try {
+            return realizarSalida.cargarTodasLasSalidas();
+        } catch (SalidaException e) {
+            throw new SalidaException("Error al cargar todas las salidas");
+        }
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
 }

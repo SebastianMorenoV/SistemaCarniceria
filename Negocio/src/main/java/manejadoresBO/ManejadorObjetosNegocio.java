@@ -10,6 +10,7 @@ import BO.EntradaBO;
 import BO.GastoBO;
 import BO.ProductoBO;
 import BO.ProveedorBO;
+import BO.SalidaBO;
 import BO.VentaBO;
 import DAOS.VentaDAO;
 import Interfaces.ICrearVentaBO;
@@ -19,6 +20,7 @@ import Interfaces.IEntradaBO;
 import Interfaces.IGastoBO;
 import Interfaces.IProductoBO;
 import Interfaces.IProveedorBO;
+import Interfaces.ISalidaBO;
 import Interfaces.IVentaBO;
 import Interfaces.IVentaDAO;
 import fabrica.CreadorDAO;
@@ -71,6 +73,11 @@ public class ManejadorObjetosNegocio {
     public static IEntradaBO crearEntradaBO(){
         ICreadorDAO fabrica = new CreadorDAO();
         return new EntradaBO(fabrica);
+    }
+    
+    public static ISalidaBO crearSalidaBO(){
+        ICreadorDAO fabrica = new CreadorDAO();
+        return new SalidaBO(fabrica);
     }
 
 }

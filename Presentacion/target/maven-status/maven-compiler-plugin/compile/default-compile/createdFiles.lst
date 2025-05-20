@@ -1,7 +1,6 @@
 GUI\ModuloRealizarVenta\RegistrarVenta$15.class
 GUI\ModuloRealizarDevolucion\PantallaDetallesHistorialDevolucion$4.class
 GUI\ModuloRegistrarEntrada\OpcionesInventario$1.class
-GUI\ModuloRegistrarSalida\DialogoFiltrarPorProducto.class
 GUI\ModuloGastos\FormularioRegistrarGasto$6.class
 GUI\ModuloRegistrarEntrada\PanelRegistrarProductosEntrada$5.class
 GUI\ModuloGastos\MenuGastos.class
@@ -16,7 +15,6 @@ GUI\ModuloRealizarDevolucion\PantallaDevolucion$19.class
 GUI\ModuloRealizarVenta\MenuOpciones$7.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$8.class
 GUI\ModuloRealizarVenta\RegistrarVenta$12.class
-GUI\ModuloRegistrarSalida\DialogoFiltrarPorFecha$1.class
 GUI\ModuloGastos\FormularioAgregarProveedor.class
 GUI\ModuloRealizarVenta\FormularioEfectivo$2.class
 GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones$5.class
@@ -61,7 +59,6 @@ GUI\ModuloRealizarVenta\generarTicketVenta$1.class
 GUI\ModuloRealizarVenta\ventanaMostrarTicket.class
 com\carniceria\presentacion\Presentacion.class
 GUI\ModuloRealizarVenta\FormularioMostrarCambio$1.class
-GUI\ModuloRegistrarSalida\DialogoFiltrarPorProducto$1.class
 GUI\ModuloRealizarVenta\RegistrarVenta$9.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$9.class
 GUI\Aplicacion.class
@@ -69,7 +66,6 @@ GUI\ModuloGastos\FormularioEditarGasto$1.class
 GUI\ModuloGastos\FormularioRegistrarGasto$5.class
 GUI\ModuloRegistrarEntrada\FormularioProductoNuevo$2.class
 GUI\ModuloRegistrarEntrada\PanelRegistrarProductosEntrada$6.class
-GUI\ModuloRegistrarSalida\DialogoFiltrarPorMes$1.class
 GUI\ModuloRegistrarSalida\VentanaHistorialSalidas$8.class
 GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones.class
 GUI\ModuloRealizarDevolucion\PantallaTicket$4.class
@@ -124,7 +120,6 @@ GUI\ModuloRegistrarSalida\DialogoRegistrarSalida$1.class
 GUI\ModuloGastos\FormularioEditarGasto$2.class
 GUI\ModuloRegistrarEntrada\PanelRegistrarProductosEntrada.class
 GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones$ButtonEditor.class
-GUI\ModuloRegistrarSalida\DialogoFiltrarPorMes.class
 GUI\ModuloRealizarVenta\RegistrarVenta$16.class
 GUI\ModuloGastos\MenuGastos$2.class
 GUI\PanelRound.class
@@ -153,7 +148,6 @@ GUI\ModuloRealizarDevolucion\PantallaDevolucion$10.class
 GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones$7.class
 GUI\ModuloRealizarVenta\RegistrarVenta$14.class
 GUI\ModuloGastos\FormularioRegistrarGasto$8.class
-GUI\ModuloRegistrarSalida\DialogoFiltrarPorFecha.class
 GUI\ModuloGastos\FormularioEditarGasto$4.class
 GUI\ModuloGastos\FormularioRegistrarGasto$1.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$5.class

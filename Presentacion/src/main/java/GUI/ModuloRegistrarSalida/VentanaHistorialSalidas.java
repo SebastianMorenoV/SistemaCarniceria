@@ -1,6 +1,7 @@
 package GUI.ModuloRegistrarSalida;
 
 import GUI.Aplicacion;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -26,7 +27,7 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableSalidas = new javax.swing.JTable();
         btnAtras = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabelIconAgregarSalida = new javax.swing.JLabel();
@@ -43,15 +44,15 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableSalidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
             },
             new String [] {
                 "Fecha", "Producto", "Motivo", "Stock Antes", "Salida", "Stock Despues"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jTableSalidas.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setViewportView(jTableSalidas);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 1080, -1));
 
@@ -188,6 +189,13 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabelFechaDesdeMouseClicked
 
+    /////////////////////////////UTILS//////////////////////////////////////////////////////////////
+    private void cargarSalidasTabla(){
+        //List<SalidaDTO> listaSalidaDTO.
+        DefaultTableModel model = (DefaultTableModel) jTableSalidas.getModel();
+        model.setRowCount(0);
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnAtras;
@@ -202,7 +210,7 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelIconGenerarReporte;
     private javax.swing.JLabel jLabelProducto;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableSalidas;
     private javax.swing.JTextField jTextFieldProducto;
     // End of variables declaration//GEN-END:variables
 }
