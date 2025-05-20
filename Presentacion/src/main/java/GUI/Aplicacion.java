@@ -143,7 +143,7 @@ public class Aplicacion {
         pantallaDevolucion = new PantallaDevolucion(this);
 
         //Pantallas de caso gastos inicializadas
-        formularioAgregarProveedor = new FormularioAgregarProveedor(this);
+        //formularioAgregarProveedor = new FormularioAgregarProveedor(this);
 
         menuGastos = new MenuGastos(this);
 
@@ -221,6 +221,7 @@ public class Aplicacion {
     }
 
     public void mostrarAgregarProveedor() {
+        formularioAgregarProveedor = new FormularioAgregarProveedor(this);
         cambiarPantalla(formularioAgregarProveedor);
     }
 

@@ -30,19 +30,18 @@ public class RegistrarGasto implements IRegistrarGasto {
     public GastoDTO agregarGasto(CrearGastoDTO gastoDTO) throws GastoException {
         try {
             // Aquí podrías agregar validaciones de negocio antes de llamar al BO
-//        if (gastoDTO == null) {
-//            throw new NegocioException("Los datos del gasto no pueden ser nulos.");
-//        }
-//        // Ejemplo de validación de campos requeridos
-//        if (gastoDTO.getFolio() == null || gastoDTO.getFolio().isEmpty()) {
-//            throw new NegocioException("El folio del gasto es obligatorio.");
-//        }
-//        if (gastoDTO.getMontoGasto() == null || gastoDTO.getMontoGasto() <= 0) {
-//            throw new NegocioException("El monto del gasto debe ser mayor que cero.");
-//        }
-// ... otras validaciones
+        if (gastoDTO == null) {
+            throw new NegocioException("Los datos del gasto no pueden ser nulos.");
+        }
+        // Ejemplo de validación de campos requeridos
+        if (gastoDTO.getFolio() == null || gastoDTO.getFolio().isEmpty()) {
+            throw new NegocioException("El folio del gasto es obligatorio.");
+        }
+        if (gastoDTO.getMontoGasto() == null || gastoDTO.getMontoGasto() <= 0) {
+            throw new NegocioException("El monto del gasto debe ser mayor que cero.");
+        }
 
-// Llama al Business Object para realizar la lógica de negocio y persistencia
+        // Llama al Business Object para realizar la lógica de negocio y persistencia
             return gastoBO.agregarGasto(gastoDTO);
         } catch (NegocioException ex) {
             throw new GastoException("Error al agregar gasto" + ex.getLocalizedMessage());
@@ -83,11 +82,6 @@ public class RegistrarGasto implements IRegistrarGasto {
         } catch (NegocioException e) {
             throw new GastoException("Error al consultar gastos filtrados" + e.getLocalizedMessage());
         }
-    }
-
-    @Override
-    public void vaidarGastoDuplicado() throws GastoException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public CrearGastoDTO getGastoPasable() {

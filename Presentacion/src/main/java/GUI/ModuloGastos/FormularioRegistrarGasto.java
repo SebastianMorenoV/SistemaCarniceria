@@ -281,22 +281,45 @@ public class FormularioRegistrarGasto extends javax.swing.JPanel {
     private GUI.PanelRound panelRound1;
     // End of variables declaration//GEN-END:variables
 
-    public void registrarGasto() throws GastoException{
+    public void registrarGasto() throws GastoException { 
         String concepto = inputConcepto.getText().trim();
-        String metodoPago = comboMetodoPago.getSelectedItem().toString();
+        String metodoPago = comboMetodoPago.getSelectedItem() != null ? comboMetodoPago.getSelectedItem().toString() : "";
         String folio = inputFolio.getText().trim();
-        
         Date fechaSeleccionada = inputFecha.getDate();
-        if (fechaSeleccionada == null) {
-            throw new GastoException("Debes seleccionar una fecha.");
-        }
-        LocalDate fechaGasto = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        
-        String categoria = comboCategoria.getSelectedItem().toString();
-        double monto = Double.parseDouble(inputMonto.getText());
+        String categoria = comboCategoria.getSelectedItem() != null ? comboCategoria.getSelectedItem().toString() : "";
+        String montoText = inputMonto.getText().trim();
         CrearProveedorDTO proveedor = (CrearProveedorDTO) comboProveedor.getSelectedItem();
-        byte[] comprobante = comprobanteSeleccionado;
-        
+        byte[] comprobante = comprobanteSeleccionado; 
+
+        // --- Validaciones en un solo bloque if ---
+        if (concepto.isEmpty()
+                || metodoPago.isEmpty()
+                || folio.isEmpty()
+                || fechaSeleccionada == null
+                || categoria.isEmpty()
+                || montoText.isEmpty()
+                || proveedor == null) { 
+
+            JOptionPane.showMessageDialog(null, "Por favor, completa todos los campos obligatorios.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
+            return; // Sale del método si hay campos vacíos
+        }
+
+        // --- Validaciones específicas después de la comprobación de campos vacíos ---
+        LocalDate fechaGasto = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        double monto;
+        try {
+            monto = Double.parseDouble(montoText);
+            if (monto <= 0) {
+                JOptionPane.showMessageDialog(null, "El **monto** debe ser un valor positivo.", "Error de Monto", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "El **monto** debe ser un número válido.", "Error de Formato", JOptionPane.WARNING_MESSAGE);
+            return; // Sale del método si el monto no es un número válido
+        }
+
+        // Si todas las validaciones pasan, procede a crear y registrar el gasto
         CrearGastoDTO gasto = new CrearGastoDTO();
         gasto.setConcepto(concepto);
         gasto.setMetodoPago(metodoPago);
@@ -306,18 +329,21 @@ public class FormularioRegistrarGasto extends javax.swing.JPanel {
         gasto.setMontoGasto(monto);
         gasto.setProveedor(proveedor);
         gasto.setComprobante(comprobante);
-        System.out.println(gasto);
-        GastoDTO resultado = app.registrarGasto(gasto);
-        
-        if(resultado!=null){
-            System.out.println("Gasto registrado correctamente: " + resultado);
-            JOptionPane.showMessageDialog(null, "Gasto registrado exitosamente", "Gasto registrado", JOptionPane.INFORMATION_MESSAGE);    
-            app.mostrarPantallaMenuGastos();
-        }
-        
 
-        
+        System.out.println(gasto); // Para depuración
+
+        GastoDTO resultado = app.registrarGasto(gasto);
+
+        if (resultado != null) {
+            System.out.println("Gasto registrado correctamente: " + resultado);
+            JOptionPane.showMessageDialog(null, "Gasto registrado exitosamente", "Gasto Registrado", JOptionPane.INFORMATION_MESSAGE);
+            app.mostrarPantallaMenuGastos();
+        } else {
+            // Manejar caso donde app.registrarGasto(gasto) devuelve null (ej. error en la capa de negocio)
+            JOptionPane.showMessageDialog(null, "Ocurrió un error al registrar el gasto. Inténtalo de nuevo.", "Error de Registro", JOptionPane.ERROR_MESSAGE);
+        }
     }
+
     
     public void cargarProveedores(){
         

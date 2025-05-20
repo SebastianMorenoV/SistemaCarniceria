@@ -24,7 +24,6 @@ public interface IRegistrarGasto {
 
     public List<GastoDTO> consultarGastos() throws GastoException;
     
-    public void vaidarGastoDuplicado() throws GastoException;
     
     public List<GastoDTO> consultarGastosFiltrados(CrearGastoDTO gastoFiltro, LocalDate fechaInicio, LocalDate fechaFin) throws GastoException;
     

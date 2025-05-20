@@ -138,20 +138,28 @@ public class FormularioAgregarProveedor extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 
-    public void agregarProveedor() throws GastoException{
+    public void agregarProveedor() throws GastoException { 
         String nombre = inputNombre.getText().trim();
         String telefono = inputTelefono.getText().trim();
-        
+
+        // validaciones
+        if (nombre.isEmpty() || telefono.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, completa todos los campos obligatorios (Nombre y Telefono).", "Campos Vacios", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        //si las validaciones pasan, procede a crear y registrar el proveedor
         CrearProveedorDTO proveedor = new CrearProveedorDTO();
         proveedor.setNombre(nombre);
         proveedor.setTelefono(telefono);
-        
+
         ProveedorDTO resultado = app.registrarProveedor(proveedor);
-        
-        if(resultado!=null){
-            System.out.println("Proveedor agregado: " + resultado);
-            JOptionPane.showMessageDialog(null, "Proveedor registrado exitosamente", "Proveedor agregado", JOptionPane.INFORMATION_MESSAGE);
+
+        if (resultado != null) {
+            JOptionPane.showMessageDialog(null, "Proveedor registrado exitosamente", "Proveedor Agregado", JOptionPane.INFORMATION_MESSAGE);
             app.mostrarPantallaMenuGastos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Ocurrió un error al registrar el proveedor. Inténtalo de nuevo.", "Error de Registro", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

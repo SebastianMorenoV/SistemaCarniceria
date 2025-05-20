@@ -30,6 +30,7 @@ public class AdaptadorProveedor implements IAdaptadorProveedor {
         }
         Proveedor proveedorEntidad = new Proveedor();
         proveedorEntidad.setNombre(proveedorDTO.getNombre());
+        proveedorEntidad.setNumero(proveedorDTO.getTelefono());
         return proveedorEntidad;
     }
 

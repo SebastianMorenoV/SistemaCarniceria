@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.bson.types.ObjectId;
 
 /**
@@ -255,33 +256,51 @@ public class FormularioEditarGasto extends javax.swing.JPanel {
 
     }
     
-    public void modificarGasto() throws GastoException{
+    public void modificarGasto() throws GastoException {
         CrearGastoDTO gastoASD = app.getCrearGastoDTO();
         String folio = gastoASD.getFolio();
-        
+
         String concepto = inputConcepto.getText().trim();
-        String metodoPago = comboMetodoPago.getSelectedItem().toString();
-        
-        
-        GastoDTO gastoBuscar = app.buscarPorFolio(folio);
-
-        ObjectId id = gastoBuscar.getId();
-
-
+        String metodoPago = comboMetodoPago.getSelectedItem() != null ? comboMetodoPago.getSelectedItem().toString() : "";
         Date fechaSeleccionada = inputFecha.getDate();
-        if (fechaSeleccionada == null) {
-            throw new GastoException("Debes seleccionar una fecha.");
-        }
-        LocalDate fechaGasto = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-        String categoria = comboCategoria.getSelectedItem().toString();
-        double monto = Double.parseDouble(inputMonto.getText());
+        String categoria = comboCategoria.getSelectedItem() != null ? comboCategoria.getSelectedItem().toString() : "";
+        String montoTexto = inputMonto.getText().trim();
         CrearProveedorDTO proveedor = (CrearProveedorDTO) comboProveedor.getSelectedItem();
+
+        // --- Validaciones generales de campos vacíos o nulos ---
+        if (concepto.isEmpty()
+                || metodoPago.isEmpty()
+                || folio.isEmpty()
+                || fechaSeleccionada == null
+                || categoria.isEmpty()
+                || montoTexto.isEmpty()
+                || proveedor == null) {
+            JOptionPane.showMessageDialog(null, "Por favor, completa todos los campos obligatorios.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // --- Validación específica de monto ---
+        double monto;
+        try {
+            monto = Double.parseDouble(montoTexto);
+            if (monto <= 0) {
+                JOptionPane.showMessageDialog(null, "El monto debe ser un valor positivo.", "Error de Monto", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "El monto debe ser un número válido.", "Error de Formato", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // --- Continuar con conversión y operaciones ---
+        LocalDate fechaGasto = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         String nombreBuscar = proveedor.getNombre();
         ProveedorDTO proveedorInsertar = app.buscarPorNombre(nombreBuscar);
 
+        GastoDTO gastoBuscar = app.buscarPorFolio(folio);
+        ObjectId id = gastoBuscar.getId();
+
         GastoDTO gasto = new GastoDTO();
-        
         gasto.setId(id);
         gasto.setConcepto(concepto);
         gasto.setMetodoPago(metodoPago);
@@ -290,13 +309,17 @@ public class FormularioEditarGasto extends javax.swing.JPanel {
         gasto.setCategoria(categoria);
         gasto.setMontoGasto(monto);
         gasto.setProveedor(proveedorInsertar);
-        
+
         GastoDTO resultado = app.modificarGasto(gasto);
-        
-        if(resultado!=null){
+
+        if (resultado != null) {
+            JOptionPane.showMessageDialog(null, "Gasto modificado exitosamente.", "Modificación Exitosa", JOptionPane.INFORMATION_MESSAGE);
             app.mostrarPantallaMenuGastos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Ocurrió un error al modificar el gasto. Inténtalo de nuevo.", "Error de Modificación", JOptionPane.ERROR_MESSAGE);
         }
     }
+
     
     public void eliminarGasto() throws GastoException {
         int confirmacion = javax.swing.JOptionPane.showConfirmDialog(
