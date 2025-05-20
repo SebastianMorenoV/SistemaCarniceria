@@ -56,11 +56,14 @@ import Implementacion.RealizarVenta;
 import Implementacion.RegistrarEntrada;
 import Proveedor.RegistrarProveedor;
 import excepciones.ProcesadorPagoException;
-<<<<<<< Updated upstream
+
 import java.time.LocalDate;
-=======
+
 import java.awt.Frame;
->>>>>>> Stashed changes
+
+
+import java.awt.Frame;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Level;
@@ -139,17 +142,17 @@ public class Aplicacion {
 
         //Pantallas de caso gastos inicializadas
         formularioAgregarProveedor = new FormularioAgregarProveedor(this);
-<<<<<<< Updated upstream
+
         menuGastos = new MenuGastos(this);
 
        
-=======
+
 
         formularioRegistrarGasto = new FormularioRegistrarGasto(this);
         menuGastos = new MenuGastos(this);
         tablaHistorialGastos = new TablaHistorialGastos(this);
 
->>>>>>> Stashed changes
+
         //Caso de Uso Registrar Salidas
         ventanaHistorialSalidas = new VentanaHistorialSalidas(this);
 
