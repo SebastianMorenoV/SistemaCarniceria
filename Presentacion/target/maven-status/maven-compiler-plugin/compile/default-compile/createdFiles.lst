@@ -90,6 +90,7 @@ GUI\ModuloRealizarVenta\RegistrarVenta.class
 GUI\ModuloRealizarVenta\RegistrarVenta$7.class
 GUI\ModuloRealizarVenta\MenuOpciones.class
 GUI\ModuloRegistrarEntrada\SeleccionarProducto$3.class
+GUI\ModuloGastos\FormularioEditarGasto$5.class
 GUI\ModuloGastos\FormularioRegistrarGasto$2.class
 GUI\ModuloRegistrarEntrada\PanelRegistrarProductosEntrada$1.class
 GUI\ModuloRealizarVenta\MenuOpciones$3.class

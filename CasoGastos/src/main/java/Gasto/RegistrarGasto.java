@@ -51,7 +51,11 @@ public class RegistrarGasto implements IRegistrarGasto {
 
     @Override
     public void eliminarGasto(String folio) throws GastoException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            gastoBO.eliminarGasto(folio);
+        } catch (NegocioException ex) {
+            throw new GastoException("Error al consultar gastos" + ex.getLocalizedMessage());
+        }
     }
 
     @Override
@@ -97,7 +101,6 @@ public class RegistrarGasto implements IRegistrarGasto {
     @Override
     public GastoDTO buscarPorFolio(String folio) throws GastoException {
         try {
-            System.out.println("Gasto desde Subsistema: " + gastoBO.buscarPorFolio(folio));
             return gastoBO.buscarPorFolio(folio);
         } catch (NegocioException ex) {
             throw new GastoException("Error al consultar gastos" + ex.getLocalizedMessage());

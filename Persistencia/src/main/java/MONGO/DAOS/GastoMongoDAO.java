@@ -110,45 +110,50 @@ public class GastoMongoDAO implements IGastoDAO{
 
     @Override
     public List<Gasto> consultarGastosFiltrados(Gasto gastoFiltro, LocalDate fechaInicio, LocalDate fechaFin) throws PersistenciaException {
-        List<Bson> filtros = new ArrayList<>();
         
-        if(gastoFiltro.getMetodoPago()!=null&& !gastoFiltro.getMetodoPago().isEmpty()){//filtro para metodo de pago
-            filtros.add(eq("metodoPago", gastoFiltro.getMetodoPago()));
+        try {
+            List<Bson> filtros = new ArrayList<>();
+
+            if (gastoFiltro.getMetodoPago() != null && !gastoFiltro.getMetodoPago().isEmpty()) {//filtro para metodo de pago
+                filtros.add(eq("metodoPago", gastoFiltro.getMetodoPago()));
+            }
+
+            if (gastoFiltro.getCategoria() != null && !gastoFiltro.getCategoria().isEmpty()) {//filtro para categoria
+                filtros.add(eq("categoria", gastoFiltro.getCategoria()));
+            }
+
+            if (fechaInicio != null && fechaFin != null) {
+                filtros.add(Filters.and(
+                        Filters.gte("fechaGasto", Date.from(fechaInicio.atStartOfDay(ZoneOffset.UTC).toInstant())),
+                        Filters.lte("fechaGasto", Date.from(fechaFin.atStartOfDay(ZoneOffset.UTC).toInstant()))
+                ));
+            } else if (fechaInicio != null) {
+                // Solo fecha inicio
+                filtros.add(Filters.gte("fechaGasto", Date.from(fechaInicio.atStartOfDay(ZoneOffset.UTC).toInstant())));
+            } else if (fechaFin != null) {
+                // Solo fecha fin
+                filtros.add(Filters.lte("fechaGasto", Date.from(fechaFin.atStartOfDay(ZoneOffset.UTC).toInstant())));
+            }
+
+            //filtros.isEmpty() ? new org.bson.Document() es que si la lista de filtros esta vacia devolvera todos los documentos, osea q no filtrara nada
+            //Filters.and(filtros) combina todos los filtros guardados en "filtros" y por lo tanto se aplican todos al mismo tiempo lo cual regresaria los documentos filtrados
+            Bson gastosFiltrados = filtros.isEmpty() ? new org.bson.Document() : Filters.and(filtros);
+
+            //aqui se ejecuta la consulta en la coleccion MongoDB usando el filtro construido "filtros"
+            //System.out.println(coleccion.find(gastosFiltrados).into(new ArrayList<>()));
+            return coleccion.find(gastosFiltrados).into(new ArrayList<>());
+
+            //.into(new ArrayList<>()) copia todos los resultados en una nueva lista (ArrayList), que es lo que devuelve el metodo            
+        } catch (Exception e) {
+            throw new PersistenciaException("Error al consultar gastos filtrados: " + e.getLocalizedMessage());
         }
-        
-        if(gastoFiltro.getCategoria()!=null&& !gastoFiltro.getCategoria().isEmpty()){//filtro para categoria
-            filtros.add(eq("categoria", gastoFiltro.getCategoria()));
-        }
-        
-        if (fechaInicio != null && fechaFin != null) {
-            filtros.add(Filters.and(
-                    Filters.gte("fechaGasto", Date.from(fechaInicio.atStartOfDay(ZoneOffset.UTC).toInstant())),
-                    Filters.lte("fechaGasto", Date.from(fechaFin.atStartOfDay(ZoneOffset.UTC).toInstant()))
-            ));
-        }else if (fechaInicio != null) {
-            // Solo fecha inicio
-            filtros.add(Filters.gte("fechaGasto", Date.from(fechaInicio.atStartOfDay(ZoneOffset.UTC).toInstant())));
-        } else if (fechaFin != null) {
-            // Solo fecha fin
-            filtros.add(Filters.lte("fechaGasto", Date.from(fechaFin.atStartOfDay(ZoneOffset.UTC).toInstant())));
-        }
-        
-        //filtros.isEmpty() ? new org.bson.Document() es que si la lista de filtros esta vacia devolvera todos los documentos, osea q no filtrara nada
-        //Filters.and(filtros) combina todos los filtros guardados en "filtros" y por lo tanto se aplican todos al mismo tiempo lo cual regresaria los documentos filtrados
-        Bson gastosFiltrados = filtros.isEmpty() ? new org.bson.Document() : Filters.and(filtros);
-        
-        //aqui se ejecuta la consulta en la coleccion MongoDB usando el filtro construido "filtros"
-        //System.out.println(coleccion.find(gastosFiltrados).into(new ArrayList<>()));
-        return coleccion.find(gastosFiltrados).into(new ArrayList<>());
-        
-        //.into(new ArrayList<>()) copia todos los resultados en una nueva lista (ArrayList), que es lo que devuelve el metodo
+
 
     }
     
     @Override
     public Gasto buscarPorFolio(String folio) throws PersistenciaException {
         try {
-            System.out.println("Gasto desde dao: " + coleccion.find(eq("folio", folio)).first());
             return coleccion.find(eq("folio", folio)).first();
             
         } catch (Exception e) {

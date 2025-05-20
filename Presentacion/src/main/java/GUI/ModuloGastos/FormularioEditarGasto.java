@@ -118,6 +118,12 @@ public class FormularioEditarGasto extends javax.swing.JPanel {
         btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnEliminar.setText("Eliminar");
+        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminarMouseClicked(evt);
+            }
+        });
         panelRound2.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 90));
 
         add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 420, 390, 90));
@@ -143,6 +149,7 @@ public class FormularioEditarGasto extends javax.swing.JPanel {
         btnGuardarEditado.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardarEditado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnGuardarEditado.setText("Guardar");
+        btnGuardarEditado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardarEditado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnGuardarEditadoMouseClicked(evt);
@@ -188,6 +195,15 @@ public class FormularioEditarGasto extends javax.swing.JPanel {
             Logger.getLogger(FormularioEditarGasto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnGuardarEditadoMouseClicked
+
+    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
+        try {
+            // TODO add your handling code here:
+            eliminarGasto();
+        } catch (GastoException ex) {
+            Logger.getLogger(FormularioEditarGasto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnEliminarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -241,16 +257,16 @@ public class FormularioEditarGasto extends javax.swing.JPanel {
     
     public void modificarGasto() throws GastoException{
         CrearGastoDTO gastoASD = app.getCrearGastoDTO();
-        
+        String folio = gastoASD.getFolio();
         
         String concepto = inputConcepto.getText().trim();
         String metodoPago = comboMetodoPago.getSelectedItem().toString();
-        String folio = gastoASD.getFolio();
+        
         
         GastoDTO gastoBuscar = app.buscarPorFolio(folio);
-        System.out.println("gasto encontrado: " + gastoBuscar);
+
         ObjectId id = gastoBuscar.getId();
-        System.out.println("id gasto buscado: " + id);
+
 
         Date fechaSeleccionada = inputFecha.getDate();
         if (fechaSeleccionada == null) {
@@ -274,10 +290,38 @@ public class FormularioEditarGasto extends javax.swing.JPanel {
         gasto.setCategoria(categoria);
         gasto.setMontoGasto(monto);
         gasto.setProveedor(proveedorInsertar);
-        System.out.println(gasto);
         
-         app.modificarGasto(gasto);
+        GastoDTO resultado = app.modificarGasto(gasto);
+        
+        if(resultado!=null){
+            app.mostrarPantallaMenuGastos();
+        }
     }
+    
+    public void eliminarGasto() throws GastoException {
+        int confirmacion = javax.swing.JOptionPane.showConfirmDialog(
+                this,
+                "¿Estas seguro de que deseas eliminar este gasto?",
+                "Confirmar eliminacion",
+                javax.swing.JOptionPane.YES_NO_OPTION,
+                javax.swing.JOptionPane.WARNING_MESSAGE
+        );
+
+        if (confirmacion == javax.swing.JOptionPane.YES_OPTION) {
+            CrearGastoDTO gastoASD = app.getCrearGastoDTO();
+            String folio = gastoASD.getFolio();
+
+            app.eliminarGasto(folio);
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Gasto eliminado exitosamente.",
+                    "Eliminacion exitosa",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE
+            );
+            app.mostrarPantallaMenuGastos();
+        }
+    }
+
     
     public void cargarProveedores() {
         try {

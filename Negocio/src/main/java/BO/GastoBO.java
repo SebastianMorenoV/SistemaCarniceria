@@ -117,7 +117,6 @@ public class GastoBO implements IGastoBO {
     public GastoDTO buscarPorFolio(String folio) throws NegocioException {
         try {
             Gasto gasto = gastoDAO.buscarPorFolio(folio);
-            System.out.println("Gasto desde BO: " + gasto);
 
             if (gasto == null) {
                 throw new NegocioException("No se encontró gasto con folio: " + folio);

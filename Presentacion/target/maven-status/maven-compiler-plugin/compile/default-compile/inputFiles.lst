@@ -1,35 +1,35 @@
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloGastos\FormularioAgregarProveedor.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarEntrada\FormularioDatosEntrada.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\FormularioEfectivo.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarSalida\DialogoFiltrarPorFecha.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarEntrada\SeleccionarProveedor.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\FormularioTarjeta.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarEntrada\OpcionesInventario.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\FormularioMostrarCambio.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarEntrada\SeleccionarProducto.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarEntrada\FormularioProductoNuevo.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarDevolucion\PantallaTicket.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\ventanaMostrarTicket.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\RegistrarVenta.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloGastos\FormularioRegistrarGasto.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarSalida\VentanaHistorialSalidas.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarDevolucion\PantallaMenuDevolucion.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\VentanaFormularioTarjeta.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarSalida\DialogoFiltrarPorMes.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarDevolucion\PantallaDevolucion.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\PanelRound.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarDevolucion\PantallaDetallesHistorialDevolucion.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\VentanaExitoProcesandoPago.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\MenuOpciones.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarSalida\DialogoRegistrarSalida.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarSalida\DialogoFiltrarPorProducto.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloGastos\TablaHistorialGastos.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\VentanaErrorProcesandoPago.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloGastos\FormularioEditarGasto.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\generarTicketVenta.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloGastos\MenuGastos.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\VentanaProcesandoPago.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarEntrada\PanelRegistrarProductosEntrada.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\GUI\Aplicacion.java
-C:\Users\Sebastian Moreno\Documents\NetBeansProjects\SistemaCarniceria\Presentacion\src\main\java\com\carniceria\presentacion\Presentacion.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarSalida\VentanaHistorialSalidas.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\PanelRound.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloGastos\FormularioRegistrarGasto.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\RegistrarVenta.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarEntrada\FormularioDatosEntrada.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarSalida\DialogoRegistrarSalida.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarEntrada\PanelRegistrarProductosEntrada.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\VentanaProcesandoPago.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarSalida\DialogoFiltrarPorFecha.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\FormularioTarjeta.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\VentanaExitoProcesandoPago.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarDevolucion\PantallaTicket.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\generarTicketVenta.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\com\carniceria\presentacion\Presentacion.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloGastos\MenuGastos.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloGastos\FormularioAgregarProveedor.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\FormularioEfectivo.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarEntrada\FormularioProductoNuevo.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloGastos\FormularioEditarGasto.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\FormularioMostrarCambio.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarSalida\DialogoFiltrarPorProducto.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarEntrada\SeleccionarProducto.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarDevolucion\PantallaDevolucion.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\MenuOpciones.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarEntrada\SeleccionarProveedor.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\VentanaErrorProcesandoPago.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\VentanaFormularioTarjeta.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarVenta\ventanaMostrarTicket.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarEntrada\OpcionesInventario.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRegistrarSalida\DialogoFiltrarPorMes.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\Aplicacion.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarDevolucion\PantallaMenuDevolucion.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloRealizarDevolucion\PantallaDetallesHistorialDevolucion.java
+C:\Users\Admin\Documents\GitHub\SistemaCarniceria\Presentacion\src\main\java\GUI\ModuloGastos\TablaHistorialGastos.java

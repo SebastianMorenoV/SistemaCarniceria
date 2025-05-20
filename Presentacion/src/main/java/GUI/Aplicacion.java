@@ -493,6 +493,15 @@ public class Aplicacion {
             throw new GastoException("Error al encontrar proveedor" + ex.getLocalizedMessage());
         }
     }
+ 
+    public void eliminarGasto(String folio) throws GastoException {
+        try {
+            registrarGasto.eliminarGasto(folio);
+
+        } catch (GastoException ex) {
+            throw new GastoException("Error al encontrar gasto" + ex.getLocalizedMessage());
+        }
+    }
     
     public GastoDTO buscarPorFolio(String folio) throws GastoException{
         try {
