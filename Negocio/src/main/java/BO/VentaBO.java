@@ -50,12 +50,11 @@ public class VentaBO implements IVentaBO {
 
         try {
             venta = ventaDAO.registrarVenta(venta);
+            VentaDTO ventaMapeada = adaptadorVenta.convertirADTO(venta);
+            return ventaMapeada;
         } catch (PersistenciaException ex) {
-            Logger.getLogger(VentaBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException("Ocurrio un error registrando una venta en la base de datos." + ex.getMessage());
         }
-
-        VentaDTO ventaMapeada = adaptadorVenta.convertirADTO(venta);
-        return ventaMapeada;
     }
 
     @Override
@@ -69,29 +68,26 @@ public class VentaBO implements IVentaBO {
 
                 ProductoVentaDTO productoVentaDTO = adaptadorProductoVenta.convertirProductoVentaADTO(productoVenta);
 
-                
-                
                 //hola
-                    productosVentaDTO.addProductoVenta(productoVentaDTO);
-                }
-
-                return productosVentaDTO;
-            } catch (PersistenciaException ex) {
-                throw new NegocioException("Hubo un error consultado los productos venta", ex.getCause());
+                productosVentaDTO.addProductoVenta(productoVentaDTO);
             }
+
+            return productosVentaDTO;
+        } catch (PersistenciaException ex) {
+            throw new NegocioException("Hubo un error consultado los productos venta", ex.getCause());
         }
+    }
 
-        @Override
-        public VentaDTO obtenerVentaPorTicket(String numeroTicket) throws NegocioException {
+    @Override
+    public VentaDTO obtenerVentaPorTicket(String numeroTicket) throws NegocioException {
 
-            Long idTicket = Long.parseLong(numeroTicket);
-            try {
-                Venta venta = ventaDAO.consultarVentaPorTicket(idTicket);
-                VentaDTO ventaDTO = adaptadorVenta.convertirADTO(venta);
-                return ventaDTO;
-            } catch (PersistenciaException ex) {
-                throw new NegocioException("Ocurrio un error obteniendo la venta por ticket." + ex.getLocalizedMessage());
-            }
+        try {
+            Venta venta = ventaDAO.consultarVentaPorTicket(numeroTicket);
+            VentaDTO ventaDTO = adaptadorVenta.convertirADTO(venta);
+            return ventaDTO;
+        } catch (PersistenciaException ex) {
+            throw new NegocioException("Ocurrio un error obteniendo la venta por ticket." + ex.getLocalizedMessage());
+        }
 
     }
 

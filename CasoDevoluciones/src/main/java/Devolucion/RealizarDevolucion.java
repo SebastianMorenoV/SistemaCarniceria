@@ -86,7 +86,7 @@ public class RealizarDevolucion implements IRealizarDevolucion {
         if (ticket == null || ticket.trim().isEmpty()) {
             throw new DevolucionException("Debe proporcionar un número de ticket válido.");
         }
-
+            
         try {
             ventaTemporal = ventaBO.obtenerVentaPorTicket(ticket);
             if (ventaTemporal == null) {

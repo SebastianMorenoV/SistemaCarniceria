@@ -1,15 +1,21 @@
-
 package entidades;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author Sebastian Moreno
  */
 public class Venta {
-    int id;
+
+    @BsonId
+    private ObjectId _id; // Este es el ID que MongoDB usa internamente
+    @BsonProperty("codigo")
+    Integer id;
     LocalDateTime fechaHora;
     Empleado cajero;
     double subtotal;
@@ -21,7 +27,7 @@ public class Venta {
     public Venta() {
     }
 
-    public Venta(int id, LocalDateTime fechaHora, Empleado cajero, double subtotal, double iva, double total, Pago pago, List<ProductoVenta> listaProductosVenta) {
+    public Venta(Integer id, LocalDateTime fechaHora, Empleado cajero, double subtotal, double iva, double total, Pago pago, List<ProductoVenta> listaProductosVenta) {
         this.id = id;
         this.fechaHora = fechaHora;
         this.cajero = cajero;
@@ -51,11 +57,19 @@ public class Venta {
         this.listaProductosVenta = listaProductosVenta;
     }
 
-    public int getId() {
+    public ObjectId get_id() {
+        return _id;
+    }
+
+    public void set_id(ObjectId _id) {
+        this._id = _id;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -99,7 +113,6 @@ public class Venta {
         this.total = total;
     }
 
-
     public List<ProductoVenta> getListaProductosVenta() {
         return listaProductosVenta;
     }
@@ -116,15 +129,9 @@ public class Venta {
         this.pago = pago;
     }
 
-    
     @Override
     public String toString() {
         return "Venta{" + "id=" + id + ", fechaHora=" + fechaHora + ", cajero=" + cajero + ", subtotal=" + subtotal + ", iva=" + iva + ", total=" + total + ", pago=" + pago + ", listaProductosVenta=" + listaProductosVenta + '}';
     }
 
-    
-    
-    
-    
-    
 }

@@ -22,5 +22,10 @@ public class NuevoEfectivoDTO {
     public void setPagoCon(double pagoCon) {
         this.pagoCon = pagoCon;
     }
+
+    @Override
+    public String toString() {
+        return "NuevoEfectivoDTO{" + "pagoCon=" + pagoCon + '}';
+    }
     
 }

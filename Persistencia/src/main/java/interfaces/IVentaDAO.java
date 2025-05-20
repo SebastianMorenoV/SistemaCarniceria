@@ -8,6 +8,7 @@ import DAOS.VentaDAO;
 import entidades.ProductoVenta;
 import entidades.Venta;
 import Exception.PersistenciaException;
+import MONGO.DAOS.VentaMongoDAO;
 import java.util.List;
 
 /**
@@ -18,15 +19,15 @@ import java.util.List;
 public interface IVentaDAO {
 
     static IVentaDAO obtenerInstanciaDAO() {
-        return new VentaDAO(); // o podrías usar singleton aquí
+        return new VentaMongoDAO(); // o podrías usar singleton aquí
     }
 
     public Venta registrarVenta(Venta venta) throws PersistenciaException;
 
-    public Venta consultarVenta(Long id) throws PersistenciaException;
+    public Venta consultarVenta(Integer id) throws PersistenciaException;
 
     public List<ProductoVenta> consultarProductosVenta() throws PersistenciaException;
     
-    public Venta consultarVentaPorTicket(Long id) throws PersistenciaException;
+    public Venta consultarVentaPorTicket(String ticket) throws PersistenciaException;
 
 }

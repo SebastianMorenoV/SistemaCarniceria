@@ -18,6 +18,7 @@ import EstrategiaPago.PagoEfectivo;
 import EstrategiaPago.PagoTarjeta;
 import EstrategiaPago.Pago;
 import Exception.NegocioException;
+import Exception.VentaException;
 import Interfaces.IEmpleadoBO;
 import Interfaces.IProductoBO;
 import Interfaces.IVentaBO;
@@ -70,8 +71,13 @@ public class RealizarVenta implements IRealizarVenta {
         }
     }
     
-    public VentaDTO registrarVentaBO() throws NegocioException{
-        return ventaBO.registrarVenta(ventaTemporal);
+    @Override
+    public VentaDTO registrarVenta(VentaDTO venta) throws VentaException{
+        try {
+            return ventaBO.registrarVenta(venta);
+        } catch (NegocioException ex) {
+            throw new VentaException("No se pudo registrar la venta" + ex.getLocalizedMessage());
+        }
     }
     
     // en donde esta su uso?

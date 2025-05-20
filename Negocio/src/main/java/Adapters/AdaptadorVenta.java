@@ -68,14 +68,15 @@ public class AdaptadorVenta implements IAdaptadorVenta {
 
     @Override
     public Venta convertirAVenta(VentaDTO ventaDTO) {
+
         if (ventaDTO == null) {
             throw new IllegalArgumentException("El objeto ventaDTO es null en AdaptadorVenta.convertirAVenta");
         }
         Venta venta = new Venta();
         venta.setId(ventaDTO.getId());
         venta.setIva(ventaDTO.getIva());
-        venta.setTotal(venta.getTotal());
-        venta.setSubtotal(venta.getSubtotal());
+        venta.setTotal(ventaDTO.getTotal());
+        venta.setSubtotal(ventaDTO.getSubtotal());
         //setear el empleado
         EmpleadoCargadoDTO empleadoDTO = ventaDTO.getEmpleado();
         Empleado empleado = empleadoAdapter.convertirAEntidad(empleadoDTO);
@@ -91,7 +92,6 @@ public class AdaptadorVenta implements IAdaptadorVenta {
         List<ProductoVentaDTO> productosVentaDTO = ventaDTO.getListadoProductosVenta();
         List<ProductoVenta> productosVenta = productoVentaAdapter.convertirListaDTOAEntidad(productosVentaDTO);
         venta.setListaProductosVenta(productosVenta);
-
         return venta;
     }
 

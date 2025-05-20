@@ -10,14 +10,12 @@ package entidades;
  */
 public class Efectivo {
     double monto;
-    double cambio;
 
     public Efectivo() {
     }
 
-    public Efectivo(double monto, double cambio) {
+    public Efectivo(double monto) {
         this.monto = monto;
-        this.cambio = cambio;
     }
 
     public double getMonto() {
@@ -28,12 +26,12 @@ public class Efectivo {
         this.monto = monto;
     }
 
-    public double getCambio() {
-        return cambio;
+    @Override
+    public String toString() {
+        return "Efectivo{" + "monto=" + monto + '}';
     }
 
-    public void setCambio(double cambio) {
-        this.cambio = cambio;
-    }
+  
+
     
 }

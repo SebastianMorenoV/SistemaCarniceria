@@ -63,6 +63,11 @@ public class ProductoVenta {
     public void setPrecioUnitario(double precioUnitaro) {
         this.precioUnitaro = precioUnitaro;
     }
+
+    @Override
+    public String toString() {
+        return "ProductoVenta{" + "producto=" + producto + ", cantidad=" + cantidad + ", importe=" + importe + ", precioUnitaro=" + precioUnitaro + '}';
+    }
     
     
 }

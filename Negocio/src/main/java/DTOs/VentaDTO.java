@@ -10,7 +10,7 @@ import java.util.List;
  * @author HP
  */
 public class VentaDTO {
-    private int id;
+    private Integer id;
     private double total,subtotal,iva;
     private LocalDateTime fechaHora;
     private EmpleadoCargadoDTO empleado;
@@ -39,11 +39,11 @@ public class VentaDTO {
     }
     
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -7,6 +7,7 @@ import MONGO.DAOS.DevolucionMongoDAO;
 import MONGO.DAOS.GastoMongoDAO;
 import MONGO.DAOS.ProveedorMongoDAO;
 import MONGO.DAOS.SalidasMongoDAO;
+import MONGO.DAOS.VentaMongoDAO;
 
 /**
  * Esta clase Fabrica se encarga de crear objetos DAO.
@@ -22,7 +23,7 @@ public class CreadorDAO implements ICreadorDAO {
 
     @Override
     public IVentaDAO crearVentaDAO() {
-        return new VentaDAO();
+        return new VentaMongoDAO();
     }
 
     @Override

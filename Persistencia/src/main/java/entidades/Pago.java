@@ -75,6 +75,11 @@ public class Pago {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return "Pago{" + "id=" + id + ", metodoPago=" + metodoPago + ", fechaHora=" + fechaHora + ", monto=" + monto + ", estado=" + estado + '}';
+    }
     
     
     

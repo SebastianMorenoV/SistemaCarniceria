@@ -38,6 +38,11 @@ public class MetodoPago {
     public void setEfectivo(Efectivo efectivo) {
         this.efectivo = efectivo;
     }
+
+    @Override
+    public String toString() {
+        return "MetodoPago{" + "tarjeta=" + tarjeta + ", efectivo=" + efectivo + '}';
+    }
             
     
 }

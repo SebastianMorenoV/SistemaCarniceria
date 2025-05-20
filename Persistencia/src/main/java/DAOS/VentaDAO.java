@@ -130,7 +130,7 @@ public class VentaDAO implements IVentaDAO {
 
     /// TALVEZ ESTE METODO NI LO OCUPAMOS.
     @Override
-    public Venta consultarVenta(Long id) throws PersistenciaException {
+    public Venta consultarVenta(Integer id) throws PersistenciaException {
         Empleado cajero = new Empleado(1L, "Juan Soto", "Cajero");
 
         // Crear la tarjeta
@@ -190,7 +190,7 @@ public class VentaDAO implements IVentaDAO {
 
     // Empezar a codificar en MongoDB
     @Override
-    public Venta consultarVentaPorTicket(Long id) throws PersistenciaException {
+    public Venta consultarVentaPorTicket(String  id) throws PersistenciaException {
         Empleado cajero = new Empleado(2L, "Yeremy", "Cajero");
 
         // Crear método de pago

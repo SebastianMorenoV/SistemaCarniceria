@@ -7,6 +7,7 @@ package Implementacion;
 import DTOs.*;
 import EstrategiaPago.IProcesadorPago;
 import Exception.NegocioException;
+import Exception.VentaException;
 import excepciones.ProcesadorPagoException;
 import java.util.List;
 
@@ -34,6 +35,8 @@ public interface IRealizarVenta {
     public void setearTotal(Double total);
 
     public void setearVenta(VentaDTO ventaNueva);
+
+    public VentaDTO registrarVenta(VentaDTO ventaNueva) throws VentaException;
 
     public VentaDTO obtenerVenta();
 

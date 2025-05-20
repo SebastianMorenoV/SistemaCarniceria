@@ -27,6 +27,7 @@ import Exception.DevolucionException;
 import Exception.GastoException;
 import Exception.InventarioException;
 import Exception.NegocioException;
+import Exception.VentaException;
 import GUI.ModuloGastos.FormularioAgregarProveedor;
 import GUI.ModuloGastos.FormularioEditarGasto;
 import GUI.ModuloGastos.FormularioRegistrarGasto;
@@ -665,6 +666,14 @@ public class Aplicacion {
     
     public double getPagaraCon(){
         return realizarVenta.getPagaraCon();
+    }
+    
+    public VentaDTO registrarVenta(VentaDTO venta) throws VentaException{
+        try {
+            return realizarVenta.registrarVenta(venta);
+        } catch (VentaException ex) {
+            throw new VentaException("Ocurrio un error registrando la venta" + ex.getMessage());
+        }
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////
     

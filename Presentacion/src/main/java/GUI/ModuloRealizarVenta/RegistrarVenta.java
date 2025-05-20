@@ -10,6 +10,7 @@ import DTOs.ProductoCargadoDTO;
 import DTOs.ProductoVentaDTO;
 import DTOs.VentaDTO;
 import Exception.NegocioException;
+import Exception.VentaException;
 import GUI.Aplicacion;
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -373,7 +374,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAtrasMouseClicked
 
     private void btnTxtTarjetaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtTarjetaMouseClicked
-        
+
         try {
             // setear la venta con los totales y los productosVenta
 
@@ -884,8 +885,17 @@ public class RegistrarVenta extends javax.swing.JPanel {
         }
 
         // Si se confirma finalizar la venta
+        // Si se confirma finalizar la venta
         if (confirmar == JOptionPane.YES_OPTION) {
             app.mostrarTicketPDF();
+            try {
+                System.out.println("Venta realizada" + ventaRealizada);
+                app.registrarVenta(ventaRealizada);
+                app.mostrarTicketPDF();
+            } catch (VentaException ex) {
+                Logger.getLogger(RegistrarVenta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         } else {
             app.mostrarVentaCancelada();
         }
