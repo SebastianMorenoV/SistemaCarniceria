@@ -35,20 +35,20 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="480" y="30" width="250" height="-1"/>
+          <AbsoluteConstraints x="460" y="30" width="270" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="txtBusquedaNombre1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Product Sans Infanity" size="24" style="0"/>
+          <Font name="Product Sans Infanity" size="24" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Venta:"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="820" y="90" width="80" height="30"/>
+          <AbsoluteConstraints x="800" y="90" width="80" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -75,7 +75,7 @@
     <Component class="javax.swing.JLabel" name="txtBusquedaNombre2">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Product Sans Infanity" size="24" style="0"/>
+          <Font name="Product Sans Infanity" size="24" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Razon de la devoluci&#xf3;n.*:"/>
       </Properties>
@@ -107,7 +107,7 @@
     <Component class="javax.swing.JLabel" name="txtBusquedaNombre3">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Product Sans Infanity" size="24" style="0"/>
+          <Font name="Product Sans Infanity" size="24" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Productos devueltos.*:"/>
       </Properties>
@@ -142,7 +142,7 @@
     <Component class="javax.swing.JLabel" name="txtBusquedaNombre4">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Product Sans Infanity" size="24" style="0"/>
+          <Font name="Product Sans Infanity" size="24" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Telefono.*:"/>
       </Properties>
@@ -361,7 +361,7 @@
     <Component class="javax.swing.JLabel" name="txtBusquedaNombre6">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Product Sans Infanity" size="24" style="0"/>
+          <Font name="Product Sans Infanity" size="24" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Nombre Completo.*:"/>
       </Properties>
@@ -374,7 +374,7 @@
     <Component class="javax.swing.JLabel" name="txtTotalParcial">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Product Sans Infanity" size="24" style="0"/>
+          <Font name="Product Sans Infanity" size="24" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Total a devolver : $ 0.00"/>
       </Properties>

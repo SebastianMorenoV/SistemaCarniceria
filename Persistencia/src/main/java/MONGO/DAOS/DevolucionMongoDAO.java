@@ -13,6 +13,7 @@ import conexion.ConexionMongo;
 import entidades.Devolucion;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -60,12 +61,15 @@ public class DevolucionMongoDAO implements IDevolucionDAO {
             filtros.add(Filters.regex("nombreCompleto", filtro.getNombreCompleto(), "i"));
         }
 
-        // filtro de fecha
         if (inicio != null && fin != null) {
             filtros.add(Filters.and(
-                    Filters.gte("fechaHora", Date.from(inicio.atZone(ZoneId.systemDefault()).toInstant())),
-                    Filters.lte("fechaHora", Date.from(fin.atZone(ZoneId.systemDefault()).toInstant()))
+                    Filters.gte("fechaHora", Date.from(inicio.toInstant(ZoneOffset.UTC))),
+                    Filters.lte("fechaHora", Date.from(fin.toInstant(ZoneOffset.UTC)))
             ));
+        } else if (inicio != null) {
+            filtros.add(Filters.gte("fechaHora", Date.from(inicio.toInstant(ZoneOffset.UTC))));
+        } else if (fin != null) {
+            filtros.add(Filters.lte("fechaHora", Date.from(fin.toInstant(ZoneOffset.UTC))));
         }
 
         Bson filtroFinal = filtros.isEmpty() ? new Document() : Filters.and(filtros);

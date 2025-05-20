@@ -1,16 +1,16 @@
 package GUI.ModuloRealizarDevolucion;
 
-import DTOs.FechaDTO;
-import DTOs.Devolucion.CrearDevolucionDTO;
 import DTOs.Devolucion.DevolucionDTO;
 import DTOs.Devolucion.DevolucionSinVentaDTO;
-import DTOs.ProductoVentaDTO;
 import Exception.DevolucionException;
 import GUI.Aplicacion;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
@@ -63,14 +62,14 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnFinalizarVenta.setBackground(new java.awt.Color(187, 187, 187));
+        btnFinalizarVenta.setBackground(new java.awt.Color(255, 255, 255));
         btnFinalizarVenta.setRoundBottomLeft(15);
         btnFinalizarVenta.setRoundBottomRight(15);
         btnFinalizarVenta.setRoundTopLeft(15);
         btnFinalizarVenta.setRoundTopRight(15);
         btnFinalizarVenta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tablaDevoluciones.setBackground(new java.awt.Color(187, 187, 187));
+        tablaDevoluciones.setBackground(new java.awt.Color(255, 255, 255));
         tablaDevoluciones.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         tablaDevoluciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,9 +82,9 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
         tablaDevoluciones.setRowHeight(24);
         jScrollPane1.setViewportView(tablaDevoluciones);
 
-        btnFinalizarVenta.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 990, 340));
+        btnFinalizarVenta.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 1040, 360));
 
-        add(btnFinalizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 1010, 360));
+        add(btnFinalizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 1060, 420));
 
         inputTelefono.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         inputTelefono.setText("Telefono");
@@ -126,7 +125,7 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
         add(txtBusquedaNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 120, 230, 30));
 
         txtBusquedaNombre2.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        txtBusquedaNombre2.setText("Telefono cliente : ");
+        txtBusquedaNombre2.setText("Teléfono Cliente : ");
         add(txtBusquedaNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 230, 30));
 
         txtBusquedaNombre3.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
@@ -139,8 +138,8 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
 
         txtPanelVentaEnCaja.setBackground(new java.awt.Color(0, 0, 0));
         txtPanelVentaEnCaja.setFont(new java.awt.Font("Product Sans Infanity", 0, 48)); // NOI18N
-        txtPanelVentaEnCaja.setText("Historial de Devoluciones");
-        add(txtPanelVentaEnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 540, -1));
+        txtPanelVentaEnCaja.setText("Historial de Devoluciónes");
+        add(txtPanelVentaEnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, 540, -1));
 
         btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/atras (1).png"))); // NOI18N
         btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -276,35 +275,46 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
         String nombre = inputNombre.getText();
         String telefono = inputTelefono.getText();
 
-        // DTO con los datos de filtro
-        DevolucionSinVentaDTO devolucionDTO = new DevolucionSinVentaDTO();
-        devolucionDTO.setTelefono(telefono);
-        devolucionDTO.setNombreCompleto(nombre);
+        if ("Nombre".equals(nombre)) {
+            nombre = null;
+        }
+        if ("Telefono".equals(telefono)) {
+            telefono = null;
+        }
 
-        // Obtener fechas desde los JDateChooser
+        DevolucionSinVentaDTO filtroDTO = new DevolucionSinVentaDTO();
+        filtroDTO.setNombreCompleto(nombre);
+        filtroDTO.setTelefono(telefono);
+
         Date fechaInicioDate = inputFechaInicio.getDate();
         Date fechaFinDate = inputFechaFin.getDate();
 
-        if (fechaInicioDate == null || fechaFinDate == null) {
-            fechaInicioDate = new Date();
-            fechaFinDate = new Date();
-            devolucionesFiltradas = app.obtenerDevoluciones();
-            llenarTabla();
+        ZoneId zona = ZoneId.systemDefault();
+        LocalDateTime fechaInicio = null;
+        LocalDateTime fechaFin = null;
+
+        if (fechaInicioDate == null && fechaFinDate == null) {
+            // Asumimos que quiere buscar por el día de hoy
+            LocalDate hoy = LocalDate.now(zona);
+            fechaInicio = hoy.atStartOfDay();
+            fechaFin = hoy.atTime(LocalTime.MAX).withNano(999_000_000);
+        } else {
+            if (fechaInicioDate != null) {
+                LocalDate fechaInicioLocalDate = fechaInicioDate.toInstant().atZone(zona).toLocalDate();
+                fechaInicio = fechaInicioLocalDate.atStartOfDay();
+            }
+
+            if (fechaFinDate != null) {
+                LocalDate fechaFinLocalDate = fechaFinDate.toInstant().atZone(zona).toLocalDate();
+                fechaFin = fechaFinLocalDate.atTime(LocalTime.MAX).withNano(999_000_000);
+            }
         }
 
-        LocalDateTime fechaInicio = fechaInicioDate.toInstant()
-                .atZone(ZoneId.systemDefault())
-                .toLocalDateTime();
-
-        LocalDateTime fechaFin = fechaFinDate.toInstant()
-                .atZone(ZoneId.systemDefault())
-                .toLocalDateTime();
-
-        devolucionDTO.setFechaInicio(fechaInicio);
-        devolucionDTO.setFechaFin(fechaFin);
+        filtroDTO.setFechaInicio(fechaInicio);
+        filtroDTO.setFechaFin(fechaFin);
 
         try {
-            devolucionesFiltradas = app.buscarDevolucionPorFiltro(devolucionDTO);
+            devolucionesFiltradas = app.buscarDevolucionPorFiltro(filtroDTO);
             llenarTabla();
         } catch (DevolucionException ex) {
             throw new DevolucionException("Existió un error consultando la base de datos: " + ex.getLocalizedMessage());
@@ -325,9 +335,9 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
                 devolucion.getId(),
                 nombresProductos,
                 devolucion.getRazon(),
-                devolucion.getFechaHora(),
+                formatearFecha(devolucion.getFechaHora()),
                 devolucion.getNombreCompleto(),
-                devolucion.getMontoDevuelto(),
+                "$" + devolucion.getMontoDevuelto(),
                 "Detalles"
             };
             model.addRow(fila);
@@ -343,32 +353,25 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
     }
 
     public void ajustarTamañoColumnasPreferidos() {
-        tablaDevoluciones.getColumnModel().getColumn(0).setPreferredWidth(40);  // Código
-        tablaDevoluciones.getColumnModel().getColumn(1).setPreferredWidth(280); // Descripción del artículo
-        tablaDevoluciones.getColumnModel().getColumn(2).setPreferredWidth(150);  // Cantidad
-        tablaDevoluciones.getColumnModel().getColumn(3).setPreferredWidth(100);  // Precio
-        tablaDevoluciones.getColumnModel().getColumn(4).setPreferredWidth(80);  // Importe
-        tablaDevoluciones.getColumnModel().getColumn(4).setPreferredWidth(80);  // Importe
-        tablaDevoluciones.getColumnModel().getColumn(4).setPreferredWidth(50);  // Importe
+        tablaDevoluciones.getColumnModel().getColumn(0).setPreferredWidth(70);
+        tablaDevoluciones.getColumnModel().getColumn(1).setPreferredWidth(200);
+        tablaDevoluciones.getColumnModel().getColumn(2).setPreferredWidth(150);
+        tablaDevoluciones.getColumnModel().getColumn(3).setPreferredWidth(120);
+        tablaDevoluciones.getColumnModel().getColumn(4).setPreferredWidth(120);
+        tablaDevoluciones.getColumnModel().getColumn(5).setPreferredWidth(50);
+        tablaDevoluciones.getColumnModel().getColumn(6).setPreferredWidth(50);
     }
 
     public void incializarValoresDefault() {
-        inputFechaInicio.setDate(new Date());
-        inputFechaFin.setDate(new Date());
+
         ajustarTamañoColumnasPreferidos();
-        cargarDevoluciones();
-        agregarDocumentListener(inputNombre);
-        agregarDocumentListener(inputTelefono);
-    }
-
-    public void cargarDevoluciones() {
         try {
-            devolucionesFiltradas = app.obtenerDevoluciones();
-            llenarTabla();
-
+            buscarDevolucionPorFiltro();
         } catch (DevolucionException ex) {
             Logger.getLogger(PantallaHistorialDevoluciones.class.getName()).log(Level.SEVERE, null, ex);
         }
+        agregarDocumentListener(inputNombre);
+        agregarDocumentListener(inputTelefono);
     }
 
     // Dentro de tu clase del formulario (por ejemplo: public class RealizarDevolucion extends JFrame { ... })
@@ -415,6 +418,13 @@ public class PantallaHistorialDevoluciones extends javax.swing.JPanel {
         public Object getCellEditorValue() {
             return "Detalles";
         }
+    }
+     private String formatearFecha(LocalDateTime fecha) {
+        if (fecha == null) {
+            return "No disponible";
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return fecha.format(formatter);
     }
 
 }

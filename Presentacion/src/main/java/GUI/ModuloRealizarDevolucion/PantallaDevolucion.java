@@ -2,6 +2,7 @@ package GUI.ModuloRealizarDevolucion;
 
 import DTOs.Devolucion.CrearDevolucionDTO;
 import DTOs.Devolucion.DevolucionDTO;
+import DTOs.EmpleadoCargadoDTO;
 import DTOs.ProductoVentaDTO;
 import DTOs.VentaDTO;
 import Exception.DevolucionException;
@@ -66,11 +67,11 @@ public class PantallaDevolucion extends javax.swing.JPanel {
         txtPanelVentaEnCaja.setBackground(new java.awt.Color(0, 0, 0));
         txtPanelVentaEnCaja.setFont(new java.awt.Font("Product Sans Infanity", 0, 48)); // NOI18N
         txtPanelVentaEnCaja.setText("Devolución");
-        add(txtPanelVentaEnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, 250, -1));
+        add(txtPanelVentaEnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 270, -1));
 
-        txtBusquedaNombre1.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        txtBusquedaNombre1.setFont(new java.awt.Font("Product Sans Infanity", 1, 24)); // NOI18N
         txtBusquedaNombre1.setText("Venta:");
-        add(txtBusquedaNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 90, 80, 30));
+        add(txtBusquedaNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 90, 80, 30));
 
         inputNombre.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         inputNombre.setText("Nombre completo");
@@ -97,7 +98,7 @@ public class PantallaDevolucion extends javax.swing.JPanel {
         });
         add(inputNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 570, 50));
 
-        txtBusquedaNombre2.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        txtBusquedaNombre2.setFont(new java.awt.Font("Product Sans Infanity", 1, 24)); // NOI18N
         txtBusquedaNombre2.setText("Razon de la devolución.*:");
         add(txtBusquedaNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 280, 30));
 
@@ -121,7 +122,7 @@ public class PantallaDevolucion extends javax.swing.JPanel {
         });
         add(inputRazon, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 570, 50));
 
-        txtBusquedaNombre3.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        txtBusquedaNombre3.setFont(new java.awt.Font("Product Sans Infanity", 1, 24)); // NOI18N
         txtBusquedaNombre3.setText("Productos devueltos.*:");
         add(txtBusquedaNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 280, 30));
 
@@ -152,7 +153,7 @@ public class PantallaDevolucion extends javax.swing.JPanel {
         });
         add(inputProductosDevueltos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 570, 50));
 
-        txtBusquedaNombre4.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        txtBusquedaNombre4.setFont(new java.awt.Font("Product Sans Infanity", 1, 24)); // NOI18N
         txtBusquedaNombre4.setText("Telefono.*:");
         add(txtBusquedaNombre4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 460, 280, 30));
 
@@ -284,11 +285,11 @@ public class PantallaDevolucion extends javax.swing.JPanel {
         });
         add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 50));
 
-        txtBusquedaNombre6.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        txtBusquedaNombre6.setFont(new java.awt.Font("Product Sans Infanity", 1, 24)); // NOI18N
         txtBusquedaNombre6.setText("Nombre Completo.*:");
         add(txtBusquedaNombre6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 280, 30));
 
-        txtTotalParcial.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        txtTotalParcial.setFont(new java.awt.Font("Product Sans Infanity", 1, 24)); // NOI18N
         txtTotalParcial.setText("Total a devolver : $ 0.00");
         add(txtTotalParcial, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 520, 360, 30));
 
@@ -483,10 +484,11 @@ public class PantallaDevolucion extends javax.swing.JPanel {
                     JOptionPane.WARNING_MESSAGE);
             return;
         }
-
+        EmpleadoCargadoDTO empleado = new EmpleadoCargadoDTO("Miguelito mockeado", "Cajero");
         CrearDevolucionDTO devolucionDTO = new CrearDevolucionDTO();
         devolucionDTO.setNombreCompleto(nombre);
         devolucionDTO.setRazon(razon);
+        devolucionDTO.setCajeroDevolucion(empleado);
         devolucionDTO.setProductosDevueltos(productosDevueltos);
         devolucionDTO.setTelefono(telefono);
         devolucionDTO.setFechaHora(LocalDateTime.now());
@@ -587,8 +589,8 @@ public class PantallaDevolucion extends javax.swing.JPanel {
             productosDevueltos.add(productoSeleccionado);
         }
     }
-    
-     public void ajustarTamañoColumnasPreferidos() {
+
+    public void ajustarTamañoColumnasPreferidos() {
         tablaProductosDevolucion.getColumnModel().getColumn(0).setPreferredWidth(200);  // Nombre Producto
         tablaProductosDevolucion.getColumnModel().getColumn(1).setPreferredWidth(80); // Precio
     }

@@ -2,6 +2,7 @@
 package GUI.ModuloRealizarDevolucion;
 
 import DTOs.Devolucion.DevolucionDTO;
+import DTOs.MetodoPagoDTO;
 import DTOs.ProductoVentaDTO;
 import GUI.Aplicacion;
 import java.time.LocalDateTime;
@@ -42,6 +43,8 @@ public class PantallaDetallesHistorialDevolucion extends javax.swing.JPanel {
         txtFechaDevolucion = new javax.swing.JLabel();
         txtMontoDevolucion = new javax.swing.JLabel();
         btnAtras = new javax.swing.JLabel();
+        panelRound2 = new GUI.PanelRound();
+        txtBusquedaNombre3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -53,7 +56,7 @@ public class PantallaDetallesHistorialDevolucion extends javax.swing.JPanel {
 
         txtMotivo.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         txtMotivo.setText("Motivo:");
-        add(txtMotivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 400, 30));
+        add(txtMotivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 400, 30));
 
         txtVentaTitulo.setFont(new java.awt.Font("Product Sans Infanity", 1, 26)); // NOI18N
         txtVentaTitulo.setText("Venta ");
@@ -97,8 +100,8 @@ public class PantallaDetallesHistorialDevolucion extends javax.swing.JPanel {
         add(btnFinalizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, 650, 410));
 
         txtDevolucion.setFont(new java.awt.Font("Product Sans Infanity", 1, 26)); // NOI18N
-        txtDevolucion.setText("Devolucion");
-        add(txtDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 140, 30));
+        txtDevolucion.setText("Devolucion:");
+        add(txtDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 160, 30));
 
         txtFechaCompra.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
         txtFechaCompra.setText("Fecha Compra : ");
@@ -108,9 +111,9 @@ public class PantallaDetallesHistorialDevolucion extends javax.swing.JPanel {
         txtMetodoPago.setText("Metodo Pago :  ");
         add(txtMetodoPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, 290, 30));
 
-        txtCajeroVenta.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        txtCajeroVenta.setFont(new java.awt.Font("Product Sans Infanity", 1, 18)); // NOI18N
         txtCajeroVenta.setText("Cajero:");
-        add(txtCajeroVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 160, 270, 30));
+        add(txtCajeroVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 160, 270, 30));
 
         txtCajeroDevolucion.setFont(new java.awt.Font("Product Sans Infanity", 1, 24)); // NOI18N
         txtCajeroDevolucion.setText("Cajero:");
@@ -120,13 +123,13 @@ public class PantallaDetallesHistorialDevolucion extends javax.swing.JPanel {
         txtCliente.setText("Cliente:");
         add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 400, 40));
 
-        txtFechaDevolucion.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        txtFechaDevolucion.setFont(new java.awt.Font("Product Sans Infanity", 0, 20)); // NOI18N
         txtFechaDevolucion.setText("Fecha devolucion:");
-        add(txtFechaDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 400, 30));
+        add(txtFechaDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 400, 30));
 
         txtMontoDevolucion.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         txtMontoDevolucion.setText("Monto devolucion:");
-        add(txtMontoDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 400, 30));
+        add(txtMontoDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 400, 30));
 
         btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/atras (1).png"))); // NOI18N
         btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -136,6 +139,27 @@ public class PantallaDetallesHistorialDevolucion extends javax.swing.JPanel {
             }
         });
         add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 50));
+
+        panelRound2.setBackground(new java.awt.Color(0, 0, 0));
+        panelRound2.setRoundBottomLeft(30);
+        panelRound2.setRoundBottomRight(30);
+        panelRound2.setRoundTopLeft(30);
+        panelRound2.setRoundTopRight(30);
+        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtBusquedaNombre3.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
+        txtBusquedaNombre3.setForeground(new java.awt.Color(255, 255, 255));
+        txtBusquedaNombre3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtBusquedaNombre3.setText("Aceptar");
+        txtBusquedaNombre3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtBusquedaNombre3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtBusquedaNombre3MouseClicked(evt);
+            }
+        });
+        panelRound2.add(txtBusquedaNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 350, 60));
+
+        add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 370, 80));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFinalizarVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFinalizarVentaMouseClicked
@@ -146,12 +170,18 @@ public class PantallaDetallesHistorialDevolucion extends javax.swing.JPanel {
         app.mostrarPantallaHistorialDevolucion();
     }//GEN-LAST:event_btnAtrasMouseClicked
 
+    private void txtBusquedaNombre3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBusquedaNombre3MouseClicked
+        app.mostrarPantallaHistorialDevolucion();
+    }//GEN-LAST:event_txtBusquedaNombre3MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnAtras;
     private GUI.PanelRound btnFinalizarVenta;
     private javax.swing.JScrollPane jScrollPane1;
+    private GUI.PanelRound panelRound2;
     private javax.swing.JTable tablaProductosDevueltos;
+    private javax.swing.JLabel txtBusquedaNombre3;
     private javax.swing.JLabel txtCajeroDevolucion;
     private javax.swing.JLabel txtCajeroVenta;
     private javax.swing.JLabel txtCliente;
@@ -188,34 +218,29 @@ public class PantallaDetallesHistorialDevolucion extends javax.swing.JPanel {
             System.out.println("No se encontró información de devolución.");
             return;
         }
-
-        // Cajero
+        
         String nombreCajero = devolucionDTO.getVenta().getEmpleado() != null
                 ? devolucionDTO.getVenta().getEmpleado().getNombre()
                 : "No disponible";
-        txtCajeroDevolucion.setText("Cajero: " + nombreCajero);
+        txtCajeroVenta.setText("Cajero: " + nombreCajero);
+        
+        txtCajeroDevolucion.setText("Cajero: " + devolucionDTO.getCajeroDevolucion().getNombre());
 
-        // Cliente
         txtCliente.setText("Cliente: " + devolucionDTO.getNombreCompleto());
 
-        // Fecha de compra
         LocalDateTime fechaCompra = devolucionDTO.getVenta().getFechaHora();
         txtFechaCompra.setText("Fecha de compra: " + formatearFecha(fechaCompra));
 
-        // Fecha de devolución
         LocalDateTime fechaDevolucion = devolucionDTO.getFechaHora();
         txtFechaDevolucion.setText("Fecha de devolución: " + formatearFecha(fechaDevolucion));
 
-        String metodoPago = "No disponible";
-
-        if (devolucionDTO.getVenta() != null
-                && devolucionDTO.getVenta().getMetodoPago() != null
-                && devolucionDTO.getVenta().getMetodoPago().getNuevaTarjeta() != null) {
-
-            metodoPago = devolucionDTO.getVenta().getMetodoPago().getNuevaTarjeta().toString();
+        MetodoPagoDTO metodoPago = devolucionDTO.getVenta().getMetodoPago();
+        String metodoPagoString = "Efectivo";
+        if(metodoPago.getNuevaTarjeta()!= null){
+            metodoPagoString = "Tarjeta"; 
         }
-
-        txtMetodoPago.setText("Método de pago: " + metodoPago);
+ 
+        txtMetodoPago.setText("Método de pago: " + metodoPagoString);
 
         // Monto devuelto
         txtMontoDevolucion.setText("Monto devuelto: $" + devolucionDTO.getMontoDevuelto());
@@ -236,8 +261,8 @@ public class PantallaDetallesHistorialDevolucion extends javax.swing.JPanel {
             Object[] fila = new Object[]{
                 productoDevuelto.getProducto().getNombre(),
                 productoDevuelto.getCantidad(),
-                productoDevuelto.getPrecioUnitario(),
-                productoDevuelto.getImporte(),};
+                "$"+productoDevuelto.getPrecioUnitario(),
+                "$"+productoDevuelto.getImporte(),};
             model.addRow(fila);
         }
 

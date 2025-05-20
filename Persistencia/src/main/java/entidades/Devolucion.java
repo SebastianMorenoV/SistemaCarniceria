@@ -1,4 +1,3 @@
-
 package entidades;
 
 import java.time.LocalDateTime;
@@ -12,22 +11,24 @@ import org.bson.types.ObjectId;
  *
  * @author Sebastian Moreno
  */
-    public class Devolucion {
-        @BsonId
-        private ObjectId _id;
-        @BsonProperty("codigo")
-        private Integer id;
-        private Venta venta;
-        private String nombreCompleto;
-        private String telefono;
-        private String razon;
-        private List<ProductoVenta> listadoProductosDevueltos;
-        private LocalDateTime fechaHora;
-        private String numeroDeTicket;
-        private double montoDevuelto;
+public class Devolucion {
 
-        public Devolucion() {
-        }
+    @BsonId
+    private ObjectId _id;
+    @BsonProperty("codigo")
+    private Integer id;
+    private Empleado cajeroDevolucion;
+    private Venta venta;
+    private String nombreCompleto;
+    private String telefono;
+    private String razon;
+    private List<ProductoVenta> listadoProductosDevueltos;
+    private LocalDateTime fechaHora;
+    private String numeroDeTicket;
+    private double montoDevuelto;
+
+    public Devolucion() {
+    }
 
     public Devolucion(ObjectId id, Venta venta, String nombreCompleto, String telefono, String razon, List<ProductoVenta> listadoProductosDevueltos, LocalDateTime fechaHora, String numeroDeTicket, double montoDevuelto) {
         this._id = id;
@@ -39,6 +40,14 @@ import org.bson.types.ObjectId;
         this.fechaHora = fechaHora;
         this.numeroDeTicket = numeroDeTicket;
         this.montoDevuelto = montoDevuelto;
+    }
+
+    public Empleado getCajeroDevolucion() {
+        return cajeroDevolucion;
+    }
+
+    public void setCajeroDevolucion(Empleado cajeroDevolucion) {
+        this.cajeroDevolucion = cajeroDevolucion;
     }
 
     public Integer getId() {
@@ -125,7 +134,5 @@ import org.bson.types.ObjectId;
     public String toString() {
         return "Devolucion{" + "id=" + _id + ", venta=" + venta + ", nombreCompleto=" + nombreCompleto + ", telefono=" + telefono + ", razon=" + razon + ", listadoProductosDevueltos=" + listadoProductosDevueltos + ", fechaHora=" + fechaHora + ", numeroDeTicket=" + numeroDeTicket + ", montoDevuelto=" + montoDevuelto + '}';
     }
-    
-    
-    
+
 }

@@ -1,6 +1,6 @@
-
 package DTOs.Devolucion;
 
+import DTOs.EmpleadoCargadoDTO;
 import DTOs.ProductoVentaDTO;
 import DTOs.VentaDTO;
 import java.time.LocalDateTime;
@@ -11,7 +11,9 @@ import java.util.List;
  * @author Sebastian Moreno
  */
 public class CrearDevolucionDTO {
+
     VentaDTO venta;
+    EmpleadoCargadoDTO cajeroDevolucion;
     String nombreCompleto;
     String telefono;
     String razon;
@@ -23,6 +25,15 @@ public class CrearDevolucionDTO {
     public CrearDevolucionDTO() {
     }
 
+    public EmpleadoCargadoDTO getCajeroDevolucion() {
+        return cajeroDevolucion;
+    }
+
+    public void setCajeroDevolucion(EmpleadoCargadoDTO cajeroDevolucion) {
+        this.cajeroDevolucion = cajeroDevolucion;
+    }
+
+    
     public VentaDTO getVenta() {
         return venta;
     }
@@ -91,6 +102,5 @@ public class CrearDevolucionDTO {
     public String toString() {
         return "CrearDevolucionDTO{" + "venta=" + venta + ", nombreCompleto=" + nombreCompleto + ", telefono=" + telefono + ", razon=" + razon + ", productosDevueltos=" + productosDevueltos + ", fechaHora=" + fechaHora + ", numeroTicket=" + numeroTicket + ", montoDevuelto=" + montoDevuelto + '}';
     }
-    
-    
+
 }

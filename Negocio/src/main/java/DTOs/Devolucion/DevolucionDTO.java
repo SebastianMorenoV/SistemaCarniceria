@@ -1,6 +1,6 @@
-
 package DTOs.Devolucion;
 
+import DTOs.EmpleadoCargadoDTO;
 import DTOs.ProductoVentaDTO;
 import DTOs.VentaDTO;
 import java.time.LocalDateTime;
@@ -13,6 +13,7 @@ import java.util.List;
 public class DevolucionDTO {
 
     int id;
+    EmpleadoCargadoDTO cajeroDevolucion;
     VentaDTO venta;
     String nombreCompleto;
     String telefono;
@@ -23,6 +24,14 @@ public class DevolucionDTO {
     double montoDevuelto;
 
     public DevolucionDTO() {
+    }
+
+    public EmpleadoCargadoDTO getCajeroDevolucion() {
+        return cajeroDevolucion;
+    }
+
+    public void setCajeroDevolucion(EmpleadoCargadoDTO cajeroDevolucion) {
+        this.cajeroDevolucion = cajeroDevolucion;
     }
 
     public int getId() {
@@ -102,7 +111,4 @@ public class DevolucionDTO {
         return "DevolucionDTO{" + "id=" + id + ", venta=" + venta + ", nombreCompleto=" + nombreCompleto + ", telefono=" + telefono + ", razon=" + razon + ", productosDevueltos=" + productosDevueltos + ", fechaHora=" + fechaHora + ", numeroTicket=" + numeroTicket + ", montoDevuelto=" + montoDevuelto + '}';
     }
 
-   
-
-    
 }
