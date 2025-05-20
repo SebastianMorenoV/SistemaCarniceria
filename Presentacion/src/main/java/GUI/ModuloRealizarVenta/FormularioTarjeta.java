@@ -6,30 +6,13 @@ package GUI.ModuloRealizarVenta;
 
 import DTOs.MetodoPagoDTO;
 import DTOs.NuevaTarjetaDTO;
-import DTOs.PagoNuevoDTO;
 import DTOs.PagoViejoDTO;
 import DTOs.VentaDTO;
 import GUI.Aplicacion;
-import EstrategiaPago.Pago;
 import Exception.VentaException;
 import excepciones.ProcesadorPagoException;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-import javax.swing.Timer;
 
 /**
  *
@@ -38,14 +21,9 @@ import javax.swing.Timer;
 public class FormularioTarjeta extends javax.swing.JPanel {
 
     Aplicacion app;
-    Pago proce;
 
-    /**
-     * Creates new form FormularioTarjeta
-     */
     public FormularioTarjeta(Aplicacion app) {
         this.app = app;
-        this.proce = new Pago();
         initComponents();
 
         double totalTemporal = app.getTotalTemporal();
@@ -70,8 +48,6 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         inputFechaExpiracion = new javax.swing.JTextField();
         inputCVV = new javax.swing.JTextField();
-        btnRegresar = new GUI.PanelRound();
-        btnTxtRegresar = new javax.swing.JLabel();
         btnAceptar = new GUI.PanelRound();
         jLabel7 = new javax.swing.JLabel();
 
@@ -103,32 +79,6 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         add(inputFechaExpiracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 170, 30));
         add(inputCVV, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 140, 30));
 
-        btnRegresar.setBackground(new java.awt.Color(44, 44, 44));
-        btnRegresar.setRoundBottomLeft(15);
-        btnRegresar.setRoundBottomRight(15);
-        btnRegresar.setRoundTopLeft(15);
-        btnRegresar.setRoundTopRight(15);
-        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegresarMouseClicked(evt);
-            }
-        });
-        btnRegresar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnTxtRegresar.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        btnTxtRegresar.setForeground(new java.awt.Color(255, 255, 255));
-        btnTxtRegresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnTxtRegresar.setText("Regresar");
-        btnTxtRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnTxtRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnTxtRegresarMouseClicked(evt);
-            }
-        });
-        btnRegresar.add(btnTxtRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 40));
-
-        add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 350, 160, 40));
-
         btnAceptar.setBackground(new java.awt.Color(44, 44, 44));
         btnAceptar.setRoundBottomLeft(15);
         btnAceptar.setRoundBottomRight(15);
@@ -151,27 +101,13 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 160, 40));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
-        // TODO add your handling code here:
-        //((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();
-        app.cerrarPantallaDialogo();
-
-    }//GEN-LAST:event_btnRegresarMouseClicked
-
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         pagoTarjeta();
     }//GEN-LAST:event_btnAceptarMouseClicked
 
-    private void btnTxtRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtRegresarMouseClicked
-
-        app.cerrarPantallaDialogo();
-    }//GEN-LAST:event_btnTxtRegresarMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.PanelRound btnAceptar;
-    private GUI.PanelRound btnRegresar;
-    private javax.swing.JLabel btnTxtRegresar;
     private javax.swing.JTextField inputCVV;
     private javax.swing.JTextField inputFechaExpiracion;
     private javax.swing.JTextField inputNumeroTarjeta;

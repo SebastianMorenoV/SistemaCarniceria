@@ -122,6 +122,9 @@
             <Property name="text" type="java.lang.String" value="Imprimir"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnImprimirTicketMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnSalirTicket">
           <Properties>

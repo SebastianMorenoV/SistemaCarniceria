@@ -116,9 +116,6 @@ public class PantallaDevolucion extends javax.swing.JPanel {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 inputRazonKeyReleased(evt);
             }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                inputRazonKeyTyped(evt);
-            }
         });
         add(inputRazon, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 570, 50));
 
@@ -141,14 +138,6 @@ public class PantallaDevolucion extends javax.swing.JPanel {
         inputProductosDevueltos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputProductosDevueltosActionPerformed(evt);
-            }
-        });
-        inputProductosDevueltos.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                inputProductosDevueltosKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                inputProductosDevueltosKeyTyped(evt);
             }
         });
         add(inputProductosDevueltos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 570, 50));
@@ -339,14 +328,6 @@ public class PantallaDevolucion extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_inputRazonFocusLost
 
-    private void inputRazonKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputRazonKeyReleased
-
-    }//GEN-LAST:event_inputRazonKeyReleased
-
-    private void inputRazonKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputRazonKeyTyped
-
-    }//GEN-LAST:event_inputRazonKeyTyped
-
     private void inputProductosDevueltosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputProductosDevueltosFocusGained
         if (inputNombre.getText().equals("Nombre Producto")) {
             inputNombre.setText("");
@@ -358,14 +339,6 @@ public class PantallaDevolucion extends javax.swing.JPanel {
             inputNombre.setText("Nombre Producto");
         }
     }//GEN-LAST:event_inputProductosDevueltosFocusLost
-
-    private void inputProductosDevueltosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputProductosDevueltosKeyReleased
-
-    }//GEN-LAST:event_inputProductosDevueltosKeyReleased
-
-    private void inputProductosDevueltosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputProductosDevueltosKeyTyped
-
-    }//GEN-LAST:event_inputProductosDevueltosKeyTyped
 
     private void inputTelefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputTelefonoFocusGained
         if (inputTelefono.getText().equals("Ingresar numero telefonico.")) {
@@ -439,6 +412,10 @@ public class PantallaDevolucion extends javax.swing.JPanel {
             Logger.getLogger(PantallaDevolucion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnTxtFinalizarVenta1MouseClicked
+
+    private void inputRazonKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputRazonKeyReleased
+
+    }//GEN-LAST:event_inputRazonKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

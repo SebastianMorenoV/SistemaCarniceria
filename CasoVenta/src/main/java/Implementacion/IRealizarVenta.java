@@ -46,4 +46,6 @@ public interface IRealizarVenta {
     public boolean validarPago(PagoViejoDTO pago) throws ProcesadorPagoException;
     
     public NuevaTarjetaDTO buscarTarjeta(String titular, String numeroTarjeta, String fechaVencimiento, int cvv) throws VentaException;
+    
+    public void generarYMostrarPDFVenta(VentaDTO venta);
 }

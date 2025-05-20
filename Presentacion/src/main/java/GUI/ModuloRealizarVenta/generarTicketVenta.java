@@ -4,23 +4,21 @@
  */
 package GUI.ModuloRealizarVenta;
 
-import DTOs.NuevoProductoVentaDTO;
 import DTOs.ProductoVentaDTO;
 import DTOs.TicketDTO;
 import DTOs.VentaDTO;
 import GUI.Aplicacion;
-import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.time.LocalDateTime;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import static javax.swing.Box.createVerticalGlue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,19 +26,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author HP
  */
-public class generarTicketVenta extends javax.swing.JPanel {
+public class GenerarTicketVenta extends javax.swing.JPanel {
 
     public Aplicacion app;
     public VentaDTO venta;
     public double subtotal, iva, total;
 
-    /**
-     * Creates new form vistaTicketPDF
-     *
-     * @param app
-     *
-     */
-    public generarTicketVenta(Aplicacion app) {
+    public GenerarTicketVenta(Aplicacion app) {
         initComponents();
         this.app = app;
         this.venta = app.obtenerVenta();
@@ -48,7 +40,11 @@ public class generarTicketVenta extends javax.swing.JPanel {
         acomodarPanelTabla();
         acomodarPanelSumas();
         acomodarPanelBotones();
-        generarTicketVenta();
+        try {
+            generarTicketVenta();
+        } catch (IOException ex) {
+            Logger.getLogger(GenerarTicketVenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -137,6 +133,11 @@ public class generarTicketVenta extends javax.swing.JPanel {
         btnImprimirTicket.setForeground(new java.awt.Color(255, 255, 255));
         btnImprimirTicket.setText("Imprimir");
         btnImprimirTicket.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnImprimirTicket.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnImprimirTicketMouseClicked(evt);
+            }
+        });
         panelBotones.add(btnImprimirTicket);
 
         btnSalirTicket.setBackground(new java.awt.Color(102, 102, 102));
@@ -156,12 +157,13 @@ public class generarTicketVenta extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirTicketActionPerformed
-        // TODO add your handling code here:
-
         ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();
         app.reconstruirRegistrarVenta();
-
     }//GEN-LAST:event_btnSalirTicketActionPerformed
+
+    private void btnImprimirTicketMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirTicketMouseClicked
+         app.generarPDFVenta(venta);
+    }//GEN-LAST:event_btnImprimirTicketMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -184,15 +186,6 @@ public class generarTicketVenta extends javax.swing.JPanel {
     private javax.swing.JLabel ticket;
     // End of variables declaration//GEN-END:variables
 
-//    public TicketDTO crearTicket() { 
-//        TicketDTO ticketNuevo = new TicketDTO(venta.getListadoProductosVenta(),
-//                venta.getFechaHora(),
-//                venta.getIva(),
-//                venta.getEmpleado(),
-//                venta.getSubtotal(),
-//                venta.getTotal());
-//        return ticketNuevo;
-//    }
     public void acomodarTicket() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -201,14 +194,13 @@ public class generarTicketVenta extends javax.swing.JPanel {
         campoFechaVenta.setAlignmentX(CENTER_ALIGNMENT);
         campoEmpleado.setAlignmentX(CENTER_ALIGNMENT);
         textoFolio.setAlignmentX(CENTER_ALIGNMENT);
-
-        removeAll(); // Limpiar componentes anteriores (por si acaso)
+        removeAll(); 
 
         add(ticket);
         add(campoCarniceria);
         add(campoFechaVenta);
         add(campoEmpleado);
-        add(textoFolio);  // <- Aquí se coloca justo debajo del nombre del empleado
+        add(textoFolio);  
     }
 
     public void acomodarPanelSumas() {
@@ -236,7 +228,7 @@ public class generarTicketVenta extends javax.swing.JPanel {
         add(panelBotones);
     }
 
-    public void generarTicketVenta() {
+    public void generarTicketVenta() throws IOException {
         textoFolio.setText("Numero de Ticket: " + venta.getId().toString());
         TicketDTO ticket = new TicketDTO(venta.getListadoProductosVenta(),
                 venta.getFechaHora(),
@@ -248,7 +240,7 @@ public class generarTicketVenta extends javax.swing.JPanel {
         campoEmpleado.setText("Venta atendida por: " + venta.getEmpleado().getNombre());
         campoFechaVenta.setText("Fecha de compra: " + ticket.getFechaHora().format(DateTimeFormatter.ISO_DATE));
         DefaultTableModel modelo = new DefaultTableModel(columnasTabla, 0);
-
+       
         for (ProductoVentaDTO producto : ticket.getListaProductosVenta()) {
             modelo.addRow(new Object[]{producto.getProducto().getNombre(), producto.getCantidad(), producto.getImporte()});
         }
@@ -261,13 +253,14 @@ public class generarTicketVenta extends javax.swing.JPanel {
         campoSubtotal2.setText(String.format("%.2f", subtotal));
         campoIVATotal.setText(String.format("%.2f", iva));
         campoTotal.setText(String.format("%.2f", total));
+
     }
 
     public double calcularSubtotal(ArrayList<ProductoVentaDTO> productosEnTabla) {
         double subtotal = 0.0;
         for (ProductoVentaDTO nuevoProductoVentaDTO : productosEnTabla) {
             double precioConIva = nuevoProductoVentaDTO.getImporte();
-            subtotal += precioConIva / 1.16; // Quitar el IVA para obtener el subtotal
+            subtotal += precioConIva / 1.16; 
         }
         return subtotal;
     }
