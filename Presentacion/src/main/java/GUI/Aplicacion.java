@@ -64,6 +64,7 @@ import java.awt.Frame;
 import java.awt.Frame;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -683,10 +684,17 @@ public class Aplicacion {
         try {
             return realizarSalida.cargarTodasLasSalidas();
         } catch (SalidaException e) {
-            throw new SalidaException("Error al cargar todas las salidas");
+            throw new SalidaException("Error al cargar todas las salidas", e);
         }
     }
     
+    public List<SalidaDTO> cargarSalidasFiltradas(String nombre, Date fechaDesde, Date fechaHasta) throws SalidaException{
+        try {
+            return realizarSalida.filtrarSalidas(nombre, fechaHasta, fechaDesde);
+        } catch (SalidaException e) {
+            throw new SalidaException("Error al cargar las salidas filtradas", e);
+        }
+    } 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
 }

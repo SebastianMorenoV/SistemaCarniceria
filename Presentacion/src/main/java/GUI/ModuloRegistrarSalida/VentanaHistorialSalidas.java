@@ -1,6 +1,13 @@
 package GUI.ModuloRegistrarSalida;
 
+import DTOs.SalidaDTO;
 import GUI.Aplicacion;
+import exception.SalidaException;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,6 +22,7 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
     public VentanaHistorialSalidas(Aplicacion app) {
         initComponents();
         this.app = app;
+        cargarSalidasTabla();
     }
 
     /**
@@ -153,6 +161,11 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
         add(datePickerHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 600, 190, 30));
 
         jTextFieldProducto.setBackground(new java.awt.Color(255, 255, 255));
+        jTextFieldProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldProductoKeyTyped(evt);
+            }
+        });
         add(jTextFieldProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 540, 180, 30));
         add(datePickerDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, 190, 30));
     }// </editor-fold>//GEN-END:initComponents
@@ -189,12 +202,48 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabelFechaDesdeMouseClicked
 
+    private void jTextFieldProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldProductoKeyTyped
+        cargarSalidasFiltradasTabla();
+    }//GEN-LAST:event_jTextFieldProductoKeyTyped
+
     /////////////////////////////UTILS//////////////////////////////////////////////////////////////
     private void cargarSalidasTabla(){
-        //List<SalidaDTO> listaSalidaDTO.
+        List<SalidaDTO> listaSalida = new ArrayList<>();
+        
+        try {
+            listaSalida = app.cargarSalidas();
+        } catch (SalidaException e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
+        
         DefaultTableModel model = (DefaultTableModel) jTableSalidas.getModel();
         model.setRowCount(0);
-
+        
+        for (SalidaDTO salidaDTO : listaSalida) {
+            model.addRow(new Object[]{
+                salidaDTO.getFecha(),
+                salidaDTO.getProducto().getNombre(),
+                salidaDTO.getMotivo(),
+                salidaDTO.getStockAntes(),
+                salidaDTO.getCantidadSalida(),
+                salidaDTO.getStockDespues()
+            });
+        }
+        jTableSalidas.setModel(model);
+    }
+    
+    public void cargarSalidasFiltradasTabla(){
+        String nombre = jTextFieldProducto.getText();
+        Date fechaDesde = Date.from(datePickerDesde.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date fechaHasta = Date.from(datePickerHasta.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        
+        List<SalidaDTO> listaSalida = new ArrayList<>();
+        
+        try {
+            listaSalida = app.cargarSalidasFiltradas(nombre, fechaDesde, fechaHasta);
+        } catch (SalidaException e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
