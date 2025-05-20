@@ -23,13 +23,12 @@ import java.util.logging.Logger;
 public class RegistrarGasto implements IRegistrarGasto {
 
     private final IGastoBO gastoBO = manejadoresBO.ManejadorObjetosNegocio.crearGastoBO();
-    private final IAdapterGasto adaptadorGasto = new AdaptadorGasto(); // Asegúrate de que este adaptador esté correctamente inicializado (quizás con el adaptador de proveedor)
+    private final IAdapterGasto adaptadorGasto = new AdaptadorGasto(); 
     CrearGastoDTO gastoPasable;
 
     @Override
     public GastoDTO agregarGasto(CrearGastoDTO gastoDTO) throws GastoException {
         try {
-            // Aquí podrías agregar validaciones de negocio antes de llamar al BO
         if (gastoDTO == null) {
             throw new NegocioException("Los datos del gasto no pueden ser nulos.");
         }
@@ -41,7 +40,6 @@ public class RegistrarGasto implements IRegistrarGasto {
             throw new NegocioException("El monto del gasto debe ser mayor que cero.");
         }
 
-        // Llama al Business Object para realizar la lógica de negocio y persistencia
             return gastoBO.agregarGasto(gastoDTO);
         } catch (NegocioException ex) {
             throw new GastoException("Error al agregar gasto" + ex.getLocalizedMessage());
