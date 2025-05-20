@@ -11,6 +11,7 @@ import DTOs.PagoViejoDTO;
 import DTOs.VentaDTO;
 import GUI.Aplicacion;
 import EstrategiaPago.Pago;
+import Exception.VentaException;
 import excepciones.ProcesadorPagoException;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -46,7 +47,7 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         this.app = app;
         this.proce = new Pago();
         initComponents();
-        
+
         double totalTemporal = app.getTotalTemporal();
 
     }
@@ -158,11 +159,7 @@ public class FormularioTarjeta extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRegresarMouseClicked
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
-        try {
-            pagoTarjeta();
-        } catch (ProcesadorPagoException ex) {
-            Logger.getLogger(FormularioTarjeta.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        pagoTarjeta();
     }//GEN-LAST:event_btnAceptarMouseClicked
 
     private void btnTxtRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtRegresarMouseClicked
@@ -188,7 +185,7 @@ public class FormularioTarjeta extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
 //metodosAuxiliares
-    public void pagoTarjeta() throws ProcesadorPagoException {
+    public void pagoTarjeta() {
         String titular = inputTitularTarjeta.getText();
         String numeroTarjeta = inputNumeroTarjeta.getText();
         String fechaVencimiento = inputFechaExpiracion.getText();
@@ -206,31 +203,38 @@ public class FormularioTarjeta extends javax.swing.JPanel {
             return;
         }
         //NuevaTarjetaDTO tarjeta = new NuevaTarjetaDTO(titular, numeroTarjeta, fechaVencimiento, cvv); 
-        NuevaTarjetaDTO tarjeta = app.buscarTarjeta(titular, numeroTarjeta, fechaVencimiento, cvv);
-
-
-        LocalDateTime fechaPago = LocalDateTime.now();
-
-        double monto = app.getTotalTemporal(); // se obtiene desde la app
-
-        MetodoPagoDTO metodoPago = new MetodoPagoDTO(tarjeta);
-        PagoViejoDTO pago = new PagoViejoDTO(fechaPago, metodoPago, monto);
-        VentaDTO venta = app.obtenerVenta();
+        NuevaTarjetaDTO tarjeta;
         try {
-            boolean ans = app.verificarPago(pago);
-            if (ans) {
-                pago.setEstado("Pagado");
-                venta.setPago(pago);
-                app.mostrarVentanaProcesandoPago();
-                app.mostrarVentanaExitoProcesandoPago();
-            } else {
+            tarjeta = app.buscarTarjeta(titular, numeroTarjeta, fechaVencimiento, cvv);
+            LocalDateTime fechaPago = LocalDateTime.now();
+
+            double monto = app.getTotalTemporal(); // se obtiene desde la app
+
+            MetodoPagoDTO metodoPago = new MetodoPagoDTO(tarjeta);
+            PagoViejoDTO pago = new PagoViejoDTO(fechaPago, metodoPago, monto);
+            VentaDTO venta = app.obtenerVenta();
+            try {
+                boolean ans = app.verificarPago(pago);
+                if (ans) {
+                    pago.setEstado("Pagado");
+                    venta.setPago(pago);
+                    app.mostrarVentanaProcesandoPago();
+                    app.mostrarVentanaExitoProcesandoPago();
+                    SwingUtilities.getWindowAncestor(this).dispose();
+                } else {
+                    app.mostrarVentanaProcesandoPago();
+                    app.mostrarVentanaErrorProcesandoPago();
+                    SwingUtilities.getWindowAncestor(this).dispose();
+                }
+            } catch (ProcesadorPagoException ex) {
                 app.mostrarVentanaProcesandoPago();
                 app.mostrarVentanaErrorProcesandoPago();
             }
-        } catch (ProcesadorPagoException ex) {
-            app.mostrarVentanaProcesandoPago();
-            app.mostrarVentanaErrorProcesandoPago();
+        } catch (VentaException ex) {
+            app.mostrarErrorTarjetaNoEncontrada();
+           
         }
+
     }
 
 }

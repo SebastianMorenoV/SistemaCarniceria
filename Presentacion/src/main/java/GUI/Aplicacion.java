@@ -6,7 +6,6 @@ package GUI;
  * @author Sebastian Moreno
  */
 import DTOs.ProductoEntradaDTO;
-import DTOs.FechaDTO;
 import EstrategiaPago.Pago;
 import GUI.ModuloRealizarVenta.VentanaExitoProcesandoPago;
 import GUI.ModuloRealizarVenta.VentanaProcesandoPago;
@@ -15,9 +14,7 @@ import GUI.ModuloRealizarVenta.FormularioMostrarCambio;
 import GUI.ModuloRealizarVenta.FormularioEfectivo;
 import GUI.ModuloRealizarVenta.FormularioTarjeta;
 import GUI.ModuloRealizarVenta.RegistrarVenta;
-import GUI.ModuloRealizarVenta.VentanaFormularioTarjeta;
 import GUI.ModuloRealizarVenta.VentanaErrorProcesandoPago;
-import GUI.ModuloRealizarVenta.ventanaMostrarTicket;
 import DTOs.*;
 import DTOs.Devolucion.CrearDevolucionDTO;
 import DTOs.Devolucion.DevolucionDTO;
@@ -38,6 +35,7 @@ import GUI.ModuloRealizarDevolucion.PantallaDevolucion;
 import GUI.ModuloRealizarDevolucion.PantallaHistorialDevoluciones;
 import GUI.ModuloRealizarDevolucion.PantallaMenuDevolucion;
 import GUI.ModuloRealizarDevolucion.PantallaTicket;
+import GUI.ModuloRealizarVenta.generarTicketVenta;
 
 import GUI.ModuloRegistrarEntrada.FormularioDatosEntrada;
 import GUI.ModuloRegistrarEntrada.FormularioProductoNuevo;
@@ -59,16 +57,12 @@ import exception.SalidaException;
 
 import java.time.LocalDate;
 
-import java.awt.Frame;
 
 
 import java.awt.Frame;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 import salidas.IRealizarSalida;
 import salidas.RealizarSalida;
@@ -84,7 +78,7 @@ public class Aplicacion {
     private FormularioMostrarCambio mostrarCambio;
     private MenuOpciones menuOpciones;
     private JDialog ventanaActual; // Variable para almacenar la ventana actual
-    private ventanaMostrarTicket ticket;
+    private generarTicketVenta ticket;
     private RealizarVenta realizarVenta;
     private Pago procesadorPago;
 
@@ -141,6 +135,7 @@ public class Aplicacion {
         registrarVenta = new RegistrarVenta(this);
         formularioTarjeta = new FormularioTarjeta(this);
         menuOpciones = new MenuOpciones(this);
+        
 
         //Inicializar Pantallas de Devolucion
         menuDevolucion = new PantallaMenuDevolucion(this);
@@ -168,13 +163,13 @@ public class Aplicacion {
     // Método para mostrar RegistrarVenta (Pantalla Principal)
     // Método para mostrar FormularioTarjeta
     public void mostrarFormularioTarjeta() {
-        VentanaFormularioTarjeta formulario = new VentanaFormularioTarjeta(this);
-        formulario.setModal(true);
-        formulario.setVisible(true);
+
+        abrirDialogo(formularioTarjeta, "Formulario Tarjeta", 800, 500);
     }
 
     public void mostrarTicketPDF() {
-        ventanaMostrarTicket ticket = new ventanaMostrarTicket(this);
+        ticket = new generarTicketVenta(this);
+        abrirDialogo(ticket, "Ticket Venta", 500, 700);
     }
 
     // Método para mostrar FormularioEfectivo
@@ -246,6 +241,10 @@ public class Aplicacion {
 
     public void mostrarErrorEmpleadoNoCargado() {
         JOptionPane.showMessageDialog(framePrincipal, "Error: Empleado no cargado correctamente.");
+    }
+    
+    public void mostrarErrorTarjetaNoEncontrada() {
+        JOptionPane.showMessageDialog(framePrincipal, "Error: Tarjeta no encontrada o datos invalidos.");
     }
 
     public void mostrarErrorVentaSinProducto() {
@@ -463,15 +462,15 @@ public class Aplicacion {
         return realizarVenta.obtenerVenta();
     }
 
-    public TicketDTO crearTicket(VentaDTO venta) {
-        TicketDTO ticketNuevo = new TicketDTO(venta.getListadoProductosVenta(),
-                venta.getFechaHora(),
-                venta.getIva(),
-                venta.getEmpleado(),
-                venta.getSubtotal(),
-                venta.getTotal());
-        return ticketNuevo;
-    }
+//    public TicketDTO crearTicket(VentaDTO venta) {
+//        TicketDTO ticketNuevo = new TicketDTO(venta.getListadoProductosVenta(),
+//                venta.getFechaHora(),
+//                venta.getIva(),
+//                venta.getEmpleado(),
+//                venta.getSubtotal(),
+//                venta.getTotal());
+//        return ticketNuevo;
+//    }
 
 //    Caso gastos
     public GastoDTO registrarGasto(CrearGastoDTO gasto) throws GastoException {
@@ -705,7 +704,7 @@ public class Aplicacion {
         }
     } 
     
-    public NuevaTarjetaDTO buscarTarjeta(String titular, String numeroTarjeta, String fechaVencimiento, int cvv) throws ProcesadorPagoException {
+    public NuevaTarjetaDTO buscarTarjeta(String titular, String numeroTarjeta, String fechaVencimiento, int cvv) throws VentaException {
         return realizarVenta.buscarTarjeta(titular, numeroTarjeta, fechaVencimiento, cvv);
     }
 

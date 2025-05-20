@@ -20,7 +20,6 @@ public class PagoEfectivo implements IProcesadorPago{
     @Override
     public double procesarPago(PagoNuevoDTO pago) throws ProcesadorPagoException {
         NuevoEfectivoDTO nuevoEfectivoDTO = pago.getMetodoPago().getNuevoEfectivo();
-        System.out.println("Se proceso pago desde efectivo correctamente.");
         return nuevoEfectivoDTO.getPagoCon() - pago.getMonto();
     }
      /**

@@ -22,7 +22,7 @@ import javax.swing.SwingWorker;
  * @author Admin
  */
 public class VentanaProcesandoPago extends JDialog {
-    Aplicacion app;
+
     public VentanaProcesandoPago() {
         // Cargar el GIF
         ImageIcon iconoGif = new ImageIcon(getClass().getResource("/imagenes/cargando.gif"));
@@ -34,7 +34,7 @@ public class VentanaProcesandoPago extends JDialog {
 
         // Panel principal con layout adecuado
         JPanel panel = new JPanel(new BorderLayout(10, 10));
-        panel.setPreferredSize(new Dimension(400, 250));  // Tamaño del JOptionPane
+        panel.setPreferredSize(new Dimension(400, 180));
         panel.add(lblMensaje, BorderLayout.NORTH);
 
         // Panel para centrar el GIF
@@ -42,31 +42,29 @@ public class VentanaProcesandoPago extends JDialog {
         panelGif.add(lblGif);
         panel.add(panelGif, BorderLayout.CENTER);
 
-        //cerrarPantallaDialogo();
+        // Configurar el JDialog (this)
+        setTitle("Procesando Pago");
+        setModal(true);
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        setContentPane(panel);
+        pack();
+        setLocationRelativeTo(null);
 
-        // Crear el JOptionPane
-        JOptionPane procesarPago = new JOptionPane(panel, JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
-        JDialog dialog = procesarPago.createDialog("Procesando Pago");
-
-        // Configurar tamaño del JDialog
-        dialog.setSize(400, 180);
-        dialog.setLocationRelativeTo(null);
-
-        // Usar SwingWorker para no bloquear la ejecución
+        // SwingWorker para cerrar después de 2 segundos
         SwingWorker<Void, Void> worker = new SwingWorker<>() {
             @Override
             protected Void doInBackground() throws Exception {
-                Thread.sleep(2000);  // Esperar el tiempo indicado
+                Thread.sleep(2000);
                 return null;
             }
 
             @Override
             protected void done() {
-                dialog.dispose();  // Cerrar el diálogo
+                dispose();  // Cerrar este JDialog
             }
         };
 
-        worker.execute();  // Iniciar el temporizador en segundo plano
-        dialog.setVisible(true);
+        worker.execute();  // Iniciar temporizador
+        //setVisible(true);  // Mostrar este JDialog (no otro)
     }
 }

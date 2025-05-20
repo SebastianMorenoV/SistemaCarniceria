@@ -158,9 +158,15 @@ public class RealizarVenta implements IRealizarVenta {
         return validado;
     }
     
-    public NuevaTarjetaDTO buscarTarjeta(String titular, String numeroTarjeta, String fechaVencimiento, int cvv) throws ProcesadorPagoException {
-        IProcesadorPago estrategia = new PagoTarjeta();
-        return procesarPago.buscarTarjeta(estrategia, titular, numeroTarjeta, fechaVencimiento, cvv);
+    @Override
+    public NuevaTarjetaDTO buscarTarjeta(String titular, String numeroTarjeta, String fechaVencimiento, int cvv) throws VentaException {
+
+        try {
+                    IProcesadorPago estrategia = new PagoTarjeta();
+        return procesarPago.buscarTarjeta(estrategia, titular, numeroTarjeta, fechaVencimiento, cvv); 
+        } catch (ProcesadorPagoException e) {
+            throw new VentaException("Error al encontrar tarjeta" + e.getLocalizedMessage());
+        }
     }
 
    

@@ -547,7 +547,6 @@ public class RegistrarVenta extends javax.swing.JPanel {
         List<ProductoCargadoDTO> nuevosProductos = app.cargarProductos(); // Siempre nueva lista
 
         listadoProductosCargados = nuevosProductos; // Reemplaza, no acumula
-        System.out.println("Cargando productos... total: " + nuevosProductos.size());
 
         DefaultListModel<String> modelo = new DefaultListModel<>();
         for (ProductoCargadoDTO p : nuevosProductos) {
@@ -887,10 +886,10 @@ public class RegistrarVenta extends javax.swing.JPanel {
         // Si se confirma finalizar la venta
         // Si se confirma finalizar la venta
         if (confirmar == JOptionPane.YES_OPTION) {
-            app.mostrarTicketPDF();
+            
             try {
-                System.out.println("Venta realizada" + ventaRealizada);
-                app.registrarVenta(ventaRealizada);
+                VentaDTO venta = app.registrarVenta(ventaRealizada);
+                app.setearVenta(venta);
                 app.mostrarTicketPDF();
             } catch (VentaException ex) {
                 Logger.getLogger(RegistrarVenta.class.getName()).log(Level.SEVERE, null, ex);

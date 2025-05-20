@@ -190,7 +190,7 @@ public class FormularioEfectivo extends javax.swing.JPanel {
             //setear el pago a la venta.
             VentaDTO venta = app.obtenerVenta();
             venta.setPago(pago);
-            System.out.println(venta + "Venta en la parte de formulario efectivo.");
+            
             app.setearVenta(venta);
 
             try {

@@ -79,14 +79,20 @@ public class MenuOpciones extends javax.swing.JPanel {
         add(pnlBotonVentaEnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 190, 170));
 
         jLabel2.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Devoluciones");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 610, 150, 30));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 380, 190, 30));
 
         panelRound1.setBackground(new java.awt.Color(44, 44, 44));
         panelRound1.setRoundBottomLeft(30);
         panelRound1.setRoundBottomRight(30);
         panelRound1.setRoundTopLeft(30);
         panelRound1.setRoundTopRight(30);
+        panelRound1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelRound1MouseClicked(evt);
+            }
+        });
         panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
@@ -94,9 +100,9 @@ public class MenuOpciones extends javax.swing.JPanel {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Cerrar Sesion");
         jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        panelRound1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 120, 40));
+        panelRound1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 40));
 
-        add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 600, 220, 40));
+        add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 600, 220, 40));
 
         pnlBotonDevoluciones.setBackground(new java.awt.Color(73, 69, 79));
         pnlBotonDevoluciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -132,11 +138,12 @@ public class MenuOpciones extends javax.swing.JPanel {
         });
         pnlBotonDevoluciones.add(icnDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 130, 150));
 
-        add(pnlBotonDevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, 190, 170));
+        add(pnlBotonDevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 200, 190, 170));
 
         jLabel4.setFont(new java.awt.Font("Product Sans Infanity", 0, 48)); // NOI18N
-        jLabel4.setText("Bienvenido, Juan Soto!");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 490, 80));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Bienvenido, Juanito!");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1150, 80));
 
         jLabel5.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -160,23 +167,24 @@ public class MenuOpciones extends javax.swing.JPanel {
 
         jLabel7.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         jLabel7.setText("Inventario");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 380, 110, 30));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 120, 30));
 
         panelBtnInventario.setBackground(new java.awt.Color(73, 69, 79));
         panelBtnInventario.setMinimumSize(new java.awt.Dimension(160, 160));
         panelBtnInventario.setPreferredSize(new java.awt.Dimension(160, 160));
         panelBtnInventario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        iconInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconInventario.png"))); // NOI18N
+        iconInventario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        iconInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/inventario.png"))); // NOI18N
         iconInventario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         iconInventario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 iconInventarioMouseClicked(evt);
             }
         });
-        panelBtnInventario.add(iconInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 100, -1));
+        panelBtnInventario.add(iconInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 190, -1));
 
-        add(panelBtnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, 200, 170));
+        add(panelBtnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, 190, 170));
 
         jLabel8.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         jLabel8.setText("Venta en caja");
@@ -238,6 +246,11 @@ public class MenuOpciones extends javax.swing.JPanel {
         // TODO add your handling code here:
         app.mostrarVentanaOpcionesInventario();
     }//GEN-LAST:event_iconInventarioMouseClicked
+
+    private void panelRound1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound1MouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_panelRound1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

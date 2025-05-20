@@ -44,13 +44,11 @@ public class generarTicketVenta extends javax.swing.JPanel {
         initComponents();
         this.app = app;
         this.venta = app.obtenerVenta();
-        crearTicket();
         acomodarTicket();
         acomodarPanelTabla();
         acomodarPanelSumas();
         acomodarPanelBotones();
         generarTicketVenta();
-        setVisible(true);
     }
 
     /**
@@ -71,6 +69,7 @@ public class generarTicketVenta extends javax.swing.JPanel {
         campoSubtotal2 = new javax.swing.JLabel();
         campoIVATotal = new javax.swing.JLabel();
         campoTotal = new javax.swing.JLabel();
+        textoFolio = new javax.swing.JLabel();
         campoFechaVenta = new javax.swing.JLabel();
         campoEmpleado = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -105,6 +104,9 @@ public class generarTicketVenta extends javax.swing.JPanel {
 
         campoTotal.setText("jLabel3");
         panelSumas.add(campoTotal);
+
+        textoFolio.setText("jLabel1");
+        panelSumas.add(textoFolio);
 
         add(panelSumas);
 
@@ -158,6 +160,7 @@ public class generarTicketVenta extends javax.swing.JPanel {
 
         ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();
         app.reconstruirRegistrarVenta();
+
     }//GEN-LAST:event_btnSalirTicketActionPerformed
 
 
@@ -177,19 +180,35 @@ public class generarTicketVenta extends javax.swing.JPanel {
     private javax.swing.JPanel panelBotones;
     private javax.swing.JPanel panelSumas;
     private javax.swing.JTable tablaTicket;
+    private javax.swing.JLabel textoFolio;
     private javax.swing.JLabel ticket;
     // End of variables declaration//GEN-END:variables
 
-    public TicketDTO crearTicket() {
-        return app.crearTicket(venta);
-    }
-
+//    public TicketDTO crearTicket() { 
+//        TicketDTO ticketNuevo = new TicketDTO(venta.getListadoProductosVenta(),
+//                venta.getFechaHora(),
+//                venta.getIva(),
+//                venta.getEmpleado(),
+//                venta.getSubtotal(),
+//                venta.getTotal());
+//        return ticketNuevo;
+//    }
     public void acomodarTicket() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
         ticket.setAlignmentX(CENTER_ALIGNMENT);
         campoCarniceria.setAlignmentX(CENTER_ALIGNMENT);
-        campoEmpleado.setAlignmentX(CENTER_ALIGNMENT);
         campoFechaVenta.setAlignmentX(CENTER_ALIGNMENT);
+        campoEmpleado.setAlignmentX(CENTER_ALIGNMENT);
+        textoFolio.setAlignmentX(CENTER_ALIGNMENT);
+
+        removeAll(); // Limpiar componentes anteriores (por si acaso)
+
+        add(ticket);
+        add(campoCarniceria);
+        add(campoFechaVenta);
+        add(campoEmpleado);
+        add(textoFolio);  // <- Aquí se coloca justo debajo del nombre del empleado
     }
 
     public void acomodarPanelSumas() {
@@ -218,14 +237,20 @@ public class generarTicketVenta extends javax.swing.JPanel {
     }
 
     public void generarTicketVenta() {
-        TicketDTO ticket = crearTicket();
+        textoFolio.setText("Numero de Ticket: " + venta.getId().toString());
+        TicketDTO ticket = new TicketDTO(venta.getListadoProductosVenta(),
+                venta.getFechaHora(),
+                venta.getIva(),
+                venta.getEmpleado(),
+                venta.getSubtotal(),
+                venta.getTotal());
         String columnasTabla[] = {"Producto", "cantidad", "subtotal"};
-        campoEmpleado.setText(ticket.getCajero().getNombre());
-        campoFechaVenta.setText(ticket.getFechaHora().format(DateTimeFormatter.ISO_DATE));
+        campoEmpleado.setText("Venta atendida por: " + venta.getEmpleado().getNombre());
+        campoFechaVenta.setText("Fecha de compra: " + ticket.getFechaHora().format(DateTimeFormatter.ISO_DATE));
         DefaultTableModel modelo = new DefaultTableModel(columnasTabla, 0);
 
         for (ProductoVentaDTO producto : ticket.getListaProductosVenta()) {
-            modelo.addRow(new Object[]{producto.getProducto().getNombre(), producto.getCantidad(), producto.getCantidad() * producto.getImporte()});
+            modelo.addRow(new Object[]{producto.getProducto().getNombre(), producto.getCantidad(), producto.getImporte()});
         }
         tablaTicket.setModel(modelo);
         tablaTicket.setVisible(true);

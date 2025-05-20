@@ -46,10 +46,12 @@ public class PagoTarjeta implements IProcesadorPago {
 
         String numeroTarjeta = nuevaTarjeta.getNumeroTarjeta();
         int cvv = nuevaTarjeta.getCvv();
+        
+        
 
         return numeroTarjeta != null
                 && numeroTarjeta.matches("\\d{16}") // Asegura que sean exactamente 16 dígitos
-                && cvv >= 100 && cvv <= 999;
+                && cvv >= 100 && cvv <= 999&&nuevaTarjeta.getSaldoDisponible()>pago.getMonto();
 
     }
 
