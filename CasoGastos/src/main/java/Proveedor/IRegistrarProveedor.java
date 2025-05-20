@@ -18,4 +18,6 @@ public interface IRegistrarProveedor {
     public ProveedorDTO agregarProveedor(CrearProveedorDTO proveedorDTO) throws GastoException;
     
     public List<ProveedorDTO> consultarProveedores() throws GastoException;
+    
+    public ProveedorDTO buscarPorNombre(String nombre) throws GastoException;
 }

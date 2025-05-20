@@ -5,13 +5,14 @@
 package entidades;
 
 import java.time.LocalDate;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author Admin
  */
 public class Gasto {
-    int id;
+    ObjectId _id;
     String folio;
     LocalDate fechaGasto;
     String categoria;
@@ -24,8 +25,8 @@ public class Gasto {
     public Gasto() {
     }
 
-    public Gasto(int id, String folio, LocalDate fechaGasto, String categoria, Proveedor proveedor, String concepto, Double montoGasto, byte[] comprobante, String metodoPago) {
-        this.id = id;
+    public Gasto(ObjectId id, String folio, LocalDate fechaGasto, String categoria, Proveedor proveedor, String concepto, Double montoGasto, byte[] comprobante, String metodoPago) {
+        this._id = id;
         this.folio = folio;
         this.fechaGasto = fechaGasto;
         this.categoria = categoria;
@@ -47,12 +48,12 @@ public class Gasto {
         this.metodoPago = metodoPago;
     }
 
-    public int getId() {
-        return id;
+    public ObjectId getId() {
+        return _id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(ObjectId id) {
+        this._id = id;
     }
 
     public String getFolio() {
@@ -121,7 +122,7 @@ public class Gasto {
 
     @Override
     public String toString() {
-        return "Gasto{" + "id=" + id + ", folio=" + folio + ", fechaGasto=" + fechaGasto + ", categoria=" + categoria + ", proveedor=" + proveedor + ", concepto=" + concepto + ", montoGasto=" + montoGasto + ", comprobante=" + comprobante + ", metodoPago=" + metodoPago + '}';
+        return "Gasto{" + "id=" + _id + ", folio=" + folio + ", fechaGasto=" + fechaGasto + ", categoria=" + categoria + ", proveedor=" + proveedor + ", concepto=" + concepto + ", montoGasto=" + montoGasto + ", comprobante=" + comprobante + ", metodoPago=" + metodoPago + '}';
     }
     
     

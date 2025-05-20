@@ -8,6 +8,7 @@ import DTOs.CrearGastoDTO;
 import DTOs.GastoDTO;
 import Exception.GastoException;
 import Exception.NegocioException;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -19,10 +20,14 @@ public interface IRegistrarGasto {
 
     public void eliminarGasto(String folio) throws GastoException;
 
-    public GastoDTO modificarGasto(CrearGastoDTO gastoDTO) throws GastoException;
+    public GastoDTO modificarGasto(GastoDTO gastoDTO) throws GastoException;
 
     public List<GastoDTO> consultarGastos() throws GastoException;
     
     public void vaidarGastoDuplicado() throws GastoException;
+    
+    public List<GastoDTO> consultarGastosFiltrados(CrearGastoDTO gastoFiltro, LocalDate fechaInicio, LocalDate fechaFin) throws GastoException;
+    
+    public GastoDTO buscarPorFolio(String folio) throws GastoException;
     
 }

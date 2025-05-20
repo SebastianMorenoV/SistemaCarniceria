@@ -17,4 +17,8 @@ public interface IAdapterGasto {
     public GastoDTO ConvertirADTO(Gasto gasto);
     
     public Gasto ConvertirAEntidad(CrearGastoDTO gastoDTO);
+    
+    public Gasto ConvertirAEntidad(GastoDTO gastoDTO);
+    
+    public GastoDTO ConvertirADTO1(Gasto gasto);
 }

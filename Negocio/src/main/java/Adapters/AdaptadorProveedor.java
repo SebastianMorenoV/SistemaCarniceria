@@ -14,17 +14,20 @@ import IAdapters.IAdaptadorProveedor;
  *
  * @author Admin
  */
-public class AdaptadorProveedor implements IAdaptadorProveedor{
+public class AdaptadorProveedor implements IAdaptadorProveedor {
 
     @Override
-    public ProveedorDTO ConvertirADTO(Proveedor proveedor){
+    public ProveedorDTO ConvertirADTO(Proveedor proveedor) {
         ProveedorDTO proveedorDTO = new ProveedorDTO();
         proveedorDTO.setNombre(proveedor.getNombre());
         return proveedorDTO;
     }
 
     @Override
-    public Proveedor ConvertirAEntidad(CrearProveedorDTO proveedorDTO){
+    public Proveedor ConvertirAEntidad(CrearProveedorDTO proveedorDTO) {
+        if (proveedorDTO == null) {
+            return null;
+        }
         Proveedor proveedorEntidad = new Proveedor();
         proveedorEntidad.setNombre(proveedorDTO.getNombre());
         return proveedorEntidad;
@@ -32,9 +35,9 @@ public class AdaptadorProveedor implements IAdaptadorProveedor{
 
     @Override
     public Proveedor ConvertirAEntidad(ProveedorDTO proveedorDTO) {
-        Proveedor proveedorEntidad = new Proveedor(proveedorDTO.getId(), proveedorDTO.getNombre(),proveedorDTO.getTelefono());
+        Proveedor proveedorEntidad = new Proveedor(proveedorDTO.getNombre(), proveedorDTO.getTelefono());
         return proveedorEntidad;
-        
+
     }
 
     @Override
@@ -44,5 +47,5 @@ public class AdaptadorProveedor implements IAdaptadorProveedor{
         proveedorDTO.setTelefono(proveedor.getNumero());
         return proveedorDTO;
     }
-    
+
 }

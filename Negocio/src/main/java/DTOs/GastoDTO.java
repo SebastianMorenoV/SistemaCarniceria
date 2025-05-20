@@ -5,13 +5,14 @@
 package DTOs;
 
 import java.time.LocalDate;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author Admin
  */
 public class GastoDTO {
-    int id;
+    ObjectId id;
     String folio;
     LocalDate fechaGasto;
     String categoria;
@@ -24,7 +25,7 @@ public class GastoDTO {
     public GastoDTO() {
     }
 
-    public GastoDTO(int id, String folio, LocalDate fechaGasto, String categoria, ProveedorDTO proveedor, String concepto, Double montoGasto, byte[] comprobante, String metodoPago) {
+    public GastoDTO(ObjectId id, String folio, LocalDate fechaGasto, String categoria, ProveedorDTO proveedor, String concepto, Double montoGasto, byte[] comprobante, String metodoPago) {
         this.id = id;
         this.folio = folio;
         this.fechaGasto = fechaGasto;
@@ -47,11 +48,11 @@ public class GastoDTO {
         this.metodoPago = metodoPago;
     }
 
-    public int getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 

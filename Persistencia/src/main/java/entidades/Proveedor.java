@@ -4,26 +4,28 @@
  */
 package entidades;
 
+import org.bson.types.ObjectId;
+
 /**
  *
  * @author Admin
  */
 public class Proveedor {
-    int id;
+    ObjectId _id;
     String nombre;
     String numero;
 
     public Proveedor() {
     }
 
-    public Proveedor(int id, String nombre, String numero) {
-        this.id = id;
+    public Proveedor(ObjectId id, String nombre, String numero) {
+        this._id = id;
         this.nombre = nombre;
         this.numero = numero;
     }
     
-    public Proveedor(int id, String nombre) {
-        this.id = id;
+    public Proveedor(ObjectId id, String nombre) {
+        this._id = id;
         this.nombre = nombre;
     }
     
@@ -33,12 +35,12 @@ public class Proveedor {
         this.numero = numero;
     }
 
-    public int getId() {
-        return id;
+    public ObjectId getId() {
+        return _id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(ObjectId id) {
+        this._id = id;
     }
 
     public String getNombre() {
@@ -59,7 +61,7 @@ public class Proveedor {
     
     @Override
     public String toString() {
-        return "Proveedor{" + "id=" + id + ", nombre=" + nombre + '}';
+        return "Proveedor{" + "id=" + _id + ", nombre=" + nombre + '}';
     }
     
     

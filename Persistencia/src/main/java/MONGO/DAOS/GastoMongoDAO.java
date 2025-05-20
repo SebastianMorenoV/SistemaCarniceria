@@ -1,0 +1,159 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package MONGO.DAOS;
+
+import Exception.PersistenciaException;
+import Interfaces.IGastoDAO;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
+import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Updates.combine;
+import static com.mongodb.client.model.Updates.set;
+import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.UpdateResult;
+import conexion.ConexionMongo;
+import entidades.Gasto;
+import entidades.MetodoPago;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
+
+/**
+ *
+ * @author Admin
+ */
+public class GastoMongoDAO implements IGastoDAO{
+    private final MongoCollection<Gasto> coleccion;
+
+    public GastoMongoDAO() {
+        this.coleccion = ConexionMongo.getDatabase().getCollection("Gastos", Gasto.class);
+    }
+
+    
+    @Override
+    public Gasto agregarGasto(Gasto gasto) throws PersistenciaException {
+        try {
+            // Asignar un nuevo _id si esta en null
+            if (gasto.getId() == null) {
+                gasto.setId(new ObjectId());
+            }
+
+            coleccion.insertOne(gasto);
+            return gasto;
+        } catch (Exception e) {
+            throw new PersistenciaException("Error al agregar el gasto: " + e.getLocalizedMessage());
+        }
+    }
+
+    @Override
+    public void eliminarGasto(String folio) throws PersistenciaException {
+        try {
+            Bson gastoEncontrado = eq("folio", folio); 
+            DeleteResult resultado = coleccion.deleteOne(gastoEncontrado);
+
+            if (resultado.getDeletedCount() == 0) {
+                throw new PersistenciaException("No se encontro un gasto con el folio: " + folio);
+            }
+
+        } catch (Exception e) {
+            throw new PersistenciaException("Error al eliminar gasto: " + e.getMessage());
+        }
+    }
+
+
+
+    @Override
+    public Gasto modificarGasto(Gasto gasto) throws PersistenciaException {
+        try {
+            if (gasto.getId() == null) {
+                throw new PersistenciaException("No existe un gasto con ese id");
+            }
+
+            Bson gastoEncontrado = eq("_id", gasto.getId());
+
+            Bson gastoActualizado = combine(
+                    set("folio", gasto.getFolio()),
+                    set("fechaGasto", gasto.getFechaGasto()),
+                    set("categoria", gasto.getCategoria()),
+                    set("proveedor", gasto.getProveedor()),
+                    set("concepto", gasto.getConcepto()),
+                    set("montoGasto", gasto.getMontoGasto()),
+                    set("comprobante", gasto.getComprobante()),
+                    set("metodoPago", gasto.getMetodoPago())
+            );
+
+            UpdateResult resultado = coleccion.updateOne(gastoEncontrado, gastoActualizado);
+
+            if (resultado.getMatchedCount() == 0) {
+                throw new PersistenciaException("No se encontro el gasto con id: " + gasto.getId());
+            }
+
+            return gasto;
+
+        } catch (Exception e) {
+            throw new PersistenciaException("Error al modificar gasto: " + e.getMessage());
+        }
+    }
+
+
+    @Override
+    public List<Gasto> consultarGastos() throws PersistenciaException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Gasto> consultarGastosFiltrados(Gasto gastoFiltro, LocalDate fechaInicio, LocalDate fechaFin) throws PersistenciaException {
+        List<Bson> filtros = new ArrayList<>();
+        
+        if(gastoFiltro.getMetodoPago()!=null&& !gastoFiltro.getMetodoPago().isEmpty()){//filtro para metodo de pago
+            filtros.add(eq("metodoPago", gastoFiltro.getMetodoPago()));
+        }
+        
+        if(gastoFiltro.getCategoria()!=null&& !gastoFiltro.getCategoria().isEmpty()){//filtro para categoria
+            filtros.add(eq("categoria", gastoFiltro.getCategoria()));
+        }
+        
+        if (fechaInicio != null && fechaFin != null) {
+            filtros.add(Filters.and(
+                    Filters.gte("fechaGasto", Date.from(fechaInicio.atStartOfDay(ZoneOffset.UTC).toInstant())),
+                    Filters.lte("fechaGasto", Date.from(fechaFin.atStartOfDay(ZoneOffset.UTC).toInstant()))
+            ));
+        }else if (fechaInicio != null) {
+            // Solo fecha inicio
+            filtros.add(Filters.gte("fechaGasto", Date.from(fechaInicio.atStartOfDay(ZoneOffset.UTC).toInstant())));
+        } else if (fechaFin != null) {
+            // Solo fecha fin
+            filtros.add(Filters.lte("fechaGasto", Date.from(fechaFin.atStartOfDay(ZoneOffset.UTC).toInstant())));
+        }
+        
+        //filtros.isEmpty() ? new org.bson.Document() es que si la lista de filtros esta vacia devolvera todos los documentos, osea q no filtrara nada
+        //Filters.and(filtros) combina todos los filtros guardados en "filtros" y por lo tanto se aplican todos al mismo tiempo lo cual regresaria los documentos filtrados
+        Bson gastosFiltrados = filtros.isEmpty() ? new org.bson.Document() : Filters.and(filtros);
+        
+        //aqui se ejecuta la consulta en la coleccion MongoDB usando el filtro construido "filtros"
+        //System.out.println(coleccion.find(gastosFiltrados).into(new ArrayList<>()));
+        return coleccion.find(gastosFiltrados).into(new ArrayList<>());
+        
+        //.into(new ArrayList<>()) copia todos los resultados en una nueva lista (ArrayList), que es lo que devuelve el metodo
+
+    }
+    
+    @Override
+    public Gasto buscarPorFolio(String folio) throws PersistenciaException {
+        try {
+            System.out.println("Gasto desde dao: " + coleccion.find(eq("folio", folio)).first());
+            return coleccion.find(eq("folio", folio)).first();
+            
+        } catch (Exception e) {
+            throw new PersistenciaException("Error al buscar gasto por folio: " + e.getLocalizedMessage());
+        }
+    }
+    
+}

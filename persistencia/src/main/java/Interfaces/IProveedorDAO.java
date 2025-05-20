@@ -23,4 +23,6 @@ public interface IProveedorDAO {
     public Proveedor agregarProveedor(Proveedor proveedor) throws PersistenciaException;
     
     public List<Proveedor> consultarProveedores() throws PersistenciaException;
+    
+    public Proveedor buscarPorNombre(String nombre) throws PersistenciaException;
 }

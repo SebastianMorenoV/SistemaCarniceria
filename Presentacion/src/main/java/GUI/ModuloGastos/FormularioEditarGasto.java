@@ -6,14 +6,17 @@ package GUI.ModuloGastos;
 
 import DTOs.CrearGastoDTO;
 import DTOs.CrearProveedorDTO;
+import DTOs.GastoDTO;
 import DTOs.ProveedorDTO;
 import Exception.GastoException;
 import GUI.Aplicacion;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -52,7 +55,7 @@ public class FormularioEditarGasto extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        inputMontoGasto = new javax.swing.JTextField();
+        inputMonto = new javax.swing.JTextField();
         panelRound2 = new GUI.PanelRound();
         btnEliminar = new javax.swing.JLabel();
         btnAtras = new javax.swing.JLabel();
@@ -60,6 +63,8 @@ public class FormularioEditarGasto extends javax.swing.JPanel {
         panelRound3 = new GUI.PanelRound();
         btnGuardarEditado = new javax.swing.JLabel();
         comboProveedor = new javax.swing.JComboBox<>();
+        comboCategoria = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(228, 233, 236));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -95,12 +100,12 @@ public class FormularioEditarGasto extends javax.swing.JPanel {
         jLabel8.setText("Proveedor");
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 470, -1, 20));
 
-        inputMontoGasto.addActionListener(new java.awt.event.ActionListener() {
+        inputMonto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputMontoGastoActionPerformed(evt);
+                inputMontoActionPerformed(evt);
             }
         });
-        add(inputMontoGasto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 420, 200, 40));
+        add(inputMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 420, 200, 40));
 
         panelRound2.setBackground(new java.awt.Color(255, 0, 0));
         panelRound2.setRoundBottomLeft(20);
@@ -138,34 +143,65 @@ public class FormularioEditarGasto extends javax.swing.JPanel {
         btnGuardarEditado.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardarEditado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnGuardarEditado.setText("Guardar");
+        btnGuardarEditado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGuardarEditadoMouseClicked(evt);
+            }
+        });
         panelRound3.add(btnGuardarEditado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 90));
 
         add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 540, 390, 90));
 
         comboProveedor.setModel(new javax.swing.DefaultComboBoxModel<>());
         add(comboProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, 200, 30));
+
+        comboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Insumos", "Materias Primas", "Mantenimiento/Servicios" }));
+        comboCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCategoriaActionPerformed(evt);
+            }
+        });
+        add(comboCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, 140, 30));
+
+        jLabel2.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
+        jLabel2.setText("Categoria");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void inputMontoGastoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputMontoGastoActionPerformed
+    private void inputMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputMontoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_inputMontoGastoActionPerformed
+    }//GEN-LAST:event_inputMontoActionPerformed
 
     private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
         // TODO add your handling code here:
         app.mostrarPantallaHistorialGastos();
     }//GEN-LAST:event_btnAtrasMouseClicked
 
+    private void comboCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboCategoriaActionPerformed
+
+    private void btnGuardarEditadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarEditadoMouseClicked
+        try {
+            modificarGasto();
+        } catch (GastoException ex) {
+            Logger.getLogger(FormularioEditarGasto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnGuardarEditadoMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnAtras;
     private javax.swing.JLabel btnEliminar;
     private javax.swing.JLabel btnGuardarEditado;
+    private javax.swing.JComboBox<String> comboCategoria;
     private javax.swing.JComboBox<String> comboMetodoPago;
     private javax.swing.JComboBox<CrearProveedorDTO> comboProveedor;
     private javax.swing.JTextField inputConcepto;
     private com.toedter.calendar.JDateChooser inputFecha;
-    private javax.swing.JTextField inputMontoGasto;
+    private javax.swing.JTextField inputMonto;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -192,9 +228,55 @@ public class FormularioEditarGasto extends javax.swing.JPanel {
         inputFecha.setDate(fechaDate);
 
         // Monto
-        inputMontoGasto.setText(gasto.getMontoGasto().toString());
+        inputMonto.setText(gasto.getMontoGasto().toString());
+        
+        //Folio
+        
+        
+        //Categoria
+        comboCategoria.setSelectedItem(gasto.getCategoria());
 
 
+    }
+    
+    public void modificarGasto() throws GastoException{
+        CrearGastoDTO gastoASD = app.getCrearGastoDTO();
+        
+        
+        String concepto = inputConcepto.getText().trim();
+        String metodoPago = comboMetodoPago.getSelectedItem().toString();
+        String folio = gastoASD.getFolio();
+        
+        GastoDTO gastoBuscar = app.buscarPorFolio(folio);
+        System.out.println("gasto encontrado: " + gastoBuscar);
+        ObjectId id = gastoBuscar.getId();
+        System.out.println("id gasto buscado: " + id);
+
+        Date fechaSeleccionada = inputFecha.getDate();
+        if (fechaSeleccionada == null) {
+            throw new GastoException("Debes seleccionar una fecha.");
+        }
+        LocalDate fechaGasto = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        String categoria = comboCategoria.getSelectedItem().toString();
+        double monto = Double.parseDouble(inputMonto.getText());
+        CrearProveedorDTO proveedor = (CrearProveedorDTO) comboProveedor.getSelectedItem();
+        String nombreBuscar = proveedor.getNombre();
+        ProveedorDTO proveedorInsertar = app.buscarPorNombre(nombreBuscar);
+
+        GastoDTO gasto = new GastoDTO();
+        
+        gasto.setId(id);
+        gasto.setConcepto(concepto);
+        gasto.setMetodoPago(metodoPago);
+        gasto.setFolio(folio);
+        gasto.setFechaGasto(fechaGasto);
+        gasto.setCategoria(categoria);
+        gasto.setMontoGasto(monto);
+        gasto.setProveedor(proveedorInsertar);
+        System.out.println(gasto);
+        
+         app.modificarGasto(gasto);
     }
     
     public void cargarProveedores() {

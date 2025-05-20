@@ -39,14 +39,14 @@ public class AdaptadorEntrada implements IAdaptadorEntrada{
         AdaptadorEmpleado empleado = new AdaptadorEmpleado();    
         Empleado empleadoEntidad = empleado.convertirAEntidad(entrada.getEmpleado());
         AdaptadorProveedor proveedor = new AdaptadorProveedor();
-        Proveedor proveedorEntidad = proveedor.ConvertirAEntidad(entrada.getProveedor());
+        //Proveedor proveedorEntidad = proveedor.ConvertirAEntidad(entrada.getProveedor());
         
         Entrada entradaEntidad = new Entrada();
         entradaEntidad.setId(entrada.getId());
         entradaEntidad.setFechaHora(entrada.getFechaHora());
         entradaEntidad.setEmpleado(empleadoEntidad);
         entradaEntidad.setListaProductosEntrada(entrada.getListaProductosEntrada());
-        entradaEntidad.setProveedor(proveedorEntidad);
+        //entradaEntidad.setProveedor(proveedorEntidad);
         return entradaEntidad;
     }
     

@@ -21,4 +21,6 @@ public interface IProveedorBO {
     
     public List<ProveedorDTO> consultarProveedores() throws NegocioException;
     
+    public ProveedorDTO buscarPorNombre(String nombre) throws NegocioException;
+    
 }

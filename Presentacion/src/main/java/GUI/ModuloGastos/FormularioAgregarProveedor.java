@@ -42,6 +42,8 @@ public class FormularioAgregarProveedor extends javax.swing.JPanel {
         agregarProveedorPanelRound = new GUI.PanelRound();
         btnAgregarProveedor = new javax.swing.JLabel();
         btnAtras = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        inputTelefono = new javax.swing.JTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -50,15 +52,15 @@ public class FormularioAgregarProveedor extends javax.swing.JPanel {
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 520, -1));
 
         jLabel2.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
-        jLabel2.setText("Nombre del proveedor");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, -1, -1));
+        jLabel2.setText("Telefono del proveedor");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 350, -1, -1));
 
         inputNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputNombreActionPerformed(evt);
             }
         });
-        add(inputNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 300, 310, 40));
+        add(inputNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 290, 310, 40));
 
         agregarProveedorPanelRound.setBackground(new java.awt.Color(44, 44, 44));
         agregarProveedorPanelRound.setRoundBottomLeft(10);
@@ -79,7 +81,7 @@ public class FormularioAgregarProveedor extends javax.swing.JPanel {
         });
         agregarProveedorPanelRound.add(btnAgregarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 80));
 
-        add(agregarProveedorPanelRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 390, 350, 80));
+        add(agregarProveedorPanelRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 500, 350, 80));
 
         btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icnAtras.png"))); // NOI18N
         btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -89,6 +91,17 @@ public class FormularioAgregarProveedor extends javax.swing.JPanel {
             }
         });
         add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
+        jLabel3.setText("Nombre del proveedor");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, -1, -1));
+
+        inputTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputTelefonoActionPerformed(evt);
+            }
+        });
+        add(inputTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 420, 310, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void inputNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNombreActionPerformed
@@ -109,21 +122,29 @@ public class FormularioAgregarProveedor extends javax.swing.JPanel {
         app.mostrarPantallaMenuGastos();
     }//GEN-LAST:event_btnAtrasMouseClicked
 
+    private void inputTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputTelefonoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.PanelRound agregarProveedorPanelRound;
     private javax.swing.JLabel btnAgregarProveedor;
     private javax.swing.JLabel btnAtras;
     private javax.swing.JTextField inputNombre;
+    private javax.swing.JTextField inputTelefono;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 
     public void agregarProveedor() throws GastoException{
         String nombre = inputNombre.getText().trim();
+        String telefono = inputTelefono.getText().trim();
         
         CrearProveedorDTO proveedor = new CrearProveedorDTO();
         proveedor.setNombre(nombre);
+        proveedor.setTelefono(telefono);
         
         ProveedorDTO resultado = app.registrarProveedor(proveedor);
         

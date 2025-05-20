@@ -58,6 +58,7 @@ import Implementacion.RealizarVenta;
 import Implementacion.RegistrarEntrada;
 import Proveedor.RegistrarProveedor;
 import excepciones.ProcesadorPagoException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Level;
@@ -138,11 +139,9 @@ public class Aplicacion {
 
         //Pantallas de caso gastos inicializadas
         formularioAgregarProveedor = new FormularioAgregarProveedor(this);
-        
-        formularioRegistrarGasto = new FormularioRegistrarGasto(this);
         menuGastos = new MenuGastos(this);
-        tablaHistorialGastos = new TablaHistorialGastos(this);
-        
+
+       
         //Caso de Uso Registrar Salidas
         ventanaHistorialSalidas = new VentanaHistorialSalidas(this);
          
@@ -184,6 +183,7 @@ public class Aplicacion {
 
     //Gastos
     public void mostrarRegistrarGasto() {
+        formularioRegistrarGasto = new FormularioRegistrarGasto(this);
         cambiarPantalla(formularioRegistrarGasto);
     }
 
@@ -283,6 +283,7 @@ public class Aplicacion {
     }
 
     public void mostrarPantallaHistorialGastos() {
+        tablaHistorialGastos = new TablaHistorialGastos(this);
         cambiarPantalla(tablaHistorialGastos);
     }
 
@@ -445,11 +446,41 @@ public class Aplicacion {
             throw new GastoException("Error al registrar el gasto" + ex.getLocalizedMessage());
         }
     }
+    
+    public GastoDTO modificarGasto(GastoDTO gastoDTO) throws GastoException{
+        try {
+            return registrarGasto.modificarGasto(gastoDTO);
+
+        } catch (GastoException ex) {
+            throw new GastoException("Error al modificar el gasto" + ex.getLocalizedMessage());
+        }
+    }
+    
+    public ProveedorDTO buscarPorNombre(String nombre) throws GastoException{
+        try {
+            return registrarProveedor.buscarPorNombre(nombre);
+
+        } catch (GastoException ex) {
+            throw new GastoException("Error al encontrar proveedor" + ex.getLocalizedMessage());
+        }
+    }
+    
+    public GastoDTO buscarPorFolio(String folio) throws GastoException{
+        try {
+            return registrarGasto.buscarPorFolio(folio);
+
+        } catch (GastoException ex) {
+            throw new GastoException("Error al encontrar gasto" + ex.getLocalizedMessage());
+        }
+    }
 
     public List<GastoDTO> consultarGastos() throws GastoException {
         return registrarGasto.consultarGastos();
     }
-
+    
+    public List<GastoDTO> consultarGastosFiltrados(CrearGastoDTO gastoFiltro, LocalDate fechaInicio, LocalDate fechaFin) throws GastoException{
+        return registrarGasto.consultarGastosFiltrados(gastoFiltro, fechaInicio, fechaFin);
+    }
     public void setCrearGastoDTO(CrearGastoDTO gasto) {
         registrarGasto.setGastoPasable(gasto);
     }

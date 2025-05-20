@@ -7,6 +7,7 @@ package Interfaces;
 import DTOs.CrearGastoDTO;
 import DTOs.GastoDTO;
 import Exception.NegocioException;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -19,7 +20,11 @@ public interface IGastoBO {
     
     public void eliminarGasto(String folio) throws NegocioException;
     
-    public GastoDTO modificarGasto(CrearGastoDTO gastoDTO) throws NegocioException;
+    public GastoDTO modificarGasto(GastoDTO gastoDTO) throws NegocioException;
     
     public List<GastoDTO> consultarGastos() throws NegocioException;
+    
+    public List<GastoDTO> consultarGastosFiltrados(CrearGastoDTO gastoFiltro, LocalDate fechaInicio, LocalDate fechaFin) throws NegocioException;
+    
+    public GastoDTO buscarPorFolio(String folio) throws NegocioException;
 }

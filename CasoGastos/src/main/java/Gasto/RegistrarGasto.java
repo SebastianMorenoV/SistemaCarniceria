@@ -11,6 +11,7 @@ import Exception.GastoException;
 import Exception.NegocioException;
 import IAdapters.IAdapterGasto;
 import Interfaces.IGastoBO;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,8 +55,12 @@ public class RegistrarGasto implements IRegistrarGasto {
     }
 
     @Override
-    public GastoDTO modificarGasto(CrearGastoDTO gastoDTO) throws GastoException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public GastoDTO modificarGasto(GastoDTO gastoDTO) throws GastoException {
+        try {
+            return gastoBO.modificarGasto(gastoDTO);
+        } catch (NegocioException ex) {
+            throw new GastoException("Error al consultar gastos" + ex.getLocalizedMessage());
+        }
     }
 
     @Override
@@ -64,6 +69,15 @@ public class RegistrarGasto implements IRegistrarGasto {
             return gastoBO.consultarGastos();
         } catch (NegocioException ex) {
             throw new GastoException("Error al consultar gastos" + ex.getLocalizedMessage());
+        }
+    }
+
+    @Override
+    public List<GastoDTO> consultarGastosFiltrados(CrearGastoDTO gastoFiltro, LocalDate fechaInicio, LocalDate fechaFin) throws GastoException {
+        try {
+            return gastoBO.consultarGastosFiltrados(gastoFiltro, fechaInicio, fechaFin);
+        } catch (NegocioException e) {
+            throw new GastoException("Error al consultar gastos filtrados" + e.getLocalizedMessage());
         }
     }
 
@@ -80,6 +94,14 @@ public class RegistrarGasto implements IRegistrarGasto {
         this.gastoPasable = gastoPasable;
     }
 
-    
+    @Override
+    public GastoDTO buscarPorFolio(String folio) throws GastoException {
+        try {
+            System.out.println("Gasto desde Subsistema: " + gastoBO.buscarPorFolio(folio));
+            return gastoBO.buscarPorFolio(folio);
+        } catch (NegocioException ex) {
+            throw new GastoException("Error al consultar gastos" + ex.getLocalizedMessage());
+        }
+    }
 
 }

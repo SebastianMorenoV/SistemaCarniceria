@@ -14,6 +14,7 @@ import IAdapters.IAdapterGasto;
 import Interfaces.IGastoBO;
 import Interfaces.IGastoDAO;
 import fabrica.ICreadorDAO;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -58,7 +59,7 @@ public class GastoBO implements IGastoBO {
     }
 
     @Override
-    public GastoDTO modificarGasto(CrearGastoDTO gastoDTO) throws NegocioException{
+    public GastoDTO modificarGasto(GastoDTO gastoDTO) throws NegocioException{
         Gasto gasto = adaptadorGasto.ConvertirAEntidad(gastoDTO);
 
         try {
@@ -76,8 +77,9 @@ public class GastoBO implements IGastoBO {
         List<Gasto> gastos = null;
         List<GastoDTO> gastosDTO = new ArrayList<>();
 
+        Gasto gastoVacio = new Gasto();
         try {
-            gastos = gastoDAO.consultarGastos();
+            gastos = gastoDAO.consultarGastosFiltrados(gastoVacio, null, null);
             for (Gasto gasto : gastos) {
                 GastoDTO gastoDTO = adaptadorGasto.ConvertirADTO(gasto);
                 gastosDTO.add(gastoDTO);
@@ -89,5 +91,46 @@ public class GastoBO implements IGastoBO {
 
         return gastosDTO;
     }
+    
+    @Override
+    public List<GastoDTO> consultarGastosFiltrados(CrearGastoDTO gastoFiltro, LocalDate fechaInicio, LocalDate fechaFin) throws NegocioException {
+        List<Gasto> gastos = new ArrayList<>();
+        List<GastoDTO> gastosDTO = new ArrayList<>();
+
+        try {
+            Gasto filtro = adaptadorGasto.ConvertirAEntidad(gastoFiltro);
+            gastos = gastoDAO.consultarGastosFiltrados(filtro, fechaInicio, fechaFin);
+            for (Gasto gasto : gastos) {
+                GastoDTO gastoDTO = adaptadorGasto.ConvertirADTO(gasto);
+                gastosDTO.add(gastoDTO);
+            }
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(GastoBO.class.getName()).log(Level.SEVERE, null, ex);
+            return new ArrayList<>();
+        }
+        
+
+        return gastosDTO;
+    }
+
+    @Override
+    public GastoDTO buscarPorFolio(String folio) throws NegocioException {
+        try {
+            Gasto gasto = gastoDAO.buscarPorFolio(folio);
+            System.out.println("Gasto desde BO: " + gasto);
+
+            if (gasto == null) {
+                throw new NegocioException("No se encontró gasto con folio: " + folio);
+            }
+
+            return adaptadorGasto.ConvertirADTO1(gasto);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(GastoBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException("Error al buscar gasto por folio.");
+        }
+    }
+
+
+
 
 }

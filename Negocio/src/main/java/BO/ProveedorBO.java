@@ -83,5 +83,24 @@ public class ProveedorBO implements IProveedorBO{
         
         return proveedorMapeado;
     }
+
+    @Override
+    public ProveedorDTO buscarPorNombre(String nombre) throws NegocioException {
+        try {
+            Proveedor proveedor = proveedorDAO.buscarPorNombre(nombre);
+
+            if (proveedor == null) {
+                return null; // o lanzar una NegocioException si prefieres
+            }
+
+            return adaptadorProveedor.ConvertirADTOEntrada(proveedor);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(ProveedorBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException("No se pudo buscar el proveedor por nombre.");
+        }
+    }
+
+
+
     
 }

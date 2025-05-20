@@ -10,6 +10,7 @@ package DTOs;
  */
 public class CrearProveedorDTO {
     String nombre;
+    String telefono;
 
     public CrearProveedorDTO() {
     }
@@ -25,6 +26,16 @@ public class CrearProveedorDTO {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+    
+    
 
     @Override
     public String toString() {

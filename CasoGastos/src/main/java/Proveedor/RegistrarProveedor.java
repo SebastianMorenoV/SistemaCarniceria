@@ -44,6 +44,17 @@ public class RegistrarProveedor implements IRegistrarProveedor{
             throw new GastoException("No se pudieron consultar los proveedores" + ex.getLocalizedMessage());
         }
     }
+
+    @Override
+    public ProveedorDTO buscarPorNombre(String nombre) throws GastoException {
+                try {
+            //validaciones
+
+            return proveedorBO.buscarPorNombre(nombre);
+        } catch (NegocioException ex) {
+            throw new GastoException("No se pudieron consultar los proveedores" + ex.getLocalizedMessage());
+        }
+    }
     
     
     

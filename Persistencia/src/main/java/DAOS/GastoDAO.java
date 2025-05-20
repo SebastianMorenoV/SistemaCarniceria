@@ -27,7 +27,7 @@ public class GastoDAO implements IGastoDAO {
             LocalDate fechaGasto = LocalDate.of(2025, 1, 1);
             Proveedor proveedor = new Proveedor("MrSteaks777", "141223");
             byte[] comprobante = null;           
-            return new Gasto(1, "asd123", fechaGasto, "Utencilios", proveedor, "compra de cuchillos", 750.0, comprobante, "Efectivo");
+            return new Gasto("asd123", fechaGasto, "Utencilios", proveedor, "compra de cuchillos", 750.0, comprobante, "Efectivo");
         } catch (Exception e) {
             throw new PersistenceException("Error al persistir gasto " + e.getMessage());
         }
@@ -73,8 +73,14 @@ public class GastoDAO implements IGastoDAO {
         return listaGastos;
     }
 
+
     @Override
-    public List<Gasto> consultarGastosFiltrados(Gasto gastoFiltro) throws PersistenceException {
+    public List<Gasto> consultarGastosFiltrados(Gasto gastoFiltro, LocalDate fechaInicio, LocalDate fechaFin) throws PersistenciaException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Gasto buscarPorFolio(String folio) throws PersistenciaException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
