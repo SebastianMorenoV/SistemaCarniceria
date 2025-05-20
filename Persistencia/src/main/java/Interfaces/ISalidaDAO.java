@@ -3,6 +3,7 @@ package Interfaces;
 import Exception.PersistenciaException;
 import entidades.Salida;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,10 +13,6 @@ import java.util.List;
 public interface ISalidaDAO {
     public Salida agregarNuevaSalida(Salida salida) throws PersistenciaException;
     
-    public List<Salida> consultarSalidasPorNombre(String nombre) throws PersistenciaException;
-    
-    public List<Salida> consultarSalidasPorFecha(LocalDateTime fecha) throws PersistenciaException;
-    
-    public List<Salida> consultarSalidasPorMes(int mes, int año) throws PersistenciaException;
+    public List<Salida> consultarSalidasBuscador(String nombre, Date fechaDesde, Date fechaHasta) throws PersistenciaException;
     
 }

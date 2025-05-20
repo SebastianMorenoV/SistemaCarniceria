@@ -27,20 +27,18 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        panelRound3 = new GUI.PanelRound();
-        jLabel2 = new javax.swing.JLabel();
-        panelRound4 = new GUI.PanelRound();
-        jLabel3 = new javax.swing.JLabel();
-        panelRound5 = new GUI.PanelRound();
-        jLabel4 = new javax.swing.JLabel();
-        panelRound6 = new GUI.PanelRound();
-        jLabel5 = new javax.swing.JLabel();
         btnAtras = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        jLabelIconAgregarSalida = new javax.swing.JLabel();
+        jLabelGenerarReporte = new javax.swing.JLabel();
+        jLabelIconGenerarReporte = new javax.swing.JLabel();
+        jLabelFechaHasta = new javax.swing.JLabel();
+        jLabelAgregarSalida = new javax.swing.JLabel();
+        jLabelProducto = new javax.swing.JLabel();
+        jLabelFechaDesde = new javax.swing.JLabel();
+        datePickerHasta = new com.github.lgooddatepicker.components.DatePicker();
+        jTextFieldProducto = new javax.swing.JTextField();
+        datePickerDesde = new com.github.lgooddatepicker.components.DatePicker();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -57,85 +55,6 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 1080, -1));
 
-        panelRound3.setBackground(new java.awt.Color(0, 0, 0));
-        panelRound3.setRoundBottomLeft(10);
-        panelRound3.setRoundBottomRight(10);
-        panelRound3.setRoundTopLeft(10);
-        panelRound3.setRoundTopRight(10);
-        panelRound3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setFont(new java.awt.Font("Product Sans Infanity", 0, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Filtrar Por Producto");
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-        });
-        panelRound3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 40));
-
-        add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 540, 130, 40));
-
-        panelRound4.setBackground(new java.awt.Color(0, 0, 0));
-        panelRound4.setRoundBottomLeft(10);
-        panelRound4.setRoundBottomRight(10);
-        panelRound4.setRoundTopLeft(10);
-        panelRound4.setRoundTopRight(10);
-        panelRound4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel3.setFont(new java.awt.Font("Product Sans Infanity", 0, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Mostrar Todo");
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        panelRound4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 40));
-
-        add(panelRound4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, 130, 40));
-
-        panelRound5.setBackground(new java.awt.Color(0, 0, 0));
-        panelRound5.setRoundBottomLeft(10);
-        panelRound5.setRoundBottomRight(10);
-        panelRound5.setRoundTopLeft(10);
-        panelRound5.setRoundTopRight(10);
-        panelRound5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel4.setFont(new java.awt.Font("Product Sans Infanity", 0, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Filtrar Por Mes");
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
-            }
-        });
-        panelRound5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 40));
-
-        add(panelRound5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 540, 130, 40));
-
-        panelRound6.setBackground(new java.awt.Color(0, 0, 0));
-        panelRound6.setRoundBottomLeft(10);
-        panelRound6.setRoundBottomRight(10);
-        panelRound6.setRoundTopLeft(10);
-        panelRound6.setRoundTopRight(10);
-        panelRound6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel5.setFont(new java.awt.Font("Product Sans Infanity", 0, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Filtrar Por Fecha");
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
-            }
-        });
-        panelRound6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 40));
-
-        add(panelRound6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 540, 130, 40));
-
         btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/atras (1).png"))); // NOI18N
         btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -151,100 +70,139 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
         jLabel1.setText("Historial De Salidas");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 440, -1));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/agregar (1).png"))); // NOI18N
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelIconAgregarSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/agregar (1).png"))); // NOI18N
+        jLabelIconAgregarSalida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelIconAgregarSalida.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel6MouseClicked(evt);
+                jLabelIconAgregarSalidaMouseClicked(evt);
             }
         });
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 530, -1, -1));
+        add(jLabelIconAgregarSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 530, -1, -1));
 
-        jLabel7.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel7.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Generar Reporte");
-        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelGenerarReporte.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelGenerarReporte.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
+        jLabelGenerarReporte.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelGenerarReporte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelGenerarReporte.setText("Generar Reporte");
+        jLabelGenerarReporte.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelGenerarReporte.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel7MouseClicked(evt);
+                jLabelGenerarReporteMouseClicked(evt);
             }
         });
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 600, 140, 60));
+        add(jLabelGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 600, 140, 60));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/informe.png"))); // NOI18N
-        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelIconGenerarReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/informe.png"))); // NOI18N
+        jLabelIconGenerarReporte.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelIconGenerarReporte.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
+                jLabelIconGenerarReporteMouseClicked(evt);
             }
         });
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 600, -1, -1));
+        add(jLabelIconGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 600, -1, -1));
 
-        jLabel9.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel9.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Agregar Salida");
-        jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelFechaHasta.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelFechaHasta.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
+        jLabelFechaHasta.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelFechaHasta.setText("Fecha Hasta:");
+        jLabelFechaHasta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelFechaHasta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel9MouseClicked(evt);
+                jLabelFechaHastaMouseClicked(evt);
             }
         });
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 530, 140, 60));
+        add(jLabelFechaHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 580, 140, 60));
+
+        jLabelAgregarSalida.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelAgregarSalida.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
+        jLabelAgregarSalida.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelAgregarSalida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelAgregarSalida.setText("Agregar Salida");
+        jLabelAgregarSalida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelAgregarSalida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelAgregarSalidaMouseClicked(evt);
+            }
+        });
+        add(jLabelAgregarSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 530, 140, 60));
+
+        jLabelProducto.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelProducto.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
+        jLabelProducto.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelProducto.setText("Producto:");
+        jLabelProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelProductoMouseClicked(evt);
+            }
+        });
+        add(jLabelProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 140, 60));
+
+        jLabelFechaDesde.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelFechaDesde.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
+        jLabelFechaDesde.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelFechaDesde.setText("Fecha Desde:");
+        jLabelFechaDesde.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelFechaDesde.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelFechaDesdeMouseClicked(evt);
+            }
+        });
+        add(jLabelFechaDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 520, 140, 60));
+        add(datePickerHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 600, 190, 30));
+
+        jTextFieldProducto.setBackground(new java.awt.Color(255, 255, 255));
+        add(jTextFieldProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 540, 180, 30));
+        add(datePickerDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, 190, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
         app.mostrarVentanaOpcionesInventario();
     }//GEN-LAST:event_btnAtrasMouseClicked
 
-    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+    private void jLabelFechaHastaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelFechaHastaMouseClicked
         app.mostrarDialogoAgregarSalida();
-    }//GEN-LAST:event_jLabel9MouseClicked
+    }//GEN-LAST:event_jLabelFechaHastaMouseClicked
 
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+    private void jLabelIconGenerarReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelIconGenerarReporteMouseClicked
 
-    }//GEN-LAST:event_jLabel8MouseClicked
+    }//GEN-LAST:event_jLabelIconGenerarReporteMouseClicked
 
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+    private void jLabelIconAgregarSalidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelIconAgregarSalidaMouseClicked
         app.mostrarDialogoAgregarSalida();
-    }//GEN-LAST:event_jLabel6MouseClicked
+    }//GEN-LAST:event_jLabelIconAgregarSalidaMouseClicked
 
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-        
-    }//GEN-LAST:event_jLabel7MouseClicked
+    private void jLabelGenerarReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelGenerarReporteMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelGenerarReporteMouseClicked
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        app.mostrarDialogoFiltrarPorMes();
-    }//GEN-LAST:event_jLabel4MouseClicked
+    private void jLabelAgregarSalidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAgregarSalidaMouseClicked
+        app.mostrarDialogoAgregarSalida();
+    }//GEN-LAST:event_jLabelAgregarSalidaMouseClicked
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        app.mostrarDialogoFiltrarPorFecha();
-    }//GEN-LAST:event_jLabel5MouseClicked
+    private void jLabelProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelProductoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelProductoMouseClicked
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        app.mostrarDialogoFiltrarPorProducto();
-    }//GEN-LAST:event_jLabel2MouseClicked
+    private void jLabelFechaDesdeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelFechaDesdeMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelFechaDesdeMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnAtras;
+    private com.github.lgooddatepicker.components.DatePicker datePickerDesde;
+    private com.github.lgooddatepicker.components.DatePicker datePickerHasta;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelAgregarSalida;
+    private javax.swing.JLabel jLabelFechaDesde;
+    private javax.swing.JLabel jLabelFechaHasta;
+    private javax.swing.JLabel jLabelGenerarReporte;
+    private javax.swing.JLabel jLabelIconAgregarSalida;
+    private javax.swing.JLabel jLabelIconGenerarReporte;
+    private javax.swing.JLabel jLabelProducto;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private GUI.PanelRound panelRound3;
-    private GUI.PanelRound panelRound4;
-    private GUI.PanelRound panelRound5;
-    private GUI.PanelRound panelRound6;
+    private javax.swing.JTextField jTextFieldProducto;
     // End of variables declaration//GEN-END:variables
 }

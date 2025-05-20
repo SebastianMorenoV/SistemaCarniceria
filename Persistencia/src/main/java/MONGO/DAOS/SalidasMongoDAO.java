@@ -2,12 +2,29 @@ package MONGO.DAOS;
 
 import Exception.PersistenciaException;
 import Interfaces.ISalidaDAO;
+import com.mongodb.client.AggregateIterable;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import conexion.ConexionMongo;
 import entidades.Salida;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
+import static com.mongodb.client.model.Aggregates.*;
+import static com.mongodb.client.model.Accumulators.*;
+import com.mongodb.client.model.Filters;
+import static com.mongodb.client.model.Filters.and;
+import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.gte;
+import static com.mongodb.client.model.Filters.lte;
+import static com.mongodb.client.model.Filters.or;
+import static com.mongodb.client.model.Filters.regex;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.regex.Pattern;
+import org.bson.Document;
 
 /**
  *
@@ -38,18 +55,46 @@ public class SalidasMongoDAO implements ISalidaDAO{
     }
 
     @Override
-    public List<Salida> consultarSalidasPorNombre(String nombre) throws PersistenciaException  {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Salida> consultarSalidasBuscador(String nombre, Date fechaDesde, Date fechaHasta) throws PersistenciaException  {     
+        //Lista que regresara el metodo
+        List<Salida> listaSalidas = new ArrayList<>();
+        
+        //Lista que guardara las condiciones
+        List<Bson> condiciones = new ArrayList<>();
+        
+        //Si el nombre no esta vacio se agrega a las condiciones
+        if(nombre != null && !nombre.trim().isEmpty()){
+            Pattern patron = Pattern.compile("^" + nombre, Pattern.CASE_INSENSITIVE);
+            condiciones.add(regex("producto.nombre", patron));
+        }
+        
+        //Si fechaDesde no esta vacia se agrega a las condiciones
+        if(fechaDesde != null){
+            condiciones.add(gte("fecha", fechaDesde));
+        }
+        
+        //Si fechaHasta no esta vacia se agrega a las condiciones
+        if(fechaHasta != null){
+            condiciones.add(lte("fecha", fechaHasta));
+        }
+        
+        /*
+            Si la lista de condiciones esta vacia regresa un documento vacio(Llamara a todo)
+            a todas las condiciones les pondra la condicional and()
+        
+        */
+        Bson filtro = condiciones.isEmpty() ? new Document() : and(condiciones);
+        
+        //Guardamos los resultados del filtro
+        FindIterable<Salida> resultados = coleccion.find(filtro);
+        
+        //Agregamos todas las salidas recogidas a la listaSalidas
+        for (Salida resultado : resultados) {
+            listaSalidas.add(resultado);
+        }
+        
+        //Retornamos la listaSalidas
+        return listaSalidas;
     }
 
-    @Override
-    public List<Salida> consultarSalidasPorFecha(LocalDateTime fecha) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<Salida> consultarSalidasPorMes(int mes, int año) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
 }

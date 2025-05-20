@@ -23,7 +23,10 @@ public class Prueba {
         Salida salida = new Salida(null, producto, new Date(), "jajajjaja", 2.2, 2.2, 2.2);
         
         try {
-            System.out.println(salidaDAO.agregarNuevaSalida(salida));
+            for (Salida salida1: salidaDAO.consultarSalidasBuscador("Le", null, null)) {
+                System.out.println(salida1.getProducto().getNombre());
+            }
+ 
         } catch (PersistenciaException e) {
             e.getStackTrace();
         }
