@@ -7,6 +7,7 @@ package GUI.ModuloRealizarVenta;
 import DTOs.MetodoPagoDTO;
 import DTOs.NuevaTarjetaDTO;
 import DTOs.PagoNuevoDTO;
+import DTOs.PagoViejoDTO;
 import GUI.Aplicacion;
 import EstrategiaPago.Pago;
 import excepciones.ProcesadorPagoException;
@@ -205,7 +206,7 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         double monto = app.getTotalTemporal(); // se obtiene desde la app
 
         MetodoPagoDTO metodoPago = new MetodoPagoDTO(tarjeta);
-        PagoNuevoDTO pago = new PagoNuevoDTO(fechaPago, metodoPago, monto);
+        PagoViejoDTO pago = new PagoViejoDTO(fechaPago, metodoPago, monto);
         try {
             boolean ans = app.verificarPago(pago);
             if (ans) {

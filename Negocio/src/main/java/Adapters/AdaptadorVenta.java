@@ -8,14 +8,17 @@ import DTOs.CrearVentaDTO;
 import DTOs.EmpleadoCargadoDTO;
 import DTOs.MetodoPagoDTO;
 import DTOs.NuevoProductoVentaDTO;
+import DTOs.PagoViejoDTO;
 import DTOs.ProductoVentaDTO;
 import DTOs.VentaDTO;
 import IAdapters.IAdaptadorEmpleado;
 import IAdapters.IAdaptadorMetodoPago;
+import IAdapters.IAdaptadorPago;
 import IAdapters.IAdaptadorProductoVenta;
 import IAdapters.IAdaptadorVenta;
 import entidades.Empleado;
 import entidades.MetodoPago;
+import entidades.Pago;
 import entidades.ProductoVenta;
 import entidades.Venta;
 import java.util.ArrayList;
@@ -30,6 +33,7 @@ public class AdaptadorVenta implements IAdaptadorVenta {
     IAdaptadorEmpleado empleadoAdapter = new AdaptadorEmpleado();
     IAdaptadorProductoVenta productoVentaAdapter = new AdaptadorProductoVenta();
     IAdaptadorMetodoPago metodoPagoAdapter = new AdaptadorMetodoPago();
+    IAdaptadorPago adaptadorPago = new AdaptadorPago();
 
     @Override
     public VentaDTO convertirADTO(Venta venta) {
@@ -50,10 +54,10 @@ public class AdaptadorVenta implements IAdaptadorVenta {
 
         ventaDTO.setListadoProductosVenta(productosVentaDTO);
 
-        MetodoPago metodo = venta.getMetodoPago();
-        if (metodo != null) {
-            MetodoPagoDTO metodoPagoDTO = metodoPagoAdapter.convertirADTO(metodo);
-            ventaDTO.setMetodoPago(metodoPagoDTO);
+        Pago pago = venta.getPago();
+        PagoViejoDTO pagoDTO = adaptadorPago.convertirADTO(pago);
+        if (pagoDTO != null) {
+            ventaDTO.setPago(pagoDTO);
         }
 
         ventaDTO.setIva(venta.getIva());
@@ -78,10 +82,11 @@ public class AdaptadorVenta implements IAdaptadorVenta {
         venta.setCajero(empleado);
 
         venta.setFechaHora(ventaDTO.getFechaHora());
-        MetodoPagoDTO metodoPagoDTO = ventaDTO.getMetodoPago();
-        MetodoPago metodoPago = metodoPagoAdapter.convertirAEntidad(metodoPagoDTO);
+        PagoViejoDTO pagoDTO = ventaDTO.getPago();
 
-        venta.setMetodoPago(metodoPago);
+        Pago pago = adaptadorPago.convertirAEntidad(pagoDTO);
+
+        venta.setPago(pago);
 
         List<ProductoVentaDTO> productosVentaDTO = ventaDTO.getListadoProductosVenta();
         List<ProductoVenta> productosVenta = productoVentaAdapter.convertirListaDTOAEntidad(productosVentaDTO);

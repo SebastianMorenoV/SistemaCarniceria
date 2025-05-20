@@ -6,6 +6,7 @@ import DTOs.EmpleadoCargadoDTO;
 import DTOs.MetodoPagoDTO;
 import DTOs.NuevoProductoVentaDTO;
 import DTOs.PagoNuevoDTO;
+import DTOs.PagoViejoDTO;
 //import DTOs.PagoNuevoDTO;
 import DTOs.ProductoCargadoDTO;
 import DTOs.ProductoVentaDTO;
@@ -36,8 +37,15 @@ public class RealizarVenta implements IRealizarVenta {
     private IProductoBO productoBO = manejadoresBO.ManejadorObjetosNegocio.crearProductoBO();// esto es tamal
     private IEmpleadoBO empleadoBO = manejadoresBO.ManejadorObjetosNegocio.crearEmpleadoBO();
     private IVentaBO ventaBO = manejadoresBO.ManejadorObjetosNegocio.crearVentasBO();
-    private Double total = 0.0;
+    
+    //variables temporales
+    private double total = 0.0;
+    private double iva = 0.0;
+    private double subtotal = 0.0;
+    private double pagaraCon = 0.0; // probablemente deba de ir en subsitema.
     private VentaDTO ventaTemporal = null;
+    //////////////////////////////////////
+    
     private static Pago procesarPago = new Pago();
     private static IProcesadorPago estrategia;
 
@@ -125,6 +133,26 @@ public class RealizarVenta implements IRealizarVenta {
     }
     
     @Override
+    public boolean validarPago(PagoViejoDTO pago) throws ProcesadorPagoException {
+        boolean validado = false;
+        if (pago.getMetodoPago().getNuevaTarjeta() != null) {
+            estrategia = new PagoTarjeta();
+        } else {
+            estrategia = new PagoEfectivo();
+        }
+        
+        try {
+            PagoNuevoDTO p = new PagoNuevoDTO(LocalDateTime.now(), pago.getMetodoPago(), pago.getMonto());
+            validado =  procesarPago.validarPago(estrategia, p);
+        } catch (ProcesadorPagoException ex) {
+            ex.getLocalizedMessage();
+        }
+        
+        return validado;
+    }
+
+   
+     @Override
     public double obtenerTotal() {
         return total;
     }
@@ -144,23 +172,29 @@ public class RealizarVenta implements IRealizarVenta {
         return ventaTemporal;
     }
 
-    @Override
-    public boolean validarPago(PagoNuevoDTO pago) throws ProcesadorPagoException {
-        boolean validado = false;
-        if (pago.getMetodoPago().getNuevaTarjeta() != null) {
-            estrategia = new PagoTarjeta();
-        } else {
-            estrategia = new PagoEfectivo();
-        }
-        
-        try {
-            PagoNuevoDTO p = new PagoNuevoDTO(LocalDateTime.now(), pago.getMetodoPago(), pago.getMonto());
-            validado =  procesarPago.validarPago(estrategia, p);
-        } catch (ProcesadorPagoException ex) {
-            ex.getLocalizedMessage();
-        }
-        
-        return validado;
+    public double getIva() {
+        return iva;
     }
 
+    public void setIva(double iva) {
+        this.iva = iva;
+    }
+
+    public double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public double getPagaraCon() {
+        return pagaraCon;
+    }
+
+    public void setPagaraCon(double pagaraCon) {
+        this.pagaraCon = pagaraCon;
+    }
+    
+    
 }

@@ -15,19 +15,19 @@ public class VentaDTO {
     private LocalDateTime fechaHora;
     private EmpleadoCargadoDTO empleado;
     private List<ProductoVentaDTO> listadoProductosVenta = new ArrayList<>();
-    private MetodoPagoDTO metodoPago;
+    private PagoViejoDTO pago;
 
     public VentaDTO() {
     }
 
-    public VentaDTO(double total, double subtotal, double iva, LocalDateTime fechaHora, EmpleadoCargadoDTO empleado, List<ProductoVentaDTO> listadoProductosVenta, MetodoPagoDTO metodoPago) {
+    public VentaDTO(double total, double subtotal, double iva, LocalDateTime fechaHora, EmpleadoCargadoDTO empleado, List<ProductoVentaDTO> listadoProductosVenta, PagoViejoDTO PAGO) {
         this.total = total;
         this.subtotal = subtotal;
         this.iva = iva;
         this.fechaHora = fechaHora;
         this.empleado = empleado;
         this.listadoProductosVenta = listadoProductosVenta;
-        this.metodoPago = metodoPago;
+        this.pago = pago;
     }
     
     //(empleado, LocalDate.now(), listadoProductosVenta);
@@ -95,19 +95,20 @@ public class VentaDTO {
         this.listadoProductosVenta = listadoProductosVenta;
     }
 
-    public MetodoPagoDTO getMetodoPago() {
-        return metodoPago;
+    public PagoViejoDTO getPago() {
+        return pago;
     }
 
-    public void setMetodoPago(MetodoPagoDTO metodoPago) {
-        this.metodoPago = metodoPago;
+    public void setPago(PagoViejoDTO pago) {
+        this.pago = pago;
     }
 
     @Override
     public String toString() {
-        return "VentaDTO{" + "total=" + total + ", subtotal=" + subtotal + ", iva=" + iva + ", fechaHora=" + fechaHora + ", empleado=" + empleado + ", listadoProductosVenta=" + listadoProductosVenta + ", metodoPago=" + metodoPago + '}';
+        return "VentaDTO{" + "id=" + id + ", total=" + total + ", subtotal=" + subtotal + ", iva=" + iva + ", fechaHora=" + fechaHora + ", empleado=" + empleado + ", listadoProductosVenta=" + listadoProductosVenta + ", pago=" + pago + '}';
     }
-    
+
+  
     
     
     

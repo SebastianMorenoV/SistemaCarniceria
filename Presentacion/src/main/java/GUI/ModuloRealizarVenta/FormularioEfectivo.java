@@ -7,11 +7,14 @@ package GUI.ModuloRealizarVenta;
 import DTOs.MetodoPagoDTO;
 import DTOs.NuevoEfectivoDTO;
 import DTOs.PagoNuevoDTO;
+import DTOs.PagoViejoDTO;
+import DTOs.VentaDTO;
 import GUI.Aplicacion;
 import EstrategiaPago.Pago;
 import Exception.NegocioException;
 import java.awt.Color;
 import java.awt.HeadlessException;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
@@ -30,8 +33,7 @@ import javax.swing.Timer;
 public class FormularioEfectivo extends javax.swing.JPanel {
 
     private Aplicacion app;
-    private double total;
-    private double pagaraCon;
+
 
     /**
      * Creates new form FormularioEfectivo
@@ -39,6 +41,12 @@ public class FormularioEfectivo extends javax.swing.JPanel {
     public FormularioEfectivo(Aplicacion app) {
         this.app = app;
         initComponents();
+        cargarValoresVenta();
+        
+      
+        double totalTemporal = app.getTotalTemporal();
+        String totalFormateado = String.format("%.2f", totalTemporal);
+        jLabelTotal.setText("Total: $" + totalFormateado);
     }
 
     /**
@@ -140,7 +148,7 @@ public class FormularioEfectivo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelRegresarMouseClicked
-        ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();
+        ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose(); // cerramos el dialgo.
     }//GEN-LAST:event_jLabelRegresarMouseClicked
 
     private void jLabelRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelRegresarMouseEntered
@@ -166,34 +174,52 @@ public class FormularioEfectivo extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabelRegresarMouseExited
 
     private boolean calcularCambio() {
-        total = app.getTotalTemporal();
-    
-
+        double total = app.getTotalTemporal();
 
         if (validarTextFieldPagaraCon()) {
-            pagaraCon = Double.parseDouble(jTextPago.getText());
+            double pagaraCon = Double.parseDouble(jTextPago.getText());
+            app.setPagaraCon(pagaraCon);
             NuevoEfectivoDTO nuevoPagoEfectivo = new NuevoEfectivoDTO(pagaraCon);
-            PagoNuevoDTO pago = new PagoNuevoDTO(LocalDateTime.MAX, new MetodoPagoDTO(nuevoPagoEfectivo), total);
+            PagoViejoDTO pago = new PagoViejoDTO(LocalDateTime.now(), new MetodoPagoDTO(nuevoPagoEfectivo), total);
+            pago.setEstado("Pagado");
+            //AQUI DEBERIAMOS TENER LA LOGICA DE ENVIAR EL PAGO AL SUBSISTEMA.
+            //AUN NO LOSE PERO SUPONGO QUE DEBE DE SER EL PATRON OBSERVER.
+            //LA VENTANUEVA DEBE TENER EL PAGO DEVUELTO POR EL SUBSISTEMA Y SETEARLE ESE PAGO CON ID GENERADO A LA VENTA.
+            
+            
+            //setear el pago a la venta.
+            VentaDTO venta = app.obtenerVenta();
+            venta.setPago(pago);
+            System.out.println(venta + "Venta en la parte de formulario efectivo.");
+            app.setearVenta(venta);
+
             try {
                 if (!app.validarPago(pago)) {
                     JOptionPane.showMessageDialog(this, "No te alcanza");
                 } else {
                     app.setTotalTemporal(total);
-                    app.mostrarFormularioCambio();
+
+                    // Cerramos el diálogo actual antes de abrir el nuevo
+                    Window window = SwingUtilities.getWindowAncestor(this);
+                    if (window instanceof JDialog) {
+                        window.dispose();
+                    }
+
+                    app.mostrarFormularioCambio(); // Ahora abrimos el nuevo diálogo
                     return true;
                 }
             } catch (NegocioException | HeadlessException e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
         }
-        return false;
 
+        return false;
     }
 
     //Valida el campo de texto
     private boolean validarTextFieldPagaraCon() {
         String pagaraCon = jTextPago.getText();
-        //Validar si el campo de texto esta vacio
+
         if (pagaraCon.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "El campo esta vacio");
             return false;
@@ -208,10 +234,10 @@ public class FormularioEfectivo extends javax.swing.JPanel {
         return true;
     }
 
-    public double getPagaraCon() {
-        return pagaraCon;
+    
+    public void cargarValoresVenta(){
+    
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLabelPagoEfectivo;

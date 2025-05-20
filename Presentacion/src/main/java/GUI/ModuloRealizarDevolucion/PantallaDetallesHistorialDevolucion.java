@@ -234,7 +234,9 @@ public class PantallaDetallesHistorialDevolucion extends javax.swing.JPanel {
         LocalDateTime fechaDevolucion = devolucionDTO.getFechaHora();
         txtFechaDevolucion.setText("Fecha de devolución: " + formatearFecha(fechaDevolucion));
 
-        MetodoPagoDTO metodoPago = devolucionDTO.getVenta().getMetodoPago();
+        
+       
+        MetodoPagoDTO metodoPago = devolucionDTO.getVenta().getPago().getMetodoPago();
         String metodoPagoString = "Efectivo";
         if(metodoPago.getNuevaTarjeta()!= null){
             metodoPagoString = "Tarjeta"; 

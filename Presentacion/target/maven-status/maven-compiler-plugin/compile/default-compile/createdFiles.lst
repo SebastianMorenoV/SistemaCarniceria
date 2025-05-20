@@ -141,9 +141,7 @@ GUI\ModuloRealizarDevolucion\PantallaDevolucion$17.class
 GUI\ModuloRealizarDevolucion\PantallaMenuDevolucion$2.class
 GUI\ModuloRealizarVenta\VentanaErrorProcesandoPago.class
 GUI\ModuloGastos\TablaHistorialGastos$3.class
-GUI\ModuloRealizarVenta\VentanaFormularioEfectivo.class
 GUI\ModuloGastos\MenuGastos$1.class
-GUI\ModuloRealizarVenta\VentanaFormularioMostrarCambio.class
 GUI\ModuloRealizarVenta\MenuOpciones$6.class
 GUI\ModuloGastos\FormularioEditarGasto.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$10.class

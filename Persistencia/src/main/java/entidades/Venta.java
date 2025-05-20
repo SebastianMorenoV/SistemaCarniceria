@@ -15,39 +15,39 @@ public class Venta {
     double subtotal;
     double iva;
     double total;
-    MetodoPago metodoPago;
+    Pago pago;
     List<ProductoVenta> listaProductosVenta;
 
     public Venta() {
     }
 
-    public Venta(int id, LocalDateTime fechaHora, Empleado cajero, double subtotal, double iva, double total, MetodoPago metodoPago, List<ProductoVenta> listaProductosVenta) {
+    public Venta(int id, LocalDateTime fechaHora, Empleado cajero, double subtotal, double iva, double total, Pago pago, List<ProductoVenta> listaProductosVenta) {
         this.id = id;
         this.fechaHora = fechaHora;
         this.cajero = cajero;
         this.subtotal = subtotal;
         this.iva = iva;
         this.total = total;
-        this.metodoPago = metodoPago;
+        this.pago = pago;
         this.listaProductosVenta = listaProductosVenta;
     }
 
-    public Venta(LocalDateTime fechaHora, Empleado cajero, double subtotal, double iva, double total, MetodoPago metodoPago) {
+    public Venta(LocalDateTime fechaHora, Empleado cajero, double subtotal, double iva, double total, Pago pago) {
         this.fechaHora = fechaHora;
         this.cajero = cajero;
         this.subtotal = subtotal;
         this.iva = iva;
         this.total = total;
-        this.metodoPago = metodoPago;
+        this.pago = pago;
     }
 
-    public Venta(LocalDateTime fechaHora, Empleado cajero, double subtotal, double iva, double total, MetodoPago metodoPago, List<ProductoVenta> listaProductosVenta) {
+    public Venta(LocalDateTime fechaHora, Empleado cajero, double subtotal, double iva, double total, Pago pago, List<ProductoVenta> listaProductosVenta) {
         this.fechaHora = fechaHora;
         this.cajero = cajero;
         this.subtotal = subtotal;
         this.iva = iva;
         this.total = total;
-        this.metodoPago = metodoPago;
+        this.pago = pago;
         this.listaProductosVenta = listaProductosVenta;
     }
 
@@ -99,13 +99,6 @@ public class Venta {
         this.total = total;
     }
 
-    public MetodoPago getMetodoPago() {
-        return metodoPago;
-    }
-
-    public void setMetodoPago(MetodoPago metodoPago) {
-        this.metodoPago = metodoPago;
-    }
 
     public List<ProductoVenta> getListaProductosVenta() {
         return listaProductosVenta;
@@ -115,10 +108,20 @@ public class Venta {
         this.listaProductosVenta = listaProductosVenta;
     }
 
+    public Pago getPago() {
+        return pago;
+    }
+
+    public void setPago(Pago pago) {
+        this.pago = pago;
+    }
+
+    
     @Override
     public String toString() {
-        return "Venta{" + "id=" + id + ", fechaHora=" + fechaHora + ", cajero=" + cajero + ", subtotal=" + subtotal + ", iva=" + iva + ", total=" + total + ", metodoPago=" + metodoPago + ", listaProductosVenta=" + listaProductosVenta + '}';
+        return "Venta{" + "id=" + id + ", fechaHora=" + fechaHora + ", cajero=" + cajero + ", subtotal=" + subtotal + ", iva=" + iva + ", total=" + total + ", pago=" + pago + ", listaProductosVenta=" + listaProductosVenta + '}';
     }
+
     
     
     

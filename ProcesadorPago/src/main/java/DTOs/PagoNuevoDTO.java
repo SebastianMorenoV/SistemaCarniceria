@@ -11,11 +11,32 @@ public class PagoNuevoDTO {
     LocalDateTime fechaHora;
     MetodoPagoDTO metodoPago;
     double monto;
+    String estado;
 
     public PagoNuevoDTO(LocalDateTime fechaHora, MetodoPagoDTO metodoPago, double monto) {
         this.fechaHora = fechaHora;
         this.metodoPago = metodoPago;
         this.monto = monto;
+    }
+
+    
+    
+    public PagoNuevoDTO(LocalDateTime fechaHora, MetodoPagoDTO metodoPago, double monto , String estado) {
+        this.fechaHora = fechaHora;
+        this.metodoPago = metodoPago;
+        this.monto = monto;
+        this.estado = estado;
+    }
+
+    public PagoNuevoDTO() {
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public LocalDateTime getFechaHora() {

@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  */
 public class Pago {
 
-    Long id;
+    int id;
     MetodoPago metodoPago;
     LocalDateTime fechaHora;
     double monto;
@@ -21,7 +21,7 @@ public class Pago {
     public Pago() {
     }
 
-    public Pago(Long id, MetodoPago metodoPago, LocalDateTime fechaHora, double monto, String estado) {
+    public Pago(int id, MetodoPago metodoPago, LocalDateTime fechaHora, double monto, String estado) {
         this.id = id;
         this.metodoPago = metodoPago;
         this.fechaHora = fechaHora;
@@ -36,11 +36,11 @@ public class Pago {
         this.estado = estado;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

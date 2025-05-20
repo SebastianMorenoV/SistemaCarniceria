@@ -4,6 +4,8 @@
  */
 package DTOs;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -12,12 +14,19 @@ import java.util.Date;
  */
 public class PagoViejoDTO{       
     int idPago;
-    Date fechaHora;
+    LocalDateTime fechaHora;
     double monto;
     MetodoPagoDTO metodoPago;
     String estado;
 
-    public PagoViejoDTO(int idPago, Date fechaHora, double monto, MetodoPagoDTO metodoPago, String estado) {
+    public PagoViejoDTO(LocalDateTime fechaHora,  MetodoPagoDTO metodoPago ,double monto) {
+        this.fechaHora = fechaHora;
+        this.monto = monto;
+        this.metodoPago = metodoPago;
+    }
+
+   
+    public PagoViejoDTO(int idPago, LocalDateTime fechaHora, double monto, MetodoPagoDTO metodoPago, String estado) {
         this.idPago = idPago;
         this.fechaHora = fechaHora;
         this.monto = monto;
@@ -35,11 +44,11 @@ public class PagoViejoDTO{
         this.idPago = idPago;
     }
 
-    public Date getFechaHora() {
+    public LocalDateTime getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(Date fechaHora) {
+    public void setFechaHora(LocalDateTime fechaHora) {
         this.fechaHora = fechaHora;
     }
 
@@ -65,6 +74,11 @@ public class PagoViejoDTO{
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "PagoViejoDTO{" + "idPago=" + idPago + ", fechaHora=" + fechaHora + ", monto=" + monto + ", metodoPago=" + metodoPago + ", estado=" + estado + '}';
     }
 
     

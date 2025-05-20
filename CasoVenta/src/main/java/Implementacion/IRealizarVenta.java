@@ -40,5 +40,5 @@ public interface IRealizarVenta {
     // para la estrategia
     public double procesarPago(PagoNuevoDTO pago) throws ProcesadorPagoException;
 
-    public boolean validarPago(PagoNuevoDTO pago) throws ProcesadorPagoException;
+    public boolean validarPago(PagoViejoDTO pago) throws ProcesadorPagoException;
 }
