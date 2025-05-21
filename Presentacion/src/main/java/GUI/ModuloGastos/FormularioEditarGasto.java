@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import org.bson.types.ObjectId;
 
 /**
  *
@@ -295,7 +294,7 @@ public class FormularioEditarGasto extends javax.swing.JPanel {
         ProveedorDTO proveedorInsertar = app.buscarPorNombre(nombreBuscar);
 
         GastoDTO gastoBuscar = app.buscarPorFolio(folio);
-        ObjectId id = gastoBuscar.getId();
+        Integer id = gastoBuscar.getId();
 
         GastoDTO gasto = new GastoDTO();
         gasto.setId(id);

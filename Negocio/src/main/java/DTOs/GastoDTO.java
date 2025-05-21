@@ -12,7 +12,7 @@ import org.bson.types.ObjectId;
  * @author Admin
  */
 public class GastoDTO {
-    ObjectId id;
+    Integer id;
     String folio;
     LocalDate fechaGasto;
     String categoria;
@@ -25,7 +25,7 @@ public class GastoDTO {
     public GastoDTO() {
     }
 
-    public GastoDTO(ObjectId id, String folio, LocalDate fechaGasto, String categoria, ProveedorDTO proveedor, String concepto, Double montoGasto, byte[] comprobante, String metodoPago) {
+    public GastoDTO(Integer id, String folio, LocalDate fechaGasto, String categoria, ProveedorDTO proveedor, String concepto, Double montoGasto, byte[] comprobante, String metodoPago) {
         this.id = id;
         this.folio = folio;
         this.fechaGasto = fechaGasto;
@@ -48,11 +48,11 @@ public class GastoDTO {
         this.metodoPago = metodoPago;
     }
 
-    public ObjectId getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -20,6 +20,7 @@ public class AdaptadorProveedor implements IAdaptadorProveedor {
     public ProveedorDTO ConvertirADTO(Proveedor proveedor) {
         ProveedorDTO proveedorDTO = new ProveedorDTO();
         proveedorDTO.setNombre(proveedor.getNombre());
+        proveedorDTO.setTelefono(proveedor.getNumero());
         return proveedorDTO;
     }
 

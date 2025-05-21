@@ -5,6 +5,8 @@
 package entidades;
 
 import java.time.LocalDate;
+import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 
 /**
@@ -12,7 +14,10 @@ import org.bson.types.ObjectId;
  * @author Admin
  */
 public class Gasto {
-    ObjectId _id;
+    @BsonId
+    private ObjectId _id;
+    @BsonProperty("codigo")
+    Integer id;
     String folio;
     LocalDate fechaGasto;
     String categoria;
@@ -48,13 +53,23 @@ public class Gasto {
         this.metodoPago = metodoPago;
     }
 
-    public ObjectId getId() {
+    public ObjectId get_Id() {
         return _id;
     }
 
-    public void setId(ObjectId id) {
+    public void set_Id(ObjectId id) {
         this._id = id;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
+
 
     public String getFolio() {
         return folio;
@@ -119,6 +134,8 @@ public class Gasto {
     public void setMetodoPago(String metodoPago) {
         this.metodoPago = metodoPago;
     }
+    
+    
 
     @Override
     public String toString() {

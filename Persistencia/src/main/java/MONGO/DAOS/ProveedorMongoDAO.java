@@ -33,7 +33,6 @@ public class ProveedorMongoDAO implements IProveedorDAO{
             if (proveedor.getId() == null) {
                 proveedor.setId(new ObjectId());
             }
-
             coleccion.insertOne(proveedor);
             return proveedor;
         } catch (Exception e) {

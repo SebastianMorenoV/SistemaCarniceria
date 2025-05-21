@@ -42,7 +42,7 @@ public class GastoMongoDAO implements IGastoDAO{
         try {
             // Asignar un nuevo _id si esta en null
             if (gasto.getId() == null) {
-                gasto.setId(new ObjectId());
+                gasto.setId(new ObjectId().getTimestamp());
             }
 
             coleccion.insertOne(gasto);
@@ -76,7 +76,7 @@ public class GastoMongoDAO implements IGastoDAO{
                 throw new PersistenciaException("No existe un gasto con ese id");
             }
 
-            Bson gastoEncontrado = eq("_id", gasto.getId());
+            Bson gastoEncontrado = eq("codigo", gasto.getId());
 
             Bson gastoActualizado = combine(
                     set("folio", gasto.getFolio()),
