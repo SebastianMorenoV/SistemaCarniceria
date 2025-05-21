@@ -1,6 +1,6 @@
 package fabrica;
 
-import DAOS.VentaDAO;
+import MONGO.DAOS.ProductoMongoDAO;
 import DAOS.*;
 import Interfaces.*;
 import MONGO.DAOS.DevolucionMongoDAO;
@@ -33,7 +33,7 @@ public class CreadorDAO implements ICreadorDAO {
 
     @Override
     public IProductoDAO crearProductoDAO() {
-        return new ProductoDAO();
+        return new ProductoMongoDAO();
     }
 
     @Override
@@ -65,7 +65,10 @@ public class CreadorDAO implements ICreadorDAO {
     public ISalidaDAO crearSalidaDAO() {
         return new SalidasMongoDAO();
     }
-    
-    
+
+    @Override
+    public IProductoDAO crearProductoMokosDAO() {
+        return new ProductoDAO();
+    }
 
 }

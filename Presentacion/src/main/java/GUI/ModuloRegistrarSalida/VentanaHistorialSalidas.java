@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -158,6 +159,17 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
             }
         });
         add(jLabelFechaDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 520, 140, 60));
+
+        datePickerHasta.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                datePickerHastaPropertyChange(evt);
+            }
+        });
+        datePickerHasta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                datePickerHastaKeyTyped(evt);
+            }
+        });
         add(datePickerHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 600, 190, 30));
 
         jTextFieldProducto.setBackground(new java.awt.Color(255, 255, 255));
@@ -167,6 +179,17 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
             }
         });
         add(jTextFieldProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 540, 180, 30));
+
+        datePickerDesde.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                datePickerDesdePropertyChange(evt);
+            }
+        });
+        datePickerDesde.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                datePickerDesdeKeyTyped(evt);
+            }
+        });
         add(datePickerDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, 190, 30));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -183,6 +206,7 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabelIconGenerarReporteMouseClicked
 
     private void jLabelIconAgregarSalidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelIconAgregarSalidaMouseClicked
+        System.out.println("dfdffdf");
         app.mostrarDialogoAgregarSalida();
     }//GEN-LAST:event_jLabelIconAgregarSalidaMouseClicked
 
@@ -192,6 +216,8 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
 
     private void jLabelAgregarSalidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAgregarSalidaMouseClicked
         app.mostrarDialogoAgregarSalida();
+        
+        
     }//GEN-LAST:event_jLabelAgregarSalidaMouseClicked
 
     private void jLabelProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelProductoMouseClicked
@@ -203,8 +229,29 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabelFechaDesdeMouseClicked
 
     private void jTextFieldProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldProductoKeyTyped
-        cargarSalidasFiltradasTabla();
+        Timer retrazoBuscador = new Timer(15, e ->{
+            cargarSalidasFiltradasTabla();
+        });
+        retrazoBuscador.setRepeats(false);
+        
+        reiniciarTimer(retrazoBuscador);
     }//GEN-LAST:event_jTextFieldProductoKeyTyped
+
+    private void datePickerDesdeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_datePickerDesdeKeyTyped
+        cargarSalidasFiltradasTabla();
+    }//GEN-LAST:event_datePickerDesdeKeyTyped
+
+    private void datePickerHastaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_datePickerHastaKeyTyped
+
+    }//GEN-LAST:event_datePickerHastaKeyTyped
+
+    private void datePickerDesdePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_datePickerDesdePropertyChange
+        cargarSalidasFiltradasTabla();
+    }//GEN-LAST:event_datePickerDesdePropertyChange
+
+    private void datePickerHastaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_datePickerHastaPropertyChange
+        cargarSalidasFiltradasTabla();
+    }//GEN-LAST:event_datePickerHastaPropertyChange
 
     /////////////////////////////UTILS//////////////////////////////////////////////////////////////
     private void cargarSalidasTabla(){
@@ -234,16 +281,46 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
     
     public void cargarSalidasFiltradasTabla(){
         String nombre = jTextFieldProducto.getText();
-        Date fechaDesde = Date.from(datePickerDesde.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
-        Date fechaHasta = Date.from(datePickerHasta.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date fechaDesde = null;
+        Date fechaHasta = null;
+
+        if (datePickerDesde.getDate() != null) {
+            fechaDesde = Date.from(datePickerDesde.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        }
+
+        if (datePickerHasta.getDate() != null) {
+            fechaHasta = Date.from(datePickerHasta.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        }
         
         List<SalidaDTO> listaSalida = new ArrayList<>();
         
         try {
+
             listaSalida = app.cargarSalidasFiltradas(nombre, fechaDesde, fechaHasta);
+            
         } catch (SalidaException e) {
             JOptionPane.showMessageDialog(this, e);
         }
+        
+        DefaultTableModel model = (DefaultTableModel) jTableSalidas.getModel();
+        model.setRowCount(0);
+        
+        for (SalidaDTO salidaDTO : listaSalida) {
+            model.addRow(new Object[]{
+                salidaDTO.getFecha(),
+                salidaDTO.getProducto().getNombre(),
+                salidaDTO.getMotivo(),
+                salidaDTO.getStockAntes(),
+                salidaDTO.getCantidadSalida(),
+                salidaDTO.getStockDespues()
+            });
+        }
+        jTableSalidas.setModel(model);
+    }
+    
+    
+    private void reiniciarTimer(Timer retrazoBuscador) {
+        retrazoBuscador.restart(); // reinicia el contador desde cero
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

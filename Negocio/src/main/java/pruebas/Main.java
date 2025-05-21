@@ -35,7 +35,7 @@ public class Main {
     /**
      * Pruebas para la capa BO.
      */
-    public static void main(String[] args) throws NegocioException {
+    public static void main(String[] args) /*throws NegocioException*/ {
 
         /**
          * Pruebas para la capa BO.

@@ -135,7 +135,7 @@ public class RegistrarEntrada implements IRegistrarEntrada{
 //¿¿Este metodo ira en control?? o puede ir en clase productoBO
     
     @Override
-    public void setStockProducto(ProductoCargadoDTO producto,int unidades) {
+    public void setStockProducto(ProductoCargadoDTO producto,Double unidades) {
         this.productoSeleccionado.setStock(unidades);
         
  //       productoBO.buscarProductoPorId(produco.getId());
@@ -159,9 +159,14 @@ public class RegistrarEntrada implements IRegistrarEntrada{
         this.entradaTemporal = entradaTemporal;
     }
     
-    public ProductoCargadoDTO agregarProducto(ProductoCargadoDTO producto){
-        ProductoCargadoDTO productoDTO = productoBO.agregarProducto(producto);
-        return productoDTO;
+    public ProductoCargadoDTO agregarProducto(ProductoCargadoDTO producto) throws NegocioException{
+        try {
+            ProductoCargadoDTO productoDTO = productoBO.agregarProducto(producto);
+            return productoDTO;
+        } catch (NegocioException e) {
+            throw new NegocioException("Error al agregar producto",e);
+        }
+        
     }
     
 }

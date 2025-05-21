@@ -47,6 +47,7 @@ GUI\ModuloRealizarVenta\FormularioEfectivo.class
 GUI\ModuloRealizarVenta\RegistrarVenta$10.class
 GUI\ModuloRealizarVenta\VentanaProcesandoPago.class
 GUI\ModuloRegistrarSalida\VentanaHistorialSalidas$7.class
+GUI\ModuloRegistrarSalida\SoloFiltroNumerico.class
 GUI\ModuloRealizarDevolucion\PantallaMenuDevolucion.class
 GUI\ModuloRegistrarEntrada\PanelRegistrarProductosEntrada$7.class
 GUI\ModuloGastos\TablaHistorialGastos$1.class

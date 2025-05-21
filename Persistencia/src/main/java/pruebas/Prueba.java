@@ -1,6 +1,7 @@
 package pruebas;
 
 import Exception.PersistenciaException;
+import Interfaces.IProductoDAO;
 import Interfaces.ISalidaDAO;
 import entidades.Producto;
 import entidades.Salida;
@@ -18,7 +19,8 @@ public class Prueba {
         ICreadorDAO creador = new CreadorDAO();
         
         ISalidaDAO salidaDAO = creador.crearSalidaDAO();
-        
+        IProductoDAO productoDAO = creador.crearProductoDAO();
+        /*
         Producto producto = new Producto("Leche chavo", "Eskeler", 0, true, 0, 0);
         Salida salida = new Salida(null, producto, new Date(), "jajajjaja", 2.2, 2.2, 2.2);
         
@@ -30,7 +32,12 @@ public class Prueba {
         } catch (PersistenciaException e) {
             e.getStackTrace();
         }
+        */
         
-        
+        Producto producto = new Producto("Leche chavo", "Eskeler", 0, true, 0, 0);
+        try {
+            productoDAO.agregarProducto(producto);
+        } catch (Exception e) {
+        }
     }
 }

@@ -1,18 +1,33 @@
 package GUI.ModuloRegistrarSalida;
 
+import DTOs.NuevaSalidaDTO;
+import GUI.Aplicacion;
+import javax.swing.text.AbstractDocument;
+import DTOs.ProductoCargadoDTO;
+import exception.SalidaException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 /**
  *
  * @author janot
  */
 public class DialogoRegistrarSalida extends javax.swing.JDialog {
-
+    private Aplicacion app;
     /**
      * Creates new form DialogoRegistrarSalida
      */
-    public DialogoRegistrarSalida(java.awt.Frame parent, boolean modal) {
+    public DialogoRegistrarSalida(java.awt.Frame parent, boolean modal, Aplicacion app) {
         super(parent, modal);
         initComponents();
+        this.app = app;
         this.setLocationRelativeTo(null);
+        buscadorProducto();
     }
 
     /**
@@ -27,16 +42,16 @@ public class DialogoRegistrarSalida extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldSalida = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jListProductos = new javax.swing.JList<>();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jTextField2 = new javax.swing.JTextField();
+        jTextAreaMotivo = new javax.swing.JTextArea();
+        jTextFieldProducto = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         panelRound1 = new GUI.PanelRound();
-        jLabel6 = new javax.swing.JLabel();
+        jLabelAgregar = new javax.swing.JLabel();
         panelRound2 = new GUI.PanelRound();
         jLabel5 = new javax.swing.JLabel();
 
@@ -58,17 +73,18 @@ public class DialogoRegistrarSalida extends javax.swing.JDialog {
         jLabel2.setText("Salida");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, -1, -1));
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, 190, 30));
+        jTextFieldSalida.setBackground(new java.awt.Color(255, 255, 255));
+        jTextFieldSalida.setForeground(new java.awt.Color(0, 0, 0));
+        ((AbstractDocument) jTextFieldSalida.getDocument()).setDocumentFilter(new SoloFiltroNumerico());
+        jPanel1.add(jTextFieldSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, 190, 30));
 
-        jList1.setBackground(new java.awt.Color(255, 255, 255));
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        jListProductos.setBackground(new java.awt.Color(255, 255, 255));
+        jListProductos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListProductosValueChanged(evt);
+            }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(jListProductos);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 280, 100));
 
@@ -78,16 +94,21 @@ public class DialogoRegistrarSalida extends javax.swing.JDialog {
         jLabel3.setText("Buscar Producto");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, -1, -1));
 
-        jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextArea1.setColumns(15);
-        jTextArea1.setRows(15);
-        jScrollPane2.setViewportView(jTextArea1);
+        jTextAreaMotivo.setBackground(new java.awt.Color(255, 255, 255));
+        jTextAreaMotivo.setColumns(15);
+        jTextAreaMotivo.setRows(15);
+        jScrollPane2.setViewportView(jTextAreaMotivo);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 190, 70));
 
-        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField2.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 190, 30));
+        jTextFieldProducto.setBackground(new java.awt.Color(255, 255, 255));
+        jTextFieldProducto.setForeground(new java.awt.Color(0, 0, 0));
+        jTextFieldProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldProductoKeyTyped(evt);
+            }
+        });
+        jPanel1.add(jTextFieldProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 190, 30));
 
         jLabel4.setBackground(new java.awt.Color(0, 0, 0));
         jLabel4.setFont(new java.awt.Font("Product Sans Infanity", 0, 14)); // NOI18N
@@ -102,11 +123,16 @@ public class DialogoRegistrarSalida extends javax.swing.JDialog {
         panelRound1.setRoundTopRight(10);
         panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Agregar");
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        panelRound1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 30));
+        jLabelAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelAgregar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelAgregar.setText("Agregar");
+        jLabelAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelAgregarMouseClicked(evt);
+            }
+        });
+        panelRound1.add(jLabelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 30));
 
         jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 430, 80, 30));
 
@@ -140,21 +166,106 @@ public class DialogoRegistrarSalida extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_jLabel5MouseClicked
 
+    private void jTextFieldProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldProductoKeyTyped
+        Timer retrazoBuscador = new Timer(15, e ->{
+            buscadorProducto();
+        });
+        retrazoBuscador.setRepeats(false);
+        
+        reiniciarTimer(retrazoBuscador);
+        
+    }//GEN-LAST:event_jTextFieldProductoKeyTyped
 
+    private void jLabelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAgregarMouseClicked
+        agregarNuevaSalida();
+        app.reconstruirVentanaHistorialSalidas();
+        
+    }//GEN-LAST:event_jLabelAgregarMouseClicked
+
+    private void jListProductosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListProductosValueChanged
+        if (!(jListProductos.getSelectedValue() == null)) {
+            jTextFieldProducto.setText(jListProductos.getSelectedValue().toString());
+        }
+    }//GEN-LAST:event_jListProductosValueChanged
+
+    
+    /////////////////////////////UTILS//////////////////////////////////////////////////////////////
+    private void buscadorProducto(){
+        String nombre = jTextFieldProducto.getText();
+        List<ProductoCargadoDTO> listaProductos = new ArrayList<>();
+        
+        try {
+            listaProductos = app.busquedaProductos(nombre);
+        } catch (SalidaException e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
+        
+        DefaultListModel<ProductoCargadoDTO> modelo = new DefaultListModel<>();
+        jListProductos.setModel(modelo);
+        
+        for (ProductoCargadoDTO productoCargadoDTO : listaProductos) {
+            modelo.addElement(productoCargadoDTO);
+        }
+    }
+    
+    private void agregarNuevaSalida(){
+        ProductoCargadoDTO producto = jListProductos.getSelectedValue();
+        String motivo = jTextAreaMotivo.getText();
+        Double salida = null;
+
+        Double stockAntes = null;
+        Double stockDespues = null;
+        
+        String textoSalida = jTextFieldSalida.getText().trim();
+
+        if (textoSalida.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El campo de salida no puede estar vacío.");
+            return;
+        }
+
+        try {
+            salida = Double.parseDouble(textoSalida);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Debes ingresar un número válido en el campo de salida.");
+            return;
+        }
+        
+        if(producto != null){
+            stockAntes = producto.getStock();
+            stockDespues = producto.getStock() - salida;
+        }
+        
+        try {
+            if(app.agregarNuevaSalida(new NuevaSalidaDTO(producto, motivo, stockAntes, salida, stockDespues))){
+                dispose();
+            }
+        } catch (SalidaException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
+    
+    private void reiniciarTimer(Timer retrazoBuscador) {
+        retrazoBuscador.restart(); // reinicia el contador desde cero
+    }
+
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JLabel jLabelAgregar;
+    private javax.swing.JList<ProductoCargadoDTO> jListProductos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextArea jTextAreaMotivo;
+    private javax.swing.JTextField jTextFieldProducto;
+    private javax.swing.JTextField jTextFieldSalida;
     private GUI.PanelRound panelRound1;
     private GUI.PanelRound panelRound2;
     // End of variables declaration//GEN-END:variables

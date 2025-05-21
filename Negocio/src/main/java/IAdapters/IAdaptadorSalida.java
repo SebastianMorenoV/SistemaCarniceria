@@ -1,7 +1,7 @@
 package IAdapters;
 
+import DTOs.NuevaSalidaDTO;
 import DTOs.SalidaDTO;
-import DTOs.Salidas.NuevaSalidaDTO;
 import entidades.Salida;
 
 /**

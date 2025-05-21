@@ -41,5 +41,7 @@ public interface ICreadorDAO {
     IProveedorDAO crearProveedorDAO();
     
     ISalidaDAO crearSalidaDAO();
+    
+    IProductoDAO crearProductoMokosDAO();
 }
 

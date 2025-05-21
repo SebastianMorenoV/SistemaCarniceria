@@ -1,7 +1,7 @@
 package Interfaces;
 
+import DTOs.NuevaSalidaDTO;
 import DTOs.SalidaDTO;
-import DTOs.Salidas.NuevaSalidaDTO;
 import Exception.NegocioException;
 import java.util.Date;
 import java.util.List;

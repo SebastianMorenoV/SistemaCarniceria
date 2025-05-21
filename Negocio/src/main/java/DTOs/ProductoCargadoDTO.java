@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DTOs;
 
 /**
@@ -15,7 +11,7 @@ public class ProductoCargadoDTO {
     double unidad;
     double precio; 
     boolean esPesable;
-    int stock;
+    Double stock;
 
     public ProductoCargadoDTO(int codigo, String nombre, String descripcion, String categoria, double unidad, double precio, boolean esPesable) {
         this.codigo = codigo;
@@ -95,11 +91,11 @@ public class ProductoCargadoDTO {
         this.esPesable = esPesable;
     }
 
-    public int getStock() {
+    public double getStock() {
         return stock;
     }
 
-    public void setStock(int stock) {
+    public void setStock(Double stock) {
         this.stock = stock;
     }
 

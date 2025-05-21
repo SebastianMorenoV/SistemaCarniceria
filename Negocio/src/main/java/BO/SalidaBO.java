@@ -1,8 +1,8 @@
 package BO;
 
 import Adapters.AdaptadorSalida;
+import DTOs.NuevaSalidaDTO;
 import DTOs.SalidaDTO;
-import DTOs.Salidas.NuevaSalidaDTO;
 import Exception.NegocioException;
 import Exception.PersistenciaException;
 import IAdapters.IAdaptadorSalida;

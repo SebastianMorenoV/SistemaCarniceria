@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package Interfaces;
 
 import DAOS.ProductoDAO;
@@ -20,6 +16,8 @@ public interface IProductoBO {
     }
     public List<ProductoCargadoDTO> cargarProductos() throws NegocioException;
     
-    public ProductoCargadoDTO agregarProducto(ProductoCargadoDTO producto);
+    public ProductoCargadoDTO agregarProducto(ProductoCargadoDTO producto) throws NegocioException;
+    
+    public List<ProductoCargadoDTO> buscadorProducto(String nombre) throws NegocioException;
     
 }

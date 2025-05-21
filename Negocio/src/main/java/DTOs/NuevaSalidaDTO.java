@@ -1,5 +1,6 @@
-package DTOs.Salidas;
+package DTOs;
 
+import DTOs.ProductoCargadoDTO;
 import entidades.Producto;
 import java.util.Date;
 
@@ -8,13 +9,13 @@ import java.util.Date;
  * @author janot
  */
 public class NuevaSalidaDTO {
-    private Producto producto;
+    private ProductoCargadoDTO producto;
     private String motivo;
     private Double stockAntes;
     private Double cantidadSalida;
     private Double stockDespues;
 
-    public NuevaSalidaDTO(Producto producto, String motivo, Double stockAntes, Double cantidadSalida, Double stockDespues) {
+    public NuevaSalidaDTO(ProductoCargadoDTO producto, String motivo, Double stockAntes, Double cantidadSalida, Double stockDespues) {
         this.producto = producto;
         this.motivo = motivo;
         this.stockAntes = stockAntes;
@@ -22,7 +23,7 @@ public class NuevaSalidaDTO {
         this.stockDespues = stockDespues;
     }
 
-    public Producto getProducto() {
+    public ProductoCargadoDTO getProducto() {
         return producto;
     }
 

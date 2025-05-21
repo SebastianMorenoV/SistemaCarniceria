@@ -4,6 +4,7 @@
  */
 package entidades;
 
+import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 
 /**
@@ -12,34 +13,35 @@ import org.bson.types.ObjectId;
  */
 public class Producto {
     ObjectId _id;
-    int id;
+    Integer id;
+    @BsonProperty("nombre")
     String nombre;
     String descripcion;
     double precio;
     boolean esPesable;
     double unidad;
-    int stock;
+    double stock;
 
     public Producto() {
     }
     
-    public Producto(int id, String nombre, String descripcion, double precio, boolean esPesable, double unidad, int texto) {
+    public Producto(Integer id, String nombre, String descripcion, double precio, boolean esPesable, double unidad, double stock) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.esPesable = esPesable;
         this.unidad = unidad;
-        this.stock = texto;
+        this.stock = stock;
     }
 
-    public Producto(String nombre, String descripcion, double precio, boolean esPesable, double unidad, int texto) {
+    public Producto(String nombre, String descripcion, double precio, boolean esPesable, double unidad, double stock) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.esPesable = esPesable;
         this.unidad = unidad;
-        this.stock = texto;
+        this.stock = stock;
     }
 
     public Producto(int id, String nombre, String descripcion) {
@@ -57,11 +59,11 @@ public class Producto {
         this._id = id;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -107,12 +109,12 @@ public class Producto {
         this.unidad = unidad;
     }
 
-    public int getStock() {
+    public double getStock() {
         return stock;
     }
 
-    public void setStock(int texto) {
-        this.stock = texto;
+    public void setStock(double stock) {
+        this.stock = stock;
     }
     
     

@@ -79,5 +79,6 @@ public class ManejadorObjetosNegocio {
         ICreadorDAO fabrica = new CreadorDAO();
         return new SalidaBO(fabrica);
     }
+    
 
 }

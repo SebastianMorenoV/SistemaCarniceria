@@ -24,7 +24,7 @@ public interface IRegistrarEntrada {
         
         public void agregarProveedor(ProveedorDTO proveedor)throws InventarioException;
         
-        public void setStockProducto(ProductoCargadoDTO producto, int Unidades);
+        public void setStockProducto(ProductoCargadoDTO producto, Double Unidades);
         
         public List<ProductoEntradaDTO> cargarProductosEntrada();
         

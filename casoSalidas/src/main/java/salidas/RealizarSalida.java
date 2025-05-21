@@ -1,7 +1,8 @@
 package salidas;
 
+import DTOs.ProductoCargadoDTO;
 import DTOs.SalidaDTO;
-import DTOs.Salidas.NuevaSalidaDTO;
+import DTOs.NuevaSalidaDTO;
 import Exception.NegocioException;
 import Interfaces.IProductoBO;
 import Interfaces.ISalidaBO;
@@ -19,6 +20,24 @@ public class RealizarSalida implements IRealizarSalida{
     
     @Override
     public SalidaDTO agregarNuevaSalida(NuevaSalidaDTO nuevaSalida) throws SalidaException {
+        if (nuevaSalida.getProducto() == null) {
+            throw new SalidaException("El Producto no puede estar vacio");
+        }
+        if(nuevaSalida.getMotivo() == null || nuevaSalida.getMotivo().trim().isEmpty()) {
+            throw new SalidaException("El motivo no puede estar vacio");
+        }
+        if(nuevaSalida.getCantidadSalida() < 0){
+            throw new SalidaException("La salida no puede ser negativa");
+        }
+        
+        if(nuevaSalida.getCantidadSalida() == 0){
+            throw new SalidaException("La salida no puede ser igual a 0");
+        }
+        
+        if(nuevaSalida.getCantidadSalida() > nuevaSalida.getProducto().getStock()){
+            throw new SalidaException("La salida no puede ser mayor al stock actual");
+        }
+        
         try {
             return salidaBO.agregarNuevaSalida(nuevaSalida);
         } catch (NegocioException e) {
@@ -43,5 +62,13 @@ public class RealizarSalida implements IRealizarSalida{
             throw new SalidaException("Error al filtrar las salidas", e);
         }
     }
-    
+
+    @Override
+    public List<ProductoCargadoDTO> buscadorProductos(String nombre) throws SalidaException {
+        try {
+            return productoBO.buscadorProducto(nombre);
+        } catch (NegocioException e) {
+            throw new SalidaException("Error al realizar la busqueda",e);
+        }
+    }
 }

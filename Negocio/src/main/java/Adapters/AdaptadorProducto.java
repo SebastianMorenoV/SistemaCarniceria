@@ -17,12 +17,13 @@ public class AdaptadorProducto implements IAdaptadorProducto{
 
     @Override
     public ProductoCargadoDTO convertirADTO(Producto producto) {
-        ProductoCargadoDTO productoDTO = new  ProductoCargadoDTO();
+       ProductoCargadoDTO productoDTO = new  ProductoCargadoDTO();
        productoDTO.setCodigo(producto.getId());
        productoDTO.setUnidad(producto.getUnidad());
        productoDTO.setDescripcion(producto.getDescripcion());
        productoDTO.setNombre(producto.getNombre());
        productoDTO.setPrecio(producto.getPrecio());
+       productoDTO.setStock(producto.getStock());
        return productoDTO;
        
     }

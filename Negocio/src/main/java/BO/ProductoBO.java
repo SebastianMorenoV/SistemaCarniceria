@@ -22,19 +22,21 @@ import java.util.List;
 public class ProductoBO implements IProductoBO {
 
     private final IProductoDAO productoDAO;
+    private final IProductoDAO productosDAOMokos;
     private final AdaptadorProducto adaptadorProducto;
 
     public ProductoBO(ICreadorDAO fabrica) {
         this.productoDAO = fabrica.crearProductoDAO();
         this.adaptadorProducto = new AdaptadorProducto();
+        this.productosDAOMokos = fabrica.crearProductoMokosDAO();
     }
-
+    
     @Override
     public List<ProductoCargadoDTO> cargarProductos() throws NegocioException {
         List<ProductoCargadoDTO> listaProductosDTO = new ArrayList<>();
 
         try {
-            List<Producto> listaProductos = productoDAO.consultarProductos();
+            List<Producto> listaProductos = productosDAOMokos.consultarProductos();
 
             //usar el adaptador para convertir los Producto a ProductoDTO
             for (Producto producto : listaProductos) {
@@ -48,12 +50,32 @@ public class ProductoBO implements IProductoBO {
 
         return listaProductosDTO;
     }
+    
+    @Override
+    public ProductoCargadoDTO agregarProducto(ProductoCargadoDTO producto) throws NegocioException {
+        Producto productoEntidad = adaptadorProducto.convertirAEntidad(producto);
+        try {
+            Producto productoDevuelto = productoDAO.agregarProducto(productoEntidad);
+            return adaptadorProducto.convertirADTO(productoDevuelto);
+        } catch (PersistenciaException e) {
+            throw new NegocioException("Error al agregar Producto", e);
+        }
+        
+    }
 
     @Override
-    public ProductoCargadoDTO agregarProducto(ProductoCargadoDTO producto) {
-        Producto productoEntidad = adaptadorProducto.convertirAEntidad(producto);
-        Producto productoDevuelto = productoDAO.agregarProducto(productoEntidad);
-        ProductoCargadoDTO productoDTO = adaptadorProducto.convertirADTO(productoDevuelto);
-        return productoDTO;
+    public List<ProductoCargadoDTO> buscadorProducto(String nombre) throws NegocioException {
+        List<ProductoCargadoDTO> listaProductosDTO = new ArrayList<>();
+        try {
+            List<Producto> listaProductos = productoDAO.buscadorProducto(nombre);
+            for (Producto producto : listaProductos) {
+                ProductoCargadoDTO productoCargadoDTO = adaptadorProducto.convertirADTO(producto);
+                listaProductosDTO.add(productoCargadoDTO);
+            }
+            return listaProductosDTO;
+        } catch (PersistenciaException e) {
+            throw new NegocioException("Error al hacer la busqueda",e);
+        }
     }
+    
 }

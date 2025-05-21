@@ -120,7 +120,12 @@ public class FormularioProductoNuevo extends javax.swing.JPanel {
     private void BtnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAceptarMouseClicked
         // TODO add your handling code here:
         validaciones();
-        control.agregarProductoNuevo(productoNuevo);
+        try {
+            control.agregarProductoNuevo(productoNuevo);
+        } catch (NegocioException e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
+        
         try {
             control.mostrarVentanaSeleccionarProductosEntrada();
         } catch (NegocioException ex) {

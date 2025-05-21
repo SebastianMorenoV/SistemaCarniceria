@@ -1,7 +1,8 @@
 package Adapters;
 
+import DTOs.NuevaSalidaDTO;
 import DTOs.SalidaDTO;
-import DTOs.Salidas.NuevaSalidaDTO;
+import IAdapters.IAdaptadorProducto;
 import IAdapters.IAdaptadorSalida;
 import entidades.Salida;
 import java.util.Date;
@@ -11,7 +12,7 @@ import java.util.Date;
  * @author janot
  */
 public class AdaptadorSalida implements IAdaptadorSalida{
-
+    private final IAdaptadorProducto adaptadorProducto = new AdaptadorProducto();
     @Override
     public SalidaDTO convertirADTO(Salida salida) {
         return new SalidaDTO(
@@ -26,7 +27,7 @@ public class AdaptadorSalida implements IAdaptadorSalida{
 
     @Override
     public Salida convertirAEntidad(NuevaSalidaDTO salidaDTO) {
-        return new Salida(null, salidaDTO.getProducto(), new Date(), salidaDTO.getMotivo(), salidaDTO.getStockAntes(), salidaDTO.getCantidadSalida(), salidaDTO.getStockDespues());
+        return new Salida(null, adaptadorProducto.convertirAEntidad(salidaDTO.getProducto()), new Date(), salidaDTO.getMotivo(), salidaDTO.getStockAntes(), salidaDTO.getCantidadSalida(), salidaDTO.getStockDespues());
     }
     
 }

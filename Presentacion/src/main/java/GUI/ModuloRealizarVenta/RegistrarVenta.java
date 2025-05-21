@@ -388,7 +388,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
                 venta.setTotal(app.getTotalVenta());
                 venta.setSubtotal(app.getSubtotalVenta());
                 venta.setListadoProductosVenta(listadoProductosVenta);
-
+               
                 app.setearVenta(venta);
                 app.mostrarFormularioTarjeta();
             }
@@ -412,9 +412,9 @@ public class RegistrarVenta extends javax.swing.JPanel {
                 venta.setTotal(app.getTotalVenta());
                 venta.setSubtotal(app.getSubtotalVenta());
                 venta.setListadoProductosVenta(listadoProductosVenta);
-
+                System.out.println("REGISTYAR"+venta );
                 app.setearVenta(venta);
-                app.mostrarFormularioEfectivo();
+                app.mostrarFormularioEfectivo(); 
             }
         } catch (NegocioException ex) {
             Logger.getLogger(RegistrarVenta.class.getName()).log(Level.SEVERE, null, ex);
@@ -891,6 +891,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
                 VentaDTO venta = app.registrarVenta(ventaRealizada);
                 app.setearVenta(venta);
                 app.mostrarTicketPDF();
+                System.out.println("FINALZIAR:" + venta);
             } catch (VentaException ex) {
                 Logger.getLogger(RegistrarVenta.class.getName()).log(Level.SEVERE, null, ex);
             }
