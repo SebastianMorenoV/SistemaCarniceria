@@ -55,6 +55,7 @@ public class ProductoBO implements IProductoBO {
     public ProductoCargadoDTO agregarProducto(ProductoCargadoDTO producto) throws NegocioException {
         Producto productoEntidad = adaptadorProducto.convertirAEntidad(producto);
         try {
+            System.out.println(producto);
             Producto productoDevuelto = productoDAO.agregarProducto(productoEntidad);
             return adaptadorProducto.convertirADTO(productoDevuelto);
         } catch (PersistenciaException e) {

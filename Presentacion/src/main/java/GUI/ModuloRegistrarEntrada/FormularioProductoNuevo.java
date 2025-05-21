@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package GUI.ModuloRegistrarEntrada;
 
 import DTOs.ProductoCargadoDTO;
@@ -16,11 +12,10 @@ import javax.swing.JOptionPane;
  * @author HP
  */
 public class FormularioProductoNuevo extends javax.swing.JPanel {
+
     private Aplicacion control;
     private ProductoCargadoDTO productoNuevo;
-    /**
-     * Creates new form FormularioProductoNuevo
-     */
+
     public FormularioProductoNuevo(Aplicacion control) {
         this.control = control;
         initComponents();
@@ -52,49 +47,53 @@ public class FormularioProductoNuevo extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Registro de Producto Nuevo");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 500, 70));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setText("Datos del producto");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, -1, -1));
+        jLabel2.setText("Ingresa los datos de el producto :");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, -1, -1));
 
         labelPrecio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelPrecio.setText("Precio unidad:");
-        add(labelPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
+        add(labelPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, -1, -1));
 
         labelNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelNombre.setText("Nombre:");
-        add(labelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
+        add(labelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, -1, -1));
 
         labelCategoria.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelCategoria.setText("Categoria:");
-        add(labelCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
+        add(labelCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, -1, -1));
 
         labelPesable.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelPesable.setText("¿Es pesable?");
-        add(labelPesable, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
+        add(labelPesable, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 460, -1, -1));
 
         labelDescripcion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelDescripcion.setText("Descripcion");
-        add(labelDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
+        add(labelDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, -1, -1));
 
-        campoPesable.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "default", "Si", "No" }));
-        add(campoPesable, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, -1, -1));
+        campoPesable.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
+        campoPesable.setToolTipText("Selecciona si tu producto es pesable o no. Las piezas unicas no se venden pesadas");
+        add(campoPesable, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 460, 170, -1));
 
         campoPrecioUnidad.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        add(campoPrecioUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 390, 170, -1));
+        campoPrecioUnidad.setToolTipText("Digita el precio($) en MXN");
+        add(campoPrecioUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 390, 100, -1));
 
         campoNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        campoNombre.setToolTipText("");
-        add(campoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 170, -1));
+        campoNombre.setToolTipText("El nombre de el producto a ingresar");
+        add(campoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 200, -1));
 
         campoCategoria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        add(campoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 170, -1));
+        campoCategoria.setToolTipText("Escribe a que categoria pertenece el producto");
+        add(campoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 200, -1));
 
         campoDescripcion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        add(campoDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 340, 170, -1));
+        add(campoDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 200, 60));
 
         BtnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         BtnCancelar.setText("Cancelar");
@@ -103,7 +102,7 @@ public class FormularioProductoNuevo extends javax.swing.JPanel {
                 BtnCancelarMouseClicked(evt);
             }
         });
-        add(BtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 540, -1, -1));
+        add(BtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 530, 140, 50));
 
         BtnAceptar.setBackground(new java.awt.Color(0, 0, 0));
         BtnAceptar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -114,18 +113,14 @@ public class FormularioProductoNuevo extends javax.swing.JPanel {
                 BtnAceptarMouseClicked(evt);
             }
         });
-        add(BtnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 540, -1, -1));
+        add(BtnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 530, 140, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAceptarMouseClicked
-        // TODO add your handling code here:
-        validaciones();
-        try {
-            control.agregarProductoNuevo(productoNuevo);
-        } catch (NegocioException e) {
-            JOptionPane.showMessageDialog(this, e);
-        }
-        
+
+        //validaciones();
+        agregarProducto();
+
         try {
             control.mostrarVentanaSeleccionarProductosEntrada();
         } catch (NegocioException ex) {
@@ -134,12 +129,7 @@ public class FormularioProductoNuevo extends javax.swing.JPanel {
     }//GEN-LAST:event_BtnAceptarMouseClicked
 
     private void BtnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCancelarMouseClicked
-        try {
-            // TODO add your handling code here:
-            control.mostrarVentanaSeleccionarProductosEntrada();
-        } catch (NegocioException ex) {
-            Logger.getLogger(FormularioProductoNuevo.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        control.mostrarVentanaOpcionesInventario();
     }//GEN-LAST:event_BtnCancelarMouseClicked
 
 
@@ -160,17 +150,23 @@ public class FormularioProductoNuevo extends javax.swing.JPanel {
     private javax.swing.JLabel labelPrecio;
     // End of variables declaration//GEN-END:variables
 
-
- public ProductoCargadoDTO crearProductoNuevo(String nombre, String descripcion, String categoria, double precio, Boolean esPesable){
+    public void agregarProducto() {
         productoNuevo = new ProductoCargadoDTO();
-        productoNuevo.setCategoria(categoria);
-        productoNuevo.setDescripcion(descripcion);
-        productoNuevo.setEsPesable(esPesable);
-        productoNuevo.setPrecio(precio);
-        return productoNuevo;
+        productoNuevo.setNombre(campoNombre.getText());
+        productoNuevo.setCategoria(campoCategoria.getText());
+        productoNuevo.setDescripcion(campoDescripcion.getText());
+        productoNuevo.setEsPesable(campoPesable.getSelectedItem().equals("Si"));
+        productoNuevo.setPrecio(Double.parseDouble(campoPrecioUnidad.getText()));
+
+        try {
+            control.agregarProductoNuevo(productoNuevo);
+        } catch (NegocioException ex) {
+            JOptionPane.showMessageDialog(this, ex.getLocalizedMessage());
+        }
+
     }
-    
-    public void validaciones(){
+
+    public void validaciones() {
         double precio;
         String nombre = campoNombre.getText().trim();
         String categoria = campoCategoria.getText().trim();
@@ -178,29 +174,24 @@ public class FormularioProductoNuevo extends javax.swing.JPanel {
         String descripcion = campoDescripcion.getText().trim();
         String precioTexto = campoPrecioUnidad.getText().trim();
         boolean esPesable = pesable.equals("Sí");
-        if (nombre.isEmpty() || categoria.isEmpty() || pesable.isEmpty() ||
-        descripcion.isEmpty() || precioTexto.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-    
-    try {
-        precio = Double.parseDouble(precioTexto);
-        if (precio < 0) {
-            throw new NumberFormatException();
+        if (nombre.isEmpty() || categoria.isEmpty() || pesable.isEmpty()
+                || descripcion.isEmpty() || precioTexto.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(null, "El precio debe ser un número válido y positivo.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+
+        try {
+            precio = Double.parseDouble(precioTexto);
+            if (precio < 0) {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "El precio debe ser un número válido y positivo.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
     
-    crearProductoNuevo(nombre, descripcion, categoria, precio, esPesable);
-    JOptionPane.showMessageDialog(null, "Producto registrado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Producto registrado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }
-
-
-
-
-
 
 }

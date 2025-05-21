@@ -28,9 +28,8 @@ public class AdaptadorProducto implements IAdaptadorProducto{
     @Override
     public Producto convertirAEntidad(ProductoCargadoDTO producto) {
        Producto productoEntidad = new  Producto();
-        productoEntidad.setId(producto.getCodigo());
-       //productoEntidad.setEsPesable(producto.);
-       //productoEntidad.setTexto(texto);
+       productoEntidad.setId(producto.getCodigo());
+       productoEntidad.setEsPesable(producto.isEsPesable());
        productoEntidad.setPrecio(producto.getPrecio());
        productoEntidad.setUnidad(producto.getUnidad());
        productoEntidad.setDescripcion(producto.getDescripcion());

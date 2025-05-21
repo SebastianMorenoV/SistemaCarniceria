@@ -118,8 +118,7 @@ public class FormularioAgregarProveedor extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAgregarProveedorMouseClicked
 
     private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
-        // TODO add your handling code here:
-        app.mostrarPantallaMenuGastos();
+        app.mostrarMenuOpciones();
     }//GEN-LAST:event_btnAtrasMouseClicked
 
     private void inputTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTelefonoActionPerformed

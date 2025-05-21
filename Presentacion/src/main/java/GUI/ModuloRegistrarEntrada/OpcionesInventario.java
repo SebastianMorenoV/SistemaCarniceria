@@ -4,11 +4,13 @@
  */
 package GUI.ModuloRegistrarEntrada;
 
+import DTOs.EmpleadoCargadoDTO;
 import Exception.InventarioException;
 import Exception.NegocioException;
 import GUI.Aplicacion;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
@@ -38,58 +40,35 @@ public class OpcionesInventario extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelBtnRegistrarProveedor = new javax.swing.JPanel();
-        panelBtnRegistrarSalida = new javax.swing.JPanel();
         panelBtnRegistrarEntrada = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         labelRegistrarEntrada = new javax.swing.JLabel();
         labelFecha = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        labelEmpleado = new javax.swing.JLabel();
         btnAtras = new javax.swing.JLabel();
+        panelBtnRegistrarEntrada1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        panelRound2 = new GUI.PanelRound();
+        txtBusquedaNombre3 = new javax.swing.JLabel();
+        panelRound3 = new GUI.PanelRound();
+        txtBusquedaNombre4 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelBtnRegistrarProveedor.setBackground(new java.awt.Color(102, 102, 102));
-
-        javax.swing.GroupLayout panelBtnRegistrarProveedorLayout = new javax.swing.GroupLayout(panelBtnRegistrarProveedor);
-        panelBtnRegistrarProveedor.setLayout(panelBtnRegistrarProveedorLayout);
-        panelBtnRegistrarProveedorLayout.setHorizontalGroup(
-            panelBtnRegistrarProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 160, Short.MAX_VALUE)
-        );
-        panelBtnRegistrarProveedorLayout.setVerticalGroup(
-            panelBtnRegistrarProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 160, Short.MAX_VALUE)
-        );
-
-        add(panelBtnRegistrarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(811, 325, -1, -1));
-
-        panelBtnRegistrarSalida.setBackground(new java.awt.Color(102, 102, 102));
-        panelBtnRegistrarSalida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        panelBtnRegistrarSalida.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelBtnRegistrarSalidaMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelBtnRegistrarSalidaLayout = new javax.swing.GroupLayout(panelBtnRegistrarSalida);
-        panelBtnRegistrarSalida.setLayout(panelBtnRegistrarSalidaLayout);
-        panelBtnRegistrarSalidaLayout.setHorizontalGroup(
-            panelBtnRegistrarSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 160, Short.MAX_VALUE)
-        );
-        panelBtnRegistrarSalidaLayout.setVerticalGroup(
-            panelBtnRegistrarSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 160, Short.MAX_VALUE)
-        );
-
-        add(panelBtnRegistrarSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 325, -1, -1));
-
-        panelBtnRegistrarEntrada.setBackground(new java.awt.Color(102, 102, 102));
+        panelBtnRegistrarEntrada.setBackground(new java.awt.Color(0, 0, 0));
+        panelBtnRegistrarEntrada.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelBtnRegistrarEntrada.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelBtnRegistrarEntradaMouseClicked(evt);
+            }
+        });
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar-producto.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
             }
         });
 
@@ -97,34 +76,37 @@ public class OpcionesInventario extends javax.swing.JPanel {
         panelBtnRegistrarEntrada.setLayout(panelBtnRegistrarEntradaLayout);
         panelBtnRegistrarEntradaLayout.setHorizontalGroup(
             panelBtnRegistrarEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 160, Short.MAX_VALUE)
+            .addGroup(panelBtnRegistrarEntradaLayout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(jLabel2)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         panelBtnRegistrarEntradaLayout.setVerticalGroup(
             panelBtnRegistrarEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 160, Short.MAX_VALUE)
+            .addGroup(panelBtnRegistrarEntradaLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel2)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
-        add(panelBtnRegistrarEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 325, -1, -1));
+        add(panelBtnRegistrarEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 180, 230, 190));
 
         labelRegistrarEntrada.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        labelRegistrarEntrada.setForeground(new java.awt.Color(0, 0, 0));
+        labelRegistrarEntrada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelRegistrarEntrada.setText("Registrar Entrada");
-        add(labelRegistrarEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 503, -1, -1));
+        add(labelRegistrarEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, 230, -1));
 
+        labelFecha.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        labelFecha.setForeground(new java.awt.Color(0, 0, 0));
         labelFecha.setText("Fecha: ");
-        add(labelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 592, -1, -1));
+        add(labelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 580, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Registrar Salida");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 503, -1, -1));
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel4.setText("Registrar Proveedor");
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(811, 503, -1, -1));
-
-        labelEmpleado.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        labelEmpleado.setText("Bienvenido, ");
-        add(labelEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 55, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 380, 230, -1));
 
         btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/atras (1).png"))); // NOI18N
         btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -134,42 +116,143 @@ public class OpcionesInventario extends javax.swing.JPanel {
             }
         });
         add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 50));
+
+        panelBtnRegistrarEntrada1.setBackground(new java.awt.Color(0, 0, 0));
+        panelBtnRegistrarEntrada1.setForeground(new java.awt.Color(0, 0, 0));
+        panelBtnRegistrarEntrada1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        panelBtnRegistrarEntrada1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelBtnRegistrarEntrada1MouseClicked(evt);
+            }
+        });
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/agregar-producto.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelBtnRegistrarEntrada1Layout = new javax.swing.GroupLayout(panelBtnRegistrarEntrada1);
+        panelBtnRegistrarEntrada1.setLayout(panelBtnRegistrarEntrada1Layout);
+        panelBtnRegistrarEntrada1Layout.setHorizontalGroup(
+            panelBtnRegistrarEntrada1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBtnRegistrarEntrada1Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(jLabel1)
+                .addContainerGap(51, Short.MAX_VALUE))
+        );
+        panelBtnRegistrarEntrada1Layout.setVerticalGroup(
+            panelBtnRegistrarEntrada1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBtnRegistrarEntrada1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel1)
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
+
+        add(panelBtnRegistrarEntrada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 230, 190));
+
+        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel5.setFont(new java.awt.Font("Product Sans Infanity", 0, 48)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Bienvenido, Juanito!");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1150, 80));
+
+        panelRound2.setBackground(new java.awt.Color(0, 0, 0));
+        panelRound2.setRoundBottomLeft(30);
+        panelRound2.setRoundBottomRight(30);
+        panelRound2.setRoundTopLeft(30);
+        panelRound2.setRoundTopRight(30);
+        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtBusquedaNombre3.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
+        txtBusquedaNombre3.setForeground(new java.awt.Color(255, 255, 255));
+        txtBusquedaNombre3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtBusquedaNombre3.setText("Agregar un Producto");
+        txtBusquedaNombre3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtBusquedaNombre3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtBusquedaNombre3MouseClicked(evt);
+            }
+        });
+        panelRound2.add(txtBusquedaNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 480, 70));
+
+        add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 530, 500, 90));
+
+        panelRound3.setBackground(new java.awt.Color(0, 0, 0));
+        panelRound3.setRoundBottomLeft(30);
+        panelRound3.setRoundBottomRight(30);
+        panelRound3.setRoundTopLeft(30);
+        panelRound3.setRoundTopRight(30);
+        panelRound3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtBusquedaNombre4.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
+        txtBusquedaNombre4.setForeground(new java.awt.Color(255, 255, 255));
+        txtBusquedaNombre4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtBusquedaNombre4.setText("Registrar Proveedor");
+        txtBusquedaNombre4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtBusquedaNombre4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtBusquedaNombre4MouseClicked(evt);
+            }
+        });
+        panelRound3.add(txtBusquedaNombre4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 480, 70));
+
+        add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 430, 500, 90));
     }// </editor-fold>//GEN-END:initComponents
 
     private void panelBtnRegistrarEntradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnRegistrarEntradaMouseClicked
-        try {
-            // TODO add your handling code here:
-            control.mostrarVentanaSeleccionarProveedor();
-        } catch (InventarioException ex) {
-            Logger.getLogger(OpcionesInventario.class.getName()).log(Level.SEVERE, null, ex);
-        }
+         control.mostrarVentanaHistorialSalidas();
     }//GEN-LAST:event_panelBtnRegistrarEntradaMouseClicked
 
     private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
         control.mostrarMenuOpciones();
     }//GEN-LAST:event_btnAtrasMouseClicked
 
-    private void panelBtnRegistrarSalidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnRegistrarSalidaMouseClicked
-        control.mostrarVentanaHistorialSalidas();
-    }//GEN-LAST:event_panelBtnRegistrarSalidaMouseClicked
+    private void panelBtnRegistrarEntrada1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnRegistrarEntrada1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelBtnRegistrarEntrada1MouseClicked
+
+    private void txtBusquedaNombre3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBusquedaNombre3MouseClicked
+       control.mostrarVentanaProductoNuevo();
+    }//GEN-LAST:event_txtBusquedaNombre3MouseClicked
+
+    private void txtBusquedaNombre4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBusquedaNombre4MouseClicked
+        control.mostrarAgregarProveedor();
+    }//GEN-LAST:event_txtBusquedaNombre4MouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+         control.mostrarVentanaHistorialSalidas();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+         control.mostrarVentanaHistorialSalidas();
+    }//GEN-LAST:event_jLabel2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnAtras;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel labelEmpleado;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel labelFecha;
     private javax.swing.JLabel labelRegistrarEntrada;
     private javax.swing.JPanel panelBtnRegistrarEntrada;
-    private javax.swing.JPanel panelBtnRegistrarProveedor;
-    private javax.swing.JPanel panelBtnRegistrarSalida;
+    private javax.swing.JPanel panelBtnRegistrarEntrada1;
+    private GUI.PanelRound panelRound2;
+    private GUI.PanelRound panelRound3;
+    private javax.swing.JLabel txtBusquedaNombre3;
+    private javax.swing.JLabel txtBusquedaNombre4;
     // End of variables declaration//GEN-END:variables
 
 
     public void cargarEmpleado(){
         try {
-            labelEmpleado.setText("Bienvenido: " + control.cargarEmpleado().getNombre());
+            EmpleadoCargadoDTO empleado = control.cargarEmpleado();
+            
+            jLabel5.setText("Bienvenido, " + empleado.getNombre() + "!");
         } catch (NegocioException ex) {
             //Tira exception inventario
             Logger.getLogger(OpcionesInventario.class.getName()).log(Level.SEVERE, null, ex);
@@ -178,9 +261,19 @@ public class OpcionesInventario extends javax.swing.JPanel {
     
     
     public void inicializarValoresDefault(){
-        labelFecha.setText("Fecha: " + LocalDateTime.now().toString());
+        LocalDateTime fecha = LocalDateTime.now();
+        String fechaString = formatearFecha(fecha);
+        labelFecha.setText("Fecha: " + fechaString );
+        cargarEmpleado();
         
-        
+    }
+    
+    private String formatearFecha(LocalDateTime fecha) {
+        if (fecha == null) {
+            return "No disponible";
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return fecha.format(formatter);
     }
 
 }
