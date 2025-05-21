@@ -684,6 +684,14 @@ public class Aplicacion {
             throw new VentaException("Ocurrio un error registrando la venta" + ex.getMessage());
         }
     }
+    
+    public List<ProductoCargadoDTO> buscaPorNombre(String textoBusqueda) throws VentaException{
+        try {
+            return realizarVenta.buscaPorNombre(textoBusqueda);
+        } catch (VentaException ex) {
+            throw new VentaException("Ocurrio un error al buscar los productos por nombre" + ex.getMessage());
+        }
+    }
     //////////////////////////////////////////////////////////////////////////////////////////////////
 
     /////////////////////////////METODOS PARA EL CASO DE USO DE HACER UNA SALIDA//////////////////////////////////////////////////////////////

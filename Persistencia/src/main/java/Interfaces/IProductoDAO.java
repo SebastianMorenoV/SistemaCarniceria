@@ -18,4 +18,6 @@ public interface IProductoDAO {
     public Producto agregarProducto(Producto producto) throws PersistenciaException;
     
     public List<Producto> buscadorProducto(String nombre) throws PersistenciaException;
+    
+    public List<Producto> buscarPorNombre(String textoBusqueda) throws PersistenciaException;
 }

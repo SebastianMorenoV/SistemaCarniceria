@@ -431,20 +431,23 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
     private void inputCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputCodigoKeyReleased
         String textoBusqueda = inputCodigo.getText().trim();
+ 
         try {
             buscarProducto(textoBusqueda);
-        } catch (NegocioException ex) {
+        } catch (VentaException ex) {
             Logger.getLogger(RegistrarVenta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_inputCodigoKeyReleased
 
     private void inputNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputNombreKeyReleased
         String textoBusqueda = inputNombre.getText().trim();
+
         try {
             buscarProducto(textoBusqueda);
-        } catch (NegocioException ex) {
+        } catch (VentaException ex) {
             Logger.getLogger(RegistrarVenta.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_inputNombreKeyReleased
 
     private void inputCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputCodigoKeyTyped
@@ -452,7 +455,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
         // Solo permite números (0-9) y retroceso
         if (!Character.isDigit(c) && c != KeyEvent.VK_BACK_SPACE) {
             evt.consume(); // Ignora la entrada si no es válida
-        }
+        }    
     }//GEN-LAST:event_inputCodigoKeyTyped
 
     private void inputNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputNombreKeyTyped
@@ -577,28 +580,19 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
     }
 
-    private void buscarProducto(String textoBusqueda) throws NegocioException {
-        DefaultListModel<String> modeloFiltrado = new DefaultListModel<>();
-
-        if (textoBusqueda.trim().isEmpty()) {
-            cargarProductos();
-            return;
+    private void buscarProducto(String textoBusqueda) throws VentaException {
+        List<ProductoCargadoDTO> resultados = app.buscaPorNombre(textoBusqueda);
+        actualizarListaProductos(resultados);
+    }
+    
+    private void actualizarListaProductos(List<ProductoCargadoDTO> productos) {
+        DefaultListModel<String> modelo = new DefaultListModel<>();
+        
+        for (ProductoCargadoDTO p : productos) {
+            modelo.addElement(p.getCodigo() + " " + p.getNombre() + " " + p.getDescripcion() + "  $" + p.getPrecio());
         }
-
-        for (ProductoCargadoDTO p : listadoProductosCargados) {
-            String infoProducto = p.getCodigo() + " " + p.getNombre() + " " + p.getDescripcion() + " $" + p.getPrecio();
-            // Convertir todo a minúsculas para búsqueda flexible
-            String productoNormalizado = infoProducto.toLowerCase().replaceAll("\\s+", "");
-            String textoNormalizado = textoBusqueda.toLowerCase().replaceAll("\\s+", "");
-            if (productoNormalizado.contains(textoNormalizado)) {
-                modeloFiltrado.addElement(infoProducto);
-            }
-        }
-
-        if (modeloFiltrado.isEmpty()) {
-            modeloFiltrado.addElement("No se encontraron coincidencias.");
-        }
-        listadoGraficoProductosCargados.setModel(modeloFiltrado);
+        listadoGraficoProductosCargados.setModel(modelo);
+        listadoProductosCargados = productos;
     }
 
     public void agregarProductoVenta() {

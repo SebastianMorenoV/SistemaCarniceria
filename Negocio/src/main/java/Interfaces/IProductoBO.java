@@ -20,4 +20,6 @@ public interface IProductoBO {
     
     public List<ProductoCargadoDTO> buscadorProducto(String nombre) throws NegocioException;
     
+    public List<ProductoCargadoDTO> buscaPorNombre(String textoBusqueda) throws NegocioException;
+    
 }

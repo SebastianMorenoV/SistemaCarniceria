@@ -121,11 +121,7 @@ public class FormularioProductoNuevo extends javax.swing.JPanel {
         //validaciones();
         agregarProducto();
 
-        try {
-            control.mostrarVentanaSeleccionarProductosEntrada();
-        } catch (NegocioException ex) {
-            Logger.getLogger(FormularioProductoNuevo.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        control.mostrarVentanaOpcionesInventario();
     }//GEN-LAST:event_BtnAceptarMouseClicked
 
     private void BtnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCancelarMouseClicked

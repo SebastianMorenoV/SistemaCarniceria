@@ -47,5 +47,7 @@ public interface IRealizarVenta {
     
     public NuevaTarjetaDTO buscarTarjeta(String titular, String numeroTarjeta, String fechaVencimiento, int cvv) throws VentaException;
     
+    public List<ProductoCargadoDTO> buscaPorNombre(String textoBusqueda) throws VentaException;
+    
     public void generarYMostrarPDFVenta(VentaDTO venta);
 }

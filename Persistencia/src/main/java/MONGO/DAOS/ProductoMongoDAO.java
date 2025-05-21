@@ -39,7 +39,18 @@ public class ProductoMongoDAO implements IProductoDAO {
 
     @Override
     public List<Producto> consultarProductos() throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            List<Producto> productos = new ArrayList<>();
+            FindIterable<Producto> resultados = coleccion.find();
+
+            for (Producto producto : resultados) {
+                productos.add(producto);
+            }
+
+            return productos;
+        } catch (Exception e) {
+            throw new PersistenciaException("No se pudieron consultar los productos", e);
+        }
     }
 
     @Override
@@ -117,5 +128,37 @@ public class ProductoMongoDAO implements IProductoDAO {
 
         return siguienteId;
     }
+    
+    @Override
+    public List<Producto> buscarPorNombre(String textoBusqueda) throws PersistenciaException {
+        try {
+            List<Producto> productosEncontrados = new ArrayList<>();
+
+            if (textoBusqueda == null || textoBusqueda.trim().isEmpty()) {
+                // Si no hay texto de búsqueda, regresamos todos los productos
+                return consultarProductos();
+            }
+
+            // Normalizamos el texto de búsqueda: minúsculas y sin espacios
+            String textoNormalizado = textoBusqueda.toLowerCase().replaceAll("\\s+", "");
+
+            // Obtenemos todos los productos para aplicar la lógica de comparación en Java
+            List<Producto> todos = consultarProductos();
+
+            for (Producto p : todos) {
+                String infoProducto = p.getId() + " " + p.getNombre() + " " + p.getDescripcion() + " $" + p.getPrecio();
+                String productoNormalizado = infoProducto.toLowerCase().replaceAll("\\s+", "");
+
+                if (productoNormalizado.contains(textoNormalizado)) {
+                    productosEncontrados.add(p);
+                }
+            }
+
+            return productosEncontrados;
+        } catch (Exception e) {
+            throw new PersistenciaException("No se pudo buscar el producto por nombre", e);
+        }
+    }
+
 
 }

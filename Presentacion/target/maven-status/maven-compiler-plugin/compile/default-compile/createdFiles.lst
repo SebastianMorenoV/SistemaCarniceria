@@ -21,6 +21,7 @@ GUI\ModuloRealizarDevolucion\PantallaDevolucion$3.class
 GUI\ModuloRegistrarEntrada\FormularioProductoNuevo$1.class
 GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones$3.class
 GUI\ModuloRealizarDevolucion\PantallaTicket$5.class
+GUI\ModuloRegistrarEntrada\OpcionesInventario$6.class
 GUI\ModuloRealizarVenta\MenuOpciones$2.class
 GUI\ModuloRealizarVenta\FormularioEfectivo.class
 GUI\ModuloRealizarVenta\VentanaProcesandoPago.class
@@ -32,6 +33,7 @@ com\carniceria\presentacion\Presentacion.class
 GUI\ModuloRealizarVenta\RegistrarVenta$9.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$9.class
 GUI\ModuloGastos\FormularioRegistrarGasto$5.class
+GUI\ModuloRegistrarEntrada\OpcionesInventario$7.class
 GUI\ModuloRealizarVenta\GenerarTicketVenta$1.class
 GUI\ModuloRegistrarEntrada\FormularioProductoNuevo$2.class
 GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones.class

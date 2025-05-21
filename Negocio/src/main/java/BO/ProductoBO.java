@@ -36,7 +36,7 @@ public class ProductoBO implements IProductoBO {
         List<ProductoCargadoDTO> listaProductosDTO = new ArrayList<>();
 
         try {
-            List<Producto> listaProductos = productosDAOMokos.consultarProductos();
+            List<Producto> listaProductos = productoDAO.consultarProductos();
 
             //usar el adaptador para convertir los Producto a ProductoDTO
             for (Producto producto : listaProductos) {
@@ -78,5 +78,21 @@ public class ProductoBO implements IProductoBO {
             throw new NegocioException("Error al hacer la busqueda",e);
         }
     }
+
+    @Override
+    public List<ProductoCargadoDTO> buscaPorNombre(String textoBusqueda) throws NegocioException {
+        List<ProductoCargadoDTO> listaProductosDTO = new ArrayList<>();
+        try {
+            List<Producto> listaProductos = productoDAO.buscarPorNombre(textoBusqueda);
+            for (Producto producto : listaProductos) {
+                ProductoCargadoDTO productoDTO = adaptadorProducto.convertirADTO(producto);
+                listaProductosDTO.add(productoDTO);
+            }
+            return listaProductosDTO;
+        } catch (PersistenciaException e) {
+            throw new NegocioException("Error al buscar productos por nombre", e);
+        }
+    }
+
     
 }

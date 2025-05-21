@@ -26,6 +26,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Esta clase representa el subsistema de caso de uso. (REALIZAR UNA VENTA)
@@ -158,6 +160,8 @@ public class RealizarVenta implements IRealizarVenta {
             throw new VentaException("Error al encontrar tarjeta" + e.getLocalizedMessage());
         }
     }
+    
+    
 
     @Override
     public void generarYMostrarPDFVenta(VentaDTO venta) {
@@ -227,6 +231,15 @@ public class RealizarVenta implements IRealizarVenta {
 
     public void setPagaraCon(double pagaraCon) {
         this.pagaraCon = pagaraCon;
+    }
+
+    @Override
+    public List<ProductoCargadoDTO> buscaPorNombre(String textoBusqueda) throws VentaException {
+        try {
+            return productoBO.buscaPorNombre(textoBusqueda);
+        } catch (NegocioException ex) {
+            throw new VentaException("Error al buscar por nombre: " + ex.getLocalizedMessage());
+        }
     }
 
 }
