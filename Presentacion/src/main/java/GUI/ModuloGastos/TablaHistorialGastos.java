@@ -38,7 +38,7 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
         initComponents();
         llenarTablaInicial();
 
-        // Escuchadores para filtros
+        //listeners para filtros
         jComboBox1.addActionListener(e -> aplicarFiltros());
         jComboBox2.addActionListener(e -> aplicarFiltros());
 
@@ -212,7 +212,7 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
                     int fila = tablaHisotrialGastos.rowAtPoint(e.getPoint());
                     int columna = tablaHisotrialGastos.columnAtPoint(e.getPoint());
 
-                    if (columna == 7 && fila != -1) { // Columna "Editar"
+                    if (columna == 7 && fila != -1) { //columna "Editar"
 
                         //Categoria
                         Object categoria = tablaHisotrialGastos.getValueAt(fila, 0);
@@ -254,9 +254,6 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
                         app.setCrearGastoDTO(gastoEditable);
 
                         app.mostrarPantallaEditarGasto();
-                        // GastoDTO gasto = app.buscarGastoPorFolio(folio.toString());
-                        // app.mostrarFormularioEdicionGasto(gasto);
-                        // algo asi seria este show oq?
                     }
                 }
             });
@@ -284,7 +281,7 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
             LocalDate fechaInicio = null;
             LocalDate fechaFin = null;
 
-            ZoneId zonaLocal = ZoneId.systemDefault(); //America/Mexico_City
+            ZoneId zonaLocal = ZoneId.systemDefault(); 
             if (fechaInicioDate != null) {
                 fechaInicio = fechaInicioDate.toInstant().atZone(zonaLocal).toLocalDate();
             }
@@ -297,10 +294,9 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
                 fechaFin = null;
             }
 
-            // Consultar gastos filtrados
+
             List<GastoDTO> gastos = app.consultarGastosFiltrados(filtro, fechaInicio, fechaFin);
 
-            // Actualizar tabla
             actualizarTabla(gastos);
             gastosLista = gastos;
            
@@ -338,14 +334,14 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
 
         tablaHisotrialGastos.setModel(modelo);
 
-        // Volver a agregar el listener para editar
+        //volver a agregar el listener para editar
         tablaHisotrialGastos.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 int fila = tablaHisotrialGastos.rowAtPoint(e.getPoint());
                 int columna = tablaHisotrialGastos.columnAtPoint(e.getPoint());
 
-                if (columna == 7 && fila != -1) { // Columna "Editar"
+                if (columna == 7 && fila != -1) { //columna "Editar"
 
                     //Categoria
                     Object categoria = tablaHisotrialGastos.getValueAt(fila, 0);

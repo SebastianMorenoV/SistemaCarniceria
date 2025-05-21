@@ -301,7 +301,7 @@ public class FormularioRegistrarGasto extends javax.swing.JPanel {
                 || montoText.isEmpty()
                 || proveedor == null) { 
 
-            JOptionPane.showMessageDialog(null, "Por favor, completa todos los campos obligatorios.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Por favor, completa todos los campos obligatorios.", "Campos Vacios", JOptionPane.WARNING_MESSAGE);
             return; 
         }
 
@@ -316,7 +316,7 @@ public class FormularioRegistrarGasto extends javax.swing.JPanel {
                 return;
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "El **monto** debe ser un número válido.", "Error de Formato", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El **monto** debe ser un numero valido.", "Error de Formato", JOptionPane.WARNING_MESSAGE);
             return; 
         }
         
@@ -347,7 +347,7 @@ public class FormularioRegistrarGasto extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Gasto registrado exitosamente", "Gasto Registrado", JOptionPane.INFORMATION_MESSAGE);
             app.mostrarPantallaMenuGastos();
         } else {           
-            JOptionPane.showMessageDialog(null, "Ocurrió un error al registrar el gasto. Inténtalo de nuevo.", "Error de Registro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ocurrio un error al registrar el gasto. Intentalo de nuevo.", "Error de Registro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -370,7 +370,7 @@ public class FormularioRegistrarGasto extends javax.swing.JPanel {
     public void subirArchivo(){
         JFileChooser fileChooser = new JFileChooser();
 
-        // Crear filtro para archivos JPG y PNG
+        //filtro para archivos JPG y PNG
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Imagenes (JPG, PNG)", "jpg", "jpeg", "png");
         fileChooser.setFileFilter(filter);
 
@@ -379,12 +379,8 @@ public class FormularioRegistrarGasto extends javax.swing.JPanel {
         if (resultado == JFileChooser.APPROVE_OPTION) {
             File archivoSeleccionado = fileChooser.getSelectedFile();
             try {
-                // Leer el archivo como arreglo de bytes
+                //leer el archivo como arreglo de bytes
                 comprobanteSeleccionado = Files.readAllBytes(archivoSeleccionado.toPath());
-                // Aquí podrías guardar el archivo en un atributo de clase para luego usarlo al registrar el gasto
-                //this.comprobanteSeleccionado = comprobante;
-
-                // Opcional: cambiar el texto del botón o mostrar mensaje
                 btnSubirArchivo.setText("Archivo seleccionado");
                 imgJPG.setVisible(false);
                 imgPNG.setVisible(false);

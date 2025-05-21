@@ -243,9 +243,6 @@ public class FormularioEditarGasto extends javax.swing.JPanel {
         // Monto
         inputMonto.setText(gasto.getMontoGasto().toString());
         
-        //Folio
-        
-        
         //Categoria
         comboCategoria.setSelectedItem(gasto.getCategoria());
 
@@ -263,7 +260,6 @@ public class FormularioEditarGasto extends javax.swing.JPanel {
         String montoTexto = inputMonto.getText().trim();
         CrearProveedorDTO proveedor = (CrearProveedorDTO) comboProveedor.getSelectedItem();
 
-        // --- Validaciones generales de campos vacíos o nulos ---
         if (concepto.isEmpty()
                 || metodoPago.isEmpty()
                 || folio.isEmpty()
@@ -275,7 +271,6 @@ public class FormularioEditarGasto extends javax.swing.JPanel {
             return;
         }
 
-        // --- Validación específica de monto ---
         double monto;
         try {
             monto = Double.parseDouble(montoTexto);
@@ -284,11 +279,10 @@ public class FormularioEditarGasto extends javax.swing.JPanel {
                 return;
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "El monto debe ser un número válido.", "Error de Formato", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El monto debe ser un numero valido.", "Error de Formato", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // --- Continuar con conversión y operaciones ---
         LocalDate fechaGasto = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         String nombreBuscar = proveedor.getNombre();
         ProveedorDTO proveedorInsertar = app.buscarPorNombre(nombreBuscar);
@@ -312,7 +306,7 @@ public class FormularioEditarGasto extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Gasto modificado exitosamente.", "Modificación Exitosa", JOptionPane.INFORMATION_MESSAGE);
             app.mostrarPantallaMenuGastos();
         } else {
-            JOptionPane.showMessageDialog(null, "Ocurrió un error al modificar el gasto. Inténtalo de nuevo.", "Error de Modificación", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ocurrio un error al modificar el gasto. Intentalo de nuevo.", "Error de Modificación", JOptionPane.ERROR_MESSAGE);
         }
     }
 

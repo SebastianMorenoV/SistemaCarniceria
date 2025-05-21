@@ -101,7 +101,7 @@ public class ProductoCargadoDTO {
 
     @Override
     public String toString() {
-        return nombre;
+        return nombre + stock;
     }
 
   

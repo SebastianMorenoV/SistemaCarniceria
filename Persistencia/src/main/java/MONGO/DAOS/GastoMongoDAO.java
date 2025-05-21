@@ -140,7 +140,6 @@ public class GastoMongoDAO implements IGastoDAO{
             Bson gastosFiltrados = filtros.isEmpty() ? new org.bson.Document() : Filters.and(filtros);
 
             //aqui se ejecuta la consulta en la coleccion MongoDB usando el filtro construido "filtros"
-            //System.out.println(coleccion.find(gastosFiltrados).into(new ArrayList<>()));
             return coleccion.find(gastosFiltrados).into(new ArrayList<>());
 
             //.into(new ArrayList<>()) copia todos los resultados en una nueva lista (ArrayList), que es lo que devuelve el metodo            

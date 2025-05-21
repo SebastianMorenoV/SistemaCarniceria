@@ -86,7 +86,7 @@ public class GastoBO implements IGastoBO {
             }
         } catch (PersistenciaException ex) {
             Logger.getLogger(GastoBO.class.getName()).log(Level.SEVERE, null, ex);
-            return new ArrayList<>(); // Retornar una lista vacia para evitar NullPointerException
+            return new ArrayList<>(); //lista vacia para evitar NullPointerException
         }
 
         return gastosDTO;
