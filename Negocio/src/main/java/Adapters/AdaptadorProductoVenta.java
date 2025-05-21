@@ -35,6 +35,7 @@ public class AdaptadorProductoVenta implements IAdaptadorProductoVenta {
         productoDTO.getProducto().setStock(producto.getProducto().getStock()); //FUERZA BRUTA 
 
         return productoDTO;
+        
     }
 
     @Override
