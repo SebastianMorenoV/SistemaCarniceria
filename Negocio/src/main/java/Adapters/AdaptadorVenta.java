@@ -49,6 +49,7 @@ public class AdaptadorVenta implements IAdaptadorVenta {
         for (ProductoVenta productoVenta : productosVenta) {
 
             ProductoVentaDTO dto = productoVentaAdapter.convertirProductoVentaADTO(productoVenta);
+            System.out.println("Producto venta desde adapter Venta" + dto);
             productosVentaDTO.add(dto);
         }
 

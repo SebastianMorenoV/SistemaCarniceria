@@ -44,8 +44,7 @@ public class ProductoMongoDAO implements IProductoDAO{
             if (producto.getId() == null) {
                 producto.setId(new ObjectId().getTimestamp());
             }
-            
-            System.out.println(producto.getId() + "Persistencia");
+
             coleccion.insertOne(producto);
             return producto;
             

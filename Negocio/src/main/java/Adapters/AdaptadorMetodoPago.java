@@ -54,7 +54,9 @@ public class AdaptadorMetodoPago implements IAdaptadorMetodoPago {
     public MetodoPago convertirAEntidad(MetodoPagoDTO metodoPagoDTO) {
         MetodoPago metodoPago = new MetodoPago();
         if (metodoPagoDTO.getNuevoEfectivo() != null) {
-            metodoPago.setEfectivo(new Efectivo());
+            Efectivo efectivo = new Efectivo();
+            efectivo.setMonto(metodoPagoDTO.getNuevoEfectivo().getPagoCon());
+            metodoPago.setEfectivo(efectivo);
         } else {
             metodoPago.setTarjeta(new Tarjeta());
         }

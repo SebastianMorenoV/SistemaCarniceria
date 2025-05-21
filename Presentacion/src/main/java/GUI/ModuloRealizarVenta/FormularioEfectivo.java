@@ -182,6 +182,7 @@ public class FormularioEfectivo extends javax.swing.JPanel {
             NuevoEfectivoDTO nuevoPagoEfectivo = new NuevoEfectivoDTO(pagaraCon);
             PagoViejoDTO pago = new PagoViejoDTO(LocalDateTime.now(), new MetodoPagoDTO(nuevoPagoEfectivo), total);
             pago.setEstado("Pagado");
+            
             //AQUI DEBERIAMOS TENER LA LOGICA DE ENVIAR EL PAGO AL SUBSISTEMA.
             //AUN NO LOSE PERO SUPONGO QUE DEBE DE SER EL PATRON OBSERVER.
             //LA VENTANUEVA DEBE TENER EL PAGO DEVUELTO POR EL SUBSISTEMA Y SETEARLE ESE PAGO CON ID GENERADO A LA VENTA.

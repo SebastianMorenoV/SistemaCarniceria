@@ -4,15 +4,20 @@
  */
 package entidades;
 
+import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 
 /**
  * Esta clase representa una entidad Producto en el sistema.
+ *
  * @author Sebastian Moreno
  */
 public class Producto {
+
+    @BsonId
     ObjectId _id;
+    @BsonProperty("codigo")
     Integer id;
     @BsonProperty("nombre")
     String nombre;
@@ -24,9 +29,9 @@ public class Producto {
 
     public Producto() {
     }
-    
-    public Producto(Integer id, String nombre, String descripcion, double precio, boolean esPesable, double unidad, double stock) {
-        this.id = id;
+
+    public Producto(ObjectId id, String nombre, String descripcion, double precio, boolean esPesable, double unidad, double stock) {
+        this._id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
@@ -44,12 +49,11 @@ public class Producto {
         this.stock = stock;
     }
 
-    public Producto(int id, String nombre, String descripcion) {
+    public Producto(Integer id, String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
-    
 
     public ObjectId get_Id() {
         return _id;
@@ -66,8 +70,6 @@ public class Producto {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    
 
     public String getNombre() {
         return nombre;
@@ -116,7 +118,10 @@ public class Producto {
     public void setStock(double stock) {
         this.stock = stock;
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Producto{" + "_id=" + _id + ", id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio + ", esPesable=" + esPesable + ", unidad=" + unidad + ", stock=" + stock + '}';
+    }
+
 }

@@ -58,8 +58,9 @@ public class ProductoVentaDTO {
 
     @Override
     public String toString() {
-        return "ProductoVentaDTO{" + "producto=" + producto + ", cantidad=" + cantidad + ", precioUnitario=" + precioUnitario + ", importe=" + importe + '}';
+        return "ProductoVentaDTO{" + "producto=" + producto.getCodigo() + ", cantidad=" + cantidad + ", precioUnitario=" + precioUnitario + ", importe=" + importe + '}';
     }
+
     
     
     

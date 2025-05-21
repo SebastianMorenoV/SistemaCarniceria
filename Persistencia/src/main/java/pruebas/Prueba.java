@@ -34,7 +34,7 @@ public class Prueba {
         }
         */
         
-        Producto producto = new Producto("Leche chavo", "Eskeler", 0, true, 0, 0);
+        Producto producto = new Producto("Hamburguesas", "Eskeler", 0, true, 10, 200);
         try {
             productoDAO.agregarProducto(producto);
         } catch (Exception e) {

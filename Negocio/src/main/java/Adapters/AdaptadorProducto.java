@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Adapters;
 
 import IAdapters.IAdaptadorProducto;
@@ -31,7 +28,7 @@ public class AdaptadorProducto implements IAdaptadorProducto{
     @Override
     public Producto convertirAEntidad(ProductoCargadoDTO producto) {
        Producto productoEntidad = new  Producto();
-       // productoDTO.setCodigo(producto.getId());
+        productoEntidad.setId(producto.getCodigo());
        //productoEntidad.setEsPesable(producto.);
        //productoEntidad.setTexto(texto);
        productoEntidad.setPrecio(producto.getPrecio());

@@ -40,6 +40,7 @@ public class ReporteService {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
             doc.add(new Paragraph("Fecha y Hora: " + venta.getFechaHora().format(formatter)));
             doc.add(new Paragraph("Empleado: " + venta.getEmpleado().getNombre()));
+            doc.add(new Paragraph("Identificador de ticket: " + venta.getId()));
             doc.add(Chunk.NEWLINE);
 
             // Tabla de productos
@@ -76,7 +77,7 @@ public class ReporteService {
                 if (metodo.getNuevoEfectivo() != null) {
                     doc.add(new Paragraph("- Efectivo"));
                     doc.add(new Paragraph("  Monto recibido: $" + String.format("%.2f", venta.getPago().getMonto())));
-                    double cambio = venta.getPago().getMonto() - venta.getTotal();
+                    double cambio = venta.getPago().getMetodoPago().getNuevoEfectivo().getPagoCon();
                     doc.add(new Paragraph("  Cambio: $" + String.format("%.2f", cambio)));
                 } else if (metodo.getNuevaTarjeta() != null) {
                     doc.add(new Paragraph("- Tarjeta"));

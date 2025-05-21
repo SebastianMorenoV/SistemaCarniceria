@@ -889,6 +889,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
             
             try {
                 VentaDTO venta = app.registrarVenta(ventaRealizada);
+   
                 app.setearVenta(venta);
                 app.mostrarTicketPDF();
                 System.out.println("FINALZIAR:" + venta);

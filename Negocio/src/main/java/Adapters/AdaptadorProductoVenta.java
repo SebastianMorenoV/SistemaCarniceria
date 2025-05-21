@@ -54,7 +54,7 @@ public class AdaptadorProductoVenta implements IAdaptadorProductoVenta {
         List<NuevoProductoVentaDTO> listaProductosVentaDTO = new ArrayList<>();
         for (ProductoVenta producto : listaProductoVenta) {
             listaProductosVentaDTO.add(convertirADTO(producto));
-
+            
         }
         return listaProductosVentaDTO;
 
@@ -84,6 +84,7 @@ public class AdaptadorProductoVenta implements IAdaptadorProductoVenta {
     
       @Override
     public ProductoVenta convertirProductoVentaAEntidad(ProductoVentaDTO producto) {
+          System.out.println("PRODUCTO DESDE EL ADAPTER PRODUCTO VENTA" + producto);
         Producto productoCargado = adapter.convertirAEntidad(producto.getProducto());
         ProductoVenta productoVentaEntidad = new ProductoVenta();
         productoVentaEntidad.setProducto(productoCargado);

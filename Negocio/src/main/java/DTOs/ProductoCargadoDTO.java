@@ -101,8 +101,12 @@ public class ProductoCargadoDTO {
 
     @Override
     public String toString() {
-        return codigo + " " + nombre + " " + descripcion + " $" + precio;
+        return nombre;
     }
+
+  
+
+
 
   
 }
