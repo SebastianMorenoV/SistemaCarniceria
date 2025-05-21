@@ -38,8 +38,8 @@ import GUI.ModuloRealizarDevolucion.PantallaTicket;
 import GUI.ModuloRealizarVenta.GenerarTicketVenta;
 import GUI.ModuloRegistrarEntrada.FormularioDatosEntrada;
 import GUI.ModuloRegistrarEntrada.FormularioProductoNuevo;
+import GUI.ModuloRegistrarEntrada.InformacionRegistrarEntrada;
 import GUI.ModuloRegistrarEntrada.OpcionesInventario;
-import GUI.ModuloRegistrarEntrada.PanelRegistrarProductosEntrada;
 import GUI.ModuloRegistrarEntrada.SeleccionarProducto;
 import GUI.ModuloRegistrarEntrada.SeleccionarProveedor;
 import GUI.ModuloRegistrarSalida.DialogoRegistrarSalida;
@@ -92,7 +92,7 @@ public class Aplicacion {
 
     //caso registrarEntrada
     private RegistrarEntrada registrarEntrada;
-    private PanelRegistrarProductosEntrada panelResumenEntrada;
+    private InformacionRegistrarEntrada panelResumenEntrada;
     private SeleccionarProducto seleccionarProducto;
     private SeleccionarProveedor seleccionarProveedor;
     private OpcionesInventario menuInventario;
@@ -382,12 +382,7 @@ public class Aplicacion {
     }
 
     public void agregarProductoNuevo(ProductoCargadoDTO producto) throws NegocioException {
-        try {
-            registrarEntrada.agregarProducto(producto);
-        } catch (NegocioException e) {
-            throw new NegocioException("Error al agregar Producto", e);
-        }
-
+        registrarEntrada.agregarProducto(producto);
     }
 
     public EmpleadoCargadoDTO cargarEmpleado() throws NegocioException {
@@ -536,9 +531,8 @@ public class Aplicacion {
     }
 
     //Caso Registrar entrada ----------------------------------------
-    public void MostrarErrorNumeroInvalido() {
+        public void MostrarErrorNumeroInvalido() {
         JOptionPane.showMessageDialog(framePrincipal, "Error: Ingresa un valor numérico válido.");
-        mostrarVentanaDatosEntrada();
     }
 
     public void MostrarErrorUsarioCancelo() {
@@ -566,13 +560,14 @@ public class Aplicacion {
     }
 
     public void mostrarVentanaInformacionEntrada() throws InventarioException {
-        panelResumenEntrada = new PanelRegistrarProductosEntrada(this);
+        panelResumenEntrada = new InformacionRegistrarEntrada(this);
         cambiarPantalla(panelResumenEntrada);
     }
 
     public void mostrarVentanaDatosEntrada() {
         FormularioDatosEntrada ventanaDatos = new FormularioDatosEntrada(this);
     }
+
 
     public void setProveedor(ProveedorDTO proveedor) {
         registrarEntrada.setProveedor(proveedor);
@@ -598,9 +593,13 @@ public class Aplicacion {
         return registrarEntrada.cargarProductosEntrada();
     }
 
+    public List<ProductoCargadoDTO> cargarProductosCE() throws InventarioException {
+        return registrarEntrada.cargarProductos();
+    }
+
+
     public void agregarProductoEntrada() throws InventarioException {
         registrarEntrada.agregarProductoEntrada();
-        mostrarVentanaInformacionEntrada();
     }
 
     public void setEntradaTemporal(EntradaDTO entrada) {
@@ -613,6 +612,35 @@ public class Aplicacion {
 
     public void registrarEntrada(EntradaDTO entrada) throws InventarioException {
         registrarEntrada.registrarEntrada(entrada);
+    }
+    //metodos para seTear los atributos de la entrada temporal
+    
+    public double calcularIVAEntrada(double subtotal) {
+        return registrarEntrada.calcularIVA(subtotal);
+    }
+    public double calcularSubtotalEntrada(List<ProductoEntradaDTO> productosEnTabla) {
+        return registrarEntrada.calcularSubtotal(productosEnTabla);
+    }
+    public double calcularTotalEntrada(double iva, double subtotal) {
+        return registrarEntrada.calcularTotal(iva, subtotal);
+    }
+    public void setIVATemporalEntrada(double iva) {
+        registrarEntrada.setIva(iva);
+    }
+    public void setTotalTemporalTemporalEntrada(double total) {
+        registrarEntrada.setTotal(total);
+    }
+    public void setSubtotalTemporalEntrada(double subtotal) {
+        registrarEntrada.setSubtotal(subtotal);
+    }
+    public double getIVATemporalEntrada() {
+        return registrarEntrada.getIva();
+    }
+    public double getTotalTemporalEntrada() {
+        return registrarEntrada.getTotal();
+    }
+    public double getSubtotalTemporalEntrada() {
+        return registrarEntrada.getSubtotal();
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////

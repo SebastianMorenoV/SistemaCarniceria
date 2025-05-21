@@ -20,5 +20,5 @@ public interface IAdaptadorProveedor {
     
     public Proveedor ConvertirAEntidad(CrearProveedorDTO proveedorDTO);
     
-    public Proveedor ConvertirAEntidad(ProveedorDTO proveedorDTO);
+    public Proveedor ConvertirAEntidadEntrada(ProveedorDTO proveedorDTO);
 }

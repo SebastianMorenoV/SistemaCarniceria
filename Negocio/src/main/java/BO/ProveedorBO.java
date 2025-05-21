@@ -71,7 +71,7 @@ public class ProveedorBO implements IProveedorBO{
     @Override
     public ProveedorDTO agregarProveedorEntrada(ProveedorDTO proveedor) throws NegocioException {
                 
-        Proveedor proveedorEntidad = adaptadorProveedor.ConvertirAEntidad(proveedor);
+        Proveedor proveedorEntidad = adaptadorProveedor.ConvertirAEntidadEntrada(proveedor);
 
         try {
             proveedorEntidad = proveedorDAO.agregarProveedor(proveedorEntidad);

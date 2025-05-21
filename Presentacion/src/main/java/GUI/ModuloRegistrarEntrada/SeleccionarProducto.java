@@ -6,6 +6,7 @@ package GUI.ModuloRegistrarEntrada;
 
 
 import DTOs.ProductoCargadoDTO;
+import Exception.InventarioException;
 import Exception.NegocioException;
 import GUI.Aplicacion;
 import java.util.logging.Level;
@@ -47,13 +48,17 @@ public class SeleccionarProducto extends javax.swing.JPanel {
                 return false;
             }                    
         }; 
-        for(ProductoCargadoDTO producto : control.cargarProductos()){
-            modelo.addRow(new Object[]{
+        try {
+            for(ProductoCargadoDTO producto : control.cargarProductosCE()){
+                modelo.addRow(new Object[]{
                     producto.getCodigo(),
                     producto.getNombre(),
                     producto.getDescripcion()
+                }
+                );
             }
-            );
+        } catch (InventarioException ex) {
+            Logger.getLogger(SeleccionarProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
         tablaProductos.setModel(modelo);
         tablaProductos.getTableHeader().setReorderingAllowed(false);
@@ -210,7 +215,7 @@ public class SeleccionarProducto extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(evt.getClickCount() == 2){ 
             try {
-                productoSeleccionado =control.cargarProductos().get(tablaProductos.getSelectedRow());
+                productoSeleccionado = control.cargarProductos().get(tablaProductos.getSelectedRow());
                 productoSeleccionado();
                 mostrarDatosProductoEntrada();
             } catch (NegocioException ex) {

@@ -33,31 +33,7 @@ public class SeleccionarProveedor extends javax.swing.JPanel {
         cargarTabla();
         setVisible(true);
     }
-//    
-//    public void crearTablaProveedores() throws NegocioException{
-//        String columnasTabla[] = {"Nombre","Telefono"};
-//        tablaProveedores.setRowHeight(25);
-//        DefaultTableModel modelo = new DefaultTableModel(columnasTabla, 0) {
-//        @Override
-//            public boolean isCellEditable(int row, int column) {
-//                return false;
-//            }
-//        };
-//        for(ProveedorDTO proveedor : control.cargarProveedores()){
-//            modelo.addRow(new Object[]{
-////              proveedor.getId(),
-//                proveedor.getNombre(),
-//                proveedor.getTelefono()}
-//            );
-//        }
-//        tablaProveedores.setModel(modelo);
-//        tablaProveedores.setRowSelectionAllowed(true);
-//        tablaProveedores.setColumnSelectionAllowed(false);
-//        tablaProveedores.getTableHeader().setReorderingAllowed(false);
-//        tablaProveedores.getTableHeader().setResizingAllowed(false);
-//        panelTablaProveedores.setViewportView(tablaProveedores);
-//
-//    }
+    
         public void cargarTabla() throws InventarioException {
         List<ProveedorDTO> listaProveedores;
         try {
@@ -178,7 +154,7 @@ public class SeleccionarProveedor extends javax.swing.JPanel {
         if(evt.getClickCount() == 2){
             try { 
                 proveedorSeleccionado = control.cargarProveedores().get(tablaProveedores.getSelectedRow());
-                obtenerProveedor();
+                setearProveedor();
                 control.mostrarVentanaSeleccionarProductosEntrada();
             } catch (InventarioException ex) {
                 Logger.getLogger(SeleccionarProveedor.class.getName()).log(Level.SEVERE, null, ex);
@@ -189,7 +165,7 @@ public class SeleccionarProveedor extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tablaProveedoresMouseClicked
 
-    public void obtenerProveedor(){
+    public void setearProveedor(){
         control.setProveedor(proveedorSeleccionado);
     }
 

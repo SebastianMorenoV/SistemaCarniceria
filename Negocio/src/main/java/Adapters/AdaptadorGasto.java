@@ -64,7 +64,7 @@ public class AdaptadorGasto implements IAdapterGasto {
         gastoEntidad.setFechaGasto(gastoDTO.getFechaGasto());
         gastoEntidad.setCategoria(gastoDTO.getCategoria());
 
-        gastoEntidad.setProveedor(adapter.ConvertirAEntidad(gastoDTO.getProveedor()));
+        gastoEntidad.setProveedor(adapter.ConvertirAEntidadEntrada(gastoDTO.getProveedor()));
 
         gastoEntidad.setConcepto(gastoDTO.getConcepto());
         gastoEntidad.setMontoGasto(gastoDTO.getMontoGasto());

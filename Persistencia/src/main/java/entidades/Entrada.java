@@ -77,7 +77,7 @@ public class Entrada {
     public void setTotal(double total) {
         this.total = total;
    }
-    public List getListaProductosEntrada() {
+    public List<ProductoEntrada> getListaProductosEntrada() {
         return listaProductosEntrada;
     }
     public void setListaProductosEntrada(List listaProductosEntrada) {

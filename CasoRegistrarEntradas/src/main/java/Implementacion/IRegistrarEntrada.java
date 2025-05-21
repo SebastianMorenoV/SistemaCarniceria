@@ -14,7 +14,7 @@ import java.util.List;
  * @author HP
  */
 public interface IRegistrarEntrada {
-        public List<ProveedorDTO> cargarProveedores()throws InventarioException;
+             public List<ProveedorDTO> cargarProveedores()throws InventarioException;
         
         public List<ProductoCargadoDTO> cargarProductos() throws InventarioException;
         
@@ -24,11 +24,16 @@ public interface IRegistrarEntrada {
         
         public void agregarProveedor(ProveedorDTO proveedor)throws InventarioException;
         
-        public void setStockProducto(ProductoCargadoDTO producto, Double Unidades);
+        public void setStockProducto(ProductoCargadoDTO producto, double Unidades);
         
         public List<ProductoEntradaDTO> cargarProductosEntrada();
         
-        public void registrarEntrada(EntradaDTO entada)throws InventarioException;
+        public EntradaDTO obtenerEntrada();
         
+        public void setEntradaDTO(EntradaDTO entrada);
+        
+        public void registrarEntrada(EntradaDTO entada)throws InventarioException;
+    
+
 
 }

@@ -19,6 +19,7 @@ public class EntradaDTO {
     public EmpleadoCargadoDTO Empleado;
     public List<ProductoEntradaDTO> listaProductosEntrada;
     public ProveedorDTO Proveedor;
+    public double iva, total, subtotal;
 
     public EntradaDTO(int id, LocalDateTime fechaHora, EmpleadoCargadoDTO Empleado, List<ProductoEntradaDTO> listaProductosEntrada, ProveedorDTO Proveedor) {
         this.id = id;
@@ -78,5 +79,35 @@ public class EntradaDTO {
     public void setProveedor(ProveedorDTO Proveedor) {
         this.Proveedor = Proveedor;
     }
+
+    public double getIva() {
+        return iva;
+    }
+
+    public void setIva(double iva) {
+        this.iva = iva;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    @Override
+    public String toString() {
+        return "EntradaDTO{" + "id=" + id + ", fechaHora=" + fechaHora + ", Empleado=" + Empleado + ", listaProductosEntrada=" + listaProductosEntrada + ", Proveedor=" + Proveedor + ", iva=" + iva + ", total=" + total + ", subtotal=" + subtotal + '}';
+    }
+    
     
 }

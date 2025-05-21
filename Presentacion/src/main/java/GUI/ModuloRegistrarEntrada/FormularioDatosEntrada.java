@@ -146,28 +146,48 @@ public class FormularioDatosEntrada extends javax.swing.JDialog {
         // TODO add your handling code here:
         try {
             validarPrecioCompra();
-            control.agregarProductoEntrada();   
+            ObtenerPrecioCompra(PrecioCompra);
+            ObtenerUnidades(Unidades);
+            control.agregarProductoEntrada(); 
+            control.mostrarVentanaInformacionEntrada();
+            dispose();
         } catch (InventarioException ex) {
             Logger.getLogger(FormularioDatosEntrada.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        dispose();
+        }       
     }//GEN-LAST:event_BotonAceptarMouseClicked
    
-    public void validarPrecioCompra(){
-        String Tunidades = campoUnidades.getText();
-        String TPrecioCompra = campoPrecioCompra.getText();
-        while(!cancelar){
-            try{
-                PrecioCompra = Double.parseDouble(TPrecioCompra);
-                Unidades = Double.parseDouble(Tunidades);
-                ObtenerPrecioCompra(PrecioCompra);
-                ObtenerUnidades(Unidades);
-                cancelar = true;
-            }catch(NumberFormatException e){
-                control.MostrarErrorNumeroInvalido();
-            }
-        }
+    public void validarPrecioCompra() throws InventarioException{
+        String Tunidades = campoUnidades.getText().trim();
+        String TPrecioCompra = campoPrecioCompra.getText().trim();
+
+        try {
+           PrecioCompra = Double.parseDouble(TPrecioCompra);
+           if (PrecioCompra <= 0) {
+               control.MostrarErrorNumeroInvalido(); // o un método más específico
+               campoPrecioCompra.requestFocus();
+               throw new InventarioException("Precio de compra inválido.");
+           }
+       } catch (NumberFormatException e) {
+           control.MostrarErrorNumeroInvalido();
+           campoPrecioCompra.requestFocus();
+           throw new InventarioException("Formato inválido en precio de compra.");
+       }
+
+       try {
+           Unidades = Double.parseDouble(Tunidades);
+           if (Unidades <= 0) {
+               control.MostrarErrorNumeroInvalido();
+               campoUnidades.requestFocus();
+               throw new InventarioException("Cantidad de unidades inválida.");
+           }
+       } catch (NumberFormatException e) {
+           control.MostrarErrorNumeroInvalido();
+           campoUnidades.requestFocus();
+           throw new InventarioException("Formato inválido en unidades.");
+       }
+        
     }
+    
     public void ObtenerUnidades(double Unidades){
        control.setUnidades(Unidades);
     }

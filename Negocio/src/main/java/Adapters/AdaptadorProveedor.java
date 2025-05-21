@@ -36,7 +36,7 @@ public class AdaptadorProveedor implements IAdaptadorProveedor {
     }
 
     @Override
-    public Proveedor ConvertirAEntidad(ProveedorDTO proveedorDTO) {
+    public Proveedor ConvertirAEntidadEntrada(ProveedorDTO proveedorDTO) {
         Proveedor proveedorEntidad = new Proveedor(proveedorDTO.getNombre(), proveedorDTO.getTelefono());
         return proveedorEntidad;
 
