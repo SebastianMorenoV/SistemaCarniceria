@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package GUI.ModuloRegistrarEntrada;
 
 import DTOs.EmpleadoCargadoDTO;
@@ -89,7 +86,7 @@ public class InformacionRegistrarEntrada extends javax.swing.JPanel {
                 BtnRegistrarEntradaMouseClicked(evt);
             }
         });
-        add(BtnRegistrarEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 530, 240, 110));
+        add(BtnRegistrarEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 510, 240, 110));
 
         BtnAgregarProducto.setBackground(new java.awt.Color(204, 204, 204));
         BtnAgregarProducto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -99,7 +96,7 @@ public class InformacionRegistrarEntrada extends javax.swing.JPanel {
                 BtnAgregarProductoMouseClicked(evt);
             }
         });
-        add(BtnAgregarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 400, 240, 50));
+        add(BtnAgregarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 410, 240, 50));
 
         BtnCancelar.setBackground(new java.awt.Color(204, 204, 204));
         BtnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -109,20 +106,20 @@ public class InformacionRegistrarEntrada extends javax.swing.JPanel {
                 BtnCancelarMouseClicked(evt);
             }
         });
-        add(BtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 250, 240, 40));
+        add(BtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 320, 240, 40));
 
         labelSubtotal.setText("Subtotal");
-        add(labelSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 80, -1, -1));
-        add(campoSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 100, 160, -1));
+        add(labelSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 110, -1, -1));
+        add(campoSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 130, 160, -1));
 
         labelTotal.setText("Total");
         labelTotal.setToolTipText("");
-        add(labelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 180, -1, -1));
-        add(CampoTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 200, 160, -1));
+        add(labelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 210, -1, -1));
+        add(CampoTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 230, 160, -1));
 
         labelIva.setText("IVA");
-        add(labelIva, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 130, -1, -1));
-        add(CampoIva, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 150, 160, -1));
+        add(labelIva, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 160, -1, -1));
+        add(CampoIva, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 180, 160, -1));
 
         TablaProductoEntrada.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -155,7 +152,7 @@ public class InformacionRegistrarEntrada extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnRegistrarEntradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRegistrarEntradaMouseClicked
-        // TODO add your handling code here:
+
         entrada = app.getEntradaTemporal();
         try {
             entrada.setEmpleado(app.cargarEmpleado());

@@ -4,6 +4,7 @@ import MONGO.DAOS.ProductoMongoDAO;
 import DAOS.*;
 import Interfaces.*;
 import MONGO.DAOS.DevolucionMongoDAO;
+import MONGO.DAOS.EntradaMongoDAO;
 import MONGO.DAOS.GastoMongoDAO;
 import MONGO.DAOS.ProveedorMongoDAO;
 import MONGO.DAOS.SalidasMongoDAO;
@@ -58,7 +59,7 @@ public class CreadorDAO implements ICreadorDAO {
 
     @Override
     public IEntradaDAO crearEntradaDAO() {
-        return new EntradaDAO();
+        return new EntradaMongoDAO();
     }
 
     @Override

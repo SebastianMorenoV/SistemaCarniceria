@@ -27,7 +27,9 @@ public class AdaptadorProductoEntrada implements IAdaptadorProductoEntrada{
     @Override
     public ProductoEntradaDTO convertirADTO(ProductoEntrada producto) {
         AdaptadorProducto adaptador = new AdaptadorProducto();
+        System.out.println("Producto a entidad llega a convertir a DTO " + producto);
         ProductoCargadoDTO productoDTO = adaptador.convertirADTO(producto.getProducto());
+        System.out.println("PRODUCTO DESDE PRODUCTOentrada convertir a DTO" + productoDTO);
         return new ProductoEntradaDTO(
             productoDTO,
             producto.getUnidades(),

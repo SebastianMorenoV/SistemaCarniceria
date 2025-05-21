@@ -211,7 +211,11 @@ public class OpcionesInventario extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAtrasMouseClicked
 
     private void panelBtnRegistrarEntrada1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnRegistrarEntrada1MouseClicked
-        // TODO add your handling code here:
+        try {
+            control.mostrarVentanaSeleccionarProveedor();
+        } catch (InventarioException ex) {
+            Logger.getLogger(OpcionesInventario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_panelBtnRegistrarEntrada1MouseClicked
 
     private void txtBusquedaNombre3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBusquedaNombre3MouseClicked
@@ -223,7 +227,11 @@ public class OpcionesInventario extends javax.swing.JPanel {
     }//GEN-LAST:event_txtBusquedaNombre4MouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-         control.mostrarVentanaHistorialSalidas();
+        try {
+            control.mostrarVentanaSeleccionarProveedor();
+        } catch (InventarioException ex) {
+            Logger.getLogger(OpcionesInventario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked

@@ -77,7 +77,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="890" y="530" width="240" height="110"/>
+          <AbsoluteConstraints x="820" y="510" width="240" height="110"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -96,7 +96,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="890" y="400" width="240" height="50"/>
+          <AbsoluteConstraints x="820" y="410" width="240" height="50"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -115,7 +115,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="890" y="250" width="240" height="40"/>
+          <AbsoluteConstraints x="820" y="320" width="240" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -125,14 +125,14 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="890" y="80" width="-1" height="-1"/>
+          <AbsoluteConstraints x="820" y="110" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JTextField" name="campoSubtotal">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="890" y="100" width="160" height="-1"/>
+          <AbsoluteConstraints x="820" y="130" width="160" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -143,14 +143,14 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="890" y="180" width="-1" height="-1"/>
+          <AbsoluteConstraints x="820" y="210" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JTextField" name="CampoTotal">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="890" y="200" width="160" height="-1"/>
+          <AbsoluteConstraints x="820" y="230" width="160" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -160,14 +160,14 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="890" y="130" width="-1" height="-1"/>
+          <AbsoluteConstraints x="820" y="160" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JTextField" name="CampoIva">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="890" y="150" width="160" height="-1"/>
+          <AbsoluteConstraints x="820" y="180" width="160" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>

@@ -190,7 +190,11 @@ public class Aplicacion {
     public void mostrarRegistrarVenta() {
         cambiarPantalla(registrarVenta);
     }
-
+    
+    public void reconstruirDefaultVenta(){
+     registrarVenta = new RegistrarVenta(this);
+        cambiarPantalla(registrarVenta);
+    }
     public void reconstruirRegistrarVenta() {
 
         registrarVenta.reiniciarVenta();

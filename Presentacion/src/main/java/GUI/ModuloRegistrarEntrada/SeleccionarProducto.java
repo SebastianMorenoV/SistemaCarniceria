@@ -73,6 +73,7 @@ public class SeleccionarProducto extends javax.swing.JPanel {
 
         panaelTitulo = new javax.swing.JPanel();
         labelSeleccionProv = new javax.swing.JLabel();
+        btnAtras = new javax.swing.JLabel();
         panelBusqueda = new javax.swing.JPanel();
         labelProveedor = new javax.swing.JLabel();
         campoBusqueda = new javax.swing.JTextField();
@@ -85,32 +86,26 @@ public class SeleccionarProducto extends javax.swing.JPanel {
         setToolTipText("");
         setMaximumSize(new java.awt.Dimension(650, 670));
         setPreferredSize(new java.awt.Dimension(650, 670));
-        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panaelTitulo.setMaximumSize(new java.awt.Dimension(600, 75));
         panaelTitulo.setPreferredSize(new java.awt.Dimension(600, 75));
+        panaelTitulo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labelSeleccionProv.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         labelSeleccionProv.setText("Seleccion de Producto");
+        panaelTitulo.add(labelSeleccionProv, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 6, -1, -1));
 
-        javax.swing.GroupLayout panaelTituloLayout = new javax.swing.GroupLayout(panaelTitulo);
-        panaelTitulo.setLayout(panaelTituloLayout);
-        panaelTituloLayout.setHorizontalGroup(
-            panaelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panaelTituloLayout.createSequentialGroup()
-                .addContainerGap(123, Short.MAX_VALUE)
-                .addComponent(labelSeleccionProv)
-                .addGap(121, 121, 121))
-        );
-        panaelTituloLayout.setVerticalGroup(
-            panaelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panaelTituloLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelSeleccionProv)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/atras (1).png"))); // NOI18N
+        btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAtrasMouseClicked(evt);
+            }
+        });
+        panaelTitulo.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 50));
 
-        add(panaelTitulo);
+        add(panaelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-5, 0, 640, 68));
 
         panelBusqueda.setMaximumSize(new java.awt.Dimension(650, 120));
         panelBusqueda.setPreferredSize(new java.awt.Dimension(650, 120));
@@ -148,10 +143,10 @@ public class SeleccionarProducto extends javax.swing.JPanel {
                     .addComponent(campoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelIndicaciones)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
-        add(panelBusqueda);
+        add(panelBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 68, 630, 103));
 
         panelTablaProductos.setMaximumSize(new java.awt.Dimension(600, 650));
         panelTablaProductos.setPreferredSize(new java.awt.Dimension(600, 650));
@@ -197,7 +192,7 @@ public class SeleccionarProducto extends javax.swing.JPanel {
                 .addContainerGap(247, Short.MAX_VALUE))
         );
 
-        add(panelTablaProductos);
+        add(panelTablaProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 171, -1, 530));
 
         BtnAgregarProducto.setBackground(new java.awt.Color(0, 0, 0));
         BtnAgregarProducto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -208,7 +203,7 @@ public class SeleccionarProducto extends javax.swing.JPanel {
                 BtnAgregarProductoMouseClicked(evt);
             }
         });
-        add(BtnAgregarProducto);
+        add(BtnAgregarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 701, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
     
     private void tablaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosMouseClicked
@@ -229,8 +224,17 @@ public class SeleccionarProducto extends javax.swing.JPanel {
         control.mostrarVentanaProductoNuevo();
     }//GEN-LAST:event_BtnAgregarProductoMouseClicked
 
+    private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
+        try {
+            control.mostrarVentanaSeleccionarProveedor();
+        } catch (InventarioException ex) {
+            Logger.getLogger(SeleccionarProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnAtrasMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAgregarProducto;
+    private javax.swing.JLabel btnAtras;
     private javax.swing.JTextField campoBusqueda;
     private javax.swing.JLabel labelIndicaciones;
     private javax.swing.JLabel labelProveedor;

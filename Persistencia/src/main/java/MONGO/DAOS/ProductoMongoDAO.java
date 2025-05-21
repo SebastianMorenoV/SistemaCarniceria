@@ -57,11 +57,9 @@ public class ProductoMongoDAO implements IProductoDAO {
     public Producto agregarProducto(Producto producto) throws PersistenciaException {
         try {
             if (producto.getId() == null || producto.getId() == 0) {
-                producto.setId(generarIdSecuencial8Digitos());
+                producto.setId(new  ObjectId().getTimestamp());
             }
-
-            coleccion.insertOne(producto);
-
+             coleccion.insertOne(producto);
             return producto;
 
         } catch (Exception e) {
@@ -98,35 +96,6 @@ public class ProductoMongoDAO implements IProductoDAO {
 
         //Retornamos la listaSalidas
         return listaProductos;
-    }
-
-    /**
-     * Metodo auxiliar para los ids.
-     *
-     */
-    private int generarIdSecuencial8Digitos() {
-        // Buscamos el producto con el ID más alto actualmente
-        Producto ultimo = coleccion
-                .find()
-                .sort(Sorts.descending("id"))
-                .limit(1)
-                .first();
-
-        int siguienteId;
-
-        if (ultimo != null && ultimo.getId() != null) {
-            siguienteId = ultimo.getId() + 1;
-        } else {
-            // Comenzamos desde 12345678 como valor inicial
-            siguienteId = 12345678;
-        }
-
-        // Verificamos que no pase el máximo de 8 dígitos
-        if (siguienteId > 99999999) {
-            throw new RuntimeException("Se alcanzó el límite máximo de 8 dígitos para el ID.");
-        }
-
-        return siguienteId;
     }
     
     @Override

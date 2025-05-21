@@ -42,4 +42,11 @@ public class ProductoEntradaDTO {
     public void setPrecioCompra(double precioCompra) {
         this.precioCompra = precioCompra;
     }
+
+    @Override
+    public String toString() {
+        return "ProductoEntradaDTO{" + "productoEntrada=" + productoEntrada + ", unidad=" + unidad + ", precioCompra=" + precioCompra + '}';
+    }
+    
+    
 }

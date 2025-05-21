@@ -43,12 +43,17 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>CasoDevoluciones</artifactId>
+            <artifactId>CasoRegistrarEntradas</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>CasoVenta</artifactId>
+            <artifactId>casoSalidas</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CasoDevoluciones</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -58,12 +63,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>CasoRegistrarEntradas</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>casoSalidas</artifactId>
+            <artifactId>CasoVenta</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

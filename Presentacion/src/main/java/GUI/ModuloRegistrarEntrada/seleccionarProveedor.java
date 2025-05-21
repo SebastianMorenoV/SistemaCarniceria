@@ -69,18 +69,25 @@ public class SeleccionarProveedor extends javax.swing.JPanel {
         labelIndicaciones = new javax.swing.JLabel();
         panelTablaProveedores = new javax.swing.JScrollPane();
         tablaProveedores = new javax.swing.JTable();
+        btnAtras = new javax.swing.JLabel();
 
         setToolTipText("");
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labelSeleccionProv.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         labelSeleccionProv.setText("Seleccion de Proveedor");
+        add(labelSeleccionProv, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
 
         labelProveedor.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         labelProveedor.setText("Buscar Proveedor:");
+        add(labelProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 99, -1, -1));
+        add(campoBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 99, 279, -1));
 
         labelIndicaciones.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         labelIndicaciones.setText("**Puedes buscar por ID o nombre de proveedor**");
+        add(labelIndicaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 77, -1, -1));
 
+        tablaProveedores.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         tablaProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -100,6 +107,7 @@ public class SeleccionarProveedor extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tablaProveedores.setRowHeight(35);
         tablaProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaProveedoresMouseClicked(evt);
@@ -107,46 +115,16 @@ public class SeleccionarProveedor extends javax.swing.JPanel {
         });
         panelTablaProveedores.setViewportView(tablaProveedores);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(labelIndicaciones)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(labelProveedor)
-                                    .addGap(291, 291, 291)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(167, 167, 167)
-                                .addComponent(campoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(panelTablaProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(labelSeleccionProv)))
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(labelSeleccionProv)
-                .addGap(18, 18, 18)
-                .addComponent(labelIndicaciones)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelProveedor)
-                    .addComponent(campoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
-                .addComponent(panelTablaProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
+        add(panelTablaProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 169, 440, 454));
+
+        btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/atras (1).png"))); // NOI18N
+        btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAtrasMouseClicked(evt);
+            }
+        });
+        add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tablaProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProveedoresMouseClicked
@@ -165,11 +143,16 @@ public class SeleccionarProveedor extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tablaProveedoresMouseClicked
 
+    private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
+        control.mostrarVentanaOpcionesInventario();
+    }//GEN-LAST:event_btnAtrasMouseClicked
+
     public void setearProveedor(){
         control.setProveedor(proveedorSeleccionado);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnAtras;
     private javax.swing.JTextField campoBusqueda;
     private javax.swing.JLabel labelIndicaciones;
     private javax.swing.JLabel labelProveedor;

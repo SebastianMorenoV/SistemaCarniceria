@@ -26,6 +26,7 @@ GUI\ModuloRealizarVenta\MenuOpciones$2.class
 GUI\ModuloRealizarVenta\FormularioEfectivo.class
 GUI\ModuloRealizarVenta\VentanaProcesandoPago.class
 GUI\ModuloRegistrarSalida\SoloFiltroNumerico.class
+GUI\ModuloRegistrarEntrada\SeleccionarProveedor$3.class
 GUI\ModuloGastos\TablaHistorialGastos$1.class
 GUI\ModuloRealizarVenta\FormularioTarjeta$1.class
 GUI\ModuloRealizarVenta\MenuOpciones$8.class
@@ -107,6 +108,7 @@ GUI\ModuloRegistrarEntrada\ResumenEntrada$2.class
 GUI\ModuloRegistrarEntrada\OpcionesInventario$4.class
 GUI\ModuloRegistrarSalida\DialogoRegistrarSalida$2.class
 GUI\ModuloRealizarDevolucion\PantallaMenuDevolucion$3.class
+GUI\ModuloRegistrarEntrada\SeleccionarProducto$4.class
 GUI\ModuloRealizarVenta\RegistrarVenta$6.class
 GUI\ModuloGastos\TablaHistorialGastos$5.class
 GUI\ModuloRealizarVenta\MenuOpciones$4.class

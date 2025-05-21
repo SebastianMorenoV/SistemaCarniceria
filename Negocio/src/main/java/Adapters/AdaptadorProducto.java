@@ -34,6 +34,7 @@ public class AdaptadorProducto implements IAdaptadorProducto{
        productoEntidad.setUnidad(producto.getUnidad());
        productoEntidad.setDescripcion(producto.getDescripcion());
        productoEntidad.setNombre(producto.getNombre());
+       // quite el setStock deberia guardarlo en 0 , pero se necesita otro adapter para cuando se guarde la entrada con el stock.
        
        return productoEntidad;
        

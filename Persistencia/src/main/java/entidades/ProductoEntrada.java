@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package entidades;
 
 /**
@@ -10,17 +9,10 @@ package entidades;
  * @author $Luis Carlos Manjarrez Gonzalez
  */
 public class ProductoEntrada {
-    public int id;
+
     public Producto producto;
     public double unidades;
     public double PrecioCompra;
-
-    public ProductoEntrada(int id, Producto producto, double unidades, double PrecioCompra) {
-        this.id = id;
-        this.producto = producto;
-        this.unidades = unidades;
-        this.PrecioCompra = PrecioCompra;
-    }
 
     public ProductoEntrada(Producto producto, double unidades, double PrecioCompra) {
         this.producto = producto;
@@ -29,14 +21,6 @@ public class ProductoEntrada {
     }
 
     public ProductoEntrada() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Producto getProducto() {
@@ -61,6 +45,11 @@ public class ProductoEntrada {
 
     public void setPrecioCompra(double PrecioCompra) {
         this.PrecioCompra = PrecioCompra;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductoEntrada{" + "producto=" + producto + ", unidades=" + unidades + ", PrecioCompra=" + PrecioCompra + '}';
     }
 
 }

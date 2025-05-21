@@ -206,7 +206,7 @@ public class MenuOpciones extends javax.swing.JPanel {
     }//GEN-LAST:event_pnlBotonVentaEnCajaMouseExited
 
     private void icnRealizarVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icnRealizarVentaMouseClicked
-        app.mostrarRegistrarVenta();
+        app.reconstruirDefaultVenta();
     }//GEN-LAST:event_icnRealizarVentaMouseClicked
 
     private void icnDevolucionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icnDevolucionMouseClicked

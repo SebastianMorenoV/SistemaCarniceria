@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package Adapters;
 
 import DTOs.EmpleadoCargadoDTO;
@@ -21,61 +20,56 @@ import java.util.List;
  *
  * @author $Luis Carlos Manjarrez Gonzalez
  */
-public class AdaptadorEntrada implements IAdaptadorEntrada{
+public class AdaptadorEntrada implements IAdaptadorEntrada {
 
     @Override
     public EntradaDTO convertirADTO(Entrada entrada) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<ProductoEntradaDTO> productosEntradaDTO = new ArrayList();
+        
+        AdaptadorEmpleado empleado = new AdaptadorEmpleado();
+        
+        EmpleadoCargadoDTO empleadoDTO = empleado.convertirADTO(entrada.getEmpleado());
+        
+        AdaptadorProveedor proveedor = new AdaptadorProveedor();
+        ProveedorDTO proveedorDTO = proveedor.ConvertirADTO(entrada.getProveedor());
+        System.out.println("CONVERTIR DTO ADAPTADOR ENTRADA " + entrada.getListaProductosEntrada());
+        
+        AdaptadorProductoEntrada productosEntrada = new AdaptadorProductoEntrada();
+        for (ProductoEntrada produtoEntrada : entrada.getListaProductosEntrada()) {
+            productosEntradaDTO.add(productosEntrada.convertirADTO(produtoEntrada));
+        }
+
+        EntradaDTO entradaDTO = new EntradaDTO();
+        entradaDTO.setId(entrada.getId());
+        entradaDTO.setFechaHora(entrada.getFechaHora());
+        entradaDTO.setEmpleado(empleadoDTO);
+        entradaDTO.setListaProductosEntrada(productosEntradaDTO);
+        entradaDTO.setProveedor(proveedorDTO);
+        return entradaDTO;
     }
 
     @Override
     public Entrada convertirAEntidad(EntradaDTO entrada) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<ProductoEntrada> productosEntradaEntidad = new ArrayList();
+        AdaptadorEmpleado empleado = new AdaptadorEmpleado();
+        Empleado empleadoEntidad = empleado.convertirAEntidad(entrada.getEmpleado());
+        AdaptadorProveedor proveedor = new AdaptadorProveedor();
+        Proveedor proveedorEntidad = proveedor.ConvertirAEntidadEntrada(entrada.getProveedor());
+        AdaptadorProducto productos = new AdaptadorProducto();
+        AdaptadorProductoEntrada productosEntrada = new AdaptadorProductoEntrada();
+        for (ProductoEntradaDTO produtoEntrada : entrada.getListaProductosEntrada()) {
+            productosEntradaEntidad.add(productosEntrada.convertirAEntidad(produtoEntrada));
+        }
+
+        Entrada entradaEntidad = new Entrada();
+        entradaEntidad.setId(entrada.getId());
+        entradaEntidad.setFechaHora(entrada.getFechaHora());
+        entradaEntidad.setEmpleado(empleadoEntidad);
+        entradaEntidad.setProveedor(proveedorEntidad);
+        entradaEntidad.setListaProductosEntrada(productosEntradaEntidad);
+        entradaEntidad.setTotal(entrada.getTotal());
+        entradaEntidad.setSubtotal(entrada.getSubtotal());
+        return entradaEntidad;
     }
 
-//    @Override
-//    public EntradaDTO convertirADTO(Entrada entrada) {
-//        List<ProductoEntradaDTO> productosEntradaDTO = new ArrayList();
-//        AdaptadorEmpleado empleado = new AdaptadorEmpleado();    
-//        EmpleadoCargadoDTO empleadoDTO = empleado.convertirADTO(entrada.getEmpleado());
-//        AdaptadorProveedor proveedor = new AdaptadorProveedor();
-//        ProveedorDTO proveedorDTO = proveedor.ConvertirADTO(entrada.getProveedor());
-//        AdaptadorProductoVenta productosEntrada = new AdaptadorProductoVenta();
-//        for(ProductoEntrada produtoEntrada : entrada.getListaProductosEntrada()){  
-//            productosEntradaDTO.add(productosEntrada.convertirADTO(produtoEntrada));
-//        }
-//        
-//        EntradaDTO entradaDTO = new EntradaDTO();
-//        entradaDTO.setId(entrada.getId());
-//        entradaDTO.setFechaHora(entrada.getFechaHora());
-//        entradaDTO.setEmpleado(empleadoDTO);
-//        entradaDTO.setListaProductosEntrada(productosEntradaDTO);
-//        entradaDTO.setProveedor(proveedorDTO);
-//        return entradaDTO;
-//    }
-//
-//    @Override
-//    public Entrada convertirAEntidad(EntradaDTO entrada) {
-//        List<ProductoEntrada> productosEntradaEntidad = new ArrayList();
-//        AdaptadorEmpleado empleado = new AdaptadorEmpleado();    
-//        Empleado empleadoEntidad = empleado.convertirAEntidad(entrada.getEmpleado());
-//        AdaptadorProveedor proveedor = new AdaptadorProveedor();
-//        Proveedor proveedorEntidad = proveedor.ConvertirAEntidadEntrada(entrada.getProveedor());
-//        AdaptadorProducto productos = new AdaptadorProducto();
-//        AdaptadorProductoEntrada productosEntrada = new AdaptadorProductoEntrada();
-//        for(ProductoEntradaDTO produtoEntrada : entrada.getListaProductosEntrada()){  
-//            productosEntradaEntidad.add(productosEntrada.convertirAEntidad(produtoEntrada));
-//        }
-//        
-//        Entrada entradaEntidad = new Entrada();
-//        entradaEntidad.setId(entrada.getId());
-//        entradaEntidad.setFechaHora(entrada.getFechaHora());
-//        entradaEntidad.setEmpleado(empleadoEntidad);
-//        entradaEntidad.setProveedor(proveedorEntidad);
-//        entradaEntidad.setListaProductosEntrada(productosEntradaEntidad);
-//        entradaEntidad.setTotal(entrada.getTotal());
-//        entradaEntidad.setSubtotal(entrada.getSubtotal());
-//        return entradaEntidad;
-//    }
-//    
 }

@@ -13,6 +13,7 @@ import GUI.Aplicacion;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -40,6 +41,7 @@ public class FormularioRegistrarGasto extends javax.swing.JPanel {
         initComponents();
         cargarProveedores();
         btnSubirArchivo.setText("Subir Archivo");
+        inputFecha.setMaxSelectableDate(Date.from(Instant.now()));
     }
 
     /**

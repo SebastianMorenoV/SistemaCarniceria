@@ -9,6 +9,7 @@ import Adapters.AdaptadorEntrada;
 import DAOS.EntradaDAO;
 import DTOs.EntradaDTO;
 import DTOs.ProductoCargadoDTO;
+import DTOs.ProductoEntradaDTO;
 import Exception.NegocioException;
 import Exception.PersistenciaException;
 import IAdapters.IAdaptadorEntrada;
@@ -16,6 +17,7 @@ import Interfaces.IEntradaBO;
 import Interfaces.IEntradaDAO;
 import entidades.Entrada;
 import fabrica.ICreadorDAO;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,7 +37,14 @@ public class EntradaBO implements IEntradaBO{
     
     @Override
     public EntradaDTO registrarEntrada(EntradaDTO entrada) {
+        List<ProductoEntradaDTO> p = entrada.getListaProductosEntrada();
+        for (ProductoEntradaDTO productoEntradaDTO : p) {
+            
+             System.out.println(productoEntradaDTO.getProductoEntrada().getStock());
+        }
+      
         Entrada entradaARegistrar = adaptadorEntrada.convertirAEntidad(entrada);
+        System.out.println("Entrada a registrar" + entradaARegistrar);
         try {
             entradaARegistrar = entradaDAO.registrarEntrada(entradaARegistrar);
         } catch (PersistenciaException ex) {
