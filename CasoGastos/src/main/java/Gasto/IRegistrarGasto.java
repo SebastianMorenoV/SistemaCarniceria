@@ -24,9 +24,10 @@ public interface IRegistrarGasto {
 
     public List<GastoDTO> consultarGastos() throws GastoException;
     
-    
     public List<GastoDTO> consultarGastosFiltrados(CrearGastoDTO gastoFiltro, LocalDate fechaInicio, LocalDate fechaFin) throws GastoException;
     
     public GastoDTO buscarPorFolio(String folio) throws GastoException;
+    
+     public void generarYMostrarPDFGasto(List<GastoDTO> gastosDTO);
     
 }

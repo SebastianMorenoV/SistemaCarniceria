@@ -74,6 +74,7 @@ GUI\ModuloRealizarVenta\VentanaExitoProcesandoPago.class
 GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones$4.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$2.class
 GUI\ModuloRealizarVenta\RegistrarVenta$11.class
+GUI\ModuloGastos\TablaHistorialGastos$7.class
 GUI\ModuloRegistrarEntrada\FormularioDatosEntrada$1.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$13.class
 GUI\ModuloRegistrarSalida\VentanaHistorialSalidas$1.class

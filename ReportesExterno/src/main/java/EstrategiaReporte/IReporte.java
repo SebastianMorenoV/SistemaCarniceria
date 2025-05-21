@@ -12,4 +12,5 @@ import DTOs.VentaDTO;
  */
 public interface IReporte {
      public byte[] generarPDFVenta(VentaDTO venta);
+     
 }

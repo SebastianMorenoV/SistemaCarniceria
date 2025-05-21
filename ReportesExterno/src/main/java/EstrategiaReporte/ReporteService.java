@@ -4,22 +4,23 @@
  */
 package EstrategiaReporte;
 
+import DTOs.GastoDTO;
 import DTOs.MetodoPagoDTO;
 import DTOs.ProductoVentaDTO;
 import DTOs.VentaDTO;
 import com.lowagie.text.pdf.PdfWriter;
-import java.io.ByteArrayOutputStream;
-import java.time.format.DateTimeFormatter;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.*;
-
+import java.util.List;
 import java.io.ByteArrayOutputStream;
 import java.time.format.DateTimeFormatter;
+
 /**
  *
  * @author Sebastian Moreno
  */
 public class ReporteService {
+
     public byte[] generarPDFVenta(VentaDTO venta) {
         try {
             Document doc = new Document();
@@ -90,4 +91,63 @@ public class ReporteService {
             throw new RuntimeException("Error al generar el PDF de la venta", e);
         }
     }
+
+    public byte[] generarPDFGasto(List<GastoDTO> gastos) {
+        try {
+            Document doc = new Document();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            PdfWriter.getInstance(doc, baos);
+
+            doc.open();
+
+            // Título
+            Font tituloFont = new Font(Font.HELVETICA, 18, Font.BOLD);
+            Paragraph titulo = new Paragraph("Reporte de Gastos", tituloFont);
+            titulo.setAlignment(Element.ALIGN_CENTER);
+            doc.add(titulo);
+            doc.add(Chunk.NEWLINE);
+
+            // Tabla de resumen de gastos
+            PdfPTable tabla = new PdfPTable(6); // columnas: Folio, Fecha, Categoría, Proveedor, Monto, Método
+            tabla.setWidthPercentage(100);
+            tabla.setWidths(new float[]{2, 2, 2, 3, 2, 2});
+
+            tabla.addCell("Folio");
+            tabla.addCell("Fecha");
+            tabla.addCell("Categoría");
+            tabla.addCell("Proveedor");
+            tabla.addCell("Monto");
+            tabla.addCell("Método");
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            double totalGastos = 0.0;
+
+            for (GastoDTO gasto : gastos) {
+                tabla.addCell(gasto.getFolio());
+                tabla.addCell(gasto.getFechaGasto().format(formatter));
+                tabla.addCell(gasto.getCategoria());
+                tabla.addCell(gasto.getProveedor() != null ? gasto.getProveedor().getNombre() : "No especificado");
+                tabla.addCell("$ " + String.format("%.2f", gasto.getMontoGasto()));
+                tabla.addCell(gasto.getMetodoPago());
+
+                totalGastos += gasto.getMontoGasto();
+            }
+
+            doc.add(tabla);
+            doc.add(Chunk.NEWLINE);
+
+            // Total de gastos
+            Font boldFont = new Font(Font.HELVETICA, 12, Font.BOLD);
+            Paragraph total = new Paragraph("Total de gastos: $ " + String.format("%.2f", totalGastos), boldFont);
+            total.setAlignment(Element.ALIGN_RIGHT);
+            doc.add(total);
+
+            doc.close();
+            return baos.toByteArray();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error al generar el PDF del reporte de gastos", e);
+        }
+    }
+
 }

@@ -690,4 +690,7 @@ public class Aplicacion {
     public void generarPDFVenta(VentaDTO venta) {
         realizarVenta.generarYMostrarPDFVenta(venta);
     }
+    public void generarPDFGasto(List<GastoDTO> gastos){
+        registrarGasto.generarYMostrarPDFGasto(gastos);
+    }
 }

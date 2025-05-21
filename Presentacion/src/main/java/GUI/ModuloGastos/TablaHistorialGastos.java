@@ -28,6 +28,7 @@ import javax.swing.JOptionPane;
 public class TablaHistorialGastos extends javax.swing.JPanel {
 
     Aplicacion app;
+      List<GastoDTO> gastosLista;
 
     /**
      * Creates new form tableHistorialGastos
@@ -38,8 +39,6 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
         llenarTablaInicial();
 
         // Escuchadores para filtros
-
-
         jComboBox1.addActionListener(e -> aplicarFiltros());
         jComboBox2.addActionListener(e -> aplicarFiltros());
 
@@ -105,6 +104,11 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
         btnGenerarReporte.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
         btnGenerarReporte.setText(" Generar Reporte.pdf");
         btnGenerarReporte.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnGenerarReporte.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGenerarReporteMouseClicked(evt);
+            }
+        });
         add(btnGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 30, 180, 40));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Tarjeta" }));
@@ -146,6 +150,12 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
         app.mostrarPantallaMenuGastos();
     }//GEN-LAST:event_bntAtrasMouseClicked
 
+    private void btnGenerarReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarReporteMouseClicked
+
+       app.generarPDFGasto(gastosLista);
+
+    }//GEN-LAST:event_btnGenerarReporteMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bntAtras;
@@ -167,6 +177,7 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
     public void llenarTablaInicial() {
         try {
             List<GastoDTO> gastos = app.consultarGastos();
+            gastosLista = gastos;
             String[] columnas = {
                 "Categoria", "Folio", "Concepto", "Metodo de pago utilizado",
                 "Fecha del gasto", "Monto del gasto", "Proveedor", "Editar"
@@ -255,16 +266,15 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
         }
     }
 
-
     private void aplicarFiltros() {
         try {
             CrearGastoDTO filtro = new CrearGastoDTO();//DTO para filtros
 
             String metodoPago = (String) jComboBox1.getSelectedItem();
-                filtro.setMetodoPago(metodoPago);
+            filtro.setMetodoPago(metodoPago);
 
             String categoria = (String) jComboBox2.getSelectedItem();
-                filtro.setCategoria(categoria);
+            filtro.setCategoria(categoria);
 
             filtro.setProveedor(null);
 
@@ -281,7 +291,7 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
             if (fechaFinDate != null) {
                 fechaFin = fechaFinDate.toInstant().atZone(zonaLocal).toLocalDate();
             }
-            
+
             if (fechaInicio == null && fechaFin == null) {
                 fechaInicio = null;
                 fechaFin = null;
@@ -292,7 +302,8 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
 
             // Actualizar tabla
             actualizarTabla(gastos);
-
+            gastosLista = gastos;
+           
         } catch (GastoException ex) {
             Logger.getLogger(TablaHistorialGastos.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -328,7 +339,7 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
         tablaHisotrialGastos.setModel(modelo);
 
         // Volver a agregar el listener para editar
-            tablaHisotrialGastos.addMouseListener(new java.awt.event.MouseAdapter() {
+        tablaHisotrialGastos.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 int fila = tablaHisotrialGastos.rowAtPoint(e.getPoint());
@@ -380,6 +391,5 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
             }
         });
     }
-
 
 }
