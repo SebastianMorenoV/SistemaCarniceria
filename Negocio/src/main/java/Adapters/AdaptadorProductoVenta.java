@@ -32,6 +32,7 @@ public class AdaptadorProductoVenta implements IAdaptadorProductoVenta {
         productoDTO.setImporte(producto.getImporte());
         productoDTO.setPrecioUnitario(producto.getPrecioUnitario());
         productoDTO.setCantidad(producto.getCantidad());
+        productoDTO.getProducto().setStock(producto.getProducto().getStock()); //FUERZA BRUTA 
 
         return productoDTO;
     }
@@ -44,6 +45,7 @@ public class AdaptadorProductoVenta implements IAdaptadorProductoVenta {
         productoVentaEntidad.setImporte(producto.getImporte());
         productoVentaEntidad.setPrecioUnitario(producto.getPrecioUnitario());
         productoVentaEntidad.setCantidad(producto.getCantidad());
+        productoVentaEntidad.getProducto().setStock(producto.getProducto().getStock()); //FUERZA BRUTA 
 
         return productoVentaEntidad;
 
@@ -54,7 +56,6 @@ public class AdaptadorProductoVenta implements IAdaptadorProductoVenta {
         List<NuevoProductoVentaDTO> listaProductosVentaDTO = new ArrayList<>();
         for (ProductoVenta producto : listaProductoVenta) {
             listaProductosVentaDTO.add(convertirADTO(producto));
-            
         }
         return listaProductosVentaDTO;
 
@@ -64,6 +65,8 @@ public class AdaptadorProductoVenta implements IAdaptadorProductoVenta {
     public List<ProductoVenta> convertirListaDTOAEntidad(List<ProductoVentaDTO> listaProductoVenta) {
         List<ProductoVenta> listaProductosVentaDTO = new ArrayList<>();
         for (ProductoVentaDTO producto : listaProductoVenta) {
+            ProductoVenta productoVenta = convertirProductoVentaAEntidad(producto);
+            productoVenta.getProducto().setStock(producto.getProducto().getStock()); //Fuerza Bruta
             listaProductosVentaDTO.add(convertirProductoVentaAEntidad(producto));
 
         }
@@ -78,19 +81,20 @@ public class AdaptadorProductoVenta implements IAdaptadorProductoVenta {
         productoVenta.setCantidad(producto.getCantidad());
         productoVenta.setPrecioUnitario(producto.getPrecioUnitario());
         productoVenta.setImporte(producto.getImporte());
+        productoVenta.getProducto().setStock(producto.getProducto().getStock()); //FUERZA BRUTA
         
         return productoVenta;
     }
     
       @Override
     public ProductoVenta convertirProductoVentaAEntidad(ProductoVentaDTO producto) {
-          System.out.println("PRODUCTO DESDE EL ADAPTER PRODUCTO VENTA" + producto);
         Producto productoCargado = adapter.convertirAEntidad(producto.getProducto());
         ProductoVenta productoVentaEntidad = new ProductoVenta();
         productoVentaEntidad.setProducto(productoCargado);
         productoVentaEntidad.setImporte(producto.getImporte());
         productoVentaEntidad.setPrecioUnitario(producto.getPrecioUnitario());
         productoVentaEntidad.setCantidad(producto.getCantidad());
+        productoVentaEntidad.getProducto().setStock(producto.getProducto().getStock()); //FUERZA BRUTA
 
         return productoVentaEntidad;
 

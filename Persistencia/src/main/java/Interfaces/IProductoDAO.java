@@ -20,4 +20,7 @@ public interface IProductoDAO {
     public List<Producto> buscadorProducto(String nombre) throws PersistenciaException;
     
     public List<Producto> buscarPorNombre(String textoBusqueda) throws PersistenciaException;
+    
+    public boolean restarStockAProducto(Double salida, Integer codigo) throws PersistenciaException;
+
 }

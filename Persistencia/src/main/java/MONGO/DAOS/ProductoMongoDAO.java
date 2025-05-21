@@ -14,6 +14,8 @@ import static com.mongodb.client.model.Filters.regex;
 import com.mongodb.client.model.FindOneAndUpdateOptions;
 import com.mongodb.client.model.ReturnDocument;
 import com.mongodb.client.model.Sorts;
+import com.mongodb.client.model.Updates;
+import com.mongodb.client.result.UpdateResult;
 import conexion.ConexionMongo;
 import entidades.Producto;
 import entidades.Salida;
@@ -128,6 +130,25 @@ public class ProductoMongoDAO implements IProductoDAO {
             throw new PersistenciaException("No se pudo buscar el producto por nombre", e);
         }
     }
+    
+        @Override
+    public boolean restarStockAProducto(Double salida, Integer codigo) throws PersistenciaException {
+        try {
+            // Filtro para encontrar el producto que deseas actualizar (ajusta según tu criterio)
+            Bson filtro = Filters.eq("codigo", codigo);
+
+             // Operación de decremento
+            Bson actualizacion = Updates.inc("stock",-(salida));
+
+            // Ejecutar la actualización
+            UpdateResult resultado = coleccion.updateOne(filtro, actualizacion);
+        
+            return resultado.getModifiedCount() > 0;
+        
+        } catch (Exception e) {
+            throw new PersistenciaException("Error al restarle el stock al producto", e);
+        }
+    } 
 
 
 }

@@ -14,5 +14,6 @@ import entidades.Producto;
 public interface IAdaptadorProducto {
     public ProductoCargadoDTO convertirADTO(Producto producto);
     public Producto convertirAEntidad(ProductoCargadoDTO producto);
+    public Producto convertirAEntidadStock(ProductoCargadoDTO producto);
 
 }

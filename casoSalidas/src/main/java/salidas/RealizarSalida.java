@@ -9,6 +9,8 @@ import Interfaces.ISalidaBO;
 import exception.SalidaException;
 import java.util.Date;
 import java.util.List;
+import observerVentas.IObservador;
+import observerVentas.Observador;
 
 /**
  *
@@ -18,6 +20,9 @@ public class RealizarSalida implements IRealizarSalida{
     private ISalidaBO salidaBO = manejadoresBO.ManejadorObjetosNegocio.crearSalidaBO();
     private IProductoBO productoBO = manejadoresBO.ManejadorObjetosNegocio.crearProductoBO();
     
+    //Observador
+    private IObservador observador = new Observador();
+
     @Override
     public SalidaDTO agregarNuevaSalida(NuevaSalidaDTO nuevaSalida) throws SalidaException {
         if (nuevaSalida.getProducto() == null) {
@@ -56,7 +61,7 @@ public class RealizarSalida implements IRealizarSalida{
 
     @Override
     public List<SalidaDTO> filtrarSalidas(String nombre, Date fechaDesde, Date fechaHasta) throws SalidaException {
-                try {
+        try {
             return salidaBO.consultarSalidasBuscador(nombre, fechaDesde, fechaHasta);
         } catch (NegocioException e) {
             throw new SalidaException("Error al filtrar las salidas", e);
@@ -71,4 +76,20 @@ public class RealizarSalida implements IRealizarSalida{
             throw new SalidaException("Error al realizar la busqueda",e);
         }
     }
+
+    @Override
+    public IObservador getObserver() {
+        return observador;
+    }
+
+    @Override
+    public boolean restarStockAProducto(Double salida, Integer codigo) throws SalidaException {
+        try {
+            return productoBO.restarStockAProducto(salida, codigo);
+        } catch (NegocioException e) {
+            throw new SalidaException("Error al restar el stock", e);
+        }
+    }
+    
+
 }

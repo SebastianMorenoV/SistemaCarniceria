@@ -75,5 +75,10 @@ public class ProductoDAO implements IProductoDAO {
     public List<Producto> buscarPorNombre(String textoBusqueda) throws PersistenciaException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
+    @Override
+    public boolean restarStockAProducto(Double salida, Integer codigo) throws PersistenciaException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+   
 }

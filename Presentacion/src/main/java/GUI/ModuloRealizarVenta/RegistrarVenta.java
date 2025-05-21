@@ -12,6 +12,7 @@ import DTOs.VentaDTO;
 import Exception.NegocioException;
 import Exception.VentaException;
 import GUI.Aplicacion;
+import exception.SalidaException;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -388,7 +389,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
                 venta.setTotal(app.getTotalVenta());
                 venta.setSubtotal(app.getSubtotalVenta());
                 venta.setListadoProductosVenta(listadoProductosVenta);
-               
+
                 app.setearVenta(venta);
                 app.mostrarFormularioTarjeta();
             }
@@ -412,9 +413,9 @@ public class RegistrarVenta extends javax.swing.JPanel {
                 venta.setTotal(app.getTotalVenta());
                 venta.setSubtotal(app.getSubtotalVenta());
                 venta.setListadoProductosVenta(listadoProductosVenta);
-                System.out.println("REGISTYAR"+venta );
+                System.out.println("REGISTYAR" + venta);
                 app.setearVenta(venta);
-                app.mostrarFormularioEfectivo(); 
+                app.mostrarFormularioEfectivo();
             }
         } catch (NegocioException ex) {
             Logger.getLogger(RegistrarVenta.class.getName()).log(Level.SEVERE, null, ex);
@@ -431,7 +432,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
     private void inputCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputCodigoKeyReleased
         String textoBusqueda = inputCodigo.getText().trim();
- 
+
         try {
             buscarProducto(textoBusqueda);
         } catch (VentaException ex) {
@@ -455,7 +456,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
         // Solo permite números (0-9) y retroceso
         if (!Character.isDigit(c) && c != KeyEvent.VK_BACK_SPACE) {
             evt.consume(); // Ignora la entrada si no es válida
-        }    
+        }
     }//GEN-LAST:event_inputCodigoKeyTyped
 
     private void inputNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputNombreKeyTyped
@@ -547,13 +548,13 @@ public class RegistrarVenta extends javax.swing.JPanel {
     }
 
     public void cargarProductos() throws NegocioException {
-        List<ProductoCargadoDTO> nuevosProductos = app.cargarProductos(); // Siempre nueva lista
+        List<ProductoCargadoDTO> nuevosProductos = app.cargarProductos();
 
         listadoProductosCargados = nuevosProductos; // Reemplaza, no acumula
 
         DefaultListModel<String> modelo = new DefaultListModel<>();
         for (ProductoCargadoDTO p : nuevosProductos) {
-            modelo.addElement(p.getCodigo() + " " + p.getNombre() + " " + p.getDescripcion() + "  $" + p.getPrecio());
+            modelo.addElement(p.getCodigo() + " " + p.getNombre() + " " + p.getDescripcion() + "  $" + p.getPrecio() + " " + p.getStock());
         }
 
         listadoGraficoProductosCargados.setModel(modelo); // Asigna un modelo nuevo limpio
@@ -584,12 +585,12 @@ public class RegistrarVenta extends javax.swing.JPanel {
         List<ProductoCargadoDTO> resultados = app.buscaPorNombre(textoBusqueda);
         actualizarListaProductos(resultados);
     }
-    
+
     private void actualizarListaProductos(List<ProductoCargadoDTO> productos) {
         DefaultListModel<String> modelo = new DefaultListModel<>();
-        
+
         for (ProductoCargadoDTO p : productos) {
-            modelo.addElement(p.getCodigo() + " " + p.getNombre() + " " + p.getDescripcion() + "  $" + p.getPrecio());
+            modelo.addElement(p.getCodigo() + " " + p.getNombre() + " " + p.getDescripcion() + "  $" + p.getPrecio() + " " + p.getStock());
         }
         listadoGraficoProductosCargados.setModel(modelo);
         listadoProductosCargados = productos;
@@ -655,7 +656,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
             }
 
             String[] partes = infoProducto.trim().split(" ");
-            if (partes.length < 3) {
+            if (partes.length < 4) { // Aumentamos el mínimo requerido por incluir stock
                 return null;
             }
 
@@ -676,15 +677,21 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
             String nombreCompleto = nombreBuilder.toString().trim();
 
-            // Validar que haya un precio al final
-            if (!partes[partes.length - 1].startsWith("$")) {
+            // Validar que haya un precio como antepenúltimo valor
+            if (partes.length < 2 || !partes[partes.length - 2].startsWith("$")) {
                 return null;
             }
 
-            String precioTexto = partes[partes.length - 1].replace("$", "");
+            String precioTexto = partes[partes.length - 2].replace("$", "");
             double precio = Double.parseDouble(precioTexto);
 
-            return new ProductoCargadoDTO(codigo, nombreCompleto, "Descripción", precio);
+            // Obtener el stock (último valor)
+            double stock = Double.parseDouble(partes[partes.length - 1]);
+
+            
+            ProductoCargadoDTO productoCargadoDTO = new ProductoCargadoDTO(codigo, nombreCompleto, "Descripción", precio);
+            productoCargadoDTO.setStock(stock);
+            return productoCargadoDTO;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -880,15 +887,16 @@ public class RegistrarVenta extends javax.swing.JPanel {
         // Si se confirma finalizar la venta
         // Si se confirma finalizar la venta
         if (confirmar == JOptionPane.YES_OPTION) {
-            
             try {
                 VentaDTO venta = app.registrarVenta(ventaRealizada);
-   
+
                 app.setearVenta(venta);
                 app.mostrarTicketPDF();
                 System.out.println("FINALZIAR:" + venta);
             } catch (VentaException ex) {
                 Logger.getLogger(RegistrarVenta.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SalidaException ex) {
+
             }
 
         } else {

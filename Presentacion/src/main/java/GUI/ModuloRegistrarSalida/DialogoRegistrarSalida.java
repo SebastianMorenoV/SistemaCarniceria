@@ -237,6 +237,7 @@ public class DialogoRegistrarSalida extends javax.swing.JDialog {
         
         try {
             if(app.agregarNuevaSalida(new NuevaSalidaDTO(producto, motivo, stockAntes, salida, stockDespues))){
+                app.restarStockAProducto(salida, producto.getCodigo());
                 dispose();
             }
         } catch (SalidaException e) {

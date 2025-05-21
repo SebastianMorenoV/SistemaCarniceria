@@ -93,6 +93,14 @@ public class ProductoBO implements IProductoBO {
             throw new NegocioException("Error al buscar productos por nombre", e);
         }
     }
-
+    
+    @Override
+    public boolean restarStockAProducto(Double salida, Integer codigo) throws NegocioException {
+        try {
+            return productoDAO.restarStockAProducto(salida, codigo);
+        } catch (PersistenciaException e) {
+            throw new NegocioException("Error al restarle el stock", e);
+        }
+    }
     
 }

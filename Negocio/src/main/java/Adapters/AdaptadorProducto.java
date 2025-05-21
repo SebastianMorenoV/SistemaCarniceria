@@ -20,7 +20,7 @@ public class AdaptadorProducto implements IAdaptadorProducto{
        productoDTO.setDescripcion(producto.getDescripcion());
        productoDTO.setNombre(producto.getNombre());
        productoDTO.setPrecio(producto.getPrecio());
-       productoDTO.setStock(producto.getStock());
+       productoDTO.setStock(producto.getStock()); //FUERZA BRUTA
        return productoDTO;
        
     }
@@ -38,6 +38,11 @@ public class AdaptadorProducto implements IAdaptadorProducto{
        
        return productoEntidad;
        
+    }
+
+    @Override
+    public Producto convertirAEntidadStock(ProductoCargadoDTO producto) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

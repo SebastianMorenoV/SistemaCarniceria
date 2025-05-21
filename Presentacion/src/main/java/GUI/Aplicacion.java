@@ -55,6 +55,8 @@ import java.awt.Frame;
 import java.util.Date;
 import java.util.List;
 import javax.swing.*;
+import observerVentas.IObservable;
+import observerVentas.Observable;
 import salidas.IRealizarSalida;
 import salidas.RealizarSalida;
 
@@ -105,6 +107,9 @@ public class Aplicacion {
     //Pago con Efectivo
     private FormularioMostrarCambio fomularioMostrarCambio;
 
+    //OBSERVABLE
+    IObservable observable;
+    
     public Aplicacion() {
         framePrincipal = new JFrame("Sistema Carnicería");
         framePrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -140,6 +145,10 @@ public class Aplicacion {
 
         //Caso de Uso Registrar Salidas
         ventanaHistorialSalidas = new VentanaHistorialSalidas(this);
+        
+        //OBSERVABLE
+        observable = new Observable(); 
+        observable.addObserver(realizarSalida.getObserver());
 
     }
 
@@ -681,14 +690,16 @@ public class Aplicacion {
         return realizarVenta.getPagaraCon();
     }
 
-    public VentaDTO registrarVenta(VentaDTO venta) throws VentaException {
+    public VentaDTO registrarVenta(VentaDTO venta) throws VentaException, SalidaException {
         try {
-            return realizarVenta.registrarVenta(venta);
+            VentaDTO ventaDTO = realizarVenta.registrarVenta(venta);
+            observable.notifyObservers(venta, realizarSalida);
+            return ventaDTO;
         } catch (VentaException ex) {
             throw new VentaException("Ocurrio un error registrando la venta" + ex.getMessage());
         }
     }
-    
+
     public List<ProductoCargadoDTO> buscaPorNombre(String textoBusqueda) throws VentaException{
         try {
             return realizarVenta.buscaPorNombre(textoBusqueda);
@@ -746,6 +757,14 @@ public class Aplicacion {
             return realizarSalida.filtrarSalidas(nombre, fechaHasta, fechaDesde);
         } catch (SalidaException e) {
             throw new SalidaException("Error al cargar las salidas filtradas", e);
+        }
+    }
+    
+    public boolean restarStockAProducto(Double stock, Integer codigo) throws SalidaException{
+        try {
+            return realizarSalida.restarStockAProducto(stock, codigo);
+        } catch (SalidaException e) {
+            throw new SalidaException("Error al restar el stock del producto", e);
         }
     }
 

@@ -47,9 +47,7 @@ public class AdaptadorVenta implements IAdaptadorVenta {
         List<ProductoVenta> productosVenta = venta.getListaProductosVenta();
         List<ProductoVentaDTO> productosVentaDTO = new ArrayList<>();
         for (ProductoVenta productoVenta : productosVenta) {
-
             ProductoVentaDTO dto = productoVentaAdapter.convertirProductoVentaADTO(productoVenta);
-            System.out.println("Producto venta desde adapter Venta" + dto);
             productosVentaDTO.add(dto);
         }
 

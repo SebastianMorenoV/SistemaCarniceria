@@ -34,10 +34,13 @@ public class Prueba {
         }
         */
         
+        /*
         Producto producto = new Producto("Hamburguesas", "Eskeler", 0, true, 10, 200);
         try {
-            productoDAO.agregarProducto(producto);
+            
+            System.out.println(productoDAO.restarStockAProducto(2.0, 1747811776));
         } catch (Exception e) {
         }
+        */
     }
 }
