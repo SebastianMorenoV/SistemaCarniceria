@@ -12,6 +12,8 @@ import GUI.Aplicacion;
 import Exception.VentaException;
 import excepciones.ProcesadorPagoException;
 import java.time.LocalDateTime;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.SwingUtilities;
 
 /**
@@ -50,6 +52,8 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         inputCVV = new javax.swing.JTextField();
         btnAceptar = new GUI.PanelRound();
         jLabel7 = new javax.swing.JLabel();
+        btnAceptar1 = new GUI.PanelRound();
+        jLabel8 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -62,11 +66,15 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
         jLabel2.setText("CVV");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, -1, -1));
+
+        inputNumeroTarjeta.setToolTipText("16 digitos");
         add(inputNumeroTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 270, 30));
 
         jLabel3.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
         jLabel3.setText("Titular de la tarjeta");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, -1, -1));
+
+        inputTitularTarjeta.setToolTipText("Nombre de el titular");
         add(inputTitularTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 270, 30));
 
         jLabel4.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
@@ -76,7 +84,11 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
         jLabel5.setText("Fecha de expiracion");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, -1, -1));
+
+        inputFechaExpiracion.setToolTipText("mm/aa");
         add(inputFechaExpiracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 170, 30));
+
+        inputCVV.setToolTipText("3 digitos");
         add(inputCVV, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 140, 30));
 
         btnAceptar.setBackground(new java.awt.Color(44, 44, 44));
@@ -96,18 +108,53 @@ public class FormularioTarjeta extends javax.swing.JPanel {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Aceptar");
         jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAceptar.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 100, 40));
+        btnAceptar.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 40));
 
-        add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 160, 40));
+        add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 180, 40));
+
+        btnAceptar1.setBackground(new java.awt.Color(44, 44, 44));
+        btnAceptar1.setRoundBottomLeft(15);
+        btnAceptar1.setRoundBottomRight(15);
+        btnAceptar1.setRoundTopLeft(15);
+        btnAceptar1.setRoundTopRight(15);
+        btnAceptar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAceptar1MouseClicked(evt);
+            }
+        });
+        btnAceptar1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Regresar");
+        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
+        btnAceptar1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 40));
+
+        add(btnAceptar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 180, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         pagoTarjeta();
     }//GEN-LAST:event_btnAceptarMouseClicked
 
+    private void btnAceptar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptar1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAceptar1MouseClicked
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+         ((JDialog) SwingUtilities.getWindowAncestor((JComponent) evt.getSource())).dispose();
+    }//GEN-LAST:event_jLabel8MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.PanelRound btnAceptar;
+    private GUI.PanelRound btnAceptar1;
     private javax.swing.JTextField inputCVV;
     private javax.swing.JTextField inputFechaExpiracion;
     private javax.swing.JTextField inputNumeroTarjeta;
@@ -118,14 +165,15 @@ public class FormularioTarjeta extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     // End of variables declaration//GEN-END:variables
 
 //metodosAuxiliares
     public void pagoTarjeta() {
-        String titular = inputTitularTarjeta.getText();
-        String numeroTarjeta = inputNumeroTarjeta.getText();
+        String titular = inputTitularTarjeta.getText().trim();
+        String numeroTarjeta = inputNumeroTarjeta.getText().trim();
         String fechaVencimiento = inputFechaExpiracion.getText();
-        String cvvStr = inputCVV.getText();
+        String cvvStr = inputCVV.getText().trim();
         int cvv = 0;
         if (!cvvStr.trim().isEmpty()) {
             try {

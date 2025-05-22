@@ -109,7 +109,7 @@ public class Aplicacion {
 
     //OBSERVABLE
     IObservable observable;
-    
+
     public Aplicacion() {
         framePrincipal = new JFrame("Sistema Carnicería");
         framePrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -145,9 +145,9 @@ public class Aplicacion {
 
         //Caso de Uso Registrar Salidas
         ventanaHistorialSalidas = new VentanaHistorialSalidas(this);
-        
+
         //OBSERVABLE
-        observable = new Observable(); 
+        observable = new Observable();
         observable.addObserver(realizarSalida.getObserver());
 
     }
@@ -175,6 +175,7 @@ public class Aplicacion {
         JDialog dialogo = new JDialog((Frame) null, titulo, true); // true = modal
 
         dialogo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialogo.setUndecorated(true);
         dialogo.setSize(ancho, alto);
         dialogo.setLocationRelativeTo(null); // Centrar la ventana
         dialogo.setResizable(false);
@@ -199,11 +200,12 @@ public class Aplicacion {
     public void mostrarRegistrarVenta() {
         cambiarPantalla(registrarVenta);
     }
-    
-    public void reconstruirDefaultVenta(){
-     registrarVenta = new RegistrarVenta(this);
+
+    public void reconstruirDefaultVenta() {
+        registrarVenta = new RegistrarVenta(this);
         cambiarPantalla(registrarVenta);
     }
+
     public void reconstruirRegistrarVenta() {
 
         registrarVenta.reiniciarVenta();
@@ -260,6 +262,32 @@ public class Aplicacion {
         return (String) JOptionPane.showInputDialog(framePrincipal, "Ingresa la cantidad del producto:", "Cantidad", JOptionPane.QUESTION_MESSAGE, null, null, "1.0");
     }
 
+    public String mostrarIngresarCantidadEntera() {
+        while (true) {
+            String input = JOptionPane.showInputDialog(
+                    framePrincipal,
+                    "Ingresa la cantidad del producto:",
+                    "Cantidad",
+                    JOptionPane.QUESTION_MESSAGE
+            );
+
+            if (input == null) {
+                return null; 
+            }
+
+            try {
+                int cantidad = Integer.parseInt(input);
+                if (cantidad >= 0) {
+                    return String.valueOf(cantidad); // Devuelve como String
+                } else {
+                    JOptionPane.showMessageDialog(framePrincipal, "La cantidad debe ser un número entero positivo.");
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(framePrincipal, "Producto no pesable o cantidad invalida.");
+            }
+        }
+    }
+
     public int mostrarPreguntaEliminarProducto() {
         return JOptionPane.showConfirmDialog(framePrincipal, "¿Deseas eliminar el producto?", "Eliminar producto", JOptionPane.YES_NO_OPTION);
     }
@@ -274,6 +302,14 @@ public class Aplicacion {
 
     public void mostrarErrorCantidadMayor0() {
         JOptionPane.showMessageDialog(framePrincipal, "La cantidad debe ser mayor que 0.");
+    }
+
+    public void mostrarErrorCantidadMayorAStock(String stock) {
+        JOptionPane.showMessageDialog(framePrincipal, "Error: Stock insuficiente , el stock de el producto es : " + stock);
+    }
+
+    public void mostrarErrorPagoSinProductos() {
+        JOptionPane.showMessageDialog(framePrincipal, "Error: Favor de agregar productos antes de pagar.");
     }
 
     public void mostrarErrorValorNumericoValido() {
@@ -398,7 +434,7 @@ public class Aplicacion {
         registrarEntrada.agregarProducto(producto);
     }
 
-    public EmpleadoCargadoDTO cargarEmpleado() throws VentaException  {
+    public EmpleadoCargadoDTO cargarEmpleado() throws VentaException {
         return realizarVenta.cargarEmpleado();
     }
 
@@ -459,16 +495,8 @@ public class Aplicacion {
         return realizarVenta.obtenerVenta();
     }
 
-//    public TicketDTO crearTicket(VentaDTO venta) {
-//        TicketDTO ticketNuevo = new TicketDTO(venta.getListadoProductosVenta(),
-//                venta.getFechaHora(),
-//                venta.getIva(),
-//                venta.getEmpleado(),
-//                venta.getSubtotal(),
-//                venta.getTotal());
-//        return ticketNuevo;
-//    }
-//    Caso gastos
+
+    //    Caso gastos
     public GastoDTO registrarGasto(CrearGastoDTO gasto) throws GastoException {
         try {
             return registrarGasto.agregarGasto(gasto);
@@ -544,7 +572,7 @@ public class Aplicacion {
     }
 
     //Caso Registrar entrada ----------------------------------------
-        public void MostrarErrorNumeroInvalido() {
+    public void MostrarErrorNumeroInvalido() {
         JOptionPane.showMessageDialog(framePrincipal, "Error: Ingresa un valor numérico válido.");
     }
 
@@ -581,7 +609,6 @@ public class Aplicacion {
         FormularioDatosEntrada ventanaDatos = new FormularioDatosEntrada(this);
     }
 
-
     public void setProveedor(ProveedorDTO proveedor) {
         registrarEntrada.setProveedor(proveedor);
     }
@@ -610,7 +637,6 @@ public class Aplicacion {
         return registrarEntrada.cargarProductos();
     }
 
-
     public void agregarProductoEntrada() throws InventarioException {
         registrarEntrada.agregarProductoEntrada();
     }
@@ -627,31 +653,39 @@ public class Aplicacion {
         registrarEntrada.registrarEntrada(entrada);
     }
     //metodos para seTear los atributos de la entrada temporal
-    
+
     public double calcularIVAEntrada(double subtotal) {
         return registrarEntrada.calcularIVA(subtotal);
     }
+
     public double calcularSubtotalEntrada(List<ProductoEntradaDTO> productosEnTabla) {
         return registrarEntrada.calcularSubtotal(productosEnTabla);
     }
+
     public double calcularTotalEntrada(double iva, double subtotal) {
         return registrarEntrada.calcularTotal(iva, subtotal);
     }
+
     public void setIVATemporalEntrada(double iva) {
         registrarEntrada.setIva(iva);
     }
+
     public void setTotalTemporalTemporalEntrada(double total) {
         registrarEntrada.setTotal(total);
     }
+
     public void setSubtotalTemporalEntrada(double subtotal) {
         registrarEntrada.setSubtotal(subtotal);
     }
+
     public double getIVATemporalEntrada() {
         return registrarEntrada.getIva();
     }
+
     public double getTotalTemporalEntrada() {
         return registrarEntrada.getTotal();
     }
+
     public double getSubtotalTemporalEntrada() {
         return registrarEntrada.getSubtotal();
     }
@@ -700,7 +734,7 @@ public class Aplicacion {
         }
     }
 
-    public List<ProductoCargadoDTO> buscaPorNombre(String textoBusqueda) throws VentaException{
+    public List<ProductoCargadoDTO> buscaPorNombre(String textoBusqueda) throws VentaException {
         try {
             return realizarVenta.buscaProductosPorTexto(textoBusqueda);
         } catch (VentaException ex) {
@@ -759,8 +793,8 @@ public class Aplicacion {
             throw new SalidaException("Error al cargar las salidas filtradas", e);
         }
     }
-    
-    public boolean restarStockAProducto(Double stock, Integer codigo) throws SalidaException{
+
+    public boolean restarStockAProducto(Double stock, Integer codigo) throws SalidaException {
         try {
             return realizarSalida.restarStockAProducto(stock, codigo);
         } catch (SalidaException e) {

@@ -7,6 +7,7 @@ import DTOs.ProductoVentaDTO;
 import DTOs.VentaDTO;
 import Exception.DevolucionException;
 import GUI.Aplicacion;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -52,9 +53,9 @@ public class PantallaDevolucion extends javax.swing.JPanel {
         btnFinalizarVenta = new GUI.PanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProductosDevolucion = new javax.swing.JTable();
-        btnFinalizarVenta1 = new GUI.PanelRound();
+        pnlFinalizar = new GUI.PanelRound();
         btnTxtFinalizarVenta1 = new javax.swing.JLabel();
-        btnFinalizarVenta2 = new GUI.PanelRound();
+        pnlCancelarD = new GUI.PanelRound();
         btnTxtFinalizarVenta2 = new javax.swing.JLabel();
         btnAtras = new javax.swing.JLabel();
         txtBusquedaNombre6 = new javax.swing.JLabel();
@@ -213,17 +214,12 @@ public class PantallaDevolucion extends javax.swing.JPanel {
 
         add(btnFinalizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 130, 300, 360));
 
-        btnFinalizarVenta1.setBackground(new java.awt.Color(44, 44, 44));
-        btnFinalizarVenta1.setRoundBottomLeft(15);
-        btnFinalizarVenta1.setRoundBottomRight(15);
-        btnFinalizarVenta1.setRoundTopLeft(15);
-        btnFinalizarVenta1.setRoundTopRight(15);
-        btnFinalizarVenta1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnFinalizarVenta1MouseClicked(evt);
-            }
-        });
-        btnFinalizarVenta1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlFinalizar.setBackground(new java.awt.Color(44, 44, 44));
+        pnlFinalizar.setRoundBottomLeft(15);
+        pnlFinalizar.setRoundBottomRight(15);
+        pnlFinalizar.setRoundTopLeft(15);
+        pnlFinalizar.setRoundTopRight(15);
+        pnlFinalizar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnTxtFinalizarVenta1.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
         btnTxtFinalizarVenta1.setForeground(new java.awt.Color(255, 255, 255));
@@ -234,22 +230,28 @@ public class PantallaDevolucion extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnTxtFinalizarVenta1MouseClicked(evt);
             }
-        });
-        btnFinalizarVenta1.add(btnTxtFinalizarVenta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 290, 70));
-
-        add(btnFinalizarVenta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 580, 370, 70));
-
-        btnFinalizarVenta2.setBackground(new java.awt.Color(44, 44, 44));
-        btnFinalizarVenta2.setRoundBottomLeft(15);
-        btnFinalizarVenta2.setRoundBottomRight(15);
-        btnFinalizarVenta2.setRoundTopLeft(15);
-        btnFinalizarVenta2.setRoundTopRight(15);
-        btnFinalizarVenta2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnFinalizarVenta2MouseClicked(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnTxtFinalizarVenta1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnTxtFinalizarVenta1MouseExited(evt);
             }
         });
-        btnFinalizarVenta2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlFinalizar.add(btnTxtFinalizarVenta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 70));
+
+        add(pnlFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 580, 370, 70));
+
+        pnlCancelarD.setBackground(new java.awt.Color(44, 44, 44));
+        pnlCancelarD.setRoundBottomLeft(15);
+        pnlCancelarD.setRoundBottomRight(15);
+        pnlCancelarD.setRoundTopLeft(15);
+        pnlCancelarD.setRoundTopRight(15);
+        pnlCancelarD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnlCancelarDMouseClicked(evt);
+            }
+        });
+        pnlCancelarD.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnTxtFinalizarVenta2.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
         btnTxtFinalizarVenta2.setForeground(new java.awt.Color(255, 255, 255));
@@ -260,10 +262,16 @@ public class PantallaDevolucion extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnTxtFinalizarVenta2MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnTxtFinalizarVenta2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnTxtFinalizarVenta2MouseExited(evt);
+            }
         });
-        btnFinalizarVenta2.add(btnTxtFinalizarVenta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 350, 70));
+        pnlCancelarD.add(btnTxtFinalizarVenta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 70));
 
-        add(btnFinalizarVenta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 580, 370, 70));
+        add(pnlCancelarD, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 580, 370, 70));
 
         btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/atras (1).png"))); // NOI18N
         btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -372,13 +380,9 @@ public class PantallaDevolucion extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnFinalizarVentaMouseClicked
 
-    private void btnFinalizarVenta1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFinalizarVenta1MouseClicked
+    private void pnlCancelarDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlCancelarDMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnFinalizarVenta1MouseClicked
-
-    private void btnFinalizarVenta2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFinalizarVenta2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnFinalizarVenta2MouseClicked
+    }//GEN-LAST:event_pnlCancelarDMouseClicked
 
     private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
         app.mostrarPantallaTicketDevolucion();
@@ -408,6 +412,7 @@ public class PantallaDevolucion extends javax.swing.JPanel {
     private void btnTxtFinalizarVenta1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtFinalizarVenta1MouseClicked
         try {
             registrarDevolucion();
+            
         } catch (DevolucionException ex) {
             Logger.getLogger(PantallaDevolucion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -417,12 +422,26 @@ public class PantallaDevolucion extends javax.swing.JPanel {
 
     }//GEN-LAST:event_inputRazonKeyReleased
 
+    private void btnTxtFinalizarVenta2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtFinalizarVenta2MouseEntered
+          pnlCancelarD.setBackground(new Color(100, 100, 120, 180));
+    }//GEN-LAST:event_btnTxtFinalizarVenta2MouseEntered
+
+    private void btnTxtFinalizarVenta2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtFinalizarVenta2MouseExited
+          pnlCancelarD.setBackground(new Color(0,0,0));
+    }//GEN-LAST:event_btnTxtFinalizarVenta2MouseExited
+
+    private void btnTxtFinalizarVenta1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtFinalizarVenta1MouseEntered
+          pnlFinalizar.setBackground(new Color(100, 100, 120, 180));
+    }//GEN-LAST:event_btnTxtFinalizarVenta1MouseEntered
+
+    private void btnTxtFinalizarVenta1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtFinalizarVenta1MouseExited
+          pnlFinalizar.setBackground(new Color(0,0,0));
+    }//GEN-LAST:event_btnTxtFinalizarVenta1MouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnAtras;
     private GUI.PanelRound btnFinalizarVenta;
-    private GUI.PanelRound btnFinalizarVenta1;
-    private GUI.PanelRound btnFinalizarVenta2;
     private javax.swing.JLabel btnTxtFinalizarVenta1;
     private javax.swing.JLabel btnTxtFinalizarVenta2;
     private javax.swing.JLabel icnBasura;
@@ -431,6 +450,8 @@ public class PantallaDevolucion extends javax.swing.JPanel {
     private javax.swing.JTextField inputRazon;
     private javax.swing.JTextField inputTelefono;
     private javax.swing.JScrollPane jScrollPane1;
+    private GUI.PanelRound pnlCancelarD;
+    private GUI.PanelRound pnlFinalizar;
     private javax.swing.JTable tablaProductosDevolucion;
     private javax.swing.JLabel txtBusquedaNombre1;
     private javax.swing.JLabel txtBusquedaNombre2;
@@ -461,7 +482,7 @@ public class PantallaDevolucion extends javax.swing.JPanel {
                     JOptionPane.WARNING_MESSAGE);
             return;
         }
-        EmpleadoCargadoDTO empleado = new EmpleadoCargadoDTO("Miguelito mockeado", "Cajero");
+        EmpleadoCargadoDTO empleado = new EmpleadoCargadoDTO("Miguelito", "Cajero");
         CrearDevolucionDTO devolucionDTO = new CrearDevolucionDTO();
         devolucionDTO.setNombreCompleto(nombre);
         devolucionDTO.setRazon(razon);

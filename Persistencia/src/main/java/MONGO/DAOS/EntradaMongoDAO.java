@@ -31,8 +31,6 @@ public class EntradaMongoDAO implements IEntradaDAO{
             if (entrada.getId() == null || entrada.getId() == 0) {
                 entrada.setId(new ObjectId().getTimestamp());
             }
-
-            System.out.println(entrada.getId() + "persisntecia");
             coleccion.insertOne(entrada);
             return entrada;
         } catch (Exception e) {

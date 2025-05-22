@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Lap-064
+ * @author Sebastian Moreno
  */
 public class PantallaDetallesHistorialDevolucion extends javax.swing.JPanel {
 
@@ -213,7 +213,6 @@ public class PantallaDetallesHistorialDevolucion extends javax.swing.JPanel {
     private void cargarTextos() {
         DevolucionDTO devolucionDTO = app.getDevolucionTemporal();
 
-        // Asegúrate de que devolucionDTO no sea null
         if (devolucionDTO == null || devolucionDTO.getVenta() == null) {
             System.out.println("No se encontró información de devolución.");
             return;
@@ -243,11 +242,7 @@ public class PantallaDetallesHistorialDevolucion extends javax.swing.JPanel {
         }
  
         txtMetodoPago.setText("Método de pago: " + metodoPagoString);
-
-        // Monto devuelto
         txtMontoDevolucion.setText("Monto devuelto: $" + devolucionDTO.getMontoDevuelto());
-
-        // Motivo
         txtMotivo.setText("Motivo: " + devolucionDTO.getRazon());
     }
 

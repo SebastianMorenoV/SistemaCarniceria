@@ -1,4 +1,3 @@
-
 package GUI.ModuloRegistrarEntrada;
 
 import DTOs.EmpleadoCargadoDTO;
@@ -6,6 +5,7 @@ import Exception.InventarioException;
 import Exception.NegocioException;
 import Exception.VentaException;
 import GUI.Aplicacion;
+import java.awt.Color;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,7 +18,9 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
  * @author HP
  */
 public class OpcionesInventario extends javax.swing.JPanel {
+
     private Aplicacion control;
+
     /**
      * Creates new form OpcionesInventario
      */
@@ -26,7 +28,7 @@ public class OpcionesInventario extends javax.swing.JPanel {
         this.control = control;
         initComponents();
         inicializarValoresDefault();
-        
+
     }
 
     /**
@@ -38,52 +40,22 @@ public class OpcionesInventario extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelBtnRegistrarEntrada = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         labelRegistrarEntrada = new javax.swing.JLabel();
         labelFecha = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnAtras = new javax.swing.JLabel();
-        panelBtnRegistrarEntrada1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        pnlFinalizar = new GUI.PanelRound();
+        btnTxtFinalizarVenta1 = new javax.swing.JLabel();
+        pnlFinalizar1 = new GUI.PanelRound();
+        btnTxtFinalizarVenta2 = new javax.swing.JLabel();
+        pnlRegistrarSalida = new GUI.PanelRound();
+        jLabel2 = new javax.swing.JLabel();
+        pnlRegistrarEntrada = new GUI.PanelRound();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelBtnRegistrarEntrada.setBackground(new java.awt.Color(0, 0, 0));
-        panelBtnRegistrarEntrada.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        panelBtnRegistrarEntrada.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelBtnRegistrarEntradaMouseClicked(evt);
-            }
-        });
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar-producto.png"))); // NOI18N
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelBtnRegistrarEntradaLayout = new javax.swing.GroupLayout(panelBtnRegistrarEntrada);
-        panelBtnRegistrarEntrada.setLayout(panelBtnRegistrarEntradaLayout);
-        panelBtnRegistrarEntradaLayout.setHorizontalGroup(
-            panelBtnRegistrarEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBtnRegistrarEntradaLayout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jLabel2)
-                .addContainerGap(51, Short.MAX_VALUE))
-        );
-        panelBtnRegistrarEntradaLayout.setVerticalGroup(
-            panelBtnRegistrarEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBtnRegistrarEntradaLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel2)
-                .addContainerGap(36, Short.MAX_VALUE))
-        );
-
-        add(panelBtnRegistrarEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 180, 230, 190));
 
         labelRegistrarEntrada.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         labelRegistrarEntrada.setForeground(new java.awt.Color(0, 0, 0));
@@ -100,7 +72,7 @@ public class OpcionesInventario extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Registrar Salida");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 380, 230, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 380, 230, -1));
 
         btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/atras (1).png"))); // NOI18N
         btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -111,64 +83,121 @@ public class OpcionesInventario extends javax.swing.JPanel {
         });
         add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 50));
 
-        panelBtnRegistrarEntrada1.setBackground(new java.awt.Color(0, 0, 0));
-        panelBtnRegistrarEntrada1.setForeground(new java.awt.Color(0, 0, 0));
-        panelBtnRegistrarEntrada1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        panelBtnRegistrarEntrada1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelBtnRegistrarEntrada1MouseClicked(evt);
-            }
-        });
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/agregar-producto.png"))); // NOI18N
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelBtnRegistrarEntrada1Layout = new javax.swing.GroupLayout(panelBtnRegistrarEntrada1);
-        panelBtnRegistrarEntrada1.setLayout(panelBtnRegistrarEntrada1Layout);
-        panelBtnRegistrarEntrada1Layout.setHorizontalGroup(
-            panelBtnRegistrarEntrada1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBtnRegistrarEntrada1Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jLabel1)
-                .addContainerGap(51, Short.MAX_VALUE))
-        );
-        panelBtnRegistrarEntrada1Layout.setVerticalGroup(
-            panelBtnRegistrarEntrada1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBtnRegistrarEntrada1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1)
-                .addContainerGap(36, Short.MAX_VALUE))
-        );
-
-        add(panelBtnRegistrarEntrada1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 230, 190));
-
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
         jLabel5.setFont(new java.awt.Font("Product Sans Infanity", 0, 48)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Bienvenido, Juanito!");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1150, 80));
-    }// </editor-fold>//GEN-END:initComponents
 
-    private void panelBtnRegistrarEntradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnRegistrarEntradaMouseClicked
-         control.mostrarVentanaHistorialSalidas();
-    }//GEN-LAST:event_panelBtnRegistrarEntradaMouseClicked
+        pnlFinalizar.setBackground(new java.awt.Color(44, 44, 44));
+        pnlFinalizar.setRoundBottomLeft(15);
+        pnlFinalizar.setRoundBottomRight(15);
+        pnlFinalizar.setRoundTopLeft(15);
+        pnlFinalizar.setRoundTopRight(15);
+        pnlFinalizar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnTxtFinalizarVenta1.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
+        btnTxtFinalizarVenta1.setForeground(new java.awt.Color(255, 255, 255));
+        btnTxtFinalizarVenta1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnTxtFinalizarVenta1.setText("Aregar Proveedor");
+        btnTxtFinalizarVenta1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTxtFinalizarVenta1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTxtFinalizarVenta1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnTxtFinalizarVenta1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnTxtFinalizarVenta1MouseExited(evt);
+            }
+        });
+        pnlFinalizar.add(btnTxtFinalizarVenta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 90));
+
+        add(pnlFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 540, 500, 90));
+
+        pnlFinalizar1.setBackground(new java.awt.Color(44, 44, 44));
+        pnlFinalizar1.setRoundBottomLeft(15);
+        pnlFinalizar1.setRoundBottomRight(15);
+        pnlFinalizar1.setRoundTopLeft(15);
+        pnlFinalizar1.setRoundTopRight(15);
+        pnlFinalizar1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnTxtFinalizarVenta2.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
+        btnTxtFinalizarVenta2.setForeground(new java.awt.Color(255, 255, 255));
+        btnTxtFinalizarVenta2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnTxtFinalizarVenta2.setText("Aregar Nuevo Producto");
+        btnTxtFinalizarVenta2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTxtFinalizarVenta2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTxtFinalizarVenta2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnTxtFinalizarVenta2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnTxtFinalizarVenta2MouseExited(evt);
+            }
+        });
+        pnlFinalizar1.add(btnTxtFinalizarVenta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 90));
+
+        add(pnlFinalizar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 440, 500, 90));
+
+        pnlRegistrarSalida.setBackground(new java.awt.Color(0, 0, 0));
+        pnlRegistrarSalida.setRoundBottomLeft(20);
+        pnlRegistrarSalida.setRoundBottomRight(20);
+        pnlRegistrarSalida.setRoundTopLeft(20);
+        pnlRegistrarSalida.setRoundTopRight(20);
+        pnlRegistrarSalida.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar-producto.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel2MouseExited(evt);
+            }
+        });
+        pnlRegistrarSalida.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -2, 230, 200));
+
+        add(pnlRegistrarSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 170, 230, 200));
+
+        pnlRegistrarEntrada.setBackground(new java.awt.Color(0, 0, 0));
+        pnlRegistrarEntrada.setRoundBottomLeft(20);
+        pnlRegistrarEntrada.setRoundBottomRight(20);
+        pnlRegistrarEntrada.setRoundTopLeft(20);
+        pnlRegistrarEntrada.setRoundTopRight(20);
+        pnlRegistrarEntrada.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/agregar-producto.png"))); // NOI18N
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel1MouseExited(evt);
+            }
+        });
+        pnlRegistrarEntrada.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -2, 230, 200));
+
+        add(pnlRegistrarEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, 230, 200));
+    }// </editor-fold>//GEN-END:initComponents
 
     private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
         control.mostrarMenuOpciones();
     }//GEN-LAST:event_btnAtrasMouseClicked
-
-    private void panelBtnRegistrarEntrada1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnRegistrarEntrada1MouseClicked
-        try {
-            control.mostrarVentanaSeleccionarProveedor();
-        } catch (InventarioException ex) {
-            Logger.getLogger(OpcionesInventario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_panelBtnRegistrarEntrada1MouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         try {
@@ -179,43 +208,85 @@ public class OpcionesInventario extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-         control.mostrarVentanaHistorialSalidas();
+        control.mostrarVentanaHistorialSalidas();
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void btnTxtFinalizarVenta1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtFinalizarVenta1MouseClicked
+        control.mostrarAgregarProveedor();
+    }//GEN-LAST:event_btnTxtFinalizarVenta1MouseClicked
+
+    private void btnTxtFinalizarVenta1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtFinalizarVenta1MouseEntered
+        pnlFinalizar.setBackground(new Color(100, 100, 120, 180));
+    }//GEN-LAST:event_btnTxtFinalizarVenta1MouseEntered
+
+    private void btnTxtFinalizarVenta1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtFinalizarVenta1MouseExited
+        pnlFinalizar.setBackground(new Color(0, 0, 0));
+    }//GEN-LAST:event_btnTxtFinalizarVenta1MouseExited
+
+    private void btnTxtFinalizarVenta2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtFinalizarVenta2MouseClicked
+        control.mostrarVentanaProductoNuevo();
+    }//GEN-LAST:event_btnTxtFinalizarVenta2MouseClicked
+
+    private void btnTxtFinalizarVenta2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtFinalizarVenta2MouseEntered
+        pnlFinalizar1.setBackground(new Color(100, 100, 120, 180));
+    }//GEN-LAST:event_btnTxtFinalizarVenta2MouseEntered
+
+    private void btnTxtFinalizarVenta2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtFinalizarVenta2MouseExited
+        pnlFinalizar1.setBackground(new Color(0, 0, 0));
+    }//GEN-LAST:event_btnTxtFinalizarVenta2MouseExited
+
+    private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
+        pnlRegistrarEntrada.setBackground(new Color(100, 100, 120, 180));
+    }//GEN-LAST:event_jLabel1MouseEntered
+
+    private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
+        pnlRegistrarEntrada.setBackground(new Color(0, 0, 0));
+    }//GEN-LAST:event_jLabel1MouseExited
+
+    private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
+        pnlRegistrarSalida.setBackground(new Color(100, 100, 120, 180));
+    }//GEN-LAST:event_jLabel2MouseEntered
+
+    private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
+        pnlRegistrarSalida.setBackground(new Color(0, 0, 0));
+    }//GEN-LAST:event_jLabel2MouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnAtras;
+    private javax.swing.JLabel btnTxtFinalizarVenta1;
+    private javax.swing.JLabel btnTxtFinalizarVenta2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel labelFecha;
     private javax.swing.JLabel labelRegistrarEntrada;
-    private javax.swing.JPanel panelBtnRegistrarEntrada;
-    private javax.swing.JPanel panelBtnRegistrarEntrada1;
+    private GUI.PanelRound pnlFinalizar;
+    private GUI.PanelRound pnlFinalizar1;
+    private GUI.PanelRound pnlRegistrarEntrada;
+    private GUI.PanelRound pnlRegistrarSalida;
     // End of variables declaration//GEN-END:variables
 
-
-    public void cargarEmpleado(){
+    public void cargarEmpleado() {
         try {
             EmpleadoCargadoDTO empleado = control.cargarEmpleado();
-            
+
             jLabel5.setText("Bienvenido, " + empleado.getNombre() + "!");
         } catch (VentaException ex) {
             //Tira exception inventario
             Logger.getLogger(OpcionesInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
-    public void inicializarValoresDefault(){
+
+    public void inicializarValoresDefault() {
         LocalDateTime fecha = LocalDateTime.now();
         String fechaString = formatearFecha(fecha);
-        labelFecha.setText("Fecha: " + fechaString );
+        labelFecha.setText("Fecha: " + fechaString);
         cargarEmpleado();
-        
+
     }
-    
+
     private String formatearFecha(LocalDateTime fecha) {
         if (fecha == null) {
             return "No disponible";

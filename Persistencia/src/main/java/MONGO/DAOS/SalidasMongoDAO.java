@@ -36,8 +36,6 @@ public class SalidasMongoDAO implements ISalidaDAO{
             if (salida.getId() == null) {
                 salida.setId(new ObjectId().getTimestamp());
             }
-            
-            System.out.println(salida.getId() + "Persistencia");
             coleccion.insertOne(salida);
             return salida;
             

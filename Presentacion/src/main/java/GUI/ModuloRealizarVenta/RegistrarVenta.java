@@ -41,6 +41,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  * Formulario para realizar una venta en caja
+ *
  * @author Sebastian Moreno
  */
 public class RegistrarVenta extends javax.swing.JPanel {
@@ -106,7 +107,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
         txtCajero.setText("Cajero:");
         add(txtCajero, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 20, -1, -1));
 
-        tablaProductosVenta.setBackground(new java.awt.Color(217, 217, 217));
+        tablaProductosVenta.setBackground(new java.awt.Color(255, 255, 255));
         tablaProductosVenta.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
         tablaProductosVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -170,14 +171,14 @@ public class RegistrarVenta extends javax.swing.JPanel {
                 btnFinalizarVentaMouseClicked(evt);
             }
         });
-        btnFinalizarVenta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnFinalizarVenta.setLayout(new java.awt.GridLayout());
 
         btnTxtFinalizarVenta.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         btnTxtFinalizarVenta.setForeground(new java.awt.Color(255, 255, 255));
         btnTxtFinalizarVenta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnTxtFinalizarVenta.setText("Finalizar Venta");
         btnTxtFinalizarVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnFinalizarVenta.add(btnTxtFinalizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 210, 70));
+        btnFinalizarVenta.add(btnTxtFinalizarVenta);
 
         add(btnFinalizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 580, 290, 70));
 
@@ -367,57 +368,91 @@ public class RegistrarVenta extends javax.swing.JPanel {
     }//GEN-LAST:event_inputNombreFocusLost
 
     private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
+        if (ventaYaPagada()) {
+            return; // sale del método actual si ya estaba pagada
+        }
+        app.setearVenta(null);
         app.mostrarMenuOpciones();
     }//GEN-LAST:event_btnAtrasMouseClicked
 
     private void btnTxtTarjetaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtTarjetaMouseClicked
 
         try {
+            // Verifica si ya hay una venta con pago registrado
             if (app.obtenerVenta() != null && app.obtenerVenta().getPago() != null) {
                 app.mostrarVentaYaPagada();
-            } else {
-                VentaDTO venta = new VentaDTO();
-                venta.setEmpleado(app.cargarEmpleado());
-                venta.setFechaHora(LocalDateTime.now());
-                venta.setIva(app.getIvaVenta());
-                venta.setTotal(app.getTotalVenta());
-                venta.setSubtotal(app.getSubtotalVenta());
-                venta.setListadoProductosVenta(listadoProductosVenta);
-
-                app.setearVenta(venta);
-                app.mostrarFormularioTarjeta();
+                return;
             }
+
+            // Verifica si hay productos para pagar
+            if (listadoProductosVenta == null || listadoProductosVenta.isEmpty()) {
+                app.mostrarErrorPagoSinProductos();
+                return;
+            }
+
+            // Crea y configura la venta
+            VentaDTO venta = new VentaDTO();
+            venta.setEmpleado(app.cargarEmpleado());
+            venta.setFechaHora(LocalDateTime.now());
+            venta.setIva(app.getIvaVenta());
+            venta.setTotal(app.getTotalVenta());
+            venta.setSubtotal(app.getSubtotalVenta());
+            venta.setListadoProductosVenta(listadoProductosVenta);
+
+            // Guarda la venta en la app
+            app.setearVenta(venta);
+
+            // Muestra formulario para introducir datos de tarjeta
+            app.mostrarFormularioTarjeta();
+
         } catch (VentaException ex) {
             Logger.getLogger(RegistrarVenta.class.getName()).log(Level.SEVERE, null, ex);
+
         }
     }//GEN-LAST:event_btnTxtTarjetaMouseClicked
 
     private void btnTxtEfectivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtEfectivoMouseClicked
 
         try {
-            // setear la venta con los totales y los productosVenta
-
+            // Verifica si ya hay una venta registrada con pago
             if (app.obtenerVenta() != null && app.obtenerVenta().getPago() != null) {
                 app.mostrarVentaYaPagada();
-            } else {
-                VentaDTO venta = new VentaDTO();
-                venta.setEmpleado(app.cargarEmpleado());
-                venta.setFechaHora(LocalDateTime.now());
-                venta.setIva(app.getIvaVenta());
-                venta.setTotal(app.getTotalVenta());
-                venta.setSubtotal(app.getSubtotalVenta());
-                venta.setListadoProductosVenta(listadoProductosVenta);
-                System.out.println("REGISTYAR" + venta);
-                app.setearVenta(venta);
-                app.mostrarFormularioEfectivo();
+                return;
             }
+
+            // Verifica si hay productos cargados para la venta
+            if (listadoProductosVenta == null || listadoProductosVenta.isEmpty()) {
+                app.mostrarErrorPagoSinProductos();
+                return;
+            }
+
+            // Crea y configura la venta
+            VentaDTO venta = new VentaDTO();
+            venta.setEmpleado(app.cargarEmpleado());
+            venta.setFechaHora(LocalDateTime.now());
+            venta.setIva(app.getIvaVenta());
+            venta.setTotal(app.getTotalVenta());
+            venta.setSubtotal(app.getSubtotalVenta());
+            venta.setListadoProductosVenta(listadoProductosVenta);
+
+           
+            // Guarda la venta en la app
+            app.setearVenta(venta);
+
+            // Muestra el formulario para pago en efectivo
+            app.mostrarFormularioEfectivo();
+
         } catch (VentaException ex) {
             Logger.getLogger(RegistrarVenta.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
+        }
     }//GEN-LAST:event_btnTxtEfectivoMouseClicked
 
     private void btnReiniciarVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReiniciarVentaMouseClicked
+        if (app.obtenerVenta() != null && app.obtenerVenta().getPago() != null) {
+            app.mostrarVentaYaPagada();
+            return;
+        }
         int opcion = app.mostrarPreguntaReiniciarVenta();
         if (opcion == JOptionPane.YES_OPTION) {
             reiniciarVenta();
@@ -463,6 +498,10 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
     private void listadoGraficoProductosCargadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listadoGraficoProductosCargadosMouseClicked
         if (evt.getClickCount() == 2) { // Doble clic
+            if (app.obtenerVenta() != null && app.obtenerVenta().getPago() != null) {
+                app.mostrarVentaYaPagada();
+                return;
+            }
             agregarProductoVenta(); // Llama al método al doble clic
         }
     }//GEN-LAST:event_listadoGraficoProductosCargadosMouseClicked
@@ -479,6 +518,10 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
     private void tablaProductosVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosVentaMouseClicked
         if (evt.getClickCount() == 2) { // Doble clic
+            if (app.obtenerVenta() != null && app.obtenerVenta().getPago() != null) {
+                app.mostrarVentaYaPagada();
+                return;
+            }
             int respuesta = app.mostrarPreguntaEliminarProducto();
             if (respuesta == JOptionPane.YES_OPTION) { // tambien mandar a abrir jOptionPanes desde aplicacion.
                 eliminarProducto(); // Llama al método al doble clic --- aqui necesito quitar el producto de la lista local
@@ -541,7 +584,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
         txtCajero.setText("Cajero:  " + empleadoCargado.getNombre());
     }
 
-    public void cargarProductos()throws VentaException {
+    public void cargarProductos() throws VentaException {
         List<ProductoCargadoDTO> nuevosProductos = app.cargarProductos();
 
         listadoProductosCargados = nuevosProductos; // Reemplaza, no acumula
@@ -591,17 +634,28 @@ public class RegistrarVenta extends javax.swing.JPanel {
     }
 
     public void agregarProductoVenta() {
-        // Obtener el String seleccionado de la listaGraficaDeProductosCargados
         String infoProducto = listadoGraficoProductosCargados.getSelectedValue();
-
+        ProductoCargadoDTO productoFiltrado = new ProductoCargadoDTO();
+        String respuesta = "";
         if (infoProducto != null && !infoProducto.isEmpty()) {
-            // Convertir el String a ProductoCargadoDTO
-            ProductoCargadoDTO productoCargado = convertirStringAProducto(infoProducto);
 
+            ProductoCargadoDTO productoCargado = convertirStringAProducto(infoProducto);
+            try {
+                List<ProductoCargadoDTO> filtroPesable = app.buscaPorNombre(String.valueOf(productoCargado.getCodigo()));
+                productoFiltrado = filtroPesable.getFirst();
+            } catch (VentaException ex) {
+                Logger.getLogger(RegistrarVenta.class.getName()).log(Level.SEVERE, null, ex);
+            }
             if (productoCargado != null) {
                 try {
-                    // Obtener la cantidad del producto
-                    String respuesta = app.mostrarIngresarCantidad();
+                   
+                    if (productoFiltrado.isEsPesable() != true) {
+                        respuesta = app.mostrarIngresarCantidadEntera();
+                    } else {
+
+                        respuesta = app.mostrarIngresarCantidad();
+                    }
+
                     if (respuesta == null) {
                         return;
                     }
@@ -609,6 +663,17 @@ public class RegistrarVenta extends javax.swing.JPanel {
                     // Validar que la cantidad sea mayor que 0
                     if (cantidad <= 0) {
                         app.mostrarErrorCantidadMayor0();
+                        return;
+                    }
+                    if (cantidad > productoCargado.getStock()) {
+                        double stockDouble = productoCargado.getStock();
+                        int stockEntero = (int) stockDouble;
+
+                        // Verifica si el número no tiene decimales
+                        String stock = (stockDouble == stockEntero) ? String.valueOf(stockEntero) : String.valueOf(stockDouble);
+
+                        // Usas el stock formateado
+                        app.mostrarErrorCantidadMayorAStock(stock);
                         return;
                     }
 
@@ -682,7 +747,6 @@ public class RegistrarVenta extends javax.swing.JPanel {
             // Obtener el stock (último valor)
             double stock = Double.parseDouble(partes[partes.length - 1]);
 
-            
             ProductoCargadoDTO productoCargadoDTO = new ProductoCargadoDTO(codigo, nombreCompleto, "Descripción", precio);
             productoCargadoDTO.setStock(stock);
             return productoCargadoDTO;
@@ -865,7 +929,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
 
         // Validar que la venta haya sido pagada
         if (ventaRealizada == null || ventaRealizada.getPago() == null) {
-            System.out.println("La venta aun no ha sido pagada.");
+         
             app.mostrarVentaCancelada();
             return;
         }
@@ -873,7 +937,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
         String estadoPago = ventaRealizada.getPago().getEstado();
 
         if (!"Pagado".equalsIgnoreCase(estadoPago)) {
-            System.out.println("La venta no ha sido pagada");
+           
             app.mostrarVentaCancelada();
             return;
         }
@@ -885,8 +949,9 @@ public class RegistrarVenta extends javax.swing.JPanel {
                 VentaDTO venta = app.registrarVenta(ventaRealizada);
 
                 app.setearVenta(venta);
+                cargarProductos();
                 app.mostrarTicketPDF();
-                System.out.println("FINALZIAR:" + venta);
+               
             } catch (VentaException ex) {
                 Logger.getLogger(RegistrarVenta.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SalidaException ex) {
@@ -898,4 +963,11 @@ public class RegistrarVenta extends javax.swing.JPanel {
         }
     }
 
+    public boolean ventaYaPagada() {
+        if (app.obtenerVenta() != null && app.obtenerVenta().getPago() != null) {
+            app.mostrarVentaYaPagada();
+            return true;
+        }
+        return false;
+    }
 }

@@ -5,8 +5,16 @@
 package GUI.ModuloRealizarVenta;
 
 import GUI.Aplicacion;
+import java.awt.Font;
 import java.awt.Color;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 
 /**
@@ -16,6 +24,8 @@ import javax.swing.UIManager;
 public class MenuOpciones extends javax.swing.JPanel {
 
     Aplicacion app;
+    private Font fontOriginal;
+    private Font fontHover;
 
     /**
      * Creates new form MenuOpciones
@@ -24,6 +34,11 @@ public class MenuOpciones extends javax.swing.JPanel {
         this.app = app;
         initComponents();
 
+        fontOriginal = txtInventario.getFont();
+        fontHover = fontOriginal.deriveFont(fontOriginal.getSize() + 2.0f);
+
+        aplicarBanderaInfinita(jLabel1);
+        iniciarAnimacionGif(gifPanel, labelGif);
     }
 
     /**
@@ -35,96 +50,88 @@ public class MenuOpciones extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlBotonVentaEnCaja = new javax.swing.JPanel();
-        icnRealizarVenta = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        panelRound1 = new GUI.PanelRound();
-        jLabel3 = new javax.swing.JLabel();
-        pnlBotonDevoluciones = new javax.swing.JPanel();
-        icnDevolucion = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        panelRound2 = new GUI.PanelRound();
+        txtDevoluciones = new javax.swing.JLabel();
+        txtEmpleado = new javax.swing.JLabel();
+        txtGastos = new javax.swing.JLabel();
+        txtInventario = new javax.swing.JLabel();
+        txtVentajaCaja = new javax.swing.JLabel();
+        pnlGastos = new GUI.PanelRound();
         btnGastos = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        panelBtnInventario = new javax.swing.JPanel();
+        pnlDevoluciones = new GUI.PanelRound();
+        icnDevolucion = new javax.swing.JLabel();
+        pnlVentaEnCaja = new GUI.PanelRound();
+        icnRealizarVenta = new javax.swing.JLabel();
+        pnlInventario = new GUI.PanelRound();
         iconInventario = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        gifPanel = new javax.swing.JPanel();
+        pnlCerrarSesion = new GUI.PanelRound();
+        btnCerrarSesion = new javax.swing.JLabel();
+        labelGif = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnlBotonVentaEnCaja.setBackground(new java.awt.Color(73, 69, 79));
-        pnlBotonVentaEnCaja.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlBotonVentaEnCaja.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtDevoluciones.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        txtDevoluciones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtDevoluciones.setText("Devoluciones");
+        add(txtDevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 380, 190, 30));
+
+        txtEmpleado.setFont(new java.awt.Font("Product Sans Infanity", 0, 48)); // NOI18N
+        txtEmpleado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtEmpleado.setText("Bienvenido, Juanito!");
+        add(txtEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 60, 1150, 80));
+
+        txtGastos.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        txtGastos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtGastos.setText("Gastos");
+        add(txtGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 380, 190, 30));
+
+        txtInventario.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        txtInventario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtInventario.setText("Inventario");
+        add(txtInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 380, 190, 30));
+
+        txtVentajaCaja.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
+        txtVentajaCaja.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtVentajaCaja.setText("Venta en caja");
+        add(txtVentajaCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, 190, 30));
+
+        pnlGastos.setBackground(new java.awt.Color(73, 69, 79));
+        pnlGastos.setRoundBottomLeft(20);
+        pnlGastos.setRoundBottomRight(20);
+        pnlGastos.setRoundTopLeft(20);
+        pnlGastos.setRoundTopRight(20);
+        pnlGastos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnGastos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnGastos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/gastando-dinero (2).png"))); // NOI18N
+        btnGastos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGastos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGastosMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pnlBotonVentaEnCajaMouseEntered(evt);
+                btnGastosMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnlBotonVentaEnCajaMouseExited(evt);
+                btnGastosMouseExited(evt);
             }
         });
-        pnlBotonVentaEnCaja.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlGastos.add(btnGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 170));
 
-        icnRealizarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icnRealizarVenta.png"))); // NOI18N
-        icnRealizarVenta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                icnRealizarVentaMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                icnRealizarVentaMouseEntered(evt);
-            }
-        });
-        pnlBotonVentaEnCaja.add(icnRealizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 130, 150));
+        add(pnlGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 200, 190, 170));
 
-        add(pnlBotonVentaEnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 190, 170));
+        pnlDevoluciones.setBackground(new java.awt.Color(73, 69, 79));
+        pnlDevoluciones.setRoundBottomLeft(20);
+        pnlDevoluciones.setRoundBottomRight(20);
+        pnlDevoluciones.setRoundTopLeft(20);
+        pnlDevoluciones.setRoundTopRight(20);
+        pnlDevoluciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Devoluciones");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 380, 190, 30));
-
-        panelRound1.setBackground(new java.awt.Color(44, 44, 44));
-        panelRound1.setRoundBottomLeft(30);
-        panelRound1.setRoundBottomRight(30);
-        panelRound1.setRoundTopLeft(30);
-        panelRound1.setRoundTopRight(30);
-        panelRound1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelRound1MouseClicked(evt);
-            }
-        });
-        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel3.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Cerrar Sesion");
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        panelRound1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 40));
-
-        add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 600, 220, 40));
-
-        pnlBotonDevoluciones.setBackground(new java.awt.Color(73, 69, 79));
-        pnlBotonDevoluciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlBotonDevoluciones.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pnlBotonDevolucionesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnlBotonDevolucionesMouseExited(evt);
-            }
-        });
-        pnlBotonDevoluciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
+        icnDevolucion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         icnDevolucion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icnDevolucion.png"))); // NOI18N
-        icnDevolucion.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                icnDevolucionFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                icnDevolucionFocusLost(evt);
-            }
-        });
+        icnDevolucion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         icnDevolucion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 icnDevolucionMouseClicked(evt);
@@ -136,43 +143,41 @@ public class MenuOpciones extends javax.swing.JPanel {
                 icnDevolucionMouseExited(evt);
             }
         });
-        pnlBotonDevoluciones.add(icnDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 130, 150));
+        pnlDevoluciones.add(icnDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 170));
 
-        add(pnlBotonDevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 200, 190, 170));
+        add(pnlDevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 200, 190, 170));
 
-        jLabel4.setFont(new java.awt.Font("Product Sans Infanity", 0, 48)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Bienvenido, Juanito!");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1150, 80));
+        pnlVentaEnCaja.setBackground(new java.awt.Color(73, 69, 79));
+        pnlVentaEnCaja.setRoundBottomLeft(20);
+        pnlVentaEnCaja.setRoundBottomRight(20);
+        pnlVentaEnCaja.setRoundTopLeft(20);
+        pnlVentaEnCaja.setRoundTopRight(20);
+        pnlVentaEnCaja.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Gastos");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 380, 190, 30));
-
-        panelRound2.setBackground(new java.awt.Color(73, 69, 79));
-        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnGastos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnGastos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/gastando-dinero (2).png"))); // NOI18N
-        btnGastos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnGastos.addMouseListener(new java.awt.event.MouseAdapter() {
+        icnRealizarVenta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        icnRealizarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icnRealizarVenta.png"))); // NOI18N
+        icnRealizarVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        icnRealizarVenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnGastosMouseClicked(evt);
+                icnRealizarVentaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                icnRealizarVentaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                icnRealizarVentaMouseExited(evt);
             }
         });
-        panelRound2.add(btnGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 170));
+        pnlVentaEnCaja.add(icnRealizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 170));
 
-        add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 200, 190, 170));
+        add(pnlVentaEnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 190, 170));
 
-        jLabel7.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        jLabel7.setText("Inventario");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 120, 30));
-
-        panelBtnInventario.setBackground(new java.awt.Color(73, 69, 79));
-        panelBtnInventario.setMinimumSize(new java.awt.Dimension(160, 160));
-        panelBtnInventario.setPreferredSize(new java.awt.Dimension(160, 160));
-        panelBtnInventario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlInventario.setBackground(new java.awt.Color(73, 69, 79));
+        pnlInventario.setRoundBottomLeft(20);
+        pnlInventario.setRoundBottomRight(20);
+        pnlInventario.setRoundTopLeft(20);
+        pnlInventario.setRoundTopRight(20);
+        pnlInventario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         iconInventario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         iconInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/inventario.png"))); // NOI18N
@@ -181,93 +186,212 @@ public class MenuOpciones extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 iconInventarioMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                iconInventarioMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                iconInventarioMouseExited(evt);
+            }
         });
-        panelBtnInventario.add(iconInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 190, -1));
+        pnlInventario.add(iconInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 170));
 
-        add(panelBtnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, 190, 170));
+        add(pnlInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, 190, 170));
 
-        jLabel8.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
-        jLabel8.setText("Venta en caja");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 150, 30));
+        jLabel1.setFont(new java.awt.Font("Product Sans Infanity", 0, 12)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Selecciona una opcion");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 140, 1150, -1));
+
+        gifPanel.setBackground(new java.awt.Color(255, 255, 255));
+        gifPanel.setLayout(null);
+
+        pnlCerrarSesion.setBackground(new java.awt.Color(44, 44, 44));
+        pnlCerrarSesion.setRoundBottomLeft(30);
+        pnlCerrarSesion.setRoundBottomRight(30);
+        pnlCerrarSesion.setRoundTopLeft(30);
+        pnlCerrarSesion.setRoundTopRight(30);
+        pnlCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnlCerrarSesionMouseClicked(evt);
+            }
+        });
+        pnlCerrarSesion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnCerrarSesion.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
+        btnCerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        btnCerrarSesion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnCerrarSesion.setText("Cerrar Sesion");
+        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCerrarSesionMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCerrarSesionMouseEntered(evt);
+            }
+        });
+        pnlCerrarSesion.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -7, 270, 50));
+
+        gifPanel.add(pnlCerrarSesion);
+        pnlCerrarSesion.setBounds(840, 140, 270, 40);
+
+        labelGif.setBackground(new java.awt.Color(255, 255, 255));
+        labelGif.setText("jLabel2");
+        gifPanel.add(labelGif);
+        labelGif.setBounds(-30, 0, 1140, 200);
+
+        add(gifPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 1130, 200));
     }// </editor-fold>//GEN-END:initComponents
 
     private void icnRealizarVentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icnRealizarVentaMouseEntered
-        // TODO add your handling code here:
-        pnlBotonVentaEnCaja.setBackground(new Color(100, 100, 120, 180));
-
+        txtVentajaCaja.setFont(fontHover);
+        pnlVentaEnCaja.setBackground(new Color(100, 100, 120, 180));
     }//GEN-LAST:event_icnRealizarVentaMouseEntered
 
-    private void pnlBotonVentaEnCajaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBotonVentaEnCajaMouseEntered
-        pnlBotonVentaEnCaja.setBackground(new Color(100, 100, 120, 180));
-    }//GEN-LAST:event_pnlBotonVentaEnCajaMouseEntered
+    private void icnDevolucionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icnDevolucionMouseClicked
+        app.mostrarPantallaMenuDevolucion();
+    }//GEN-LAST:event_icnDevolucionMouseClicked
 
-    private void pnlBotonVentaEnCajaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBotonVentaEnCajaMouseExited
-        pnlBotonVentaEnCaja.setBackground(new Color(73, 69, 79, 150));
-    }//GEN-LAST:event_pnlBotonVentaEnCajaMouseExited
+    private void icnDevolucionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icnDevolucionMouseEntered
+        txtDevoluciones.setFont(fontHover);
+        pnlDevoluciones.setBackground(new Color(100, 100, 120, 180));
+    }//GEN-LAST:event_icnDevolucionMouseEntered
+
+    private void icnDevolucionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icnDevolucionMouseExited
+        txtDevoluciones.setFont(fontOriginal);
+        pnlDevoluciones.setBackground(new Color(73, 69, 79));
+    }//GEN-LAST:event_icnDevolucionMouseExited
+
+    private void iconInventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconInventarioMouseClicked
+        app.mostrarVentanaOpcionesInventario();
+    }//GEN-LAST:event_iconInventarioMouseClicked
+
+    private void pnlCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlCerrarSesionMouseClicked
+
+    }//GEN-LAST:event_pnlCerrarSesionMouseClicked
 
     private void icnRealizarVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icnRealizarVentaMouseClicked
         app.reconstruirDefaultVenta();
     }//GEN-LAST:event_icnRealizarVentaMouseClicked
 
-    private void icnDevolucionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icnDevolucionMouseClicked
-          app.mostrarPantallaMenuDevolucion();
-    }//GEN-LAST:event_icnDevolucionMouseClicked
-
-    private void icnDevolucionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icnDevolucionMouseEntered
-          pnlBotonDevoluciones.setBackground(new Color(100, 100, 120, 180));
-    }//GEN-LAST:event_icnDevolucionMouseEntered
-
-    private void pnlBotonDevolucionesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBotonDevolucionesMouseEntered
-     
-    }//GEN-LAST:event_pnlBotonDevolucionesMouseEntered
-
-    private void pnlBotonDevolucionesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBotonDevolucionesMouseExited
-       
-    }//GEN-LAST:event_pnlBotonDevolucionesMouseExited
-
-    private void icnDevolucionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_icnDevolucionFocusGained
-           pnlBotonDevoluciones.setBackground(new Color(100, 100, 120, 180));
-    }//GEN-LAST:event_icnDevolucionFocusGained
-
-    private void icnDevolucionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_icnDevolucionFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_icnDevolucionFocusLost
-
-    private void icnDevolucionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icnDevolucionMouseExited
-         pnlBotonDevoluciones.setBackground(new Color(73, 69, 79, 150));
-    }//GEN-LAST:event_icnDevolucionMouseExited
+    private void icnRealizarVentaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icnRealizarVentaMouseExited
+        txtVentajaCaja.setFont(fontOriginal);
+        pnlVentaEnCaja.setBackground(new Color(73, 69, 79));
+    }//GEN-LAST:event_icnRealizarVentaMouseExited
 
     private void btnGastosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGastosMouseClicked
-        // TODO add your handling code here:
         app.mostrarPantallaMenuGastos();
     }//GEN-LAST:event_btnGastosMouseClicked
 
-    private void iconInventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconInventarioMouseClicked
-        // TODO add your handling code here:
-        app.mostrarVentanaOpcionesInventario();
-    }//GEN-LAST:event_iconInventarioMouseClicked
+    private void iconInventarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconInventarioMouseEntered
+        txtInventario.setFont(fontHover);
+        pnlInventario.setBackground(new Color(100, 100, 120, 180));
+    }//GEN-LAST:event_iconInventarioMouseEntered
 
-    private void panelRound1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound1MouseClicked
-        // TODO add your handling code here:
+    private void iconInventarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconInventarioMouseExited
+        txtInventario.setFont(fontOriginal);
+        pnlInventario.setBackground(new Color(73, 69, 79));
+    }//GEN-LAST:event_iconInventarioMouseExited
+
+    private void btnGastosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGastosMouseEntered
+        txtGastos.setFont(fontHover);
+        pnlGastos.setBackground(new Color(100, 100, 120, 180));
+    }//GEN-LAST:event_btnGastosMouseEntered
+
+    private void btnGastosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGastosMouseExited
+        txtGastos.setFont(fontOriginal);
+        pnlGastos.setBackground(new Color(73, 69, 79));
+    }//GEN-LAST:event_btnGastosMouseExited
+
+    private void btnCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseClicked
         System.exit(0);
-    }//GEN-LAST:event_panelRound1MouseClicked
+    }//GEN-LAST:event_btnCerrarSesionMouseClicked
+
+    private void btnCerrarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseEntered
+
+    }//GEN-LAST:event_btnCerrarSesionMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnCerrarSesion;
     private javax.swing.JLabel btnGastos;
+    private javax.swing.JPanel gifPanel;
     private javax.swing.JLabel icnDevolucion;
     private javax.swing.JLabel icnRealizarVenta;
     private javax.swing.JLabel iconInventario;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel panelBtnInventario;
-    private GUI.PanelRound panelRound1;
-    private GUI.PanelRound panelRound2;
-    private javax.swing.JPanel pnlBotonDevoluciones;
-    private javax.swing.JPanel pnlBotonVentaEnCaja;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel labelGif;
+    private GUI.PanelRound pnlCerrarSesion;
+    private GUI.PanelRound pnlDevoluciones;
+    private GUI.PanelRound pnlGastos;
+    private GUI.PanelRound pnlInventario;
+    private GUI.PanelRound pnlVentaEnCaja;
+    private javax.swing.JLabel txtDevoluciones;
+    private javax.swing.JLabel txtEmpleado;
+    private javax.swing.JLabel txtGastos;
+    private javax.swing.JLabel txtInventario;
+    private javax.swing.JLabel txtVentajaCaja;
     // End of variables declaration//GEN-END:variables
+
+    public static void aplicarBanderaInfinita(JLabel label) {
+        Timer timer = new Timer(15, null); // actualiza cada 15ms
+        final float[] fontSize = {20.0f};
+        final boolean[] creciendo = {true};
+
+        timer.addActionListener(e -> {
+            if (creciendo[0]) {
+                fontSize[0] += 0.5f;
+                if (fontSize[0] >= 32f) {
+                    creciendo[0] = false;
+                }
+            } else {
+                fontSize[0] -= 0.5f;
+                if (fontSize[0] <= 20f) {
+                    creciendo[0] = true;
+                }
+            }
+
+            label.setFont(label.getFont().deriveFont(fontSize[0]));
+        });
+
+        timer.start();
+    }
+
+    public void iniciarAnimacionGif(JPanel gifPanel, JLabel labelGif) {
+        // Carga el gif
+        ImageIcon gifIcon = new ImageIcon(getClass().getResource("/imagenes/paquete.gif"));
+        labelGif.setIcon(gifIcon);
+
+        // Para poder mover libremente el label, usa layout null en gifPanel
+        gifPanel.setLayout(null);
+
+        // Tamaño y posición inicial del labelGif
+        int y = 20;
+        int xInicial = 10;
+        labelGif.setBounds(xInicial, y, gifIcon.getIconWidth(), gifIcon.getIconHeight());
+
+        // Si no está agregado, lo agregamos
+        if (labelGif.getParent() != gifPanel) {
+            gifPanel.add(labelGif);
+        }
+
+        gifPanel.revalidate();
+        gifPanel.repaint();
+
+        // Timer para mover el labelGif horizontalmente
+        Timer timer = new Timer(16, e -> {
+            int xActual = labelGif.getX();
+            int nuevoX = xActual + 8;
+
+            if (nuevoX > gifPanel.getWidth()) {
+                nuevoX = -gifIcon.getIconWidth();
+            }
+
+            labelGif.setLocation(nuevoX, y);
+            gifPanel.repaint();
+        });
+
+        timer.start();
+    }
+
 }

@@ -46,6 +46,7 @@ public class FormularioAgregarProveedor extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         inputTelefono = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Product Sans Infanity", 0, 60)); // NOI18N

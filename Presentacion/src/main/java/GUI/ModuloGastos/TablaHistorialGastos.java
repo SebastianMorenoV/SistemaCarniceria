@@ -71,13 +71,16 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Product Sans Infanity", 0, 60)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("Historial Gastos");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 450, -1));
 
-        tablaHisotrialGastos.setFont(new java.awt.Font("Product Sans Infanity", 0, 14)); // NOI18N
+        tablaHisotrialGastos.setBackground(new java.awt.Color(255, 255, 255));
+        tablaHisotrialGastos.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
         tablaHisotrialGastos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -95,6 +98,7 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
                 return false;
             }
         };
+        tablaHisotrialGastos.setRowHeight(30);
         tablaHisotrialGastos.getTableHeader().setResizingAllowed(false);
         tablaHisotrialGastos.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaHisotrialGastos);
@@ -110,7 +114,7 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
                 btnGenerarReporteMouseClicked(evt);
             }
         });
-        add(btnGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 30, 180, 40));
+        add(btnGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 60, 180, 40));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Tarjeta" }));
         add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 100, -1));

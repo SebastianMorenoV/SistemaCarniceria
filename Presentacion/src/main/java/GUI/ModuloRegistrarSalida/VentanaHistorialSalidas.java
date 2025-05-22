@@ -16,7 +16,9 @@ import javax.swing.table.DefaultTableModel;
  * @author janot
  */
 public class VentanaHistorialSalidas extends javax.swing.JPanel {
+
     private Aplicacion app;
+
     /**
      * Creates new form ventanaHistorialSalidas
      */
@@ -206,7 +208,6 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabelIconGenerarReporteMouseClicked
 
     private void jLabelIconAgregarSalidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelIconAgregarSalidaMouseClicked
-        System.out.println("dfdffdf");
         app.mostrarDialogoAgregarSalida();
     }//GEN-LAST:event_jLabelIconAgregarSalidaMouseClicked
 
@@ -216,8 +217,8 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
 
     private void jLabelAgregarSalidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAgregarSalidaMouseClicked
         app.mostrarDialogoAgregarSalida();
-        
-        
+
+
     }//GEN-LAST:event_jLabelAgregarSalidaMouseClicked
 
     private void jLabelProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelProductoMouseClicked
@@ -229,11 +230,11 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabelFechaDesdeMouseClicked
 
     private void jTextFieldProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldProductoKeyTyped
-        Timer retrazoBuscador = new Timer(15, e ->{
+        Timer retrazoBuscador = new Timer(15, e -> {
             cargarSalidasFiltradasTabla();
         });
         retrazoBuscador.setRepeats(false);
-        
+
         reiniciarTimer(retrazoBuscador);
     }//GEN-LAST:event_jTextFieldProductoKeyTyped
 
@@ -254,18 +255,18 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
     }//GEN-LAST:event_datePickerHastaPropertyChange
 
     /////////////////////////////UTILS//////////////////////////////////////////////////////////////
-    private void cargarSalidasTabla(){
+    private void cargarSalidasTabla() {
         List<SalidaDTO> listaSalida = new ArrayList<>();
-        
+
         try {
             listaSalida = app.cargarSalidas();
         } catch (SalidaException e) {
             JOptionPane.showMessageDialog(this, e);
         }
-        
+
         DefaultTableModel model = (DefaultTableModel) jTableSalidas.getModel();
         model.setRowCount(0);
-        
+
         for (SalidaDTO salidaDTO : listaSalida) {
             model.addRow(new Object[]{
                 salidaDTO.getFecha(),
@@ -278,8 +279,8 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
         }
         jTableSalidas.setModel(model);
     }
-    
-    public void cargarSalidasFiltradasTabla(){
+
+    public void cargarSalidasFiltradasTabla() {
         String nombre = jTextFieldProducto.getText();
         Date fechaDesde = null;
         Date fechaHasta = null;
@@ -291,20 +292,20 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
         if (datePickerHasta.getDate() != null) {
             fechaHasta = Date.from(datePickerHasta.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
         }
-        
+
         List<SalidaDTO> listaSalida = new ArrayList<>();
-        
+
         try {
 
             listaSalida = app.cargarSalidasFiltradas(nombre, fechaDesde, fechaHasta);
-            
+
         } catch (SalidaException e) {
             JOptionPane.showMessageDialog(this, e);
         }
-        
+
         DefaultTableModel model = (DefaultTableModel) jTableSalidas.getModel();
         model.setRowCount(0);
-        
+
         for (SalidaDTO salidaDTO : listaSalida) {
             model.addRow(new Object[]{
                 salidaDTO.getFecha(),
@@ -317,8 +318,7 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
         }
         jTableSalidas.setModel(model);
     }
-    
-    
+
     private void reiniciarTimer(Timer retrazoBuscador) {
         retrazoBuscador.restart(); // reinicia el contador desde cero
     }

@@ -18,6 +18,7 @@ public class AdaptadorProducto implements IAdaptadorProducto{
        productoDTO.setCodigo(producto.getId());
        productoDTO.setUnidad(producto.getUnidad());
        productoDTO.setDescripcion(producto.getDescripcion());
+       productoDTO.setEsPesable(producto.isEsPesable());
        productoDTO.setNombre(producto.getNombre());
        productoDTO.setPrecio(producto.getPrecio());
        productoDTO.setStock(producto.getStock()); //FUERZA BRUTA

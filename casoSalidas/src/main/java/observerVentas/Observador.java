@@ -14,8 +14,6 @@ import salidas.RealizarSalida;
 public class Observador implements IObservador{ 
     @Override
     public void update(VentaDTO venta, IRealizarSalida realizarSalida) throws SalidaException{
-        System.out.println("OOB-S-S--S-S-S-S--SE-E-E-E-E-RVEEEE-E-E-E-ER" + venta);
-        System.out.println(venta.getListadoProductosVenta());
         //REGISTRAR LAS SALIDAS
         for (ProductoVentaDTO productoVentaDTO : venta.getListadoProductosVenta()) {
             NuevaSalidaDTO nuevaSalidaDTO = new NuevaSalidaDTO(productoVentaDTO.getProducto(), 

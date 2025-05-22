@@ -38,13 +38,8 @@ public class EntradaBO implements IEntradaBO{
     @Override
     public EntradaDTO registrarEntrada(EntradaDTO entrada) {
         List<ProductoEntradaDTO> p = entrada.getListaProductosEntrada();
-        for (ProductoEntradaDTO productoEntradaDTO : p) {
-            
-             System.out.println(productoEntradaDTO.getProductoEntrada().getStock());
-        }
       
         Entrada entradaARegistrar = adaptadorEntrada.convertirAEntidad(entrada);
-        System.out.println("Entrada a registrar: DESDE REGISTRAR ENTRADABO" + entradaARegistrar);
         try {
             entradaARegistrar = entradaDAO.registrarEntrada(entradaARegistrar);
         } catch (PersistenciaException ex) {

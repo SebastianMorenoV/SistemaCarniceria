@@ -6,25 +6,18 @@ package GUI.ModuloRealizarVenta;
 
 import DTOs.MetodoPagoDTO;
 import DTOs.NuevoEfectivoDTO;
-import DTOs.PagoNuevoDTO;
 import DTOs.PagoViejoDTO;
 import DTOs.VentaDTO;
 import GUI.Aplicacion;
-import EstrategiaPago.Pago;
 import Exception.NegocioException;
 import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.Window;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 
 /**
  *
@@ -182,10 +175,6 @@ public class FormularioEfectivo extends javax.swing.JPanel {
             NuevoEfectivoDTO nuevoPagoEfectivo = new NuevoEfectivoDTO(pagaraCon);
             PagoViejoDTO pago = new PagoViejoDTO(LocalDateTime.now(), new MetodoPagoDTO(nuevoPagoEfectivo), total);
             pago.setEstado("Pagado");
-            
-            //AQUI DEBERIAMOS TENER LA LOGICA DE ENVIAR EL PAGO AL SUBSISTEMA.
-            //AUN NO LOSE PERO SUPONGO QUE DEBE DE SER EL PATRON OBSERVER.
-            //LA VENTANUEVA DEBE TENER EL PAGO DEVUELTO POR EL SUBSISTEMA Y SETEARLE ESE PAGO CON ID GENERADO A LA VENTA.
             
             
             //setear el pago a la venta.

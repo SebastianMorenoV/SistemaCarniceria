@@ -39,6 +39,7 @@ public class MenuGastos extends javax.swing.JPanel {
         btnAgregarProveedor = new javax.swing.JLabel();
         btnAtras = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Product Sans Infanity", 0, 60)); // NOI18N

@@ -63,7 +63,7 @@ public class FormularioEditarGasto extends javax.swing.JPanel {
         comboCategoria = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(228, 233, 236));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Product Sans Infanity", 0, 60)); // NOI18N

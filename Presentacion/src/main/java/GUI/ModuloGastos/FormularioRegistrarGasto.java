@@ -79,7 +79,7 @@ public class FormularioRegistrarGasto extends javax.swing.JPanel {
         btnAtras = new javax.swing.JLabel();
         inputFecha = new com.toedter.calendar.JDateChooser();
 
-        setBackground(new java.awt.Color(228, 233, 236));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Product Sans Infanity", 0, 60)); // NOI18N

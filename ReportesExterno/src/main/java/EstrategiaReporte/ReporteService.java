@@ -76,9 +76,6 @@ public class ReporteService {
 
                 if (metodo.getNuevoEfectivo() != null) {
                     doc.add(new Paragraph("- Efectivo"));
-                    doc.add(new Paragraph("  Monto recibido: $" + String.format("%.2f", venta.getPago().getMonto())));
-                    double cambio = venta.getPago().getMetodoPago().getNuevoEfectivo().getPagoCon();
-                    doc.add(new Paragraph("  Cambio: $" + String.format("%.2f", cambio)));
                 } else if (metodo.getNuevaTarjeta() != null) {
                     doc.add(new Paragraph("- Tarjeta"));
                     doc.add(new Paragraph("  Monto cargado: $" + String.format("%.2f", venta.getPago().getMonto())));
