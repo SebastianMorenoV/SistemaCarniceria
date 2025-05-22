@@ -107,14 +107,13 @@ public class RegistrarVenta extends javax.swing.JPanel {
         txtCajero.setText("Cajero:");
         add(txtCajero, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 20, -1, -1));
 
-        tablaProductosVenta.setBackground(new java.awt.Color(255, 255, 255));
         tablaProductosVenta.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
         tablaProductosVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Codigo", "Descripción del articulo", "Cantidad", "Precio", "Importe"
+                "Codigo", "Descripción del articulo", "Cantidad", "Precio ($)", "Importe ($)"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -171,7 +170,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
                 btnFinalizarVentaMouseClicked(evt);
             }
         });
-        btnFinalizarVenta.setLayout(new java.awt.GridLayout());
+        btnFinalizarVenta.setLayout(new java.awt.GridLayout(1, 0));
 
         btnTxtFinalizarVenta.setFont(new java.awt.Font("Product Sans Infanity", 0, 24)); // NOI18N
         btnTxtFinalizarVenta.setForeground(new java.awt.Color(255, 255, 255));

@@ -111,7 +111,6 @@ GUI\ModuloRegistrarEntrada\SeleccionarProducto$4.class
 GUI\ModuloRealizarVenta\RegistrarVenta$6.class
 GUI\ModuloGastos\TablaHistorialGastos$5.class
 GUI\ModuloRealizarVenta\MenuOpciones$4.class
-GUI\ModuloRegistrarSalida\VentanaHistorialSalidas$12.class
 GUI\ModuloGastos\FormularioRegistrarGasto$3.class
 GUI\ModuloRealizarDevolucion\PantallaTicket.class
 GUI\ModuloRegistrarEntrada\SeleccionarProducto$5.class
@@ -139,7 +138,6 @@ GUI\ModuloRegistrarSalida\VentanaHistorialSalidas$9.class
 GUI\ModuloRealizarVenta\FormularioMostrarCambio.class
 GUI\ModuloRegistrarSalida\VentanaHistorialSalidas.class
 GUI\ModuloGastos\FormularioEditarGasto$5.class
-GUI\ModuloRegistrarSalida\VentanaHistorialSalidas$13.class
 GUI\ModuloRealizarDevolucion\PantallaDevolucion$12.class
 GUI\ModuloGastos\MenuGastos$3.class
 GUI\ModuloRealizarVenta\GenerarTicketVenta.class
