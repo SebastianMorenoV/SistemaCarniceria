@@ -22,7 +22,7 @@ public class Observable implements IObservable{
     public void deleteObserver(IObservador observador) {
         listaObservadores.remove(observador);
     }
-
+    
     @Override
     public void notifyObservers(VentaDTO venta, IRealizarSalida realizarSalida) throws SalidaException{
         for (IObservador observador : listaObservadores) {

@@ -167,6 +167,7 @@ public class DialogoRegistrarSalida extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jTextFieldProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldProductoKeyTyped
+        //Generea un retrazo de 15 mili al momento de realizar un filtro
         Timer retrazoBuscador = new Timer(15, e ->{
             buscadorProducto();
         });
@@ -177,12 +178,14 @@ public class DialogoRegistrarSalida extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextFieldProductoKeyTyped
 
     private void jLabelAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAgregarMouseClicked
+        //Cada que se clickea se agrega una nueva salida
         agregarNuevaSalida();
         app.reconstruirVentanaHistorialSalidas();
         
     }//GEN-LAST:event_jLabelAgregarMouseClicked
 
     private void jListProductosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListProductosValueChanged
+        //Sirve para seleccionar el objeto en la lisra
         if (!(jListProductos.getSelectedValue() == null)) {
             jTextFieldProducto.setText(jListProductos.getSelectedValue().toString());
         }
@@ -190,6 +193,7 @@ public class DialogoRegistrarSalida extends javax.swing.JDialog {
 
     
     /////////////////////////////UTILS//////////////////////////////////////////////////////////////
+    //Sirve para buscar un producto
     private void buscadorProducto(){
         String nombre = jTextFieldProducto.getText();
         List<ProductoCargadoDTO> listaProductos = new ArrayList<>();
@@ -208,6 +212,7 @@ public class DialogoRegistrarSalida extends javax.swing.JDialog {
         }
     }
     
+    //Sirve para agregar una nueva salida
     private void agregarNuevaSalida(){
         ProductoCargadoDTO producto = jListProductos.getSelectedValue();
         String motivo = jTextAreaMotivo.getText();

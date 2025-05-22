@@ -13,6 +13,13 @@ import java.util.Date;
  */
 public class AdaptadorSalida implements IAdaptadorSalida{
     private final IAdaptadorProducto adaptadorProducto = new AdaptadorProducto();
+    
+    /**
+     * Convierte una entidad Salida a SalidaDTO
+     * 
+     * @param salida Salida que se desea convertir
+     * @return Objeto SalidaDTO con los datos de salida
+     */
     @Override
     public SalidaDTO convertirADTO(Salida salida) {
         return new SalidaDTO(
@@ -25,6 +32,12 @@ public class AdaptadorSalida implements IAdaptadorSalida{
         );
     }
 
+    /**
+     * Convierte un SalidaDTO a Salida
+     * 
+     * @param salidaDTO que se desea convertir a entidad
+     * @return Salida con los datos de SalidaDTO
+     */
     @Override
     public Salida convertirAEntidad(NuevaSalidaDTO salidaDTO) {
         return new Salida(null, adaptadorProducto.convertirAEntidad(salidaDTO.getProducto()), new Date(), salidaDTO.getMotivo(), salidaDTO.getStockAntes(), salidaDTO.getCantidadSalida(), salidaDTO.getStockDespues());

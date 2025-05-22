@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VentanaHistorialSalidas extends javax.swing.JPanel {
 
+    //Control de aplicacion
     private Aplicacion app;
 
     /**
@@ -26,6 +27,7 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
     public VentanaHistorialSalidas(Aplicacion app) {
         initComponents();
         this.app = app;
+        //Carga todas las salidas en la tabla
         cargarSalidasTabla();
     }
 
@@ -192,6 +194,7 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabelFechaDesdeMouseClicked
 
     private void jTextFieldProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldProductoKeyTyped
+        //Generea un retrazo de 15 mili al momento de realizar un filtro
         Timer retrazoBuscador = new Timer(15, e -> {
             cargarSalidasFiltradasTabla();
         });
@@ -217,6 +220,7 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
     }//GEN-LAST:event_datePickerHastaPropertyChange
 
     /////////////////////////////UTILS//////////////////////////////////////////////////////////////
+    //Carga todas las salidas de la tabla
     private void cargarSalidasTabla() {
         List<SalidaDTO> listaSalida = new ArrayList<>();
 
@@ -243,6 +247,7 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
         jTableSalidas.setModel(model);
     }
 
+    //Carga las salidas en la tabla segun se van haciendo los filtroa
     public void cargarSalidasFiltradasTabla() {
         String nombre = jTextFieldProducto.getText();
         Date fechaDesde = null;
@@ -283,6 +288,7 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
         jTableSalidas.setModel(model);
     }
 
+    //Sirve para reiniciar el timer cada vez que se hace la consulta
     private void reiniciarTimer(Timer retrazoBuscador) {
         retrazoBuscador.restart(); // reinicia el contador desde cero
     }

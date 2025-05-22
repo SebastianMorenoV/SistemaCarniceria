@@ -30,6 +30,13 @@ public class SalidasMongoDAO implements ISalidaDAO{
         this.coleccion = ConexionMongo.getDatabase().getCollection("Salida", Salida.class);
     }
 
+    /**
+     * Agrega una nueva salida a la base de datos
+     * 
+     * @param salida Entidad salida que se agregara a la BD
+     * @return La entidad Salida
+     * @throws PersistenciaException Si no se logra hacer la insercion
+     */
     @Override
     public Salida agregarNuevaSalida(Salida salida) throws PersistenciaException {
         try {
@@ -45,6 +52,16 @@ public class SalidasMongoDAO implements ISalidaDAO{
         
     }
 
+    /**
+     * Funciona como un buscador de salidas, acepta nulos en cualquier parametro
+     * 
+     * @param nombre Nombre del producto que se desea buscar.
+     * @param fechaDesde Fecha desde la que se desea saber las salidas
+     * @param fechaHasta Fecha hasta la que se desea saber las salidas
+     * @return Una lista con las salidas que cumplen el parametro.
+     * 
+     * @throws PersistenciaException Si no se logra hacer la consulta de busqueda
+     */
     @Override
     public List<Salida> consultarSalidasBuscador(String nombre, Date fechaDesde, Date fechaHasta) throws PersistenciaException  {     
         //Lista que regresara el metodo

@@ -17,12 +17,21 @@ import observerVentas.Observador;
  * @author janot
  */
 public class RealizarSalida implements IRealizarSalida{
+    //Objeto SalidaBO para manejar las acciones de negocio
     private ISalidaBO salidaBO = manejadoresBO.ManejadorObjetosNegocio.crearSalidaBO();
+    //Objeto productoBO para manejar las acciones de negocio
     private IProductoBO productoBO = manejadoresBO.ManejadorObjetosNegocio.crearProductoBO();
     
-    //Observador
+    //Observador Al cual se le notificara si hay una venta realizada
     private IObservador observador = new Observador();
 
+    /**
+     * Agrega una NuevaSalidaDTO 
+     * 
+     * @param nuevaSalida Nueva Salida que se agregara
+     * @return SalidaDTO
+     * @throws SalidaException Si en las validaciones no son correctads
+     */
     @Override
     public SalidaDTO agregarNuevaSalida(NuevaSalidaDTO nuevaSalida) throws SalidaException {
         if (nuevaSalida.getProducto() == null) {
@@ -50,6 +59,11 @@ public class RealizarSalida implements IRealizarSalida{
         }
     }
 
+    /**
+     * Obtiene una lista con todas las salidas
+     * @return Una lista con salidas
+     * @throws SalidaException 
+     */
     @Override
     public List<SalidaDTO> cargarTodasLasSalidas() throws SalidaException {
         try {
@@ -59,6 +73,15 @@ public class RealizarSalida implements IRealizarSalida{
         }
     }
 
+    /**
+     * Obtiene todas las salidas que son filtradas por los parametros
+     * 
+     * @param nombre
+     * @param fechaDesde
+     * @param fechaHasta
+     * @return Una lista con salidas
+     * @throws SalidaException 
+     */
     @Override
     public List<SalidaDTO> filtrarSalidas(String nombre, Date fechaDesde, Date fechaHasta) throws SalidaException {
         try {
@@ -68,6 +91,12 @@ public class RealizarSalida implements IRealizarSalida{
         }
     }
 
+    /**
+     * Devuelve una lista de ProductosCargadosDTO que coincidan con el nombre del parametro
+     * @param nombre Nombre con el que se quieren encontrar coincidencias
+     * @return Lista con ProductoCargadoDTO
+     * @throws SalidaException 
+     */
     @Override
     public List<ProductoCargadoDTO> buscadorProductos(String nombre) throws SalidaException {
         try {
@@ -77,11 +106,22 @@ public class RealizarSalida implements IRealizarSalida{
         }
     }
 
+    /**
+     * Sirve para obtener el objeto observer
+     * @return IObserver
+     */
     @Override
     public IObservador getObserver() {
         return observador;
     }
 
+    /**
+     * Resta el stock del producto
+     * @param salida La cantidad que se le desea restar
+     * @param codigo Codigo del producto
+     * @return True si se logra restar y false en caso contrario
+     * @throws SalidaException 
+     */
     @Override
     public boolean restarStockAProducto(Double salida, Integer codigo) throws SalidaException {
         try {
