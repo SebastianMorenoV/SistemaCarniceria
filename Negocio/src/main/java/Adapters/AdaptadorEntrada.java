@@ -35,6 +35,7 @@ public class AdaptadorEntrada implements IAdaptadorEntrada {
         System.out.println("CONVERTIR DTO ADAPTADOR ENTRADA " + entrada.getListaProductosEntrada());
         
         AdaptadorProductoEntrada productosEntrada = new AdaptadorProductoEntrada();
+        
         for (ProductoEntrada produtoEntrada : entrada.getListaProductosEntrada()) {
             productosEntradaDTO.add(productosEntrada.convertirADTO(produtoEntrada));
         }
@@ -50,15 +51,18 @@ public class AdaptadorEntrada implements IAdaptadorEntrada {
 
     @Override
     public Entrada convertirAEntidad(EntradaDTO entrada) {
+        //lista de ProductosEntradaEntidad
         List<ProductoEntrada> productosEntradaEntidad = new ArrayList();
+        
         AdaptadorEmpleado empleado = new AdaptadorEmpleado();
         Empleado empleadoEntidad = empleado.convertirAEntidad(entrada.getEmpleado());
+        
         AdaptadorProveedor proveedor = new AdaptadorProveedor();
-        Proveedor proveedorEntidad = proveedor.ConvertirAEntidadEntrada(entrada.getProveedor());
-        AdaptadorProducto productos = new AdaptadorProducto();
+        Proveedor proveedorEntidad = proveedor.ConvertirAEntidadEntrada(entrada.getProveedor());  
+        
         AdaptadorProductoEntrada productosEntrada = new AdaptadorProductoEntrada();
-        for (ProductoEntradaDTO produtoEntrada : entrada.getListaProductosEntrada()) {
-            productosEntradaEntidad.add(productosEntrada.convertirAEntidad(produtoEntrada));
+        for (ProductoEntradaDTO produtoEntradaDTO : entrada.getListaProductosEntrada()) {
+            productosEntradaEntidad.add(productosEntrada.convertirAEntidad(produtoEntradaDTO));
         }
 
         Entrada entradaEntidad = new Entrada();

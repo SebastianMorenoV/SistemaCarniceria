@@ -246,11 +246,11 @@ public class InformacionRegistrarEntrada extends javax.swing.JPanel {
             for(ProductoEntradaDTO producto : app.cargarProductosEntrada()){
                 precioCompra = producto.getPrecioCompra();
                 StringprecioCompra = String.format("%.2f", precioCompra);
-                importe = producto.getUnidad()*producto.getPrecioCompra();
+                importe = producto.getStock()*producto.getPrecioCompra();
                 Stringimporte = String.format("%.2f", importe);
                 modelo.addRow(new Object[]{
                     producto.getProductoEntrada().getNombre(),
-                    producto.getUnidad(),
+                    producto.getStock(),
                     StringprecioCompra,
                     Stringimporte 
                     }               

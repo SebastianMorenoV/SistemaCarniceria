@@ -44,7 +44,7 @@ public class EntradaBO implements IEntradaBO{
         }
       
         Entrada entradaARegistrar = adaptadorEntrada.convertirAEntidad(entrada);
-        System.out.println("Entrada a registrar" + entradaARegistrar);
+        System.out.println("Entrada a registrar: DESDE REGISTRAR ENTRADABO" + entradaARegistrar);
         try {
             entradaARegistrar = entradaDAO.registrarEntrada(entradaARegistrar);
         } catch (PersistenciaException ex) {

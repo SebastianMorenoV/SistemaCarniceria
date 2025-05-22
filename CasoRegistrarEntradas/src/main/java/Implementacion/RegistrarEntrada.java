@@ -94,6 +94,9 @@ public class RegistrarEntrada implements IRegistrarEntrada{
     @Override
     public void registrarEntrada(EntradaDTO entrada) throws InventarioException {
         try {
+            for(ProductoEntradaDTO producto : entrada.getListaProductosEntrada()){
+                setStockProducto(producto.getProductoEntrada(), producto.getStock());
+            }           
             entradaBO.registrarEntrada(entrada);                   
         } catch (NegocioException ex) {
             throw new InventarioException("No se pudo registrar la entrada" + ex.getMessage());
@@ -118,17 +121,21 @@ public class RegistrarEntrada implements IRegistrarEntrada{
     public double calcularSubtotal(List<ProductoEntradaDTO> productosEnTabla) {
         double subtotal = 0.0;
         for (ProductoEntradaDTO productoEntrada : productosEnTabla) {
-            double subtotalTemporal = productoEntrada.getPrecioCompra()* productoEntrada.getUnidad();
+            double subtotalTemporal = productoEntrada.getPrecioCompra()* productoEntrada.getStock();
             subtotal += subtotalTemporal;
         }
         return subtotal;
     }
     
     @Override
-    public void setStockProducto(ProductoCargadoDTO producto,double unidades) {
-        this.productoSeleccionado.setStock(unidades);
-        
- //       productoBO.buscarProductoPorId(produco.getId());
+    public void setStockProducto(ProductoCargadoDTO producto, double stock) throws InventarioException {
+        try {   
+            System.out.println("Producto cargadoDTO desde CU cuando se suma el stock de producto: " + producto.toString()+"  Stock a agregar :" + stock);
+            productoBO.sumararStockAProducto(stock, (Integer)producto.getCodigo());
+            
+        } catch (NegocioException ex) {
+            throw new InventarioException("No se pudo registrar la entrada" + ex.getMessage());
+        }
     }
 
     public double calcularIVA(double subtotal) {

@@ -11,12 +11,13 @@ package entidades;
 public class ProductoEntrada {
 
     public Producto producto;
-    public double unidades;
+    public double stock;
     public double PrecioCompra;
+    
 
     public ProductoEntrada(Producto producto, double unidades, double PrecioCompra) {
         this.producto = producto;
-        this.unidades = unidades;
+        this.stock = unidades;
         this.PrecioCompra = PrecioCompra;
     }
 
@@ -31,12 +32,12 @@ public class ProductoEntrada {
         this.producto = producto;
     }
 
-    public double getUnidades() {
-        return unidades;
+    public double getStock() {
+        return stock;
     }
 
-    public void setUnidades(double unidades) {
-        this.unidades = unidades;
+    public void setStock(double stock) {
+        this.stock = stock;
     }
 
     public double getPrecioCompra() {
@@ -49,7 +50,7 @@ public class ProductoEntrada {
 
     @Override
     public String toString() {
-        return "ProductoEntrada{" + "producto=" + producto + ", unidades=" + unidades + ", PrecioCompra=" + PrecioCompra + '}';
+        return "ProductoEntrada{" + "producto=" + producto + ", unidades=" + stock + ", PrecioCompra=" + PrecioCompra + '}';
     }
 
 }

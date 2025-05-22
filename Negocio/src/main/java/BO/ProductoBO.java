@@ -14,6 +14,8 @@ import Interfaces.IProductoDAO;
 import fabrica.ICreadorDAO;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -95,12 +97,21 @@ public class ProductoBO implements IProductoBO {
     }
     
     @Override
-    public boolean restarStockAProducto(Double salida, Integer codigo) throws NegocioException {
+    public boolean restarStockAProducto(double salida, Integer codigo) throws NegocioException {
         try {
             return productoDAO.restarStockAProducto(salida, codigo);
         } catch (PersistenciaException e) {
             throw new NegocioException("Error al restarle el stock", e);
         }
+    }
+
+    @Override
+    public void sumararStockAProducto(double salida, Integer codigo) throws NegocioException {
+        try {
+            productoDAO.sumarStockAProducto(salida, codigo);
+        } catch (PersistenciaException ex) {
+            throw new NegocioException("Error al sumarle el stock", ex);
+        }       
     }
     
 }

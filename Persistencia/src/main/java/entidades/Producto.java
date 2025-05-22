@@ -116,7 +116,7 @@ public class Producto {
     }
 
     public void setStock(double stock) {
-        this.stock = stock;
+        this.stock += stock;
     }
 
     @Override

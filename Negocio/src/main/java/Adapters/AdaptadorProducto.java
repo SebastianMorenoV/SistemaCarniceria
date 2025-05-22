@@ -42,7 +42,18 @@ public class AdaptadorProducto implements IAdaptadorProducto{
 
     @Override
     public Producto convertirAEntidadStock(ProductoCargadoDTO producto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Producto productoEntidad = new  Producto();
+        productoEntidad.setId(producto.getCodigo());
+        productoEntidad.setEsPesable(producto.isEsPesable());
+        productoEntidad.setPrecio(producto.getPrecio());
+        productoEntidad.setUnidad(producto.getUnidad());
+        productoEntidad.setDescripcion(producto.getDescripcion());
+        productoEntidad.setNombre(producto.getNombre());
+        productoEntidad.setStock(producto.getStock());
+        
+        System.out.println("Return ProductoEntidad desde convertirEntidadStock: " + productoEntidad.toString());
+     
+        return productoEntidad;
     }
 
 }

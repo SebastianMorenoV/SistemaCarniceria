@@ -22,5 +22,7 @@ public interface IProductoBO {
     
     public List<ProductoCargadoDTO> buscaPorNombre(String textoBusqueda) throws NegocioException;
     
-    public boolean restarStockAProducto(Double salida, Integer codigo) throws NegocioException;
+    public boolean restarStockAProducto(double salida, Integer codigo) throws NegocioException;
+    
+    public void sumararStockAProducto(double entrada, Integer codigo) throws NegocioException;
 }

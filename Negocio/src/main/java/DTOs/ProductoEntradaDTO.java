@@ -8,11 +8,11 @@ import DTOs.ProductoCargadoDTO;
 public class ProductoEntradaDTO {
 
     private ProductoCargadoDTO productoEntrada;
-    private double unidad, precioCompra;
+    private double stock, precioCompra;
 
     public ProductoEntradaDTO(ProductoCargadoDTO productoEntrada, double unidades, double precioCompra) {
         this.productoEntrada = productoEntrada;
-        this.unidad = unidades;
+        this.stock = unidades;
         this.precioCompra = precioCompra;
     }
 
@@ -27,12 +27,12 @@ public class ProductoEntradaDTO {
         this.productoEntrada = productoEntrada;
     }
 
-    public double getUnidad() {
-        return unidad;
+    public double getStock() {
+        return stock;
     }
 
-    public void setUnidad(double unidad) {
-        this.unidad = unidad;
+    public void setStock(double stock) {
+        this.stock += stock;
     }
 
     public double getPrecioCompra() {
@@ -45,7 +45,7 @@ public class ProductoEntradaDTO {
 
     @Override
     public String toString() {
-        return "ProductoEntradaDTO{" + "productoEntrada=" + productoEntrada + ", unidad=" + unidad + ", precioCompra=" + precioCompra + '}';
+        return "ProductoEntradaDTO{" + "productoEntrada=" + productoEntrada + ", unidad=" + stock + ", precioCompra=" + precioCompra + '}';
     }
     
     

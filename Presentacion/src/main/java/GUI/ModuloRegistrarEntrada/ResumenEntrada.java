@@ -151,7 +151,7 @@ public class ResumenEntrada extends javax.swing.JPanel {
         TablaProductosEntrada.setModel(modelo);
         for (ProductoEntradaDTO producto : entrada.getListaProductosEntrada()) {
             String nombre = producto.getProductoEntrada().getNombre();
-            double cantidad = producto.getUnidad();
+            double cantidad = producto.getStock();
             double precio = producto.getPrecioCompra();
             double importe = cantidad * precio;
             modelo.addRow(new Object[]{nombre, cantidad, "$" + precio, "$" + importe});
