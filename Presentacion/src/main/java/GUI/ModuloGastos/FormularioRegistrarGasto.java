@@ -10,6 +10,7 @@ import DTOs.GastoDTO;
 import DTOs.ProveedorDTO;
 import Exception.GastoException;
 import GUI.Aplicacion;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -140,6 +141,11 @@ public class FormularioRegistrarGasto extends javax.swing.JPanel {
                 inputMontoActionPerformed(evt);
             }
         });
+        inputMonto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputMontoKeyTyped(evt);
+            }
+        });
         add(inputMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 420, 200, 40));
 
         comboProveedor.setModel(new javax.swing.DefaultComboBoxModel<>());
@@ -235,8 +241,14 @@ public class FormularioRegistrarGasto extends javax.swing.JPanel {
     private void btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMouseClicked
         try {
             registrarGasto();
+            
         } catch (GastoException ex) {
-            Logger.getLogger(FormularioRegistrarGasto.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(
+                    null,
+                    ex.getLocalizedMessage(),
+                    " ",
+                    JOptionPane.ERROR_MESSAGE
+            );
         }
     }//GEN-LAST:event_btnMouseClicked
 
@@ -253,6 +265,15 @@ public class FormularioRegistrarGasto extends javax.swing.JPanel {
         // TODO add your handling code here:
         subirArchivo();
     }//GEN-LAST:event_btnSubirArchivoMouseClicked
+
+    private void inputMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputMontoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        // Solo permite números (0-9) y retroceso
+        if (!Character.isDigit(c) && c != KeyEvent.VK_BACK_SPACE) {
+            evt.consume(); // Ignora la entrada si no es válida
+        }
+    }//GEN-LAST:event_inputMontoKeyTyped
 
     
 
@@ -301,31 +322,13 @@ public class FormularioRegistrarGasto extends javax.swing.JPanel {
                 || montoText.isEmpty()
                 || proveedor == null) { 
 
-            JOptionPane.showMessageDialog(null, "Por favor, completa todos los campos obligatorios.", "Campos Vacios", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Todos los campos obligatorios, favor de completarlos.", "Campos Vacios", JOptionPane.WARNING_MESSAGE);
             return; 
         }
-
 
         LocalDate fechaGasto = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
         double monto;
-        try {
-            monto = Double.parseDouble(montoText);
-            if (monto <= 0) {
-                JOptionPane.showMessageDialog(null, "El **monto** debe ser un valor positivo.", "Error de Monto", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "El **monto** debe ser un numero valido.", "Error de Formato", JOptionPane.WARNING_MESSAGE);
-            return; 
-        }
-        
-        try {
-            GastoDTO res = app.buscarPorFolio(folio);
-            JOptionPane.showMessageDialog(null, "El folio ingresado ya existe. Por favor, utiliza uno diferente.", "Folio Duplicado", JOptionPane.WARNING_MESSAGE);
-            return;
-        } catch (GastoException ex) {
-        }
+        monto = Double.parseDouble(montoText);
 
         // Si todas las validaciones pasan, procede a crear y registrar el gasto
         CrearGastoDTO gasto = new CrearGastoDTO();
@@ -338,17 +341,12 @@ public class FormularioRegistrarGasto extends javax.swing.JPanel {
         gasto.setProveedor(proveedor);
         gasto.setComprobante(comprobante);
 
-        System.out.println(gasto); 
 
         GastoDTO resultado = app.registrarGasto(gasto);
-
         if (resultado != null) {
-            System.out.println("Gasto registrado correctamente: " + resultado);
             JOptionPane.showMessageDialog(null, "Gasto registrado exitosamente", "Gasto Registrado", JOptionPane.INFORMATION_MESSAGE);
             app.mostrarPantallaMenuGastos();
-        } else {           
-            JOptionPane.showMessageDialog(null, "Ocurrio un error al registrar el gasto. Intentalo de nuevo.", "Error de Registro", JOptionPane.ERROR_MESSAGE);
-        }
+        } 
     }
 
     

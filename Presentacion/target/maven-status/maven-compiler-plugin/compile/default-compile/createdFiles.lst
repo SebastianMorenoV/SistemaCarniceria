@@ -13,6 +13,7 @@ GUI\ModuloRegistrarSalida\VentanaHistorialSalidas$5.class
 GUI\ModuloRealizarVenta\MenuOpciones$1.class
 GUI\ModuloRegistrarEntrada\FormularioDatosEntrada$2.class
 GUI\ModuloRealizarVenta\VentanaExitoProcesandoPago$1.class
+GUI\ModuloGastos\FormularioAgregarProveedor$5.class
 GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones$2.class
 GUI\ModuloRealizarDevolucion\PantallaDetallesHistorialDevolucion$1.class
 GUI\ModuloRegistrarEntrada\SeleccionarProducto$1.class
@@ -99,6 +100,7 @@ GUI\ModuloGastos\MenuGastos.class
 GUI\ModuloRegistrarEntrada\SeleccionarProveedor$1.class
 GUI\ModuloGastos\FormularioAgregarProveedor$2.class
 GUI\ModuloRegistrarSalida\VentanaHistorialSalidas$2.class
+GUI\ModuloGastos\FormularioRegistrarGasto$9.class
 GUI\ModuloGastos\FormularioAgregarProveedor.class
 GUI\ModuloRealizarDevolucion\PantallaHistorialDevoluciones$5.class
 GUI\ModuloRealizarDevolucion\PantallaTicket$3.class

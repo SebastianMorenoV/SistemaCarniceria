@@ -104,6 +104,7 @@ public class TablaHistorialGastos extends javax.swing.JPanel {
         btnGenerarReporte.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
         btnGenerarReporte.setText(" Generar Reporte.pdf");
         btnGenerarReporte.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnGenerarReporte.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGenerarReporte.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnGenerarReporteMouseClicked(evt);

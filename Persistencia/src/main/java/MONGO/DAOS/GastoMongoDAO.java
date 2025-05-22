@@ -15,9 +15,7 @@ import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
 import conexion.ConexionMongo;
 import entidades.Gasto;
-import entidades.MetodoPago;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,17 +24,34 @@ import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 /**
+ * Esta clase permite realizar operaciones CRUD y consultas filtradas sobre gastos.
+ *
+ * Usa la coleccion "Gastos" en la base de datos Mongo.
+ *
+ * metodos disponibles son: agregar, eliminar, modificar, buscar por
+ * folio y consultar gastos con filtros.
  *
  * @author Admin
  */
 public class GastoMongoDAO implements IGastoDAO{
     private final MongoCollection<Gasto> coleccion;
 
+    /**
+     * Crea una nueva instancia de GastoMongoDAO y obtiene la coleccion de
+     * gastos desde la base de datos Mongo.
+     */
     public GastoMongoDAO() {
         this.coleccion = ConexionMongo.getDatabase().getCollection("Gastos", Gasto.class);
     }
 
-    
+    /**
+     * Metodo que agrega un nuevo gasto a la BD. 
+     * Si el gasto no tiene un id asignado se le asigna uno automaticamente
+     *
+     * @param gasto el gasto que se desea agregar
+     * @return el gasto agregado
+     * @throws PersistenciaException si ocurre un error al insertar el gasto
+     */
     @Override
     public Gasto agregarGasto(Gasto gasto) throws PersistenciaException {
         try {
@@ -52,6 +67,12 @@ public class GastoMongoDAO implements IGastoDAO{
         }
     }
 
+    /**
+     * Metodo que elimina un gasto de la BD usando su folio.
+     *
+     * @param folio el folio del gasto a eliminar
+     * @throws PersistenciaException si ocurre un error o si no se encuentra el gasto
+     */
     @Override
     public void eliminarGasto(String folio) throws PersistenciaException {
         try {
@@ -67,8 +88,14 @@ public class GastoMongoDAO implements IGastoDAO{
         }
     }
 
-
-
+    /**
+     * Metodo que modifica un gasto existente en la BD. 
+     * Se busca por el id del gasto
+     *
+     * @param gasto el gasto con los nuevos datos
+     * @return el gasto modificado
+     * @throws PersistenciaException si el gasto no tiene ID o no se encuentra
+     */
     @Override
     public Gasto modificarGasto(Gasto gasto) throws PersistenciaException {
         try {
@@ -101,13 +128,17 @@ public class GastoMongoDAO implements IGastoDAO{
             throw new PersistenciaException("Error al modificar gasto: " + e.getMessage());
         }
     }
-
-
-    @Override
-    public List<Gasto> consultarGastos() throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+    
+    /**
+     * Metodo que consulta una lista de gastos usando filtros de categoria, metodo de pago y/o un rango de fechas.
+     * Si se ingresan un gasto vacio y fechas nulas regresa todos los gastos registrados en la BD
+     * 
+     * @param gastoFiltro objeto con los campos a filtrar (categoria, metodoPago)
+     * @param fechaInicio fecha de inicio del rango (puede ser null)
+     * @param fechaFin fecha de fin del rango (puede ser null)
+     * @return una lista con los gastos que cumplen los filtros
+     * @throws PersistenciaException si ocurre un error en la consulta
+     */
     @Override
     public List<Gasto> consultarGastosFiltrados(Gasto gastoFiltro, LocalDate fechaInicio, LocalDate fechaFin) throws PersistenciaException {
         
@@ -150,6 +181,13 @@ public class GastoMongoDAO implements IGastoDAO{
 
     }
     
+    /**
+     * Metodo que busca un gasto por su folio.
+     *
+     * @param folio el folio del gasto a buscar
+     * @return el gasto encontrado, o null si no se encuentra
+     * @throws PersistenciaException si ocurre un error en la busqueda
+     */
     @Override
     public Gasto buscarPorFolio(String folio) throws PersistenciaException {
         try {

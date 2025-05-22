@@ -27,10 +27,13 @@ public class RegistrarProveedor implements IRegistrarProveedor{
         
         try {
             //validaciones
-
+            if (proveedorDTO.getTelefono().length()!= 10) {
+                throw new NegocioException("El telefono debe tener exactamente 10 digitos");
+            }
+            
             return proveedorBO.agregarProveedor(proveedorDTO);
         } catch (NegocioException ex) {
-            throw new GastoException("No se pudo agregar al proveedor"+ ex.getLocalizedMessage());
+            throw new GastoException("No se pudo agregar al proveedor: "+ ex.getLocalizedMessage());
         }
     }
 

@@ -474,7 +474,7 @@ public class Aplicacion {
             return registrarGasto.agregarGasto(gasto);
 
         } catch (GastoException ex) {
-            throw new GastoException("Error al registrar el gasto" + ex.getLocalizedMessage());
+            throw new GastoException(ex.getLocalizedMessage());
         }
     }
 
@@ -535,7 +535,7 @@ public class Aplicacion {
         try {
             return registrarProveedor.agregarProveedor(proveedor);
         } catch (GastoException ex) {
-            throw new GastoException("Error al registrar el proveedor" + ex.getLocalizedMessage());
+            throw new GastoException(ex.getLocalizedMessage());
         }
     }
 

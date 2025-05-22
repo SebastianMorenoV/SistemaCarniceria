@@ -34,14 +34,14 @@ public class GastoBO implements IGastoBO {
     }
 
     @Override
-    public GastoDTO agregarGasto(CrearGastoDTO gastoDTO) throws NegocioException{
+    public GastoDTO agregarGasto(CrearGastoDTO gastoDTO) throws NegocioException {
 
         Gasto gasto = adaptadorGasto.ConvertirAEntidad(gastoDTO);
 
         try {
             gasto = gastoDAO.agregarGasto(gasto);
         } catch (PersistenciaException ex) {
-            Logger.getLogger(GastoBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException("Error al agregar gasto: " + ex.getLocalizedMessage());
         }
 
         GastoDTO gastoMapeado = adaptadorGasto.ConvertirADTO(gasto);
@@ -49,23 +49,23 @@ public class GastoBO implements IGastoBO {
     }
 
     @Override
-    public void eliminarGasto(String folio) throws NegocioException{
+    public void eliminarGasto(String folio) throws NegocioException {
 
         try {
             gastoDAO.eliminarGasto(folio);
         } catch (PersistenciaException ex) {
-            Logger.getLogger(GastoBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException("Error al eliminar gasto: " + ex.getLocalizedMessage());
         }
     }
 
     @Override
-    public GastoDTO modificarGasto(GastoDTO gastoDTO) throws NegocioException{
+    public GastoDTO modificarGasto(GastoDTO gastoDTO) throws NegocioException {
         Gasto gasto = adaptadorGasto.ConvertirAEntidad(gastoDTO);
 
         try {
             gasto = gastoDAO.modificarGasto(gasto);
         } catch (PersistenciaException ex) {
-            Logger.getLogger(GastoBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException("Error al modifcar gasto: " + ex.getLocalizedMessage());
         }
 
         GastoDTO gastoMapeado = adaptadorGasto.ConvertirADTO(gasto);
@@ -73,7 +73,7 @@ public class GastoBO implements IGastoBO {
     }
 
     @Override
-    public List<GastoDTO> consultarGastos() throws NegocioException{
+    public List<GastoDTO> consultarGastos() throws NegocioException {
         List<Gasto> gastos = null;
         List<GastoDTO> gastosDTO = new ArrayList<>();
 
@@ -85,13 +85,12 @@ public class GastoBO implements IGastoBO {
                 gastosDTO.add(gastoDTO);
             }
         } catch (PersistenciaException ex) {
-            Logger.getLogger(GastoBO.class.getName()).log(Level.SEVERE, null, ex);
             return new ArrayList<>(); //lista vacia para evitar NullPointerException
         }
 
         return gastosDTO;
     }
-    
+
     @Override
     public List<GastoDTO> consultarGastosFiltrados(CrearGastoDTO gastoFiltro, LocalDate fechaInicio, LocalDate fechaFin) throws NegocioException {
         List<Gasto> gastos = new ArrayList<>();
@@ -105,10 +104,8 @@ public class GastoBO implements IGastoBO {
                 gastosDTO.add(gastoDTO);
             }
         } catch (PersistenciaException ex) {
-            Logger.getLogger(GastoBO.class.getName()).log(Level.SEVERE, null, ex);
-            return new ArrayList<>();
+            return new ArrayList<>();//lista vacia para evitar NullPointerException
         }
-        
 
         return gastosDTO;
     }
@@ -124,12 +121,8 @@ public class GastoBO implements IGastoBO {
 
             return adaptadorGasto.ConvertirADTO1(gasto);
         } catch (PersistenciaException ex) {
-            Logger.getLogger(GastoBO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new NegocioException("Error al buscar gasto por folio.");
+            throw new NegocioException("Error al buscar gasto por folio: " + ex.getLocalizedMessage());
         }
     }
-
-
-
 
 }

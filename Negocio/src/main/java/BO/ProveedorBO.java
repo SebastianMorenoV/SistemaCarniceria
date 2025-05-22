@@ -23,38 +23,35 @@ import java.util.logging.Logger;
  *
  * @author Admin
  */
-public class ProveedorBO implements IProveedorBO{
-    
+public class ProveedorBO implements IProveedorBO {
+
     private final IAdaptadorProveedor adaptadorProveedor = new AdaptadorProveedor();
     private final IProveedorDAO proveedorDAO;
-    
+
     public ProveedorBO(ICreadorDAO fabrica) {
         this.proveedorDAO = fabrica.crearProveedorDAO();
-        
+
     }
 
     @Override
-    public ProveedorDTO agregarProveedor(CrearProveedorDTO proveedorDTO) throws NegocioException{
-        
-        Proveedor proveedor = adaptadorProveedor.ConvertirAEntidad(proveedorDTO);
+    public ProveedorDTO agregarProveedor(CrearProveedorDTO proveedorDTO) throws NegocioException {
 
+        Proveedor proveedor = adaptadorProveedor.ConvertirAEntidad(proveedorDTO);
         try {
             proveedor = proveedorDAO.agregarProveedor(proveedor);
         } catch (PersistenciaException ex) {
-            Logger.getLogger(GastoBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException("No se pudo agregar el provedor: " + ex.getLocalizedMessage());
         }
-        //
         ProveedorDTO proveedorMapeado = adaptadorProveedor.ConvertirADTO(proveedor);
-        
+
         return proveedorMapeado;
-        
     }
 
     @Override
     public List<ProveedorDTO> consultarProveedores() throws NegocioException {
         List<Proveedor> proveedores = null;
         List<ProveedorDTO> proveedoresDTO = new ArrayList<>();
-        
+
         try {
             proveedores = proveedorDAO.consultarProveedores();
             for (Proveedor proveedor : proveedores) {
@@ -62,25 +59,24 @@ public class ProveedorBO implements IProveedorBO{
                 proveedoresDTO.add(proveedorDTO);
             }
         } catch (PersistenciaException ex) {
-            Logger.getLogger(GastoBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException("Error al consultar proveedores: " + ex.getLocalizedMessage());
         }
-        
+
         return proveedoresDTO;
     }
 
     @Override
     public ProveedorDTO agregarProveedorEntrada(ProveedorDTO proveedor) throws NegocioException {
-                
+
         Proveedor proveedorEntidad = adaptadorProveedor.ConvertirAEntidadEntrada(proveedor);
 
         try {
             proveedorEntidad = proveedorDAO.agregarProveedor(proveedorEntidad);
         } catch (PersistenciaException ex) {
-            Logger.getLogger(GastoBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException("No se pudo agregar el provedor: " + ex.getLocalizedMessage());
         }
-        //
         ProveedorDTO proveedorMapeado = adaptadorProveedor.ConvertirADTO(proveedorEntidad);
-        
+
         return proveedorMapeado;
     }
 
@@ -90,17 +86,13 @@ public class ProveedorBO implements IProveedorBO{
             Proveedor proveedor = proveedorDAO.buscarPorNombre(nombre);
 
             if (proveedor == null) {
-                return null; // o lanzar una NegocioException si prefieres
+                return null;
             }
 
             return adaptadorProveedor.ConvertirADTOEntrada(proveedor);
         } catch (PersistenciaException ex) {
-            Logger.getLogger(ProveedorBO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new NegocioException("No se pudo buscar el proveedor por nombre.");
+            throw new NegocioException("No se pudo buscar el proveedor por nombre: " + ex.getLocalizedMessage());
         }
     }
 
-
-
-    
 }

@@ -8,6 +8,7 @@ import DTOs.CrearProveedorDTO;
 import DTOs.ProveedorDTO;
 import Exception.GastoException;
 import GUI.Aplicacion;
+import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -101,6 +102,11 @@ public class FormularioAgregarProveedor extends javax.swing.JPanel {
                 inputTelefonoActionPerformed(evt);
             }
         });
+        inputTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputTelefonoKeyTyped(evt);
+            }
+        });
         add(inputTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 420, 310, 40));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -110,10 +116,14 @@ public class FormularioAgregarProveedor extends javax.swing.JPanel {
 
     private void btnAgregarProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarProveedorMouseClicked
         try {
-            // TODO add your handling code here:
             agregarProveedor();
         } catch (GastoException ex) {
-            Logger.getLogger(FormularioAgregarProveedor.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(
+                    null,
+                    ex.getLocalizedMessage(), 
+                    " ",
+                    JOptionPane.ERROR_MESSAGE
+            );
         }
     }//GEN-LAST:event_btnAgregarProveedorMouseClicked
 
@@ -124,6 +134,15 @@ public class FormularioAgregarProveedor extends javax.swing.JPanel {
     private void inputTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inputTelefonoActionPerformed
+
+    private void inputTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputTelefonoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        // Solo permite números (0-9) y retroceso
+        if (!Character.isDigit(c) && c != KeyEvent.VK_BACK_SPACE) {
+            evt.consume(); // Ignora la entrada si no es válida
+        }
+    }//GEN-LAST:event_inputTelefonoKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -151,14 +170,11 @@ public class FormularioAgregarProveedor extends javax.swing.JPanel {
         CrearProveedorDTO proveedor = new CrearProveedorDTO();
         proveedor.setNombre(nombre);
         proveedor.setTelefono(telefono);
-
         ProveedorDTO resultado = app.registrarProveedor(proveedor);
 
         if (resultado != null) {
             JOptionPane.showMessageDialog(null, "Proveedor registrado exitosamente", "Proveedor Agregado", JOptionPane.INFORMATION_MESSAGE);
             app.mostrarPantallaMenuGastos();
-        } else {
-            JOptionPane.showMessageDialog(null, "Ocurrió un error al registrar el proveedor. Inténtalo de nuevo.", "Error de Registro", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

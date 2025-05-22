@@ -26,8 +26,6 @@ public interface IGastoDAO {
     
     public Gasto modificarGasto(Gasto gasto) throws PersistenciaException;
     
-    public List<Gasto> consultarGastos() throws PersistenciaException;
-    
     public List<Gasto> consultarGastosFiltrados(Gasto gastoFiltro, LocalDate fechaInicio, LocalDate fechaFin) throws PersistenciaException;
     
     public Gasto buscarPorFolio(String folio) throws PersistenciaException;
