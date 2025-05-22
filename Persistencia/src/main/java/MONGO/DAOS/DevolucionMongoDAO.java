@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package MONGO.DAOS;
 
 import Exception.PersistenciaException;
@@ -12,18 +9,16 @@ import static com.mongodb.client.model.Filters.eq;
 import conexion.ConexionMongo;
 import entidades.Devolucion;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.PersistenceException;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 /**
- *
+ * Esta clase representa una DAO de Devoluciones funcionando con MongoDB.
  * @author Sebastian Moreno
  */
 public class DevolucionMongoDAO implements IDevolucionDAO {
@@ -33,23 +28,34 @@ public class DevolucionMongoDAO implements IDevolucionDAO {
     public DevolucionMongoDAO() {
         this.coleccion = ConexionMongo.getDatabase().getCollection("Devolucion", Devolucion.class);
     }
-
+    /**
+     * Metodo que registra una devolucion en la BD.
+     * @param devolucion la devolucion a registrar.
+     * @return Un Objeto del tipo devolucion con id , persisitido.
+     * @throws PersistenciaException si no se puede realizar la devolucion.
+     */
     @Override
     public Devolucion registrarDevolucion(Devolucion devolucion) throws PersistenciaException {
         try {
-            // Asignar un nuevo _id si está en null
             if (devolucion.getId() == null) {
                 devolucion.setId(new ObjectId().getTimestamp());
             }
-
-            System.out.println(devolucion.getId() + "persisntecia");
             coleccion.insertOne(devolucion);
             return devolucion;
         } catch (Exception e) {
             throw new PersistenciaException("No se pudo registrar la devolución.", e);
         }
     }
-
+    
+    /**
+     * Metodo para buscar una devolucion de manera dinamica en la base de datos.
+     * Basicamente construye una lista de filtros los cuales, entran o desaparecen dependiendo
+     * de lo que reciba el metodo.
+     * @param filtro una devolucion con el dato telefono o nombre completo.
+     * @param inicio la fecha de inicio a buscar
+     * @param fin la fecha fin a buscar
+     * @return una lista de devoluciones filtradas.
+     */
     public List<Devolucion> buscarDevolucionPorFiltro(Devolucion filtro, LocalDateTime inicio, LocalDateTime fin) {
         List<Bson> filtros = new ArrayList<>();
 
@@ -77,11 +83,25 @@ public class DevolucionMongoDAO implements IDevolucionDAO {
         return coleccion.find(filtroFinal).into(new ArrayList<>());
     }
 
+    /**
+     * NO SE UTILIZA.
+     * Metodo para buscar todas las devoluciones de la base de datos.
+     * Realmente no se implementa como tal este metodo debido a que se utilizan las busquedas dinamicas.
+     * Sobrecarga un poco el sistema si existen muchas devoluciones , por eso no es utilizado.
+     * @return una lista de devoluciones
+     *
+     */
     @Override
-    public List<Devolucion> buscarDevoluciones() throws PersistenciaException {
+    public List<Devolucion> buscarDevoluciones() {
         return coleccion.find().into(new ArrayList<>());
     }
-
+    
+    /**
+     * Este metodo busca una devolucion por su numero de id.
+     * @param id el id de la devolucion a buscar.
+     * @return un objeto devolucion buscado por su codigo.
+     * @throws PersistenciaException si no se puede buscar la devolucion por id.
+     */
     @Override
     public Devolucion buscarPorID(String id) throws PersistenciaException {
         try {
@@ -92,5 +112,5 @@ public class DevolucionMongoDAO implements IDevolucionDAO {
             throw new PersistenciaException("No se pudo buscar la devolución por ID.", e);
         }
     }
-
+    
 }

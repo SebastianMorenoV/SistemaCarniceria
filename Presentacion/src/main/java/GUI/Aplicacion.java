@@ -398,11 +398,11 @@ public class Aplicacion {
         registrarEntrada.agregarProducto(producto);
     }
 
-    public EmpleadoCargadoDTO cargarEmpleado() throws NegocioException {
+    public EmpleadoCargadoDTO cargarEmpleado() throws VentaException  {
         return realizarVenta.cargarEmpleado();
     }
 
-    public List<ProductoCargadoDTO> cargarProductos() throws NegocioException {
+    public List<ProductoCargadoDTO> cargarProductos() throws VentaException {
         return realizarVenta.cargarProductos();
     }
 
@@ -702,7 +702,7 @@ public class Aplicacion {
 
     public List<ProductoCargadoDTO> buscaPorNombre(String textoBusqueda) throws VentaException{
         try {
-            return realizarVenta.buscaPorNombre(textoBusqueda);
+            return realizarVenta.buscaProductosPorTexto(textoBusqueda);
         } catch (VentaException ex) {
             throw new VentaException("Ocurrio un error al buscar los productos por nombre" + ex.getMessage());
         }

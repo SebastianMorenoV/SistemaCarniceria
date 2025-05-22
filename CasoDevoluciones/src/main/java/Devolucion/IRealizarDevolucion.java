@@ -24,11 +24,4 @@ public interface IRealizarDevolucion {
 
     public VentaDTO validarTicket(String ticket) throws DevolucionException;
 
-    public void validarProductoRepetido();
-
-    public void validarCamposLlenos();
-
-    public void calcularResumen();
-
-    public void validarValoresCampos();
 }

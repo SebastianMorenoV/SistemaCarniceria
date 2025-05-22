@@ -1,9 +1,5 @@
 package GUI.ModuloRealizarVenta;
 
-/**
- *
- * @author Lap-064
- */
 import DTOs.EmpleadoCargadoDTO;
 import DTOs.NuevoProductoVentaDTO;
 import DTOs.ProductoCargadoDTO;
@@ -20,9 +16,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +31,6 @@ import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -46,6 +39,10 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * Formulario para realizar una venta en caja
+ * @author Sebastian Moreno
+ */
 public class RegistrarVenta extends javax.swing.JPanel {
 
     /**
@@ -60,9 +57,8 @@ public class RegistrarVenta extends javax.swing.JPanel {
         initComponents();
 
         try {
-
             inicializarValoresDefault();
-        } catch (NegocioException ex) {
+        } catch (VentaException ex) {
             Logger.getLogger(RegistrarVenta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -377,8 +373,6 @@ public class RegistrarVenta extends javax.swing.JPanel {
     private void btnTxtTarjetaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtTarjetaMouseClicked
 
         try {
-            // setear la venta con los totales y los productosVenta
-
             if (app.obtenerVenta() != null && app.obtenerVenta().getPago() != null) {
                 app.mostrarVentaYaPagada();
             } else {
@@ -393,7 +387,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
                 app.setearVenta(venta);
                 app.mostrarFormularioTarjeta();
             }
-        } catch (NegocioException ex) {
+        } catch (VentaException ex) {
             Logger.getLogger(RegistrarVenta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnTxtTarjetaMouseClicked
@@ -417,7 +411,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
                 app.setearVenta(venta);
                 app.mostrarFormularioEfectivo();
             }
-        } catch (NegocioException ex) {
+        } catch (VentaException ex) {
             Logger.getLogger(RegistrarVenta.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -499,7 +493,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
     private void btnFinalizarVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFinalizarVentaMouseClicked
         try {
             finalizarVenta();
-        } catch (NegocioException ex) {
+        } catch (VentaException ex) {
             Logger.getLogger(RegistrarVenta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnFinalizarVentaMouseClicked
@@ -542,12 +536,12 @@ public class RegistrarVenta extends javax.swing.JPanel {
         tablaProductosVenta.getColumnModel().getColumn(4).setPreferredWidth(80);  // Importe
     }
 
-    public void cargarEmpleado() throws NegocioException {
+    public void cargarEmpleado() throws VentaException {
         EmpleadoCargadoDTO empleadoCargado = app.cargarEmpleado();
         txtCajero.setText("Cajero:  " + empleadoCargado.getNombre());
     }
 
-    public void cargarProductos() throws NegocioException {
+    public void cargarProductos()throws VentaException {
         List<ProductoCargadoDTO> nuevosProductos = app.cargarProductos();
 
         listadoProductosCargados = nuevosProductos; // Reemplaza, no acumula
@@ -573,7 +567,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
         inputNombre.setText("");
     }
 
-    public void inicializarValoresDefault() throws NegocioException {
+    public void inicializarValoresDefault() throws VentaException {
         cargarEmpleado();
         cargarProductos();
         ajustarTamañoColumnasPreferidos();
@@ -852,7 +846,7 @@ public class RegistrarVenta extends javax.swing.JPanel {
         return (DefaultTableModel) tablaProductosVenta.getModel();
     }
 
-    public void finalizarVenta() throws NegocioException {
+    public void finalizarVenta() throws VentaException {
         int confirmar = app.mostrarPreguntaFinalizarVenta();
         EmpleadoCargadoDTO empleado = app.cargarEmpleado();
         VentaDTO ventaRealizada = app.obtenerVenta();

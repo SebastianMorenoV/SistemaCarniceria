@@ -6,6 +6,7 @@ import DTOs.EntradaDTO;
 import DTOs.ProductoEntradaDTO;
 import Exception.InventarioException;
 import Exception.NegocioException;
+import Exception.VentaException;
 import GUI.Aplicacion;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -167,7 +168,7 @@ public class InformacionRegistrarEntrada extends javax.swing.JPanel {
             }
         } catch (InventarioException ex) {
             Logger.getLogger(InformacionRegistrarEntrada.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NegocioException ex) {
+        } catch (VentaException ex) {
             Logger.getLogger(InformacionRegistrarEntrada.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnRegistrarEntradaMouseClicked
@@ -278,7 +279,7 @@ public class InformacionRegistrarEntrada extends javax.swing.JPanel {
             crearTablaProductosEntrada();
             revalidate();
             repaint();
-        } catch (NegocioException ex) {
+        } catch (VentaException ex) {
             throw new InventarioException("Error al cargar Empleado");
         }
     }

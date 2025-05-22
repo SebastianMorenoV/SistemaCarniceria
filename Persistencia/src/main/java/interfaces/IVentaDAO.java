@@ -1,33 +1,30 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
+
 package Interfaces;
 
-import DAOS.VentaDAO;
-import entidades.ProductoVenta;
 import entidades.Venta;
 import Exception.PersistenciaException;
 import MONGO.DAOS.VentaMongoDAO;
-import java.util.List;
 
 /**
- * Esta clase representa la interfaz de la dao Venta se encarga de crear la DAO.
- *
+ * Esta clase representa la interfaz de la DAO Venta se encarga de crear la DAO.
+ * Tiene metodos generales que utilizan las clases que implementan esta interfaz con la finalidad de
+ * que si algun dia cambia la DAO , puedan remplazarlas sin que el sistema dependa de ellas.
  * @author Sebastian Moreno
  */
 public interface IVentaDAO {
 
     static IVentaDAO obtenerInstanciaDAO() {
-        return new VentaMongoDAO(); // o podrías usar singleton aquí
+        return new VentaMongoDAO();
     }
 
     public Venta registrarVenta(Venta venta) throws PersistenciaException;
 
     public Venta consultarVenta(Integer id) throws PersistenciaException;
 
-    public List<ProductoVenta> consultarProductosVenta() throws PersistenciaException;
-    
     public Venta consultarVentaPorTicket(String ticket) throws PersistenciaException;
+
+    public boolean buscarVentaSinDevolucion(int codigoVenta) throws PersistenciaException;
+
+    public boolean tieneDevolucionAsociada(int codigoVenta) throws PersistenciaException;
 
 }

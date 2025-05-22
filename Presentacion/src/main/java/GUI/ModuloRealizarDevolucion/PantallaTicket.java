@@ -9,7 +9,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Esta pantalla solicita un numero de ticket asociado a una venta para poder realizar una devolucion.
+ * Solo se puede hacer una devolucion historica por ticket o venta.
  * @author Sebastian Moreno
  */
 public class PantallaTicket extends javax.swing.JPanel {
@@ -149,9 +150,7 @@ public class PantallaTicket extends javax.swing.JPanel {
     private void btnTxtIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTxtIngresarMouseClicked
         if (validarTicket()) {
             app.mostrarPantallaDevolucion();
-
         }
-
     }//GEN-LAST:event_btnTxtIngresarMouseClicked
 
     private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
@@ -171,7 +170,8 @@ public class PantallaTicket extends javax.swing.JPanel {
     private javax.swing.JLabel txtTitulo1;
     // End of variables declaration//GEN-END:variables
 
-//Metodos auxiliares
+    //Metodos auxiliares
+    
     public boolean validarTicket() {
         String texto = inputNumeroTicket.getText().trim();
 

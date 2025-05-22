@@ -8,6 +8,7 @@ package GUI.ModuloRegistrarEntrada;
 import DTOs.ProductoCargadoDTO;
 import Exception.InventarioException;
 import Exception.NegocioException;
+import Exception.VentaException;
 import GUI.Aplicacion;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -213,7 +214,7 @@ public class SeleccionarProducto extends javax.swing.JPanel {
                 productoSeleccionado = control.cargarProductos().get(tablaProductos.getSelectedRow());
                 productoSeleccionado();
                 mostrarDatosProductoEntrada();
-            } catch (NegocioException ex) {
+            } catch (VentaException ex) {
                 Logger.getLogger(SeleccionarProducto.class.getName()).log(Level.SEVERE, null, ex);
             }
         }        

@@ -7,7 +7,6 @@ import DTOs.PagoNuevoDTO;
 import DTOs.PagoViejoDTO;
 import DTOs.ProductoCargadoDTO;
 import DTOs.ProductoVentaDTO;
-import DTOs.ProductosVentaDTO;
 import DTOs.VentaDTO;
 import EstrategiaPago.IProcesadorPago;
 import EstrategiaPago.PagoEfectivo;
@@ -26,17 +25,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
- * Esta clase representa el subsistema de caso de uso. (REALIZAR UNA VENTA)
- *
+ * Esta clase representa el subsistema de caso de uso (REALIZAR UNA VENTA).
+ * Utiliza BOS para la conversion de tipos, tambien para la llamada a las DAO  y almacena variables temporales 
+ * para acceder a ellas por el mediador cuando se requieran.
  * @author sebastian Moreno
  */
 public class RealizarVenta implements IRealizarVenta {
 
-    private IProductoBO productoBO = manejadoresBO.ManejadorObjetosNegocio.crearProductoBO();// esto es tamal
+    private IProductoBO productoBO = manejadoresBO.ManejadorObjetosNegocio.crearProductoBO();
     private IEmpleadoBO empleadoBO = manejadoresBO.ManejadorObjetosNegocio.crearEmpleadoBO();
     private IVentaBO ventaBO = manejadoresBO.ManejadorObjetosNegocio.crearVentasBO();
 
@@ -50,27 +48,45 @@ public class RealizarVenta implements IRealizarVenta {
 
     private static Pago procesarPago = new Pago();
     private static IProcesadorPago estrategia;
+    
+    //Ponerle la interfaz por si algun dia se necesita cambiar.
+    //INTERFAZ DE REPORTE FALTANTE...
     private static ReporteService realizarReporte = new ReporteService();
-
+    
+    /**
+     * Metodo para cargar un empleado desde la base de datos mockeada.
+     * Esto si el sistema crece usara la base de datos real, donde si existan los empleados.
+     * @return un EmpleadoCargadoDTO si lo encuentra.
+     * @throws NegocioException si no encuentra el empleado
+     */
     @Override
-    public EmpleadoCargadoDTO cargarEmpleado() throws NegocioException {
+    public EmpleadoCargadoDTO cargarEmpleado() throws VentaException {
         try {
             return empleadoBO.consultarEmpleado();
         } catch (NegocioException ex) {
-            throw new NegocioException("No se encontro al empleado");
+            throw new VentaException("No se encontro al empleado" + ex.getMessage());
         }
     }
-
+    
+    /**
+     * Metodo para cargar los productos desde la base de datos.
+     * @return Lista de productos consultados.
+     * @throws VentaException si no hay productos que consultar.
+     */
     @Override
-    public List<ProductoCargadoDTO> cargarProductos() throws NegocioException {
+    public List<ProductoCargadoDTO> cargarProductos() throws VentaException {
         try {
             return productoBO.cargarProductos();
-
         } catch (NegocioException ex) {
-            throw new NegocioException("No hay productos");
+            throw new VentaException("No hay productos" + ex.getMessage());
         }
     }
-
+    /**
+     * Metodo para registrar una venta.
+     * @param venta la VentaDTO pasada desde presentacion para registrar.
+     * @return la venta Persistida de la base de datos.
+     * @throws VentaException si no se puede registrar la venta.
+     */
     @Override
     public VentaDTO registrarVenta(VentaDTO venta) throws VentaException {
         try {
@@ -79,13 +95,14 @@ public class RealizarVenta implements IRealizarVenta {
             throw new VentaException("No se pudo registrar la venta" + ex.getLocalizedMessage());
         }
     }
-
-    // en donde esta su uso?
-    public ProductosVentaDTO ConsultarProductosVenta() throws NegocioException {
-        return ventaBO.obtenerProductosVenta();
-    }
-
-    //
+    /**
+     * Metodo para agregar un nuevo producto venta.
+     * Aclaracion: el producto Venta no se persiste en la base de datos como un objeto individual
+     * Este metodo nos ayuda en la creacion de un productoVentaDTO para utilizarlo en la presentacion.
+     * @param productoCargado El ProductoCargadoDTO sin los parametros de un productoVentaDTO
+     * @param cantidad la cantidad de un Producto en especifico.
+     * @return Un nuevo ProductoVentaDTO.
+     */
     @Override
     public ProductoVentaDTO agregarProductoVenta(ProductoCargadoDTO productoCargado, double cantidad) {
 
@@ -130,7 +147,12 @@ public class RealizarVenta implements IRealizarVenta {
         }
 
     }
-
+    /**
+     * Metodo para validar un pago, utilizando el sistema externo dependiendo de la estrategia.
+     * @param pago un PagoViejo dto con los detalles de el pago.
+     * @return true si el pago es valido , false si no.
+     * @throws ProcesadorPagoException si existe un error con el pago.
+     */
     @Override
     public boolean validarPago(PagoViejoDTO pago) throws ProcesadorPagoException {
         boolean validado = false;
@@ -144,12 +166,21 @@ public class RealizarVenta implements IRealizarVenta {
             PagoNuevoDTO p = new PagoNuevoDTO(LocalDateTime.now(), pago.getMetodoPago(), pago.getMonto());
             validado = procesarPago.validarPago(estrategia, p);
         } catch (ProcesadorPagoException ex) {
-            ex.getLocalizedMessage();
+            throw new ProcesadorPagoException("Existio un error validando el pago: " + ex.getMessage());
         }
 
         return validado;
     }
-
+    /**
+     * Metodo que utiliza el modulo ProcesadorPago , busca coincidencias en las tarjetas.
+     * Obtiene una tarjeta mockeada.
+     * @param titular el titular de la tarjeta
+     * @param numeroTarjeta el numero de la tarjeta
+     * @param fechaVencimiento la fecha vencimiento pasada desde la presentacion con formato nn/nn
+     * @param cvv numero de 3 digitos de la tarjeta
+     * @return una NuevaTarjetaDTO si la encuentra
+     * @throws VentaException si existe un error buscando la tarjeta o llega nula.
+     */
     @Override
     public NuevaTarjetaDTO buscarTarjeta(String titular, String numeroTarjeta, String fechaVencimiento, int cvv) throws VentaException {
 
@@ -162,7 +193,12 @@ public class RealizarVenta implements IRealizarVenta {
     }
     
     
-
+    /**
+     * Metodo para generar y mostrar un PDF de el ticket de la venta.
+     * Este metodo doblega la responsabilidad de creacion de el ticket a el subsitema Externo.
+     * Tambien genera un PDF recibido y le habla a el sistema local para abrirlo en el navegador automaticamente.
+     * @param venta recibe una ventaDTO con los datos necesarios para crear el ticket.
+     */
     @Override
     public void generarYMostrarPDFVenta(VentaDTO venta) {
         byte[] pdfBytes = realizarReporte.generarPDFVenta(venta);
@@ -178,12 +214,35 @@ public class RealizarVenta implements IRealizarVenta {
             throw new RuntimeException("Error al guardar o abrir el PDF de la venta", ex);
         }
     }
-
+    /**
+     * Metodo para buscar los productos por un texto similar al ingresado.
+     * @param textoBusqueda es el texto que recibimos de presentacion por el cual se buscara un producto.
+     * @return una lista de uno o mas productosCargadosDTO.
+     * @throws VentaException Si existe un error buscando por el nombre.
+     */
+    @Override
+    public List<ProductoCargadoDTO> buscaProductosPorTexto(String textoBusqueda) throws VentaException {
+        try {
+            return productoBO.buscaPorNombre(textoBusqueda);
+        } catch (NegocioException ex) {
+            throw new VentaException("Error al buscar por nombre: " + ex.getLocalizedMessage());
+        }
+    }
+    /**
+     * Metodo para calcular el iva.
+     * @param subtotal el subtotal de la venta
+     * @return un iva double
+     */
     @Override
     public double calcularIva(double subtotal) {
         return subtotal * 0.16; // 16% de IVA
     }
-
+    /**
+     * Metodo para cargar el Total de una venta.
+     * @param subtotal el subtotal de la venta.
+     * @param iva el iva de la venta
+     * @return el total
+     */
     @Override
     public double calcularTotal(double subtotal, double iva) {
         return subtotal + iva;
@@ -233,13 +292,6 @@ public class RealizarVenta implements IRealizarVenta {
         this.pagaraCon = pagaraCon;
     }
 
-    @Override
-    public List<ProductoCargadoDTO> buscaPorNombre(String textoBusqueda) throws VentaException {
-        try {
-            return productoBO.buscaPorNombre(textoBusqueda);
-        } catch (NegocioException ex) {
-            throw new VentaException("Error al buscar por nombre: " + ex.getLocalizedMessage());
-        }
-    }
+   
 
 }

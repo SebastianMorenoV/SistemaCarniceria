@@ -1,7 +1,6 @@
 package BO;
 
 import Adapters.AdaptadorDevolucion;
-import DTOs.FechaDTO;
 import DTOs.Devolucion.CrearDevolucionDTO;
 import DTOs.Devolucion.DevolucionDTO;
 import DTOs.Devolucion.DevolucionSinVentaDTO;
@@ -12,13 +11,13 @@ import Interfaces.IDevolucionBO;
 import Interfaces.IDevolucionDAO;
 import entidades.Devolucion;
 import fabrica.ICreadorDAO;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Esta clase representa la devolucion en su capa de objetos negocio.
  *
  * @author Sebastian Moreno
  */
@@ -28,23 +27,31 @@ public class DevolucionBO implements IDevolucionBO {
     private final IAdaptadorDevolucion adaptadorDevolucion = new AdaptadorDevolucion();
     // dao
     private final IDevolucionDAO devolucionDAO;
-    //constructorFabrica
 
+    //constructorFabrica
     public DevolucionBO(ICreadorDAO fabrica) {
         this.devolucionDAO = fabrica.crearDevolucionDAO();
     }
 
+    /**
+     * Metodo para registrar una devolucion. utiliza los adapters para convertir
+     * de entidad a DTO y viceversa.
+     *
+     * @param devolucion devolucion pasada desde la presentacion.
+     * @return una Devolucion con id.
+     * @throws NegocioException si existe un error registrando.
+     */
     @Override
     public DevolucionDTO registrarDevolucion(CrearDevolucionDTO devolucion) throws NegocioException {
 
         Devolucion devolucionEntidad = adaptadorDevolucion.convertirAEntidad(devolucion);
         try {
             Devolucion devolucionInsertada = devolucionDAO.registrarDevolucion(devolucionEntidad);
+            DevolucionDTO devolucionDTO = adaptadorDevolucion.convertirADTO(devolucionEntidad);
+            return devolucionDTO;
         } catch (PersistenciaException ex) {
-            Logger.getLogger(DevolucionBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NegocioException("Existio un error registrando la devolucion." + ex.getMessage());
         }
-        DevolucionDTO devolucionDTO = adaptadorDevolucion.convertirADTO(devolucionEntidad);
-        return devolucionDTO;
     }
 
     @Override
@@ -98,4 +105,5 @@ public class DevolucionBO implements IDevolucionBO {
         }
         return null;
     }
+
 }

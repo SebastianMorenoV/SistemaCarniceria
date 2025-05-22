@@ -5,8 +5,6 @@
 package Implementacion;
 
 import DTOs.*;
-import EstrategiaPago.IProcesadorPago;
-import Exception.NegocioException;
 import Exception.VentaException;
 import excepciones.ProcesadorPagoException;
 import java.util.List;
@@ -17,17 +15,19 @@ import java.util.List;
  */
 public interface IRealizarVenta {
 
-    public EmpleadoCargadoDTO cargarEmpleado() throws NegocioException;
+    public EmpleadoCargadoDTO cargarEmpleado() throws VentaException;
 
-    public List<ProductoCargadoDTO> cargarProductos() throws NegocioException;
+    public VentaDTO registrarVenta(VentaDTO ventaNueva) throws VentaException;
 
-    public ProductoVentaDTO agregarProductoVenta(ProductoCargadoDTO productoCargado, double cantidad);
+    public List<ProductoCargadoDTO> cargarProductos() throws VentaException;
 
-    public double calcularTotal(double subtotal, double iva);
+    public ProductoVentaDTO agregarProductoVenta(ProductoCargadoDTO productoCargado, double cantidad) throws VentaException;
 
-    public double calcularSubtotal(List<NuevoProductoVentaDTO> productosEnTabla);
+    public double calcularTotal(double subtotal, double iva) throws VentaException;
 
-    public double calcularIva(double subtotal);
+    public double calcularSubtotal(List<NuevoProductoVentaDTO> productosEnTabla) throws VentaException;
+
+    public double calcularIva(double subtotal) throws VentaException;
 
     // public boolean verificarPago(PagoNuevoDTO pago);
     public double obtenerTotal();
@@ -36,18 +36,16 @@ public interface IRealizarVenta {
 
     public void setearVenta(VentaDTO ventaNueva);
 
-    public VentaDTO registrarVenta(VentaDTO ventaNueva) throws VentaException;
-
     public VentaDTO obtenerVenta();
 
     // para la estrategia
     public double procesarPago(PagoNuevoDTO pago) throws ProcesadorPagoException;
 
     public boolean validarPago(PagoViejoDTO pago) throws ProcesadorPagoException;
-    
+
     public NuevaTarjetaDTO buscarTarjeta(String titular, String numeroTarjeta, String fechaVencimiento, int cvv) throws VentaException;
-    
-    public List<ProductoCargadoDTO> buscaPorNombre(String textoBusqueda) throws VentaException;
-    
+
+    public List<ProductoCargadoDTO> buscaProductosPorTexto(String textoBusqueda) throws VentaException;
+
     public void generarYMostrarPDFVenta(VentaDTO venta);
 }

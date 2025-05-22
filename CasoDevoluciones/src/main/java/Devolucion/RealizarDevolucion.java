@@ -1,6 +1,5 @@
 package Devolucion;
 
-import DTOs.FechaDTO;
 import DTOs.Devolucion.CrearDevolucionDTO;
 import DTOs.Devolucion.DevolucionDTO;
 import DTOs.Devolucion.DevolucionSinVentaDTO;
@@ -10,11 +9,12 @@ import Exception.NegocioException;
 import Interfaces.IDevolucionBO;
 import Interfaces.IVentaBO;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
- *
+ * Esta clase representa el caso de uso para realizar una devolucion.
+ * Aclaracion : Cuando un cliente quiere devolver uno o mas productos dentro de su venta.
+ * solo se acepta una devolucion por venta.
  * @author Sebastian Moreno
  */
 public class RealizarDevolucion implements IRealizarDevolucion {
@@ -24,36 +24,41 @@ public class RealizarDevolucion implements IRealizarDevolucion {
 
     VentaDTO ventaTemporal = new VentaDTO();
     DevolucionDTO devolucionTemporal = new DevolucionDTO();
-
+    /**
+     * Metodo para registrar una devolucion.
+     * Valida que los campos no sean nulos y que cumplan con ciertos valores estrictos los campos.
+     * @param devolucionDTO es la nueva devolucion pasada por la presentacion para su creacion.
+     * @return una DevolucionDTO ya ingresada en la base de datos
+     * @throws DevolucionException si existe algun error registrando la devolucion.
+     */
     @Override
     public DevolucionDTO registrarDevolucion(CrearDevolucionDTO devolucionDTO) throws DevolucionException {
         try {
-            // Validar nombreCompleto (no vacío, solo letras y espacios)
             String nombre = devolucionDTO.getNombreCompleto();
             if (!nombre.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$")) {
                 throw new DevolucionException("El nombre completo solo debe contener letras y espacios, sin números ni caracteres especiales.");
             }
-
-            // Validar razón (solo letras y espacios)
+            
             String razon = devolucionDTO.getRazon();
             if (razon == null || !razon.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$")) {
                 throw new DevolucionException("La razón solo debe contener letras y espacios, sin números ni caracteres especiales.");
             }
 
-            // Validar teléfono (solo 10 dígitos)
             String telefono = devolucionDTO.getTelefono();
             if (telefono == null || !telefono.matches("^\\d{10}$")) {
                 throw new DevolucionException("El teléfono debe contener exactamente 10 dígitos numéricos.");
             }
 
-            // Si todo es válido, se procede con el registro
             return devolucionBO.registrarDevolucion(devolucionDTO);
         } catch (NegocioException ex) {
-            Logger.getLogger(RealizarDevolucion.class.getName()).log(Level.SEVERE, null, ex);
             throw new DevolucionException("Error al registrar la devolución: " + ex.getMessage());
         }
     }
-
+    /**
+     * Metodo para consultar todas las devoluciones.
+     * @return Lista de devolucionesDTO consultadas.
+     * @throws DevolucionException si exsite un error buscando.
+     */
     @Override
     public List<DevolucionDTO> consultarDevoluciones() throws DevolucionException {
         try {
@@ -62,7 +67,15 @@ public class RealizarDevolucion implements IRealizarDevolucion {
             throw new DevolucionException("Ocurrio un error encontrando devoluciones ." + ex.getMessage());
         }
     }
-
+    /**
+     * Metodo para consultar las devoluciones por filtro.
+     * Este metodo es dinamico , lo cual se ejecuta muchas veces , dependiendo de
+     * la devolucionDTO pasada como parametro.
+     * @param devolucionDTO es una devolucion con ciertos valores , por los cual se va filtrar.
+     * puede venir 0 o muchos de los filtros necesarios.
+     * @return Lista de DevolucionDTO consultada.
+     * @throws DevolucionException si ocurrio un error consultando las devoluciones por filtro.
+     */
     @Override
     public List<DevolucionDTO> consultarDevolucionesPorFiltro(DevolucionSinVentaDTO devolucionDTO) throws DevolucionException {
         try {
@@ -71,7 +84,12 @@ public class RealizarDevolucion implements IRealizarDevolucion {
             throw new DevolucionException("Ocurrio un error encontrando devoluciones por filtro." + ex.getMessage());
         }
     }
-
+    /**
+     * Metodo para buscar una devolucion por su id.
+     * @param id el id de la devolucion a buscar.
+     * @return una DevolucionDTO consultada.
+     * @throws DevolucionException si existe algun error.
+     */
     public DevolucionDTO consultarDevolucionPorID(String id) throws DevolucionException {
         try {
             return devolucionBO.consultarDevolucionPorID(id);
@@ -79,45 +97,39 @@ public class RealizarDevolucion implements IRealizarDevolucion {
             throw new DevolucionException("Error al buscar una devolucion por id :" + ex.getMessage());
         }
     }
-
+    /**
+     * Metodo para validar el ticket de la venta pasada a la devolucion.
+     * Este metodo valida que el ticket no este vacio , no tenga ninguna devolucion asociada,
+     * que el numero de el ticket sea valido.
+     * @param ticket el numero de el ticket asociado a una venta.
+     * @return la VentaDTO asociada al numero de ticket para realizar la devolucion.
+     * @throws DevolucionException si existe un error valiando el ticket.
+     */
     @Override
     public VentaDTO validarTicket(String ticket) throws DevolucionException {
-        // Validar que el ticket no sea null o vacío
+
         if (ticket == null || ticket.trim().isEmpty()) {
             throw new DevolucionException("Debe proporcionar un número de ticket válido.");
         }
-            
+
         try {
             ventaTemporal = ventaBO.obtenerVentaPorTicket(ticket);
             if (ventaTemporal == null) {
                 throw new DevolucionException("No se encontró ninguna venta asociada al ticket ingresado.");
             }
+
+            boolean tieneDevolucion = ventaBO.validarVentaConDevolucion(ventaTemporal.getId());
+
+            if (tieneDevolucion == false) {
+                throw new DevolucionException("La venta ya tiene una devolución registrada y no puede devolverse nuevamente.");
+            }
+
             return ventaTemporal;
         } catch (NegocioException ex) {
-            Logger.getLogger(RealizarDevolucion.class.getName()).log(Level.SEVERE, null, ex);
             throw new DevolucionException("Error al buscar el ticket: " + ex.getMessage());
         }
     }
 
-    @Override
-    public void validarProductoRepetido() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void validarCamposLlenos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void calcularResumen() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void validarValoresCampos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     public VentaDTO getVentaTemporal() {
         return ventaTemporal;

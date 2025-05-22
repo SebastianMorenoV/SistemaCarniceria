@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package DAOS;
 
 import entidades.Venta;
@@ -19,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Esta clase representa una venta DAO pero utilizando datos mock (Insertados manualmente.)
  * @author Sebastian Moreno
  */
 public class VentaDAO implements IVentaDAO {
@@ -105,7 +102,7 @@ public class VentaDAO implements IVentaDAO {
         return nuevaVenta;
     }
 
-    // este metodo lo meti aqui porque asi lo habiamos diagramado.
+
     public List<ProductoVenta> consultarProductosVenta() throws PersistenciaException {
         List<ProductoVenta> listaProductosVenta = new ArrayList<>();
 
@@ -128,7 +125,6 @@ public class VentaDAO implements IVentaDAO {
         return listaProductosVenta;
     }
 
-    /// TALVEZ ESTE METODO NI LO OCUPAMOS.
     @Override
     public Venta consultarVenta(Integer id) throws PersistenciaException {
         Empleado cajero = new Empleado(1L, "Juan Soto", "Cajero");
@@ -190,7 +186,7 @@ public class VentaDAO implements IVentaDAO {
 
     // Empezar a codificar en MongoDB
     @Override
-    public Venta consultarVentaPorTicket(String  id) throws PersistenciaException {
+    public Venta consultarVentaPorTicket(String id) throws PersistenciaException {
         Empleado cajero = new Empleado(2L, "Yeremy", "Cajero");
 
         // Crear método de pago
@@ -257,6 +253,16 @@ public class VentaDAO implements IVentaDAO {
         venta.setListaProductosVenta(listaProductosVenta);
 
         return venta;
+    }
+
+    @Override
+    public boolean buscarVentaSinDevolucion(int codigoVenta) {
+        throw new UnsupportedOperationException("Esto lo hago solo en MongoDAO");
+    }
+
+    @Override
+    public boolean tieneDevolucionAsociada(int codigoVenta) {
+      throw new UnsupportedOperationException("Esto lo hago solo en MongoDAO");
     }
 
 }

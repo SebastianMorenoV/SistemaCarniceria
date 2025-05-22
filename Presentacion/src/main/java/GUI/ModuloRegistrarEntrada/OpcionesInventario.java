@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package GUI.ModuloRegistrarEntrada;
 
 import DTOs.EmpleadoCargadoDTO;
 import Exception.InventarioException;
 import Exception.NegocioException;
+import Exception.VentaException;
 import GUI.Aplicacion;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -49,10 +47,6 @@ public class OpcionesInventario extends javax.swing.JPanel {
         panelBtnRegistrarEntrada1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        panelRound2 = new GUI.PanelRound();
-        txtBusquedaNombre3 = new javax.swing.JLabel();
-        panelRound3 = new GUI.PanelRound();
-        txtBusquedaNombre4 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -158,48 +152,6 @@ public class OpcionesInventario extends javax.swing.JPanel {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Bienvenido, Juanito!");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1150, 80));
-
-        panelRound2.setBackground(new java.awt.Color(0, 0, 0));
-        panelRound2.setRoundBottomLeft(30);
-        panelRound2.setRoundBottomRight(30);
-        panelRound2.setRoundTopLeft(30);
-        panelRound2.setRoundTopRight(30);
-        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtBusquedaNombre3.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
-        txtBusquedaNombre3.setForeground(new java.awt.Color(255, 255, 255));
-        txtBusquedaNombre3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtBusquedaNombre3.setText("Agregar un Producto");
-        txtBusquedaNombre3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        txtBusquedaNombre3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtBusquedaNombre3MouseClicked(evt);
-            }
-        });
-        panelRound2.add(txtBusquedaNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 480, 70));
-
-        add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 530, 500, 90));
-
-        panelRound3.setBackground(new java.awt.Color(0, 0, 0));
-        panelRound3.setRoundBottomLeft(30);
-        panelRound3.setRoundBottomRight(30);
-        panelRound3.setRoundTopLeft(30);
-        panelRound3.setRoundTopRight(30);
-        panelRound3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtBusquedaNombre4.setFont(new java.awt.Font("Product Sans Infanity", 0, 36)); // NOI18N
-        txtBusquedaNombre4.setForeground(new java.awt.Color(255, 255, 255));
-        txtBusquedaNombre4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtBusquedaNombre4.setText("Registrar Proveedor");
-        txtBusquedaNombre4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        txtBusquedaNombre4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtBusquedaNombre4MouseClicked(evt);
-            }
-        });
-        panelRound3.add(txtBusquedaNombre4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 480, 70));
-
-        add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 430, 500, 90));
     }// </editor-fold>//GEN-END:initComponents
 
     private void panelBtnRegistrarEntradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBtnRegistrarEntradaMouseClicked
@@ -217,14 +169,6 @@ public class OpcionesInventario extends javax.swing.JPanel {
             Logger.getLogger(OpcionesInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_panelBtnRegistrarEntrada1MouseClicked
-
-    private void txtBusquedaNombre3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBusquedaNombre3MouseClicked
-       control.mostrarVentanaProductoNuevo();
-    }//GEN-LAST:event_txtBusquedaNombre3MouseClicked
-
-    private void txtBusquedaNombre4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBusquedaNombre4MouseClicked
-        control.mostrarAgregarProveedor();
-    }//GEN-LAST:event_txtBusquedaNombre4MouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         try {
@@ -249,10 +193,6 @@ public class OpcionesInventario extends javax.swing.JPanel {
     private javax.swing.JLabel labelRegistrarEntrada;
     private javax.swing.JPanel panelBtnRegistrarEntrada;
     private javax.swing.JPanel panelBtnRegistrarEntrada1;
-    private GUI.PanelRound panelRound2;
-    private GUI.PanelRound panelRound3;
-    private javax.swing.JLabel txtBusquedaNombre3;
-    private javax.swing.JLabel txtBusquedaNombre4;
     // End of variables declaration//GEN-END:variables
 
 
@@ -261,7 +201,7 @@ public class OpcionesInventario extends javax.swing.JPanel {
             EmpleadoCargadoDTO empleado = control.cargarEmpleado();
             
             jLabel5.setText("Bienvenido, " + empleado.getNombre() + "!");
-        } catch (NegocioException ex) {
+        } catch (VentaException ex) {
             //Tira exception inventario
             Logger.getLogger(OpcionesInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
