@@ -92,6 +92,13 @@ public class ProveedorMongoDAO implements IProveedorDAO{
             throw new PersistenciaException("Error al buscar proveedor por nombre: " + e.getLocalizedMessage());
         }
     }
+    
+    /**
+     * Metodo auxiliar para pruebas unitarias: elimina todos los proveedores insertados de prueba de la coleccion.
+     */
+    public void limpiarColeccion() {
+        coleccion.deleteMany(new org.bson.Document());
+    }
 
     
 }
