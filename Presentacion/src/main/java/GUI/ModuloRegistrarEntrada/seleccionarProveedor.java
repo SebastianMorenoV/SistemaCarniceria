@@ -34,7 +34,7 @@ public class SeleccionarProveedor extends javax.swing.JPanel {
         setVisible(true);
     }
     
-        public void cargarTabla() throws InventarioException {
+    public void cargarTabla() throws InventarioException {
         List<ProveedorDTO> listaProveedores;
         try {
             listaProveedores = control.cargarProveedores();

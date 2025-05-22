@@ -32,7 +32,6 @@ public class AdaptadorEntrada implements IAdaptadorEntrada {
         
         AdaptadorProveedor proveedor = new AdaptadorProveedor();
         ProveedorDTO proveedorDTO = proveedor.ConvertirADTO(entrada.getProveedor());
-        System.out.println("CONVERTIR DTO ADAPTADOR ENTRADA " + entrada.getListaProductosEntrada());
         
         AdaptadorProductoEntrada productosEntrada = new AdaptadorProductoEntrada();
         

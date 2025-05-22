@@ -36,6 +36,12 @@ public class RegistrarEntrada implements IRegistrarEntrada{
     private ProductoCargadoDTO productoSeleccionado;
     private ProveedorDTO proveedorSeleccionado;
     
+    /**
+    * Carga la lista de proveedores disponibles desde la capa de negocio.
+    * 
+    * @return Lista de objetos ProveedorDTO.
+    * @throws InventarioException Si ocurre un error al consultar los proveedores.
+    */
     @Override
     public List<ProveedorDTO> cargarProveedores() throws InventarioException{ 
         try {
@@ -44,7 +50,12 @@ public class RegistrarEntrada implements IRegistrarEntrada{
             throw new InventarioException("No hay proveedores");
         }
     }
-
+    /**
+     * Carga la lista de productos disponibles desde la capa de negocio.
+     *
+     * @return Lista de objetos ProductoCargadoDTO.
+     * @throws InventarioException Si ocurre un error al consultar los productos.
+     */
     @Override
     public List<ProductoCargadoDTO> cargarProductos()throws InventarioException{
         try {
@@ -53,11 +64,20 @@ public class RegistrarEntrada implements IRegistrarEntrada{
             throw new InventarioException("No hay productos"); 
         }
     }
-
+    /**
+     * Retorna un objeto EmpleadoCargadoDTO que representa al empleado actual.
+     *
+     * @return Objeto EmpleadoCargadoDTO con nombre fijo "Juan Soto".
+     */
     @Override
     public EmpleadoCargadoDTO cargarEmpleado() {    
         return new EmpleadoCargadoDTO("Juan Soto");   
     }
+
+    /**
+    * Agrega un producto a la entrada temporal. Si no existe una entrada temporal, la crea.
+    * También recalcula subtotal, IVA y total.
+    */
 
     @Override
     public void agregarProductoEntrada() {
@@ -91,6 +111,14 @@ public class RegistrarEntrada implements IRegistrarEntrada{
            throw new InventarioException("No se pudo agregar al proveedor" + ex.getMessage());
         }
     }
+    
+    /**
+     * Registra la entrada de productos en el sistema, actualizando el stock de cada producto
+     * y enviando la entrada a la capa de negocio.
+     *
+     * @param entrada Objeto EntradaDTO que contiene los productos y datos de entrada.
+     * @throws InventarioException Si ocurre un error al registrar la entrada.
+     */    
     @Override
     public void registrarEntrada(EntradaDTO entrada) throws InventarioException {
         try {
@@ -102,21 +130,41 @@ public class RegistrarEntrada implements IRegistrarEntrada{
             throw new InventarioException("No se pudo registrar la entrada" + ex.getMessage());
         }
     }
-
+    
+    /**
+     * Retorna la lista de productos de la entrada temporal.
+     *
+     * @return Lista de objetos ProductoEntradaDTO.
+     */
     @Override
     public List<ProductoEntradaDTO> cargarProductosEntrada() {
         return entradaTemporal.listaProductosEntrada;
     }
-    
+    /**
+    * Obtiene la entrada temporal actualmente en curso.
+    *
+    * @return Objeto EntradaDTO que representa la entrada temporal.
+    */
     @Override
     public EntradaDTO obtenerEntrada() {
         return entradaTemporal;
     }
-
+    /**
+     * Establece una nueva entrada temporal.
+     *
+     * @param entradaNueva Objeto EntradaDTO a establecer.
+     */
     @Override
     public void setEntradaDTO(EntradaDTO entradaNueva) {
         this.entradaTemporal = entradaNueva;
     }
+    
+    /**
+    * Calcula el subtotal de una lista de productos en función del precio de compra y las unidades.
+    *
+    * @param productosEnTabla Lista de productos de entrada.
+    * @return Valor total del subtotal.
+    */
     
     public double calcularSubtotal(List<ProductoEntradaDTO> productosEnTabla) {
         double subtotal = 0.0;
@@ -126,35 +174,65 @@ public class RegistrarEntrada implements IRegistrarEntrada{
         }
         return subtotal;
     }
-    
+    /**
+    * Establece el nuevo stock para un producto sumando las unidades indicadas.
+    *
+    * @param producto Objeto ProductoCargadoDTO al que se le sumará el stock.
+    * @param stock Cantidad de unidades a agregar.
+    * @throws InventarioException Si ocurre un error al actualizar el stock.
+    */
     @Override
     public void setStockProducto(ProductoCargadoDTO producto, double stock) throws InventarioException {
         try {   
-            System.out.println("Producto cargadoDTO desde CU cuando se suma el stock de producto: " + producto.toString()+"  Stock a agregar :" + stock);
             productoBO.sumararStockAProducto(stock, (Integer)producto.getCodigo());
             
         } catch (NegocioException ex) {
             throw new InventarioException("No se pudo registrar la entrada" + ex.getMessage());
         }
     }
-
+    
+    /**
+     * Calcula el IVA (16%) de un valor dado.
+     *
+     * @param subtotal Monto base sobre el cual se calculará el IVA.
+     * @return Monto del IVA.
+     */
     public double calcularIVA(double subtotal) {
         return subtotal * 0.16; // 16% de IVA
     }
-
+    /**
+     * Calcula el total a pagar sumando el IVA al subtotal.
+     *
+     * @param iva Monto del IVA.
+     * @param subtotal Monto base.
+     * @return Total a pagar.
+     */
     public double calcularTotal(double iva, double subtotal) {
         return subtotal + iva;
     }
     
-
+    /**
+     * Obtiene la entrada temporal actual.
+     *
+     * @return Objeto EntradaDTO.
+     */
     public EntradaDTO getEntradaTemporal() {
         return entradaTemporal;
     }
-
+    /**
+     * Establece una nueva entrada temporal.
+     *
+     * @param entradaTemporal Objeto EntradaDTO a establecer.
+     */
     public void setEntradaTemporal(EntradaDTO entradaTemporal) {
         this.entradaTemporal = entradaTemporal;
     }
-    
+    /**
+    * Agrega un nuevo producto a la base de datos a través de la capa de negocio.
+    *
+    * @param producto Objeto ProductoCargadoDTO a agregar.
+    * @return Producto agregado, o null si ocurre un error.
+    */  
     public ProductoCargadoDTO agregarProducto(ProductoCargadoDTO producto){
         ProductoCargadoDTO productoDTO;
         try {
@@ -165,24 +243,47 @@ public class RegistrarEntrada implements IRegistrarEntrada{
         }
         return null;
     }
-    
+    /**
+    * Obtiene el precio de compra actual registrado.
+    *
+    * @return Precio de compra.
+    */
     public double obtenerPrecioCompra() {
         return precioCompra;
     }
 
-
+    /**
+     * Obtiene la cantidad de unidades establecida para el producto.
+     *
+     * @return Número de unidades.
+     */
     public double obtenerUnidades() {
         return unidades;
     }
-
+    
+    /**
+    * Establece el precio de compra para el producto seleccionado.
+    *
+    * @param PrecioCompra Nuevo precio de compra.
+    */
     public void setPrecioCompra(double PrecioCompra) {
        this.precioCompra = PrecioCompra;
     }
-
+    
+    /**
+    * Establece la cantidad de unidades para el producto seleccionado.
+    *
+    * @param Unidades Nueva cantidad de unidades.
+    */
     public void setUnidades(double Unidades) {
         this.unidades = Unidades;
     }
 
+    /**
+    * Establece el producto actualmente seleccionado para agregarlo a la entrada.
+    *
+    * @param producto Objeto ProductoCargadoDTO a establecer.
+    */
     public void setProductoEntrada(ProductoCargadoDTO producto) {
         this.productoSeleccionado = producto;
     }

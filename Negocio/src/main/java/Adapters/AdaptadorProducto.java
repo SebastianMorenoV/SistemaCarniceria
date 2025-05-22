@@ -50,8 +50,6 @@ public class AdaptadorProducto implements IAdaptadorProducto{
         productoEntidad.setDescripcion(producto.getDescripcion());
         productoEntidad.setNombre(producto.getNombre());
         productoEntidad.setStock(producto.getStock());
-        
-        System.out.println("Return ProductoEntidad desde convertirEntidadStock: " + productoEntidad.toString());
      
         return productoEntidad;
     }
