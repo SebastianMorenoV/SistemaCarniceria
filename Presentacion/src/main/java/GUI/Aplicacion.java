@@ -36,7 +36,7 @@ import GUI.ModuloRealizarDevolucion.PantallaHistorialDevoluciones;
 import GUI.ModuloRealizarDevolucion.PantallaMenuDevolucion;
 import GUI.ModuloRealizarDevolucion.PantallaTicket;
 import GUI.ModuloRealizarVenta.GenerarTicketVenta;
-import GUI.ModuloRegistrarEntrada.FormularioDatosEntrada;
+import GUI.ModuloRegistrarEntrada.DatosProductoEntrada;
 import GUI.ModuloRegistrarEntrada.FormularioProductoNuevo;
 import GUI.ModuloRegistrarEntrada.InformacionRegistrarEntrada;
 import GUI.ModuloRegistrarEntrada.OpcionesInventario;
@@ -606,7 +606,9 @@ public class Aplicacion {
     }
 
     public void mostrarVentanaDatosEntrada() {
-        FormularioDatosEntrada ventanaDatos = new FormularioDatosEntrada(this);
+        DatosProductoEntrada ventanaDatos = new DatosProductoEntrada(this);
+        ventanaDatos.setModal(true);
+        ventanaDatos.setVisible(true);
     }
 
     public void setProveedor(ProveedorDTO proveedor) {
@@ -689,6 +691,13 @@ public class Aplicacion {
     public double getSubtotalTemporalEntrada() {
         return registrarEntrada.getSubtotal();
     }
+    
+   public List<ProductoCargadoDTO> cargarProductosPorNombre(String nombre) throws InventarioException{
+       return registrarEntrada.buscarProductoPorNombre(nombre);
+   }
+   public ProveedorDTO cargarProveedorPorNombre(String nombre) throws InventarioException{
+       return registrarEntrada.buscarProveedorPorNombre(nombre);
+   }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////METODOS NUEVOS PARA CASOVENTA///////////////////////////////////////

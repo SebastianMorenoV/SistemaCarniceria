@@ -13,7 +13,10 @@ import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,37 +26,20 @@ import javax.swing.table.DefaultTableModel;
 public class SeleccionarProveedor extends javax.swing.JPanel {
     private Aplicacion control;
     private ProveedorDTO proveedorSeleccionado;
+ 
+    
     /**
      * Creates new form ProveedorSeleccionado
      */
     public SeleccionarProveedor(Aplicacion control) throws InventarioException {
         this.control = control;
         initComponents();
-        campoBusqueda.setToolTipText("Buscar por ID o nombre de proveedor");
         cargarTabla();
         setVisible(true);
-    }
-    
-    public void cargarTabla() throws InventarioException {
-        List<ProveedorDTO> listaProveedores;
-        try {
-            listaProveedores = control.cargarProveedores();
-            DefaultTableModel model = (DefaultTableModel) tablaProveedores.getModel();
-            model.setRowCount(0);
-            
-            for (ProveedorDTO proveedor : listaProveedores) {
-                Object[] fila = new Object[]{
-                    proveedor.getNombre(),
-                    proveedor.getTelefono()
-                };
-                model.addRow(fila);
-            }
-        } catch (InventarioException ex) {
-            throw new InventarioException("Error al cargar Proveedores");
-        }
 
     }
-  
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,9 +50,6 @@ public class SeleccionarProveedor extends javax.swing.JPanel {
     private void initComponents() {
 
         labelSeleccionProv = new javax.swing.JLabel();
-        labelProveedor = new javax.swing.JLabel();
-        campoBusqueda = new javax.swing.JTextField();
-        labelIndicaciones = new javax.swing.JLabel();
         panelTablaProveedores = new javax.swing.JScrollPane();
         tablaProveedores = new javax.swing.JTable();
         btnAtras = new javax.swing.JLabel();
@@ -77,15 +60,6 @@ public class SeleccionarProveedor extends javax.swing.JPanel {
         labelSeleccionProv.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         labelSeleccionProv.setText("Seleccion de Proveedor");
         add(labelSeleccionProv, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
-
-        labelProveedor.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        labelProveedor.setText("Buscar Proveedor:");
-        add(labelProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 99, -1, -1));
-        add(campoBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 99, 279, -1));
-
-        labelIndicaciones.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        labelIndicaciones.setText("**Puedes buscar por ID o nombre de proveedor**");
-        add(labelIndicaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 77, -1, -1));
 
         tablaProveedores.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         tablaProveedores.setModel(new javax.swing.table.DefaultTableModel(
@@ -115,7 +89,7 @@ public class SeleccionarProveedor extends javax.swing.JPanel {
         });
         panelTablaProveedores.setViewportView(tablaProveedores);
 
-        add(panelTablaProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 169, 440, 454));
+        add(panelTablaProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 123, 440, 500));
 
         btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/atras (1).png"))); // NOI18N
         btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -134,9 +108,7 @@ public class SeleccionarProveedor extends javax.swing.JPanel {
                 proveedorSeleccionado = control.cargarProveedores().get(tablaProveedores.getSelectedRow());
                 setearProveedor();
                 control.mostrarVentanaSeleccionarProductosEntrada();
-            } catch (InventarioException ex) {
-                Logger.getLogger(SeleccionarProveedor.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NegocioException ex) {
+            } catch (InventarioException | NegocioException ex) {
                 Logger.getLogger(SeleccionarProveedor.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -153,14 +125,31 @@ public class SeleccionarProveedor extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnAtras;
-    private javax.swing.JTextField campoBusqueda;
-    private javax.swing.JLabel labelIndicaciones;
-    private javax.swing.JLabel labelProveedor;
     private javax.swing.JLabel labelSeleccionProv;
     private javax.swing.JScrollPane panelTablaProveedores;
     private javax.swing.JTable tablaProveedores;
     // End of variables declaration//GEN-END:variables
     
  
+    public void cargarTabla() throws InventarioException {
+        List<ProveedorDTO> listaProveedores;
+        try {
+            listaProveedores = control.cargarProveedores();
+            DefaultTableModel model = (DefaultTableModel) tablaProveedores.getModel();
+            model.setRowCount(0);
+            
+            for (ProveedorDTO proveedor : listaProveedores) {
+                Object[] fila = new Object[]{
+                    proveedor.getNombre(),
+                    proveedor.getTelefono()
+                };
+                model.addRow(fila);
+            }
+        } catch (InventarioException ex) {
+            throw new InventarioException("Error al cargar Proveedores");
+        }
+
+    }
+    
 }
 

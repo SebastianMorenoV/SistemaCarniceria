@@ -9,6 +9,7 @@ import Exception.NegocioException;
 import Exception.VentaException;
 import GUI.Aplicacion;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -52,7 +53,6 @@ public class InformacionRegistrarEntrada extends javax.swing.JPanel {
         labelEmpleado = new javax.swing.JLabel();
         labelFecha = new javax.swing.JLabel();
         BtnRegistrarEntrada = new javax.swing.JButton();
-        BtnAgregarProducto = new javax.swing.JButton();
         BtnCancelar = new javax.swing.JButton();
         labelSubtotal = new javax.swing.JLabel();
         campoSubtotal = new javax.swing.JTextField();
@@ -88,16 +88,6 @@ public class InformacionRegistrarEntrada extends javax.swing.JPanel {
             }
         });
         add(BtnRegistrarEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 510, 240, 110));
-
-        BtnAgregarProducto.setBackground(new java.awt.Color(204, 204, 204));
-        BtnAgregarProducto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        BtnAgregarProducto.setText("Nuevo Producto");
-        BtnAgregarProducto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BtnAgregarProductoMouseClicked(evt);
-            }
-        });
-        add(BtnAgregarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 410, 240, 50));
 
         BtnCancelar.setBackground(new java.awt.Color(204, 204, 204));
         BtnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -173,13 +163,10 @@ public class InformacionRegistrarEntrada extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_BtnRegistrarEntradaMouseClicked
 
-    private void BtnAgregarProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAgregarProductoMouseClicked
-        // TODO add your handling code here:
-        app.mostrarVentanaProductoNuevo();
-    }//GEN-LAST:event_BtnAgregarProductoMouseClicked
-
     private void BtnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCancelarMouseClicked
         // TODO add your handling code here:
+        app.MostrarErrorUsarioCancelo();
+        app.mostrarVentanaOpcionesInventario();
     }//GEN-LAST:event_BtnCancelarMouseClicked
 
     private void TablaProductoEntradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaProductoEntradaMouseClicked
@@ -204,7 +191,6 @@ public class InformacionRegistrarEntrada extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnAgregarProducto;
     private javax.swing.JButton BtnAgregarProductoEntrada;
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JButton BtnRegistrarEntrada;
@@ -274,7 +260,9 @@ public class InformacionRegistrarEntrada extends javax.swing.JPanel {
  
     public void valoresDefault() throws InventarioException{
         try {
-            labelFecha.setText("Fecha: " + LocalDateTime.now().toString());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String fechaFormateada = LocalDateTime.now().format(formatter);
+            labelFecha.setText("Fecha: " + fechaFormateada);
             labelEmpleado.setText("Empleado: "+ app.cargarEmpleado().getNombre());
             crearTablaProductosEntrada();
             revalidate();

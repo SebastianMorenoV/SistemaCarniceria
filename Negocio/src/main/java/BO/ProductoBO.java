@@ -105,9 +105,9 @@ public class ProductoBO implements IProductoBO {
     }
 
     @Override
-    public void sumararStockAProducto(double salida, Integer codigo) throws NegocioException {
+    public void sumararStockAProducto(double stock, Integer codigo) throws NegocioException {
         try {
-            productoDAO.sumarStockAProducto(salida, codigo);
+            productoDAO.sumarStockAProducto(stock, codigo);
         } catch (PersistenciaException ex) {
             throw new NegocioException("Error al sumarle el stock", ex);
         }       

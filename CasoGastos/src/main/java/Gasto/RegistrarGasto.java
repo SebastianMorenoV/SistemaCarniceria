@@ -63,10 +63,10 @@ public class RegistrarGasto implements IRegistrarGasto {
                 throw new NegocioException("El folio debe de tener menos de 16 digitos");
             }
             
-            GastoDTO existente = gastoBO.buscarPorFolio(gastoDTO.getFolio());
-            if (existente != null) {
-                throw new NegocioException("Ya existe un gasto con ese folio.");
-            }
+//            GastoDTO existente = gastoBO.buscarPorFolio(gastoDTO.getFolio());
+//            if (existente != null) {
+//                throw new NegocioException("Ya existe un gasto con ese folio.");
+//            }
 
             return gastoBO.agregarGasto(gastoDTO);
         } catch (NegocioException ex) {

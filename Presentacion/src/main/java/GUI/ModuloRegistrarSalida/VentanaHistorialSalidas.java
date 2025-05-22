@@ -3,6 +3,7 @@ package GUI.ModuloRegistrarSalida;
 import DTOs.SalidaDTO;
 import GUI.Aplicacion;
 import exception.SalidaException;
+import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -266,10 +267,11 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
 
         DefaultTableModel model = (DefaultTableModel) jTableSalidas.getModel();
         model.setRowCount(0);
-
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+      
         for (SalidaDTO salidaDTO : listaSalida) {
             model.addRow(new Object[]{
-                salidaDTO.getFecha(),
+                format.format(salidaDTO.getFecha()),
                 salidaDTO.getProducto().getNombre(),
                 salidaDTO.getMotivo(),
                 salidaDTO.getStockAntes(),
@@ -305,10 +307,11 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
 
         DefaultTableModel model = (DefaultTableModel) jTableSalidas.getModel();
         model.setRowCount(0);
-
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        
         for (SalidaDTO salidaDTO : listaSalida) {
             model.addRow(new Object[]{
-                salidaDTO.getFecha(),
+                format.format(salidaDTO.getFecha()),
                 salidaDTO.getProducto().getNombre(),
                 salidaDTO.getMotivo(),
                 salidaDTO.getStockAntes(),

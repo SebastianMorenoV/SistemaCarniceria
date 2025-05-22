@@ -313,4 +313,21 @@ public class RegistrarEntrada implements IRegistrarEntrada{
         entradaTemporal.setProveedor(proveedor);
     }
     
+    //metodo para consultarProveeor por nombre para el panel Seleccionar Proveedor
+    public ProveedorDTO buscarProveedorPorNombre(String nombre) throws InventarioException{
+        try {
+            return proveedorBO.buscarPorNombre(nombre);
+        } catch (NegocioException ex) {
+            throw new InventarioException("Erro: " +  ex.getMessage());
+        }
+    }
+    //metodo para consultarProducto por nombre para el panel Seleccionar Producto
+    public List<ProductoCargadoDTO> buscarProductoPorNombre(String nombre) throws InventarioException{
+        try {
+            return productoBO.buscadorProducto(nombre);
+        } catch (NegocioException ex) {
+            throw new InventarioException("Erro: " +  ex.getMessage());
+        }
+    }
+    
 }

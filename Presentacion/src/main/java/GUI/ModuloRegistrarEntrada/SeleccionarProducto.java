@@ -6,17 +6,23 @@ package GUI.ModuloRegistrarEntrada;
 
 
 import DTOs.ProductoCargadoDTO;
+import Exception.DevolucionException;
 import Exception.InventarioException;
 import Exception.NegocioException;
 import Exception.VentaException;
 import GUI.Aplicacion;
+import GUI.ModuloRealizarDevolucion.PantallaHistorialDevoluciones;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,6 +33,7 @@ public class SeleccionarProducto extends javax.swing.JPanel {
     private Aplicacion control;
     private double unidades, precioCompra;
     private ProductoCargadoDTO productoSeleccionado;
+    private List<ProductoCargadoDTO> listDinamicaProductos;
     /**
      * 
      * @param control
@@ -39,34 +46,9 @@ public class SeleccionarProducto extends javax.swing.JPanel {
         this.revalidate();
         this.repaint();
         setVisible(true);
+        agregarDocumentListener(CampoNombreProducto);
     }
-    public void crearTablaProductos() throws NegocioException{
-        String columnasTabla[] = {"ID","Nombre","Descripcion"};
-        tablaProductos.setRowHeight(25);
-        DefaultTableModel modelo = new DefaultTableModel(columnasTabla, 0){
-            @Override
-            public boolean  isCellEditable(int fila, int columna){
-                return false;
-            }                    
-        }; 
-        try {
-            for(ProductoCargadoDTO producto : control.cargarProductosCE()){
-                modelo.addRow(new Object[]{
-                    producto.getCodigo(),
-                    producto.getNombre(),
-                    producto.getDescripcion()
-                }
-                );
-            }
-        } catch (InventarioException ex) {
-            Logger.getLogger(SeleccionarProducto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        tablaProductos.setModel(modelo);
-        tablaProductos.getTableHeader().setReorderingAllowed(false);
-        tablaProductos.getTableHeader().setResizingAllowed(false);   
-        scrollTablaProductos.setViewportView(tablaProductos);
-
-    }
+    
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -77,7 +59,7 @@ public class SeleccionarProducto extends javax.swing.JPanel {
         btnAtras = new javax.swing.JLabel();
         panelBusqueda = new javax.swing.JPanel();
         labelProveedor = new javax.swing.JLabel();
-        campoBusqueda = new javax.swing.JTextField();
+        CampoNombreProducto = new javax.swing.JTextField();
         labelIndicaciones = new javax.swing.JLabel();
         panelTablaProductos = new javax.swing.JPanel();
         scrollTablaProductos = new javax.swing.JScrollPane();
@@ -114,10 +96,10 @@ public class SeleccionarProducto extends javax.swing.JPanel {
         labelProveedor.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         labelProveedor.setText("Buscar Producto:");
 
-        campoBusqueda.setMaximumSize(new java.awt.Dimension(200, 75));
+        CampoNombreProducto.setMaximumSize(new java.awt.Dimension(200, 75));
 
         labelIndicaciones.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        labelIndicaciones.setText("**Puedes buscar por ID o nombre de producto**");
+        labelIndicaciones.setText("**Puedes buscar por nombre de producto**");
 
         javax.swing.GroupLayout panelBusquedaLayout = new javax.swing.GroupLayout(panelBusqueda);
         panelBusqueda.setLayout(panelBusquedaLayout);
@@ -129,11 +111,11 @@ public class SeleccionarProducto extends javax.swing.JPanel {
                         .addGap(66, 66, 66)
                         .addComponent(labelProveedor)
                         .addGap(18, 18, 18)
-                        .addComponent(campoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(CampoNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelBusquedaLayout.createSequentialGroup()
                         .addGap(187, 187, 187)
                         .addComponent(labelIndicaciones)))
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
         panelBusquedaLayout.setVerticalGroup(
             panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,7 +123,7 @@ public class SeleccionarProducto extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelProveedor)
-                    .addComponent(campoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CampoNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelIndicaciones)
                 .addContainerGap(39, Short.MAX_VALUE))
@@ -235,8 +217,8 @@ public class SeleccionarProducto extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAgregarProducto;
+    private javax.swing.JTextField CampoNombreProducto;
     private javax.swing.JLabel btnAtras;
-    private javax.swing.JTextField campoBusqueda;
     private javax.swing.JLabel labelIndicaciones;
     private javax.swing.JLabel labelProveedor;
     private javax.swing.JLabel labelSeleccionProv;
@@ -253,5 +235,82 @@ public class SeleccionarProducto extends javax.swing.JPanel {
     public void productoSeleccionado(){
         control.setProducto(productoSeleccionado);
     }
+    
+       public void crearTablaProductos() throws NegocioException{
+        String columnasTabla[] = {"ID","Nombre","Descripcion"};
+        tablaProductos.setRowHeight(25);
+        DefaultTableModel modelo = new DefaultTableModel(columnasTabla, 0){
+            @Override
+            public boolean  isCellEditable(int fila, int columna){
+                return false;
+            }                    
+        }; 
+        try {
+            for(ProductoCargadoDTO producto : control.cargarProductosCE()){
+                modelo.addRow(new Object[]{
+                    producto.getCodigo(),
+                    producto.getNombre(),
+                    producto.getDescripcion()
+                }
+                );
+            }
+        } catch (InventarioException ex) {
+            Logger.getLogger(SeleccionarProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        tablaProductos.setModel(modelo);
+        tablaProductos.getTableHeader().setReorderingAllowed(false);
+        tablaProductos.getTableHeader().setResizingAllowed(false);   
+        scrollTablaProductos.setViewportView(tablaProductos);
+
+    }
+       
+    private void agregarDocumentListener(JTextField textField) {
+        textField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                buscarProducto();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                buscarProducto();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                buscarProducto();
+            }
+        });
+    }
+    
+    public void buscarProducto(){
+        try {
+            listDinamicaProductos = control.cargarProductosPorNombre(CampoNombreProducto.getText());
+            String columnasTabla[] = {"ID","Nombre","Descripcion"};
+            tablaProductos.setRowHeight(25);
+            DefaultTableModel modelo = new DefaultTableModel(columnasTabla, 0){
+                @Override
+                public boolean  isCellEditable(int fila, int columna){
+                    return false;
+                }                    
+            }; 
+            for(ProductoCargadoDTO producto : listDinamicaProductos){
+                modelo.addRow(new Object[]{
+                    producto.getCodigo(),
+                    producto.getNombre(),
+                    producto.getDescripcion()
+                }
+                );
+            }
+            tablaProductos.setModel(modelo);
+            tablaProductos.getTableHeader().setReorderingAllowed(false);
+            tablaProductos.getTableHeader().setResizingAllowed(false);   
+            scrollTablaProductos.setViewportView(tablaProductos);
+            } catch (InventarioException ex) {
+                Logger.getLogger(SeleccionarProducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
+    
+    
 }
 
