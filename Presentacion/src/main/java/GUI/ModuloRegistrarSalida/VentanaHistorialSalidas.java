@@ -43,8 +43,6 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
         btnAtras = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabelIconAgregarSalida = new javax.swing.JLabel();
-        jLabelGenerarReporte = new javax.swing.JLabel();
-        jLabelIconGenerarReporte = new javax.swing.JLabel();
         jLabelFechaHasta = new javax.swing.JLabel();
         jLabelAgregarSalida = new javax.swing.JLabel();
         jLabelProducto = new javax.swing.JLabel();
@@ -63,7 +61,6 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
                 "Fecha", "Producto", "Motivo", "Stock Antes", "Salida", "Stock Despues"
             }
         ));
-        jTableSalidas.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(jTableSalidas);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 1080, -1));
@@ -78,7 +75,6 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
         add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 50));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Historial De Salidas");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 440, -1));
@@ -92,31 +88,8 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
         });
         add(jLabelIconAgregarSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 530, -1, -1));
 
-        jLabelGenerarReporte.setBackground(new java.awt.Color(0, 0, 0));
-        jLabelGenerarReporte.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
-        jLabelGenerarReporte.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelGenerarReporte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelGenerarReporte.setText("Generar Reporte");
-        jLabelGenerarReporte.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabelGenerarReporte.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelGenerarReporteMouseClicked(evt);
-            }
-        });
-        add(jLabelGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 600, 140, 60));
-
-        jLabelIconGenerarReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/informe.png"))); // NOI18N
-        jLabelIconGenerarReporte.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabelIconGenerarReporte.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelIconGenerarReporteMouseClicked(evt);
-            }
-        });
-        add(jLabelIconGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 600, -1, -1));
-
         jLabelFechaHasta.setBackground(new java.awt.Color(0, 0, 0));
         jLabelFechaHasta.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
-        jLabelFechaHasta.setForeground(new java.awt.Color(0, 0, 0));
         jLabelFechaHasta.setText("Fecha Hasta:");
         jLabelFechaHasta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelFechaHasta.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -128,7 +101,6 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
 
         jLabelAgregarSalida.setBackground(new java.awt.Color(0, 0, 0));
         jLabelAgregarSalida.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
-        jLabelAgregarSalida.setForeground(new java.awt.Color(0, 0, 0));
         jLabelAgregarSalida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelAgregarSalida.setText("Agregar Salida");
         jLabelAgregarSalida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -141,7 +113,6 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
 
         jLabelProducto.setBackground(new java.awt.Color(0, 0, 0));
         jLabelProducto.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
-        jLabelProducto.setForeground(new java.awt.Color(0, 0, 0));
         jLabelProducto.setText("Producto:");
         jLabelProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelProducto.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -153,7 +124,6 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
 
         jLabelFechaDesde.setBackground(new java.awt.Color(0, 0, 0));
         jLabelFechaDesde.setFont(new java.awt.Font("Product Sans Infanity", 0, 18)); // NOI18N
-        jLabelFechaDesde.setForeground(new java.awt.Color(0, 0, 0));
         jLabelFechaDesde.setText("Fecha Desde:");
         jLabelFechaDesde.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelFechaDesde.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -175,7 +145,6 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
         });
         add(datePickerHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 600, 190, 30));
 
-        jTextFieldProducto.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextFieldProductoKeyTyped(evt);
@@ -204,17 +173,9 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
         app.mostrarDialogoAgregarSalida();
     }//GEN-LAST:event_jLabelFechaHastaMouseClicked
 
-    private void jLabelIconGenerarReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelIconGenerarReporteMouseClicked
-
-    }//GEN-LAST:event_jLabelIconGenerarReporteMouseClicked
-
     private void jLabelIconAgregarSalidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelIconAgregarSalidaMouseClicked
         app.mostrarDialogoAgregarSalida();
     }//GEN-LAST:event_jLabelIconAgregarSalidaMouseClicked
-
-    private void jLabelGenerarReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelGenerarReporteMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelGenerarReporteMouseClicked
 
     private void jLabelAgregarSalidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAgregarSalidaMouseClicked
         app.mostrarDialogoAgregarSalida();
@@ -334,9 +295,7 @@ public class VentanaHistorialSalidas extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelAgregarSalida;
     private javax.swing.JLabel jLabelFechaDesde;
     private javax.swing.JLabel jLabelFechaHasta;
-    private javax.swing.JLabel jLabelGenerarReporte;
     private javax.swing.JLabel jLabelIconAgregarSalida;
-    private javax.swing.JLabel jLabelIconGenerarReporte;
     private javax.swing.JLabel jLabelProducto;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableSalidas;
