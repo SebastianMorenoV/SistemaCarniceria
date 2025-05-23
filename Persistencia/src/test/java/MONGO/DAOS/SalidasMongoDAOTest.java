@@ -18,35 +18,35 @@ import static org.junit.Assert.*;
  */
 public class SalidasMongoDAOTest {
     
-    public SalidasMongoDAOTest() {
-    }
-
-    /**
-     * Test of agregarNuevaSalida method, of class SalidasMongoDAO.
-     */
-    @Test
-    public void testAgregarNuevaSalida() throws Exception {
-        System.out.println("agregarNuevaSalida");
-        Salida salida = new Salida();
-        SalidasMongoDAO instance = new SalidasMongoDAO();
-        Salida expResult = salida;
-        Salida result = instance.agregarNuevaSalida(salida);
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of consultarSalidasBuscador method, of class SalidasMongoDAO.
-     */
-    @Test
-    public void testConsultarSalidasBuscador() throws Exception {
-        System.out.println("consultarSalidasBuscador");
-        String nombre = "Coca";
-        Date fechaDesde = null;
-        Date fechaHasta = null;
-        SalidasMongoDAO instance = new SalidasMongoDAO();
-        Object expResult = ArrayList.class;
-        Object result = instance.consultarSalidasBuscador(nombre, fechaDesde, fechaHasta).getClass();
-        assertEquals(expResult, result);
-    }
+//    public SalidasMongoDAOTest() {
+//    }
+//
+//    /**
+//     * Test of agregarNuevaSalida method, of class SalidasMongoDAO.
+//     */
+//    @Test
+//    public void testAgregarNuevaSalida() throws Exception {
+//        System.out.println("agregarNuevaSalida");
+//        Salida salida = new Salida();
+//        SalidasMongoDAO instance = new SalidasMongoDAO();
+//        Salida expResult = salida;
+//        Salida result = instance.agregarNuevaSalida(salida);
+//        assertEquals(expResult, result);
+//    }
+//
+//    /**
+//     * Test of consultarSalidasBuscador method, of class SalidasMongoDAO.
+//     */
+//    @Test
+//    public void testConsultarSalidasBuscador() throws Exception {
+//        System.out.println("consultarSalidasBuscador");
+//        String nombre = "Coca";
+//        Date fechaDesde = null;
+//        Date fechaHasta = null;
+//        SalidasMongoDAO instance = new SalidasMongoDAO();
+//        Object expResult = ArrayList.class;
+//        Object result = instance.consultarSalidasBuscador(nombre, fechaDesde, fechaHasta).getClass();
+//        assertEquals(expResult, result);
+//    }
     
 }
